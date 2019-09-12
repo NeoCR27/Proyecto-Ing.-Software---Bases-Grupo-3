@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Manual_ASP_NET_WEB.Models.Consulta>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Sintomas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Diagnostico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Medico.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Paciente.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sintomas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Diagnostico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Medico.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Paciente.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { PacienteId = item.IdPaciente,
+            MedicoId = item.IdMedico, Fecha = item.Fecha}) |
+            @Html.ActionLink("Details", "Details", new { PacienteId =
+            item.IdPaciente, MedicoId = item.IdMedico, Fecha = item.Fecha }) |
+            @Html.ActionLink("Delete", "Delete", new { PacienteId =
+            item.IdPaciente, MedicoId = item.IdMedico, Fecha = item.Fecha } )
+
+        </td>
+    </tr>
+}
+
+</table>
