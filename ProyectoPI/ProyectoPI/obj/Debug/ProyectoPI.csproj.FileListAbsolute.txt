@@ -1,0 +1,160 @@
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\ProyectoPI.dll.config
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\ProyectoPI.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\ProyectoPI.pdb
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\csc.exe
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\csc.exe.config
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\csc.rsp
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\csi.exe
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\csi.exe.config
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\csi.rsp
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.AppContext.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Console.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.Compression.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.Pipes.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Claims.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.ValueTuple.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\vbc.exe
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\vbc.exe.config
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\vbc.rsp
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\VBCSCompiler.exe
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\Antlr3.Runtime.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\EntityFramework.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\EntityFramework.SqlServer.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\Newtonsoft.Json.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.Helpers.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.Mvc.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.Optimization.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.Razor.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.Razor.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\WebGrease.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\EntityFramework.xml
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\EntityFramework.SqlServer.xml
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.Helpers.xml
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.Mvc.xml
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.Optimization.xml
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.Razor.xml
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.xml
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.Razor.xml
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\Newtonsoft.Json.xml
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\Antlr3.Runtime.pdb
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csproj.CoreCompileInputs.cache
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csproj.CopyComplete
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.dll
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.pdb
+C:\Users\Esteban\source\repos\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csprojAssemblyReference.cache
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\ProyectoPI.dll.config
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\ProyectoPI.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\ProyectoPI.pdb
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\csc.exe
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\csc.exe.config
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\csc.rsp
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\csi.exe
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\csi.exe.config
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\csi.rsp
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.AppContext.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Console.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.Compression.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.Pipes.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Claims.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.ValueTuple.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\vbc.exe
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\vbc.exe.config
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\vbc.rsp
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\VBCSCompiler.exe
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Antlr3.Runtime.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\EntityFramework.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\EntityFramework.SqlServer.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Newtonsoft.Json.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.Helpers.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.Mvc.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.Optimization.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.Razor.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.Razor.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\WebGrease.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\EntityFramework.xml
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\EntityFramework.SqlServer.xml
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.Helpers.xml
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.Mvc.xml
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.Optimization.xml
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.Razor.xml
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.xml
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.Razor.xml
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Newtonsoft.Json.xml
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Antlr3.Runtime.pdb
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csprojAssemblyReference.cache
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csproj.CoreCompileInputs.cache
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csproj.CopyComplete
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.dll
+C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.pdb
