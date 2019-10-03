@@ -8,16 +8,16 @@ using System.Web;
 using System.Web.Mvc;
 using ProyectoPI.Models;
 
-namespace ProyectoPI.Controllers
+namespace ProyectoPI.Views
 {
-    public class EmpleadoController : Controller
+    public class EMPLEADOController : Controller
     {
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
 
         // GET: EMPLEADO
         public ActionResult Index()
         {
-            return View(db.EMPLEADOes.ToList());
+            return View(db.EMPLEADO.ToList());
         }
 
         // GET: EMPLEADO/Details/5
@@ -27,7 +27,7 @@ namespace ProyectoPI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EMPLEADO eMPLEADO = db.EMPLEADOes.Find(id);
+            EMPLEADO eMPLEADO = db.EMPLEADO.Find(id);
             if (eMPLEADO == null)
             {
                 return HttpNotFound();
@@ -41,16 +41,17 @@ namespace ProyectoPI.Controllers
             return View();
         }
 
+
         // POST: EMPLEADO/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "cedulaPK,tel,nombre,primerApellido,segundoApellido,correo,distrito,canton,provincia,direccionExacta,horasLaboradas,edad,disponibilidad,rol,fechaNacimiento")] EMPLEADO eMPLEADO)
         {
             if (ModelState.IsValid)
             {
-                db.EMPLEADOes.Add(eMPLEADO);
+                db.EMPLEADO.Add(eMPLEADO);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +66,7 @@ namespace ProyectoPI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EMPLEADO eMPLEADO = db.EMPLEADOes.Find(id);
+            EMPLEADO eMPLEADO = db.EMPLEADO.Find(id);
             if (eMPLEADO == null)
             {
                 return HttpNotFound();
@@ -74,8 +75,8 @@ namespace ProyectoPI.Controllers
         }
 
         // POST: EMPLEADO/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "cedulaPK,tel,nombre,primerApellido,segundoApellido,correo,distrito,canton,provincia,direccionExacta,horasLaboradas,edad,disponibilidad,rol,fechaNacimiento")] EMPLEADO eMPLEADO)
@@ -96,7 +97,7 @@ namespace ProyectoPI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EMPLEADO eMPLEADO = db.EMPLEADOes.Find(id);
+            EMPLEADO eMPLEADO = db.EMPLEADO.Find(id);
             if (eMPLEADO == null)
             {
                 return HttpNotFound();
@@ -109,8 +110,8 @@ namespace ProyectoPI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            EMPLEADO eMPLEADO = db.EMPLEADOes.Find(id);
-            db.EMPLEADOes.Remove(eMPLEADO);
+            EMPLEADO eMPLEADO = db.EMPLEADO.Find(id);
+            db.EMPLEADO.Remove(eMPLEADO);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

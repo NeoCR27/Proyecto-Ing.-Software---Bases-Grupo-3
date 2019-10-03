@@ -8,27 +8,27 @@ using System.Web;
 using System.Web.Mvc;
 using ProyectoPI.Models;
 
-namespace ProyectoPI.Controllers
+namespace ProyectoPI.Views
 {
-    public class ParticipaController : Controller
+    public class PARTICIPAController : Controller
     {
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
 
-        // GET: Participa
+        // GET: PARTICIPA
         public ActionResult Index()
         {
-            var pARTICIPAs = db.PARTICIPAs.Include(p => p.EMPLEADO).Include(p => p.PROYECTO);
-            return View(pARTICIPAs.ToList());
+            var pARTICIPA = db.PARTICIPA.Include(p => p.EMPLEADO).Include(p => p.PROYECTO);
+            return View(pARTICIPA.ToList());
         }
 
-        // GET: Participa/Details/5
+        // GET: PARTICIPA/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PARTICIPA pARTICIPA = db.PARTICIPAs.Find(id);
+            PARTICIPA pARTICIPA = db.PARTICIPA.Find(id);
             if (pARTICIPA == null)
             {
                 return HttpNotFound();
@@ -36,53 +36,53 @@ namespace ProyectoPI.Controllers
             return View(pARTICIPA);
         }
 
-        // GET: Participa/Create
+        // GET: PARTICIPA/Create
         public ActionResult Create()
         {
-            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADOes, "cedulaPK", "tel");
-            ViewBag.idProyectoFK = new SelectList(db.PROYECTOes, "idPK", "nombre");
+            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel");
+            ViewBag.idProyectoFK = new SelectList(db.PROYECTO, "idPK", "nombre");
             return View();
         }
 
-        // POST: Participa/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: PARTICIPA/Create
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "rol,cedulaEmpleadoFK,idProyectoFK")] PARTICIPA pARTICIPA)
         {
             if (ModelState.IsValid)
             {
-                db.PARTICIPAs.Add(pARTICIPA);
+                db.PARTICIPA.Add(pARTICIPA);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADOes, "cedulaPK", "tel", pARTICIPA.cedulaEmpleadoFK);
-            ViewBag.idProyectoFK = new SelectList(db.PROYECTOes, "idPK", "nombre", pARTICIPA.idProyectoFK);
+            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", pARTICIPA.cedulaEmpleadoFK);
+            ViewBag.idProyectoFK = new SelectList(db.PROYECTO, "idPK", "nombre", pARTICIPA.idProyectoFK);
             return View(pARTICIPA);
         }
 
-        // GET: Participa/Edit/5
+        // GET: PARTICIPA/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PARTICIPA pARTICIPA = db.PARTICIPAs.Find(id);
+            PARTICIPA pARTICIPA = db.PARTICIPA.Find(id);
             if (pARTICIPA == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADOes, "cedulaPK", "tel", pARTICIPA.cedulaEmpleadoFK);
-            ViewBag.idProyectoFK = new SelectList(db.PROYECTOes, "idPK", "nombre", pARTICIPA.idProyectoFK);
+            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", pARTICIPA.cedulaEmpleadoFK);
+            ViewBag.idProyectoFK = new SelectList(db.PROYECTO, "idPK", "nombre", pARTICIPA.idProyectoFK);
             return View(pARTICIPA);
         }
 
-        // POST: Participa/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: PARTICIPA/Edit/5
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "rol,cedulaEmpleadoFK,idProyectoFK")] PARTICIPA pARTICIPA)
@@ -93,19 +93,19 @@ namespace ProyectoPI.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADOes, "cedulaPK", "tel", pARTICIPA.cedulaEmpleadoFK);
-            ViewBag.idProyectoFK = new SelectList(db.PROYECTOes, "idPK", "nombre", pARTICIPA.idProyectoFK);
+            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", pARTICIPA.cedulaEmpleadoFK);
+            ViewBag.idProyectoFK = new SelectList(db.PROYECTO, "idPK", "nombre", pARTICIPA.idProyectoFK);
             return View(pARTICIPA);
         }
 
-        // GET: Participa/Delete/5
+        // GET: PARTICIPA/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PARTICIPA pARTICIPA = db.PARTICIPAs.Find(id);
+            PARTICIPA pARTICIPA = db.PARTICIPA.Find(id);
             if (pARTICIPA == null)
             {
                 return HttpNotFound();
@@ -113,13 +113,13 @@ namespace ProyectoPI.Controllers
             return View(pARTICIPA);
         }
 
-        // POST: Participa/Delete/5
+        // POST: PARTICIPA/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            PARTICIPA pARTICIPA = db.PARTICIPAs.Find(id);
-            db.PARTICIPAs.Remove(pARTICIPA);
+            PARTICIPA pARTICIPA = db.PARTICIPA.Find(id);
+            db.PARTICIPA.Remove(pARTICIPA);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

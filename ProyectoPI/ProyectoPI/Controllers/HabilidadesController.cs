@@ -8,114 +8,114 @@ using System.Web;
 using System.Web.Mvc;
 using ProyectoPI.Models;
 
-namespace ProyectoPI.Controllers
+namespace ProyectoPI.Views
 {
-    public class HabilidadesController : Controller
+    public class HABILIDADESController : Controller
     {
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
 
-        // GET: Habilidades
+        // GET: HABILIDADES
         public ActionResult Index()
         {
             var hABILIDADES = db.HABILIDADES.Include(h => h.EMPLEADO);
             return View(hABILIDADES.ToList());
         }
 
-        // GET: Habilidades/Details/5
+        // GET: HABILIDADES/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HABILIDADE hABILIDADE = db.HABILIDADES.Find(id);
-            if (hABILIDADE == null)
+            HABILIDADES hABILIDADES = db.HABILIDADES.Find(id);
+            if (hABILIDADES == null)
             {
                 return HttpNotFound();
             }
-            return View(hABILIDADE);
+            return View(hABILIDADES);
         }
 
-        // GET: Habilidades/Create
+        // GET: HABILIDADES/Create
         public ActionResult Create()
         {
-            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADOes, "cedulaPK", "tel");
+            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel");
             return View();
         }
 
-        // POST: Habilidades/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: HABILIDADES/Create
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "valorPK,tipoPK,cedulaEmpleadoFK")] HABILIDADE hABILIDADE)
+        public ActionResult Create([Bind(Include = "valorPK,tipoPK,cedulaEmpleadoFK")] HABILIDADES hABILIDADES)
         {
             if (ModelState.IsValid)
             {
-                db.HABILIDADES.Add(hABILIDADE);
+                db.HABILIDADES.Add(hABILIDADES);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADOes, "cedulaPK", "tel", hABILIDADE.cedulaEmpleadoFK);
-            return View(hABILIDADE);
+            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", hABILIDADES.cedulaEmpleadoFK);
+            return View(hABILIDADES);
         }
 
-        // GET: Habilidades/Edit/5
+        // GET: HABILIDADES/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HABILIDADE hABILIDADE = db.HABILIDADES.Find(id);
-            if (hABILIDADE == null)
+            HABILIDADES hABILIDADES = db.HABILIDADES.Find(id);
+            if (hABILIDADES == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADOes, "cedulaPK", "tel", hABILIDADE.cedulaEmpleadoFK);
-            return View(hABILIDADE);
+            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", hABILIDADES.cedulaEmpleadoFK);
+            return View(hABILIDADES);
         }
 
-        // POST: Habilidades/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: HABILIDADES/Edit/5
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "valorPK,tipoPK,cedulaEmpleadoFK")] HABILIDADE hABILIDADE)
+        public ActionResult Edit([Bind(Include = "valorPK,tipoPK,cedulaEmpleadoFK")] HABILIDADES hABILIDADES)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(hABILIDADE).State = EntityState.Modified;
+                db.Entry(hABILIDADES).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADOes, "cedulaPK", "tel", hABILIDADE.cedulaEmpleadoFK);
-            return View(hABILIDADE);
+            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", hABILIDADES.cedulaEmpleadoFK);
+            return View(hABILIDADES);
         }
 
-        // GET: Habilidades/Delete/5
+        // GET: HABILIDADES/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HABILIDADE hABILIDADE = db.HABILIDADES.Find(id);
-            if (hABILIDADE == null)
+            HABILIDADES hABILIDADES = db.HABILIDADES.Find(id);
+            if (hABILIDADES == null)
             {
                 return HttpNotFound();
             }
-            return View(hABILIDADE);
+            return View(hABILIDADES);
         }
 
-        // POST: Habilidades/Delete/5
+        // POST: HABILIDADES/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            HABILIDADE hABILIDADE = db.HABILIDADES.Find(id);
-            db.HABILIDADES.Remove(hABILIDADE);
+            HABILIDADES hABILIDADES = db.HABILIDADES.Find(id);
+            db.HABILIDADES.Remove(hABILIDADES);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

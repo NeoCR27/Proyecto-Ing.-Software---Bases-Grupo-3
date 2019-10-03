@@ -8,16 +8,16 @@ using System.Web;
 using System.Web.Mvc;
 using ProyectoPI.Models;
 
-namespace ProyectoPI.Controllers
+namespace ProyectoPI.Views
 {
-    public class ClienteController : Controller
+    public class CLIENTEController : Controller
     {
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
 
         // GET: CLIENTE
         public ActionResult Index()
         {
-            return View(db.CLIENTEs.ToList());
+            return View(db.CLIENTE.ToList());
         }
 
         // GET: CLIENTE/Details/5
@@ -27,7 +27,7 @@ namespace ProyectoPI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CLIENTE cLIENTE = db.CLIENTEs.Find(id);
+            CLIENTE cLIENTE = db.CLIENTE.Find(id);
             if (cLIENTE == null)
             {
                 return HttpNotFound();
@@ -42,15 +42,15 @@ namespace ProyectoPI.Controllers
         }
 
         // POST: CLIENTE/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "cedulaPK,tel,nombre,primerApellido,segundoApellido,correo,distrito,canton,provincia,direccionExacta")] CLIENTE cLIENTE)
         {
             if (ModelState.IsValid)
             {
-                db.CLIENTEs.Add(cLIENTE);
+                db.CLIENTE.Add(cLIENTE);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace ProyectoPI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CLIENTE cLIENTE = db.CLIENTEs.Find(id);
+            CLIENTE cLIENTE = db.CLIENTE.Find(id);
             if (cLIENTE == null)
             {
                 return HttpNotFound();
@@ -74,8 +74,8 @@ namespace ProyectoPI.Controllers
         }
 
         // POST: CLIENTE/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "cedulaPK,tel,nombre,primerApellido,segundoApellido,correo,distrito,canton,provincia,direccionExacta")] CLIENTE cLIENTE)
@@ -96,7 +96,7 @@ namespace ProyectoPI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CLIENTE cLIENTE = db.CLIENTEs.Find(id);
+            CLIENTE cLIENTE = db.CLIENTE.Find(id);
             if (cLIENTE == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace ProyectoPI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            CLIENTE cLIENTE = db.CLIENTEs.Find(id);
-            db.CLIENTEs.Remove(cLIENTE);
+            CLIENTE cLIENTE = db.CLIENTE.Find(id);
+            db.CLIENTE.Remove(cLIENTE);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
