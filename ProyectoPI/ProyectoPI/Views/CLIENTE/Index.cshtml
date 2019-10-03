@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.cedulaPK)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.tel)
         </th>
         <th>
@@ -44,6 +47,9 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.cedulaPK)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.tel)
         </td>
         <td>
@@ -71,9 +77,9 @@
             @Html.DisplayFor(modelItem => item.direccionExacta)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.cedulaPK }) |
-            @Html.ActionLink("Details", "Details", new { id=item.cedulaPK }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.cedulaPK })
+            @Html.ActionLink("Edit", "Edit", new { id = item.cedulaPK }) |
+            @Html.ActionLink("Details", "Details", new { id = item.cedulaPK }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.cedulaPK })
         </td>
     </tr>
 }

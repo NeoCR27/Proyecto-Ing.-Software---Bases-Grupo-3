@@ -124,5 +124,9 @@ namespace ProyectoPI.Views
             }
             base.Dispose(disposing);
         }
+
+        public SelectList getLideres() {
+            return new SelectList(db.EMPLEADO.Where(empleado => empleado.rol == "LIDER"), "", "nombre");
+        }
     }
 }

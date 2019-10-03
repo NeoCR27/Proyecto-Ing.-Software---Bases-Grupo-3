@@ -14,6 +14,8 @@ namespace ProyectoPI.Views
     {
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
 
+        private EMPLEADOController empleadoController = new EMPLEADOController();
+
         // GET: PROYECTOes
         public ActionResult Index()
         {
@@ -39,7 +41,9 @@ namespace ProyectoPI.Views
         // GET: PROYECTOes/Create
         public ActionResult Create()
         {
-            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "cedulaPK", "tel");
+            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK");
+            SelectList lideres = empleadoController.getLideres();
+            ViewBag.lideres = lideres;
             return View();
         }
 
@@ -57,7 +61,8 @@ namespace ProyectoPI.Views
                 return RedirectToAction("Index");
             }
 
-            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "cedulaPK", "tel", pROYECTO.cedulaClienteFK);
+            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "tel" ,"cedulaPK", pROYECTO.cedulaClienteFK);
+
             return View(pROYECTO);
         }
 

@@ -216,11 +216,11 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Views\CLIENTEController.cs" />
-    <Compile Include="Views\EMPLEADOController.cs" />
-    <Compile Include="Views\HABILIDADESController.cs" />
-    <Compile Include="Views\PARTICIPAController.cs" />
-    <Compile Include="Views\PROYECTOesController.cs" />
+    <Compile Include="Controllers\CLIENTEController.cs" />
+    <Compile Include="Controllers\EMPLEADOController.cs" />
+    <Compile Include="Controllers\HABILIDADESController.cs" />
+    <Compile Include="Controllers\PARTICIPAController.cs" />
+    <Compile Include="Controllers\PROYECTOesController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

@@ -30,7 +30,7 @@ namespace ProyectoPI.Models
         public Nullable<System.DateTime> fechaFinalizacion { get; set; }
         public string estado { get; set; }
         public string cedulaClienteFK { get; set; }
-    
+ 
         public virtual CLIENTE CLIENTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PARTICIPA> PARTICIPA { get; set; }
