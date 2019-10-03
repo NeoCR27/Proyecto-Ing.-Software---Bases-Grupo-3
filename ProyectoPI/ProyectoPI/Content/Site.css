@@ -1,4 +1,5 @@
 ﻿body {
+    background-image: url("~/Img/fondo.jpg");
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -21,4 +22,9 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+#jumb {
+    background-image: url("~/Img/jumb.jpg");
+    background-size: cover;
 }
