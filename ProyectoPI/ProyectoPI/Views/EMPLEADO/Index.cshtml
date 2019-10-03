@@ -1,0 +1,81 @@
+﻿@model IEnumerable<ProyectoPI.Models.EMPLEADO>
+
+@{
+    ViewBag.Title = "Informacion de empleado";
+}
+
+<h2>Informacion de empleado</h2>
+
+<p>
+    @Html.ActionLink("Agregar empleado", "Create")
+</p>
+<input type="button" value="Create" onclick="location.href='@Url.Action("~/Views/HABILIDADES")'" />
+<input type="button" name="button" class="button1" value="Insert" />
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.primerApellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cedulaPK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.correo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.horasLaboradas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.edad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.disponibilidad)
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.primerApellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cedulaPK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.correo)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.horasLaboradas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.edad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.disponibilidad)
+            </td>
+
+
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.cedulaPK }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.cedulaPK }) |
+                @Html.ActionLink("Habilidades","Details", "HABILIDADES", new { id = item.cedulaPK }, null) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.cedulaPK })
+            </td>
+        </tr>
+    }
+
+</table>

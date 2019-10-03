@@ -1,0 +1,241 @@
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\ProyectoPI.dll.config
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\ProyectoPI.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\ProyectoPI.pdb
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\csc.exe
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\csc.exe.config
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\csc.rsp
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\csi.exe
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\csi.exe.config
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\csi.rsp
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.AppContext.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Console.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.Compression.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.Pipes.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Claims.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.ValueTuple.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\vbc.exe
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\vbc.exe.config
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\vbc.rsp
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\VBCSCompiler.exe
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Antlr3.Runtime.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\EntityFramework.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\EntityFramework.SqlServer.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Newtonsoft.Json.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Owin.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.Helpers.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.Mvc.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.Optimization.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.Razor.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.Razor.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\WebGrease.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.Helpers.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.Mvc.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.Optimization.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.Razor.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.Razor.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Newtonsoft.Json.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Antlr3.Runtime.pdb
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\EntityFramework.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\EntityFramework.SqlServer.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\es\System.Web.Helpers.resources.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\es\System.Web.Mvc.resources.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\es\System.Web.Optimization.resources.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\es\System.Web.Razor.resources.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\es\System.Web.WebPages.resources.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\es\System.Web.WebPages.Deployment.resources.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\es\EntityFramework.resources.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\es\EntityFramework.SqlServer.resources.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csproj.CoreCompileInputs.cache
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csproj.CopyComplete
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.dll
+C:\Users\Windows 10 LTSB ®\source\repos\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.pdb
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\ProyectoPI.dll.config
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\ProyectoPI.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\ProyectoPI.pdb
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\csc.exe
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\csc.exe.config
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\csc.rsp
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\csi.exe
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\csi.exe.config
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\csi.rsp
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\Microsoft.Win32.Primitives.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.AppContext.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Console.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Globalization.Calendars.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.Compression.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.Compression.ZipFile.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.IO.Pipes.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Net.Http.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Net.Sockets.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Claims.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.ValueTuple.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Xml.XPath.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\vbc.exe
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\vbc.exe.config
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\vbc.rsp
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\VBCSCompiler.exe
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Antlr3.Runtime.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\EntityFramework.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\EntityFramework.SqlServer.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Newtonsoft.Json.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Owin.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.Helpers.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.Mvc.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.Optimization.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.Razor.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.Deployment.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.Razor.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\WebGrease.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.Helpers.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.Mvc.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.Optimization.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.Razor.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.Deployment.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\System.Web.WebPages.Razor.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Newtonsoft.Json.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Antlr3.Runtime.pdb
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\EntityFramework.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\EntityFramework.SqlServer.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\es\System.Web.Helpers.resources.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\es\System.Web.Mvc.resources.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\es\System.Web.Optimization.resources.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\es\System.Web.Razor.resources.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\es\System.Web.WebPages.resources.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\es\System.Web.WebPages.Deployment.resources.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\es\EntityFramework.resources.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\es\EntityFramework.SqlServer.resources.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csprojAssemblyReference.cache
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csproj.CoreCompileInputs.cache
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csproj.CopyComplete
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.dll
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.pdb
