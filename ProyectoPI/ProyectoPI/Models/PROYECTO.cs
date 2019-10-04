@@ -6,12 +6,14 @@
 //     Los cambios manuales en este archivo se sobrescribirán si se regenera el código.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+using System.ComponentModel.DataAnnotations;
 namespace ProyectoPI.Models
 {
+   
     using System;
     using System.Collections.Generic;
-    
+
+
     public partial class PROYECTO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,19 +23,39 @@ namespace ProyectoPI.Models
             this.REQUERIMIENTOS = new HashSet<REQUERIMIENTOS>();
         }
     
+        [Required]
+        [Display (Name = "ID del proyecto")]
         public string idPK { get; set; }
+
+        [Display(Name = "Nombre del proyecto")]
         public string nombre { get; set; }
+
+        [Display(Name = "Objetivo del proyecto")]
         public string objetivo { get; set; }
-        public Nullable<int> duracionReal { get; set; }
+
+        [Display(Name = "Duracion estimada")]
         public Nullable<int> duracionEstimada { get; set; }
+
+        [Display(Name = "Duración real")]
+        public Nullable<int> duracionReal { get; set; }
+        
+        [Display(Name = "Fecha de inicio")]
         public Nullable<System.DateTime> fechaInicio { get; set; }
+
+        [Display(Name = "Fecha de finalización")]
         public Nullable<System.DateTime> fechaFinalizacion { get; set; }
+
+        [Display(Name = "Estado")]
         public string estado { get; set; }
+
+        [Display(Name = "Cédula del cliente a asignar")]
         public string cedulaClienteFK { get; set; }
  
         public virtual CLIENTE CLIENTE { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PARTICIPA> PARTICIPA { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REQUERIMIENTOS> REQUERIMIENTOS { get; set; }
     }

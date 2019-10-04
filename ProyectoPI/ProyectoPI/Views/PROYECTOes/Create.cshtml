@@ -80,7 +80,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.cedulaClienteFK, "cedulaClienteFK", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.cedulaClienteFK, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("cedulaClienteFK", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.cedulaClienteFK, "", new { @class = "text-danger" })
@@ -88,7 +88,7 @@
     </div>
 
     <div class="form-group">
-        <h4 class = "control-label col-md-2" id="lideres"> Lideres </h4>
+        @Html.Label("Líderes", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("lideres", null, htmlAttributes: new { @class = "form-control" })
         </div>
