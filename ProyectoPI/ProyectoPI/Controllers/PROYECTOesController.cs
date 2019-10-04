@@ -42,7 +42,7 @@ namespace ProyectoPI.Views
         public ActionResult Create()
         {
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK");
-            SelectList lideres = empleadoController.getLideres();
+            SelectList lideres = this.empleadoController.getLideres();
             ViewBag.lideres = lideres;
             return View();
         }
@@ -61,7 +61,7 @@ namespace ProyectoPI.Views
                 return RedirectToAction("Index");
             }
 
-            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "tel" ,"cedulaPK", pROYECTO.cedulaClienteFK);
+            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "" ,"cedulaPK", pROYECTO.cedulaClienteFK);
 
             return View(pROYECTO);
         }
@@ -78,7 +78,9 @@ namespace ProyectoPI.Views
             {
                 return HttpNotFound();
             }
-            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "cedulaPK", "tel", pROYECTO.cedulaClienteFK);
+            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK", pROYECTO.cedulaClienteFK);
+            SelectList lideres = empleadoController.getLideres();
+            ViewBag.lideres = lideres;
             return View(pROYECTO);
         }
 

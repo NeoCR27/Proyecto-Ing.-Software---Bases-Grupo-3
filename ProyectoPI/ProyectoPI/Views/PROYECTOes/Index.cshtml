@@ -15,24 +15,6 @@
             @Html.DisplayNameFor(model => model.nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.objetivo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.duracionReal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.duracionEstimada)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaInicio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaFinalizacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.CLIENTE.tel)
         </th>
         <th></th>
@@ -44,30 +26,12 @@
             @Html.DisplayFor(modelItem => item.nombre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.objetivo)
+            @Html.DisplayFor(modelItem => item.CLIENTE.cedulaPK)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.duracionReal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.duracionEstimada)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaInicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaFinalizacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CLIENTE.tel)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idPK }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idPK }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idPK })
+            @Html.ActionLink("Editar", "Edit", new { id=item.idPK }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.idPK }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.idPK })
         </td>
     </tr>
 }

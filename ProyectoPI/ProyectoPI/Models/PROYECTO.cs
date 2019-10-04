@@ -27,9 +27,11 @@ namespace ProyectoPI.Models
         [Display (Name = "ID del proyecto")]
         public string idPK { get; set; }
 
+        [Required]
         [Display(Name = "Nombre del proyecto")]
         public string nombre { get; set; }
 
+        [Required]
         [Display(Name = "Objetivo del proyecto")]
         public string objetivo { get; set; }
 
