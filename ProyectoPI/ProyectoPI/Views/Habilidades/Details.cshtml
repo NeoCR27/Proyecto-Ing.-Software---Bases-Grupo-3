@@ -1,26 +1,30 @@
 ﻿@model ProyectoPI.Models.HABILIDADES
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalle de habilidades";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
-    <h4>HABILIDADES</h4>
-    <hr />
+     <h4>@ViewBag.nombre</h4>
+    
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.EMPLEADO.tel)
-        </dt>
+            
+  
+        <div class="form-group">
+            <h4 class="control-label col-md-2" id="habilidades"> habilidades </h4>
+            <div class="col-md-10">
+                @Html.DropDownList("Habilidades", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.EMPLEADO.tel)
-        </dd>
 
     </dl>
 </div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+

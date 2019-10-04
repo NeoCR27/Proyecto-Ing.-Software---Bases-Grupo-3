@@ -1,0 +1,30 @@
+﻿@model ProyectoPI.Models.HABILIDADES
+
+@{
+    ViewBag.Title = "Detalle de habilidades";
+}
+
+<h2>Detalles</h2>
+
+<div>
+
+    @foreach (var x in ViewBag.nombre)
+    {
+        <h4> @x.Text </h4>
+    }
+    @foreach (var x in ViewBag.habilidades)
+    {
+        <p> @x.Text </p>
+    }
+    
+</div>
+
+<p>
+
+    
+
+    @Html.ActionLink("Editar", "edit", "HABILIDADES", new { }, null)
+    @Html.ActionLink("Regresar", "to_empleados", "HABILIDADES", new { }, null)
+
+</p>
+

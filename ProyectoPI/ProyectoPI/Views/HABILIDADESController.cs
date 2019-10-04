@@ -12,10 +12,28 @@ using System.Data.SqlClient;
 
 namespace ProyectoPI.Views
 {
+    /*
+SqlConnection connection = new SqlConnection("@DataInitial Catalog= Gr03Proy4");
+SqlDataAdapter adapter = new SqlDataAdapter();
+SqlCommand command;
+DataSet d_set = new DataSet();
+DataTable d_table;
+DataRow d_row;
+
+adapter.SelectCommand = new SqlCommand("SELECT E.nombre, H.valorPK FROM EMPLEADO E JOIN HABILIDADES H ON E.cedulaPK = H.cedulaEmpleadoFK; ");
+
+adapter.Fill(d_set, "my_data");
+d_table = d_set.Tables["my_data"];
+d_row = d_table.Rows[0];
+
+/*using (var context = new BloggingContext())
+{
+    var query = context.Blogs.SqlQuery("SELECT * FROM dbo.Blogs").ToList();
+}*/
     public class HABILIDADESController : Controller
     {
 
-
+        private EMPLEADOController emp_controller = new EMPLEADOController();
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
 
         // GET: HABILIDADES
@@ -28,41 +46,62 @@ namespace ProyectoPI.Views
         // GET: HABILIDADES/Details/5
         public ActionResult Details(string id)
         {
-            SqlConnection connection = new SqlConnection("@DataInitial Catalog= Gr03Proy4");
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand command;
-            DataSet d_set = new DataSet();
-            DataTable d_table;
-            DataRow d_row;
-
-            adapter.SelectCommand = new SqlCommand("SELECT E.nombre, H.valorPK FROM EMPLEADO E JOIN HABILIDADES HON E.cedulaPK = H.cedulaEmpleadoFK; ");
-
-            adapter.Fill(d_set, "my_data");
-            d_table = d_set.Tables["my_data"];
-            d_row = d_table.Rows[0];
-            
-            /*using (var context = new BloggingContext())
-            {
-                var query = context.Blogs.SqlQuery("SELECT * FROM dbo.Blogs").ToList();
-            }*/
-            
 
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HABILIDADES hABILIDADES = db.HABILIDADES.Find(id);
-            if (hABILIDADES == null)
+
+            //HABILIDADES consulta = db.HABILIDADES.Find(id, "valor", "tipo");
+
+
+            //ViewBag.skill_consult = new SelectList(db.HABILIDADES.Where(x=> x.cedulaEmpleadoFK == id), "valorPK", consulta.valor);
+            //ViewBag.emp_consult = new SelectList(db.EMPLEADO.Where(x => x.cedulaPK == id), "nombre", consulta.cedulaEmpleadoFK);
+
+            
+            //db.Items.Where(x => x.userid == user_ID).Select(x => x.Id).Distinct();
+
+            string sql_query = "SELECT valorPK FROM HABILIDADES WHERE 1 = cedulaEmpleadoFK;";
+            List<String> query = db.Database.SqlQuery<String>(sql_query).ToList();
+            ViewBag.habilidades = new SelectList(db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id),"", "valorPK");
+
+            SelectList nombre = emp_controller.get_nombres(id);
+            ViewBag.nombre = nombre;
+
+            return View();
+        }
+
+        public ActionResult detalles_empleado(string id)
+        {
+
+            if (id == null)
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(hABILIDADES);
+
+            //HABILIDADES consulta = db.HABILIDADES.Find(id, "valor", "tipo");
+
+
+            //ViewBag.skill_consult = new SelectList(db.HABILIDADES.Where(x=> x.cedulaEmpleadoFK == id), "valorPK", consulta.valor);
+            //ViewBag.emp_consult = new SelectList(db.EMPLEADO.Where(x => x.cedulaPK == id), "nombre", consulta.cedulaEmpleadoFK);
+
+
+            //db.Items.Where(x => x.userid == user_ID).Select(x => x.Id).Distinct();
+
+            string sql_query = "SELECT valorPK FROM HABILIDADES WHERE 1 = cedulaEmpleadoFK;";
+            List<String> query = db.Database.SqlQuery<String>(sql_query).ToList();
+            ViewBag.habilidades = new SelectList(db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id), "", "valorPK");
+
+            SelectList nombre = emp_controller.get_nombres(id);
+            ViewBag.nombre = nombre;
+
+            return View();
         }
 
         // GET: HABILIDADES/Create
         public ActionResult Create()
         {
-            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel");
+            ViewBag.cedulaEmpleadoFK = emp_controller.get_cedulas();
             return View();
         }
 
@@ -143,6 +182,10 @@ namespace ProyectoPI.Views
             return RedirectToAction("Index");
         }
 
+        public ActionResult to_empleados(string id)
+        {
+            return RedirectToAction("../EMPLEADO/Index", new {  });
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

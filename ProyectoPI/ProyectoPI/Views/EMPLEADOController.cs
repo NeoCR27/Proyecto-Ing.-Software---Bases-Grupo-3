@@ -127,6 +127,20 @@ namespace ProyectoPI.Views
             return RedirectToAction("Index");
         }
 
+        public ActionResult to_habilidades(string id)
+        {
+            return RedirectToAction("../HABILIDADES/detalles_empleado", new { id = id });
+        }
+
+        public SelectList get_nombres(String id)
+        {
+            return new SelectList(db.EMPLEADO.Where(empleado => empleado.cedulaPK == id), "", "nombre");
+        }
+
+        public SelectList get_cedulas()
+        {
+            return new SelectList(db.EMPLEADO, "","cedulaPK");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
