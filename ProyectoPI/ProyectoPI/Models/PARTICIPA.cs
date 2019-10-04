@@ -21,4 +21,10 @@ namespace ProyectoPI.Models
         public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual PROYECTO PROYECTO { get; set; }
     }
+
+    public class teamViewModel
+    {
+        public string Name_Emp { get; set; }
+        public string ContactNum { get; set; }
+    }
 }

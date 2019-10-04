@@ -1,0 +1,10 @@
+﻿@model IEnumerable<ProyectoPI.Models.PARTICIPA>
+@{
+    ViewBag.Title = "Equipos";
+}
+<h2>Equipo</h2>
+@foreach (var x in ViewBag.datosMiembro)
+{ 
+            @x.Text
+}
+

@@ -13,6 +13,21 @@ namespace ProyectoPI.Views
     public class PARTICIPAController : Controller
     {
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
+        private EMPLEADOController empleados = new EMPLEADOController();
+        private PROYECTOesController proyect = new PROYECTOesController();
+
+      
+
+
+        //Get team
+        public ActionResult showTeam()
+        {
+            string query = "SELECT Emp.nombre + ' ' + Emp.primerApellido + ' ' + Emp.segundoApellido AS 'Empleado', Emp.tel FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK WHERE Part.idProyectoFK = 2411";
+            List<teamViewModel> team = db.Database.SqlQuery<teamViewModel>(query).ToList();
+            ViewBag.datosMiembro = new SelectList(team, "Name_Emp", "ContactNum");
+            //Emp.tel AS 'Numero de Contacto', + Part.rol AS 'ROL' 
+            return View();
+        }
 
         // GET: PARTICIPA
         public ActionResult Index()

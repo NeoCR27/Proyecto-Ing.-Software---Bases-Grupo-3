@@ -320,6 +320,7 @@
     <Content Include="Views\PROYECTOes\Details.cshtml" />
     <Content Include="Views\PROYECTOes\Edit.cshtml" />
     <Content Include="Views\PROYECTOes\Index.cshtml" />
+    <Content Include="Views\PARTICIPA\showTeam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
