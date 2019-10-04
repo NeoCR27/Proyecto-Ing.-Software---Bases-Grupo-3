@@ -1,81 +1,28 @@
 ﻿@model IEnumerable<ProyectoPI.Models.CLIENTE>
-
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Cliente";
 }
-
-<h2>Index</h2>
-
+<h2 class="titulosPag">CLIENTE</h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear Nuevo Cliente", "Create", null, new { @class = "crearIndex" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.tel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.primerApellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.segundoApellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.correo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.distrito)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.canton)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.provincia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.direccionExacta)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.tel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.primerApellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.segundoApellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.correo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.distrito)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.canton)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.provincia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.direccionExacta)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.cedulaPK }) |
-            @Html.ActionLink("Details", "Details", new { id=item.cedulaPK }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.cedulaPK })
-        </td>
-    </tr>
-}
+    <div class="card-deck">
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <div class="card-body">
+                    <img src="../Img/jumb.jpg" class="card-img-top" alt="...">
+                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.nombre) @Html.DisplayFor(modelItem => item.primerApellido) @Html.DisplayFor(modelItem => item.segundoApellido) </h4>
+                    <p class="card-text"><small class="text-muted">@Html.DisplayFor(modelItem => item.correo)</small></p>
+                    <p class="card-text"><small class="text-muted">@Html.DisplayFor(modelItem => item.tel)</small></p>
+                    <p class="card-text">
+                        @Html.ActionLink("Consultar", "Details", new { id = item.cedulaPK }, new { @class = "prueba" }) |
+                        @Html.ActionLink("Modificar", "Edit", new { id = item.cedulaPK }, new { @class = "prueba" })
+                    </p>
+                    <p class="card-text">@Html.ActionLink("Eliminar", "Delete", new { id = item.cedulaPK }, new { @class = "prueba" })</p>
+                </div>
+            </div>
+        }
 
-</table>
+    </div>

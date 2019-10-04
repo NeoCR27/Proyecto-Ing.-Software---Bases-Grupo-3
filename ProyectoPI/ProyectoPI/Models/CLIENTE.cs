@@ -11,7 +11,8 @@ namespace ProyectoPI.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class CLIENTE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,18 +20,46 @@ namespace ProyectoPI.Models
         {
             this.PROYECTO = new HashSet<PROYECTO>();
         }
-    
-        public string cedulaPK { get; set; }
-        public string tel { get; set; }
+        [Required]
+        [Display(Name = "Nombre")]
         public string nombre { get; set; }
+
+        [Required]
+        [Display(Name = "Primer Apellido")]
         public string primerApellido { get; set; }
+
+        [Required]
+        [Display(Name = "Segundo Apellido")]
         public string segundoApellido { get; set; }
+
+        [Required]
+        [Display(Name = "Cedula")]
+        public string cedulaPK { get; set; }
+
+        [Required]
+        [Display(Name = "Telefono")]
+        public string tel { get; set; }
+
+        [Required]
+        [Display(Name = "Correo")]
         public string correo { get; set; }
-        public string distrito { get; set; }
-        public string canton { get; set; }
+
+        [Required]
+        [Display(Name = "Provincia")]
         public string provincia { get; set; }
+
+        [Required]
+        [Display(Name = "Canton")]
+        public string canton { get; set; }
+
+        [Required]
+        [Display(Name = "Distrito")]
+        public string distrito { get; set; }
+
+        [Required]
+        [Display(Name = "Direccion Exacta")]
         public string direccionExacta { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PROYECTO> PROYECTO { get; set; }
     }

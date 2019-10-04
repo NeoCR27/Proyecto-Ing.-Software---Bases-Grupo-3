@@ -1,5 +1,5 @@
 ﻿body {
-    background-image: url("~/Img/fondo.jpg");
+    background-image: url(../Img/fondo.jpg);
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -25,6 +25,97 @@ textarea {
 }
 
 #jumb {
-    background-image: url("~/Img/jumb.jpg");
+    background-image: url(../Img/jumb.jpg);
     background-size: cover;
+    height: 500px;
+}
+#jumb h1 {
+
+    margin-top: 280px;
+    font-size: 80px;
+    color: white;
+}
+#footer1 {
+    font-size: 20px;
+}
+
+.prueba {
+    background-color: rgb(19, 158, 194);
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 6px 12px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.prueba:hover {
+    opacity: 0.8;
+    color: white;
+    text-decoration: none;
+}
+
+.card-deck {
+    text-align: center;
+    padding: 20px;
+}
+.card-body {
+    margin-right: 10px;
+    margin: 20px;
+}
+.card-img-top {
+    width: 400px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.required:after {
+    content: "*";
+    font-weight: bold;
+    color: red;
+}
+
+.crearIndex {
+    background-color: darkgreen;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 6px 12px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.crearIndex:hover {
+    opacity: 0.8;
+    color: white;
+    text-decoration: none;
+}
+
+.volverBoton {
+    background-color: darkred;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 6px 12px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.volverBoton:hover {
+    opacity: 0.8;
+    color: white;
+    text-decoration: none;
+}
+
+h2.titulosPag{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    font-size: 50px;
+    text-align: center;
+    text-transform:uppercase;
+    letter-spacing: 5px;
+    padding: 10px 0px 10px 0px;
+}
+
+.container {
+    margin-right: 250px;
+    margin-left: 250px;
 }
