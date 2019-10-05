@@ -6,6 +6,7 @@
 //     Los cambios manuales en este archivo se sobrescribirán si se regenera el código.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.ComponentModel.DataAnnotations;
 
 namespace ProyectoPI.Models
 {
@@ -22,9 +23,14 @@ namespace ProyectoPI.Models
         public virtual PROYECTO PROYECTO { get; set; }
     }
 
-    public class teamViewModel
+    public  class TeamViewModel
     {
-        public string Name_Emp { get; set; }
-        public string ContactNum { get; set; }
+        public TeamViewModel ()
+        {
+
+        }
+        public string empleado { get; set; }
+        public string tel { get; set; }
+        public string rol { get; set; }
     }
 }

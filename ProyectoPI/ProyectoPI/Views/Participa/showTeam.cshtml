@@ -1,10 +1,14 @@
-﻿@model IEnumerable<ProyectoPI.Models.PARTICIPA>
+﻿@model IEnumerable<ProyectoPI.Models.TeamViewModel>
 @{
     ViewBag.Title = "Equipos";
-}
-<h2>Equipo</h2>
-@foreach (var x in ViewBag.datosMiembro)
-{ 
-            @x.Text
-}
+    <h2>Equipo</h2>
 
+    <ul>
+        @foreach (var name in ViewData["datos"] as IList<ProyectoPI.Models.TeamViewModel>)
+        {
+        <li>
+            @name.empleado, @name.tel ,@name.rol 
+        </li>
+        }
+    </ul>
+ }

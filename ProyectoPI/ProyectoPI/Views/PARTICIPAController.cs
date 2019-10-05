@@ -22,17 +22,16 @@ namespace ProyectoPI.Views
         //Get team
         public ActionResult showTeam()
         {
-            string query = "SELECT Emp.nombre + ' ' + Emp.primerApellido + ' ' + Emp.segundoApellido AS 'Empleado', Emp.tel FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK WHERE Part.idProyectoFK = 2411";
-            List<teamViewModel> team = db.Database.SqlQuery<teamViewModel>(query).ToList();
-            ViewBag.datosMiembro = new SelectList(team, "Name_Emp", "ContactNum");
-            //Emp.tel AS 'Numero de Contacto', + Part.rol AS 'ROL' 
+            string query = "SELECT Emp.nombre + ' ' + Emp.primerApellido + ' ' + Emp.segundoApellido AS 'empleado', Emp.tel AS 'tel', Part.rol AS 'rol' FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK WHERE Part.idProyectoFK = 2411";
+            IList<TeamViewModel> team = (db.Database.SqlQuery<TeamViewModel>(query)).ToList();
+            ViewData["datos"] = team;
             return View();
         }
 
         // GET: PARTICIPA
         public ActionResult Index()
         {
-            var pARTICIPA = db.PARTICIPA.Include(p => p.EMPLEADO).Include(p => p.PROYECTO);
+             var pARTICIPA = db.PARTICIPA.Include(p => p.EMPLEADO).Include(p => p.PROYECTO);
             return View(pARTICIPA.ToList());
         }
 
