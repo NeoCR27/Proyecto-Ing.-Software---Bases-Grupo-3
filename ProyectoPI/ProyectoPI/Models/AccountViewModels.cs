@@ -69,14 +69,12 @@ namespace ProyectoPI.Models
         [Display(Name = "Correo electrónico")]
         public string Email { get; set; }
 
-        [Required]
-        [Display(Name = "Usuario")]
-        public string Usuario { get; set; }
+      
 
         [Required]
         [Display(Name = "Rol: Tester, Lider, Jefe o Cliente")]
         public string Rol{ get; set; }
-
+        
         
 
         [Required]

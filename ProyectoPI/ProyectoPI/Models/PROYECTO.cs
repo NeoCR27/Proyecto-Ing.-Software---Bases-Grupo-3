@@ -6,7 +6,7 @@
 //     Los cambios manuales en este archivo se sobrescribirán si se regenera el código.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+using System.ComponentModel.DataAnnotations;
 namespace ProyectoPI.Models
 {
     using System;
@@ -20,7 +20,7 @@ namespace ProyectoPI.Models
             this.PARTICIPA = new HashSet<PARTICIPA>();
             this.REQUERIMIENTOS = new HashSet<REQUERIMIENTOS>();
         }
-    
+        [Required]
         public string idPK { get; set; }
         public string nombre { get; set; }
         public string objetivo { get; set; }

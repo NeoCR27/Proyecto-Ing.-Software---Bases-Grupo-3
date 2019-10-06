@@ -17,6 +17,7 @@ namespace ProyectoPI.Views
         // GET: CLIENTE
         public ActionResult Index()
         {
+           
             return View(db.CLIENTE.ToList());
         }
 
@@ -66,6 +67,7 @@ namespace ProyectoPI.Views
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             CLIENTE cLIENTE = db.CLIENTE.Find(id);
+            
             if (cLIENTE == null)
             {
                 return HttpNotFound();
