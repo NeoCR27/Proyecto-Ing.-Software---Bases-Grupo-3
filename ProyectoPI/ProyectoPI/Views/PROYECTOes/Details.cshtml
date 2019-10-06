@@ -101,7 +101,7 @@
     </dl>
 </div>
 
-@if (@rol == "Jefe")
+@if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
 {
     @:<p>
         @:@Html.ActionLink("Editar", "Edit", new { id = Model.idPK }) |
