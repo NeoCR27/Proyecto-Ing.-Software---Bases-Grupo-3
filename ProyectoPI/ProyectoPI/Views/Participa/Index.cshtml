@@ -6,7 +6,7 @@
 <ul>
     @{string currentID = "0";}
 
-    @foreach (var miembro in ViewData["teams"] as IList<ProyectoPI.Models.TeamViewModel>)
+    @foreach (var miembro in Model)
     {
         if (!currentID.Equals(miembro.id))
         {
