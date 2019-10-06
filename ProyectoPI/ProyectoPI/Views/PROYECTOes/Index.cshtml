@@ -4,36 +4,52 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Proyecto</h2>
 
+@{
+    string rol = ViewBag.rol;
+}
+<h3>Rol: @rol</h3>
+
+
+@if(@rol == "jefe")
+{
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear Nuevo Proyecto", "Create", null, new { @class = "btn btn-success" })
 </p>
+}
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CLIENTE.tel)
+            @Html.DisplayNameFor(model => model.CLIENTE.cedulaPK)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CLIENTE.cedulaPK)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.idPK }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.idPK }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.idPK })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CLIENTE.cedulaPK)
+            </td>
+            <td>
+                @if (@rol == "jefe")
+                {
+                    @:@Html.ActionLink("Editar ", "Edit", new { id = item.idPK })|
+                    @:@Html.ActionLink(" Detalles ", "Details", new { id = item.idPK })|
+                    @:@Html.ActionLink(" Eliminar", "Delete", new { id = item.idPK })
+                }else{
+                    @Html.ActionLink("Detalles", "Details", new { id = item.idPK })
+                }
+
+            </td>
+        </tr>
+    }
 
 </table>
