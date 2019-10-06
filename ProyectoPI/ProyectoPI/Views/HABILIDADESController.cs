@@ -7,8 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoPI.Models;
-using System.Data.SqlClient; 
-
+using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace ProyectoPI.Views
 {
@@ -118,7 +118,7 @@ d_row = d_table.Rows[0];
                 return RedirectToAction("../EMPLEADO/index");
             }
 
-            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", hABILIDADES.cedulaEmpleadoFK);
+            //ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", hABILIDADES.cedulaEmpleadoFK);
             return View(hABILIDADES);
         }
 
@@ -168,34 +168,49 @@ d_row = d_table.Rows[0];
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            string query = "SELECT * FROM HABILIDADES WHERE tipoPK = @tipo AND valorPK = @valor AND cedulaEmpleadoFK = @id";
-            var hABILIDADES = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id );
+
+            //string query = "SELECT * FROM HABILIDADES WHERE tipoPK = @tipo AND valorPK = @valor AND cedulaEmpleadoFK = @id";
+            ViewBag.habilidades = new SelectList(db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id && x.tipoPK == tipo && x.valorPK == valor), "cedulaEmpleadoFK", "tipoPK", "valorPK");
+
+            var hABILIDADES = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id && x.tipoPK == tipo && x.valorPK == valor);
          
-            return View();
+            return View(hABILIDADES);
         }
 
         // POST: HABILIDADES/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(FormCollection collection)
+         public async Task<ActionResult> DeleteConfirmed(string id, string valor, string tipo)
         {
-            foreach (string key in collection.AllKeys)
-            {
-                Response.Write("Key = " + key);
-                Response.Write(collection[key]);
-                Response.Write("<br/>");
 
-            }
-           // HABILIDADES hABILIDADES = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK = collection.Keys);
-            //db.HABILIDADES.Remove(hABILIDADES);
-            //db.SaveChanges();
-            return RedirectToAction("Index");
+            //var hABILIDADES = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id && x.tipoPK == tipo && x.valorPK == valor);
+           
+            //HABILIDADES hABILIDADES = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id);
+            string query = "SELECT * FROM HABILIDADES WHERE tipoPK = @tipo AND valorPK = @valor AND cedulaEmpleadoFK = @id";
+            HABILIDADES hABILIDADES = await db.HABILIDADES.FindAsync(id,  tipo, valor);
+            db.HABILIDADES.Remove(hABILIDADES);
+            await db.SaveChangesAsync();
+
+            //return View(hABILIDADES);
+            return RedirectToAction("Index", new { id = id });
         }
 
         public ActionResult to_empleados(string id)
         {
-            return RedirectToAction("../EMPLEADO/Index", new {  });
+            return RedirectToAction("../EMPLEADO/Index", new { });
         }
+   
+        /*public async Task<ActionResult> DeleteConfirmed(string id, string valor, string tipo)
+        {
+
+            HABILIDADES habilidad = db.HABILIDADES.Find(id, valor, tipo);
+            
+            //HABILIDADES hABILIDADES = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id);
+            db.HABILIDADES.Remove(habilidad);
+            await db.SaveChangesAsync();
+            return RedirectToAction("../EMPLEADO/Index", new { id =id });
+        }*/
         protected override void Dispose(bool disposing)
         {
             if (disposing)
