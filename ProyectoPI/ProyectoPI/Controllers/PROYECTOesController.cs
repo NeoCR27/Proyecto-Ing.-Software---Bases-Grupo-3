@@ -62,10 +62,10 @@ namespace ProyectoPI.Views
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
+        public ActionResult Create(string liderEscogido, [Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
         {
             //string liderEscogido = ViewBag.lideres.SelectValue; // Sacar valor del lider escogido en el view
-            //System.Diagnostics.Debug.WriteLine(liderEscogido + " fue el lider escogido");
+            System.Diagnostics.Debug.WriteLine(liderEscogido + " fue el lider escogido");
             if (ModelState.IsValid)
             {
                 
