@@ -1,48 +1,33 @@
-﻿@model IEnumerable<ProyectoPI.Models.PARTICIPA>
-
+﻿@model IEnumerable<ProyectoPI.Models.TeamViewModel>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista de Equipos";
+<h2>Lista de Equipos</h2>
+
+<ul>
+    @{string currentID = "0";}
+
+    @foreach (var miembro in ViewData["teams"] as IList<ProyectoPI.Models.TeamViewModel>)
+    {
+        if (!currentID.Equals(miembro.id))
+        {
+            <h2>
+                @miembro.proyName
+            </h2>
+            <p>
+                @Html.ActionLink("Add or Remove Members","Edit",routeValues: new {id = @miembro.id})
+            </p>
+            <li>
+                @miembro.employee, @miembro.email ,@miembro.role, @miembro.id,
+            </li>
+            currentID = @miembro.id;
+            }
+            else
+            {
+            <li>
+                @miembro.employee, @miembro.email ,@miembro.role, @miembro.id
+            </li>
+            }
+
+            }
+        </ul>
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<p>
-    @Html.ActionLink("Ver Equipos", "showTeam")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.rol)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EMPLEADO.tel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PROYECTO.nombre)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.rol)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EMPLEADO.tel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PROYECTO.nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
-
-</table>

@@ -29,8 +29,15 @@ namespace ProyectoPI.Models
         {
 
         }
-        public string empleado { get; set; }
-        public string tel { get; set; }
-        public string rol { get; set; }
+        [Display(Name = "ID Proyecto")]
+        public string id { get; set;}
+        [Display(Name = "Nombre Completo")]
+        public string employee { get; set; }
+        [Display(Name = "Numero de Contacto")]
+        public string email { get; set; }
+        [Display(Name = "Rol")]
+        public string role { get; set; }
+        [Display(Name = "Nombre de Proyecto")]
+        public string proyName { get; set; }
     }
 }

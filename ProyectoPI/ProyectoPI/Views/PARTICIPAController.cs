@@ -22,32 +22,24 @@ namespace ProyectoPI.Views
         //Get team
         public ActionResult showTeam()
         {
-            string query = "SELECT Emp.nombre + ' ' + Emp.primerApellido + ' ' + Emp.segundoApellido AS 'empleado', Emp.tel AS 'tel', Part.rol AS 'rol' FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK WHERE Part.idProyectoFK = 2411";
-            IList<TeamViewModel> team = (db.Database.SqlQuery<TeamViewModel>(query)).ToList();
-            ViewData["datos"] = team;
-            return View();
+            var pARTICIPA = db.PARTICIPA.Include(p => p.EMPLEADO).Include(p => p.PROYECTO);
+            return View(pARTICIPA.ToList());
         }
 
         // GET: PARTICIPA
         public ActionResult Index()
         {
-             var pARTICIPA = db.PARTICIPA.Include(p => p.EMPLEADO).Include(p => p.PROYECTO);
-            return View(pARTICIPA.ToList());
+            string query = "SELECT Part.idProyectoFK AS 'id', Emp.nombre + ' ' + Emp.primerApellido + ' ' + Emp.segundoApellido AS 'employee', Emp.correo AS 'email', Part.rol AS 'role', Proy.nombre AS 'proyName' FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK Join PROYECTO proy ON proy.idPK = Part.idProyectoFK WHERE Part.idProyectoFK = proy.idPK ORDER BY part.idProyectoFK";
+            IList<TeamViewModel> team = (db.Database.SqlQuery<TeamViewModel>(query)).ToList();
+            ViewData["teams"] = team;
+            return View();
         }
 
         // GET: PARTICIPA/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PARTICIPA pARTICIPA = db.PARTICIPA.Find(id);
-            if (pARTICIPA == null)
-            {
-                return HttpNotFound();
-            }
-            return View(pARTICIPA);
+         
+            return View();
         }
 
         // GET: PARTICIPA/Create
@@ -78,20 +70,12 @@ namespace ProyectoPI.Views
         }
 
         // GET: PARTICIPA/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string id = "2411")
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PARTICIPA pARTICIPA = db.PARTICIPA.Find(id);
-            if (pARTICIPA == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", pARTICIPA.cedulaEmpleadoFK);
-            ViewBag.idProyectoFK = new SelectList(db.PROYECTO, "idPK", "nombre", pARTICIPA.idProyectoFK);
-            return View(pARTICIPA);
+            string query = "SELECT Part.idProyectoFK AS 'ID Proyecto', Emp.nombre + ' ' + Emp.primerApellido + ' ' + Emp.segundoApellido AS 'employee', Emp.correo AS 'email', Part.rol AS 'role' FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK WHERE Part.idProyectoFK = " + id;
+            IList<TeamViewModel> team = (db.Database.SqlQuery<TeamViewModel>(query)).ToList();
+            ViewData["team"] = team;
+            return View();
         }
 
         // POST: PARTICIPA/Edit/5
