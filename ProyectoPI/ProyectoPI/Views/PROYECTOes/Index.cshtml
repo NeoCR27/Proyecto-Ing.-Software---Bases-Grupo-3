@@ -12,8 +12,7 @@
 <h3>Rol: @rol</h3>
 
 
-@if(@rol == "jefe")
-{
+@if(@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase)){ 
 <p>
     @Html.ActionLink("Crear Nuevo Proyecto", "Create", null, new { @class = "btn btn-success" })
 </p>
@@ -39,7 +38,7 @@
                 @Html.DisplayFor(modelItem => item.CLIENTE.cedulaPK)
             </td>
             <td>
-                @if (@rol == "jefe")
+                @if (@rol == "Jefe")
                 {
                     @:@Html.ActionLink("Editar ", "Edit", new { id = item.idPK })|
                     @:@Html.ActionLink(" Detalles ", "Details", new { id = item.idPK })|

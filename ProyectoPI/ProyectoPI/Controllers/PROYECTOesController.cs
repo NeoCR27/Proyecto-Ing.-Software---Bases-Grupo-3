@@ -21,7 +21,7 @@ namespace ProyectoPI.Views
         //private string user = User.identity.name();
 
         //private string rol = seguridadController.getRol(user);
-        private string rol = "jefe";
+        private string rol = "Jefe";
 
         // GET: PROYECTOes
         public ActionResult Index()

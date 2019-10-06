@@ -10,7 +10,8 @@
 
 <h2>Eliminar</h2>
 
-@if(rol == "jefe"){
+@if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
+{
 <div>
     <h4>PROYECTO</h4>
     <hr />

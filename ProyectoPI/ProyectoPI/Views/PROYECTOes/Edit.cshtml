@@ -11,7 +11,7 @@
 
 <h2>Editar</h2>
 
-@if (rol == "jefe")
+@if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
 {
     @:@using (Html.BeginForm())
     {

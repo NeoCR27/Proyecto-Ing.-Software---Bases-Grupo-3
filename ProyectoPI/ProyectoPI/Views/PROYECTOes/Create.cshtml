@@ -11,7 +11,8 @@
 
 <h2>Crear</h2>
 
-@if (@rol == "jefe")
+@if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
+
 {
     @:@using (Html.BeginForm())
     {
