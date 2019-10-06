@@ -14,15 +14,17 @@
     }
     @foreach (var x in ViewBag.habilidades)
     {
-        <p> @x.Text </p>
+        <p> @x.Text</p>
     }
     
-</div>
+
+
+    </div>
 
 <p>
 
-    
 
+    @Html.ActionLink("Agregar", "create", "HABILIDADES", new { }, null)
     @Html.ActionLink("Editar", "edit", "HABILIDADES", new { }, null)
     @Html.ActionLink("Regresar", "to_empleados", "HABILIDADES", new { }, null)
 

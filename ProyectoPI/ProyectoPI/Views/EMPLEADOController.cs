@@ -50,6 +50,8 @@ namespace ProyectoPI.Views
         // GET: EMPLEADO/Create
         public ActionResult Create()
         {
+            string[] values = new[] { "Lider", "Jefe de calidad", "Tester" };
+            ViewBag.rol = new SelectList(values);
             return View();
         }
 
@@ -129,7 +131,7 @@ namespace ProyectoPI.Views
 
         public ActionResult to_habilidades(string id)
         {
-            return RedirectToAction("../HABILIDADES/detalles_empleado", new { id = id });
+            return RedirectToAction("../HABILIDADES/index", new { id = id });
         }
 
         public SelectList get_nombres(String id)

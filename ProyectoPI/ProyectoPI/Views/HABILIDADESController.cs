@@ -37,9 +37,16 @@ d_row = d_table.Rows[0];
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
 
         // GET: HABILIDADES
-        public ActionResult Index()
+        public ActionResult Index(String id)
         {
-            var hABILIDADES = db.HABILIDADES.Include(h => h.EMPLEADO);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //var hABILIDADES = db.HABILIDADES.Include(h => h.EMPLEADO);
+            var hABILIDADES = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id);
+            SelectList nombre = emp_controller.get_nombres(id);
+            ViewBag.nombre = nombre;
             return View(hABILIDADES.ToList());
         }
 
@@ -52,17 +59,8 @@ d_row = d_table.Rows[0];
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            //HABILIDADES consulta = db.HABILIDADES.Find(id, "valor", "tipo");
-
-
-            //ViewBag.skill_consult = new SelectList(db.HABILIDADES.Where(x=> x.cedulaEmpleadoFK == id), "valorPK", consulta.valor);
-            //ViewBag.emp_consult = new SelectList(db.EMPLEADO.Where(x => x.cedulaPK == id), "nombre", consulta.cedulaEmpleadoFK);
-
-            
-            //db.Items.Where(x => x.userid == user_ID).Select(x => x.Id).Distinct();
-
-            string sql_query = "SELECT valorPK FROM HABILIDADES WHERE 1 = cedulaEmpleadoFK;";
-            List<String> query = db.Database.SqlQuery<String>(sql_query).ToList();
+            //string sql_query = "SELECT valorPK FROM HABILIDADES WHERE 1 = cedulaEmpleadoFK;";
+            //List<String> query = db.Database.SqlQuery<String>(sql_query).ToList();
             ViewBag.habilidades = new SelectList(db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id),"", "valorPK");
 
             SelectList nombre = emp_controller.get_nombres(id);
@@ -79,18 +77,13 @@ d_row = d_table.Rows[0];
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            //HABILIDADES consulta = db.HABILIDADES.Find(id, "valor", "tipo");
+            string sql_query = "SELECT valorPK, tipoPK FROM HABILIDADES WHERE cedulaEmpleadoFK = 1;";
+            //IList<String> query = db.Database.SqlQuery<String>(sql_query).ToList();
 
+            ViewBag.habilidades = new SelectList(db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id), "", "valorPK", "tipoPK");
 
-            //ViewBag.skill_consult = new SelectList(db.HABILIDADES.Where(x=> x.cedulaEmpleadoFK == id), "valorPK", consulta.valor);
-            //ViewBag.emp_consult = new SelectList(db.EMPLEADO.Where(x => x.cedulaPK == id), "nombre", consulta.cedulaEmpleadoFK);
-
-
-            //db.Items.Where(x => x.userid == user_ID).Select(x => x.Id).Distinct();
-
-            string sql_query = "SELECT valorPK FROM HABILIDADES WHERE 1 = cedulaEmpleadoFK;";
-            List<String> query = db.Database.SqlQuery<String>(sql_query).ToList();
-            ViewBag.habilidades = new SelectList(db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id), "", "valorPK");
+            //IList<HABILIDADES> habilidades = (db.Database.SqlQuery<HABILIDADES>(sql_query)).ToList();
+            //ViewData["data"] = habilidades;
 
             SelectList nombre = emp_controller.get_nombres(id);
             ViewBag.nombre = nombre;
@@ -101,8 +94,14 @@ d_row = d_table.Rows[0];
         // GET: HABILIDADES/Create
         public ActionResult Create()
         {
+            var hABILIDADES = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == "1");
             ViewBag.cedulaEmpleadoFK = emp_controller.get_cedulas();
+            string[] values = new[] { "Tecnica", "Blanda" };
+            ViewBag.tipoPK = new SelectList(values);
+
+            //return View(hABILIDADES.ToList());
             return View();
+
         }
 
         // POST: HABILIDADES/Create
@@ -116,7 +115,7 @@ d_row = d_table.Rows[0];
             {
                 db.HABILIDADES.Add(hABILIDADES);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("../EMPLEADO/index");
             }
 
             ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", hABILIDADES.cedulaEmpleadoFK);
@@ -130,55 +129,66 @@ d_row = d_table.Rows[0];
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HABILIDADES hABILIDADES = db.HABILIDADES.Find(id);
-            if (hABILIDADES == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", hABILIDADES.cedulaEmpleadoFK);
-            return View(hABILIDADES);
+            var hABILIDADES = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id);
+            //ViewBag.datos = new SelectList(db.HABILIDADES.Where(x=>x.cedulaEmpleadoFK == id), "cedulaEmpleadoFK", "tipoPK", "valorPK");
+
+            //ViewBag.cedulaEmpleadoFK = new SelectList(db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id), "", "valorPK", "tipoPK");
+            return View(hABILIDADES.ToList());
         }
 
         // POST: HABILIDADES/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598. [Bind(Include = "valorPK,tipoPK,cedulaEmpleadoFK")] HABILIDADES hABILIDADES 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "valorPK,tipoPK,cedulaEmpleadoFK")] HABILIDADES hABILIDADES)
+        public ActionResult Edit(FormCollection collection)
         {
-            if (ModelState.IsValid)
+            foreach (string key in collection.AllKeys)
+            {
+                Response.Write("Key = " + key);
+                Response.Write(collection[key]);
+                Response.Write("<br/>");
+
+            }
+            /*if (ModelState.IsValid)
             {
                 db.Entry(hABILIDADES).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", hABILIDADES.cedulaEmpleadoFK);
-            return View(hABILIDADES);
+            */
+            return View();
         }
 
         // GET: HABILIDADES/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string id, string valor, string tipo)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HABILIDADES hABILIDADES = db.HABILIDADES.Find(id);
-            if (hABILIDADES == null)
-            {
-                return HttpNotFound();
-            }
-            return View(hABILIDADES);
+            string query = "SELECT * FROM HABILIDADES WHERE tipoPK = @tipo AND valorPK = @valor AND cedulaEmpleadoFK = @id";
+            var hABILIDADES = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id );
+         
+            return View();
         }
 
         // POST: HABILIDADES/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(FormCollection collection)
         {
-            HABILIDADES hABILIDADES = db.HABILIDADES.Find(id);
-            db.HABILIDADES.Remove(hABILIDADES);
-            db.SaveChanges();
+            foreach (string key in collection.AllKeys)
+            {
+                Response.Write("Key = " + key);
+                Response.Write(collection[key]);
+                Response.Write("<br/>");
+
+            }
+           // HABILIDADES hABILIDADES = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK = collection.Keys);
+            //db.HABILIDADES.Remove(hABILIDADES);
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 
