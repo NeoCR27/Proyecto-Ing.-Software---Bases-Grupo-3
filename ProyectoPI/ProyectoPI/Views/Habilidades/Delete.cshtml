@@ -1,4 +1,4 @@
-﻿@model ProyectoPI.Models.HABILIDADES
+﻿@model IEnumerable<ProyectoPI.Models.HABILIDADES>
 
 @{
     ViewBag.Title = "Delete";
@@ -10,23 +10,57 @@
 <div>
     <h4>HABILIDADES</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.EMPLEADO.tel)
-        </dt>
+    <dl class="dl-horizontal"></dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.EMPLEADO.tel)
-        </dd>
 
-    </dl>
 
-    @using (Html.BeginForm()) {
+
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.cedulaEmpleadoFK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.valorPK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipoPK)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cedulaEmpleadoFK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valorPK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipoPK)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteConfirmed", "HABILIDADES", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }, null)
+
+            </td>
+        </tr>
+    }
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
+
         <div class="form-actions no-color">
+
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Regresar" class="btn btn-default" />
         </div>
+
+
+
     }
-</div>
+
+</table>

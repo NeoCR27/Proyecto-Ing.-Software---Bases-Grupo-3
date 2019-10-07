@@ -1,33 +1,50 @@
 ﻿@model IEnumerable<ProyectoPI.Models.HABILIDADES>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Detalles";
 }
 
-<h2>Index</h2>
-
+<h2>Detalles </h2>
+@foreach (var x in ViewBag.nombre)
+{
+    <h4> @x.Text </h4>
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.EMPLEADO.tel)
+            @Html.DisplayNameFor(model => model.cedulaEmpleadoFK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.valorPK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipoPK)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EMPLEADO.tel)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cedulaEmpleadoFK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valorPK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipoPK)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.cedulaEmpleadoFK }) |
+                @Html.ActionLink("Details", "Details", new { id = item.cedulaEmpleadoFK }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK })
+
+            </td>
+        </tr>
+    }
 
 </table>

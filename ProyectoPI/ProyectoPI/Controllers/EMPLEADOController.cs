@@ -42,6 +42,8 @@ namespace ProyectoPI.Views
         // GET: EMPLEADO/Create
         public ActionResult Create()
         {
+            string[] values = new[] { "Lider", "Jefe de calidad", "Tester" };
+            ViewBag.rol = new SelectList(values);
             return View();
         }
 
@@ -122,7 +124,20 @@ namespace ProyectoPI.Views
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult to_habilidades(string id)
+        {
+            return RedirectToAction("../HABILIDADES/index", new { id = id });
+        }
 
+        public SelectList get_nombres(String id)
+        {
+            return new SelectList(db.EMPLEADO.Where(empleado => empleado.cedulaPK == id), "", "nombre");
+        }
+
+        public SelectList get_cedulas()
+        {
+            return new SelectList(db.EMPLEADO, "", "cedulaPK");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
