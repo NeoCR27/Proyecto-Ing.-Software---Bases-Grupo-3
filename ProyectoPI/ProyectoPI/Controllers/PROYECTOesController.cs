@@ -16,6 +16,8 @@ namespace ProyectoPI.Views
 
         private EMPLEADOController empleadoController = new EMPLEADOController();
 
+        private PARTICIPAController participaController = new PARTICIPAController();
+
         //private SeguridadController seguridadController = new SeguridadController();
 
         //private string user = User.identity.name();
@@ -52,7 +54,7 @@ namespace ProyectoPI.Views
         {
             ViewBag.rol = this.rol;
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK");
-            SelectList lideres = this.empleadoController.getLideres();
+            SelectList lideres = this.empleadoController.getLideresDisponibles();
             ViewBag.lideres = lideres;
             return View();
         }
@@ -62,15 +64,17 @@ namespace ProyectoPI.Views
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string liderEscogido, [Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
+        public ActionResult Create(string cedulaLiderEscogido, [Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
         {
-            //string liderEscogido = ViewBag.lideres.SelectValue; // Sacar valor del lider escogido en el view
-            System.Diagnostics.Debug.WriteLine(liderEscogido + " fue el lider escogido");
+            System.Diagnostics.Debug.WriteLine(cedulaLiderEscogido + " es la cedula del lider escogido");
             if (ModelState.IsValid)
             {
-                
                 db.PROYECTO.Add(pROYECTO);
                 db.SaveChanges();
+                // Guardar en la base de datos que el lider escogido para ese proyecto 
+                // pasar el ID del proyecto, cedula del lider
+                // PASAR ESTO A PARTICIPA, con el rol de "Lider"
+
                 return RedirectToAction("Index");
             }
             return View(pROYECTO);
@@ -80,7 +84,8 @@ namespace ProyectoPI.Views
         public ActionResult Edit(string id)
         {
             ViewBag.rol = this.rol;
-            SelectList lideres = this.empleadoController.getLideres();
+            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK");
+            SelectList lideres = this.empleadoController.getLideresDisponibles();
             ViewBag.lideres = lideres;
             if (id == null)
             {

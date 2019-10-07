@@ -125,8 +125,17 @@ namespace ProyectoPI.Views
             base.Dispose(disposing);
         }
 
-        public SelectList getLideres() {
-            return new SelectList(db.EMPLEADO.Where(empleado => empleado.rol == "LIDER"), "", "nombre");
+        public SelectList getLideresDisponibles() { // Retorna los nombres y cédulas de los empleados líderes disponibles
+            string query = "SELECT EMPLEADO.nombre, EMPLEADO.cedulaPK FROM EMPLEADO";
+            var resultado = db.Database.SqlQuery<EMPLEADO>(query);
+            IEnumerable<EMPLEADO> resultados = (db.EMPLEADO.Where((e => e.disponibilidad == true && e.rol == "Lider")));
+            IDictionary<string, string> diccionario = new Dictionary<string, string>(); // Para guardar NOMBRE, CEDULA
+            foreach (EMPLEADO empleado in resultados)
+            {
+                diccionario.Add(empleado.nombre, empleado.cedulaPK);
+            }
+            
+            return new SelectList(diccionario);
         }
     }
 }
