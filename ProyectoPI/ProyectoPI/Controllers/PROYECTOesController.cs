@@ -18,6 +18,8 @@ namespace ProyectoPI.Views
 
         private PARTICIPAController participaController = new PARTICIPAController();
 
+        private int contadorProyectos = 1;
+
         //private SeguridadController seguridadController = new SeguridadController();
 
         //private string user = User.identity.name();
@@ -52,6 +54,7 @@ namespace ProyectoPI.Views
         // GET: PROYECTOes/Create
         public ActionResult Create()
         {
+            ViewBag.idPK = this.contadorProyectos.ToString();
             ViewBag.rol = this.rol;
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK");
             List<SelectListItem> lideres = this.empleadoController.getLideresDisponibles();
@@ -66,15 +69,18 @@ namespace ProyectoPI.Views
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
         {
+            pROYECTO.idPK = this.contadorProyectos.ToString();
+            ++this.contadorProyectos;
             if (ModelState.IsValid)
             {
                 db.PROYECTO.Add(pROYECTO);
                 db.SaveChanges();
                 string cedulaLiderEscogido = Request.Form["Lideres"].ToString();
-                //System.Diagnostics.Debug.WriteLine(cedulaLiderEscogido + " es la cedula del lider escogido");
+
                 // Guardar en la base de datos que el lider escogido para ese proyecto 
                 // pasar el ID del proyecto, cedula del lider
-                // PASAR ESTO A PARTICIPA, con el rol de "Lider"
+                // Pasar a PARTICIPA, con el rol de "Lider"
+
                 participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider");
                 return RedirectToAction("Index");
             }
@@ -114,9 +120,14 @@ namespace ProyectoPI.Views
             {
                 db.Entry(pROYECTO).State = EntityState.Modified;
                 db.SaveChanges();
+                // Guardar en la base de datos que el lider escogido para ese proyecto 
+                // pasar el ID del proyecto, cedula del lider
+                // Pasar a PARTICIPA, con el rol de "Lider"
+                string cedulaLiderEscogido = Request.Form["Lideres"].ToString();
+                participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider");
                 return RedirectToAction("Index");
             }
-            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "cedulaPK", "tel", pROYECTO.cedulaClienteFK);
+            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK", pROYECTO.cedulaClienteFK);
             return View(pROYECTO);
         }
 

@@ -22,7 +22,7 @@ namespace ProyectoPI.Models
             this.PARTICIPA = new HashSet<PARTICIPA>();
             this.REQUERIMIENTOS = new HashSet<REQUERIMIENTOS>();
         }
-    
+
         [Required]
         [Display (Name = "ID del proyecto")]
         public string idPK { get; set; }
