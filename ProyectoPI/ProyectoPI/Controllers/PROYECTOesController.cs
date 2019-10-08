@@ -54,7 +54,7 @@ namespace ProyectoPI.Views
         {
             ViewBag.rol = this.rol;
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK");
-            SelectList lideres = this.empleadoController.getLideresDisponibles();
+            List<SelectListItem> lideres = this.empleadoController.getLideresDisponibles();
             ViewBag.lideres = lideres;
             return View();
         }
@@ -64,17 +64,18 @@ namespace ProyectoPI.Views
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string cedulaLiderEscogido, [Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
+        public ActionResult Create([Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
         {
-            System.Diagnostics.Debug.WriteLine(cedulaLiderEscogido + " es la cedula del lider escogido");
             if (ModelState.IsValid)
             {
                 db.PROYECTO.Add(pROYECTO);
                 db.SaveChanges();
+                string cedulaLiderEscogido = Request.Form["Lideres"].ToString();
+                //System.Diagnostics.Debug.WriteLine(cedulaLiderEscogido + " es la cedula del lider escogido");
                 // Guardar en la base de datos que el lider escogido para ese proyecto 
                 // pasar el ID del proyecto, cedula del lider
                 // PASAR ESTO A PARTICIPA, con el rol de "Lider"
-
+                participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider");
                 return RedirectToAction("Index");
             }
             return View(pROYECTO);
@@ -85,7 +86,7 @@ namespace ProyectoPI.Views
         {
             ViewBag.rol = this.rol;
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK");
-            SelectList lideres = this.empleadoController.getLideresDisponibles();
+            List<SelectListItem> lideres = this.empleadoController.getLideresDisponibles();
             ViewBag.lideres = lideres;
             if (id == null)
             {

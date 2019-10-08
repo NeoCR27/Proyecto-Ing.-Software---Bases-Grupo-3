@@ -105,11 +105,8 @@
 {
     @:<p>
         @:@Html.ActionLink("Editar", "Edit", new { id = Model.idPK }) |
-        @:@Html.ActionLink("Eliminar", "Delete", new { id = Model.idPK }) |
-        @Html.ActionLink("Lista proyectos", "Index")
+        @:@Html.ActionLink("Eliminar", "Delete", new { id = Model.idPK })
     @:</p>
 }
-else
-{
-    @Html.ActionLink("Lista proyectos", "Index")
-}
+
+@Html.ActionLink("Regresar", "Index")

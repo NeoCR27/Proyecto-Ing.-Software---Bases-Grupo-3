@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoPI.Models;
+using System.Data.SqlClient;
 
 namespace ProyectoPI.Views
 {
@@ -132,5 +133,16 @@ namespace ProyectoPI.Views
             }
             base.Dispose(disposing);
         }
+
+        public void agregar(string idProyectoFK, string cedulaEmpleadoFK, string rol)
+        {
+            string query = "INSERT INTO PARTICIPA (cedulaEmpleadoFK,idProyectoFK,rol) VALUES (@cedulaEmpleadoFK,@idProyectoFK,@rol)";
+            db.Database.ExecuteSqlCommand(query,
+                new SqlParameter("@cedulaEmpleadoFK", cedulaEmpleadoFK),
+                new SqlParameter("@idProyectoFK", idProyectoFK),
+                new SqlParameter("@rol", rol)
+            );  
+        }
+        
     }
 }
