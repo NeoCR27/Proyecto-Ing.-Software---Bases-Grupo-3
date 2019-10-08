@@ -25,35 +25,17 @@ namespace ProyectoPI.Models
 
     public  class TeamViewModel
     {
-        public TeamViewModel ()
-        {
 
-        }
-        [Display(Name = "ID Proyecto")]
         public string id { get; set;}
-        [Display(Name = "Nombre Completo")]
+
         public string employee { get; set; }
-        [Display(Name = "Correo de Contacto")]
+
         public string email { get; set; }
-        [Display(Name = "Rol")]
+
         public string role { get; set; }
-        [Display(Name = "Nombre de Proyecto")]
+
         public string proyName { get; set; }
-        [Display(Name = "Habilidades")]
+
         public string habilidades { get; set; }
     }
-
-    public class empDesc
-    {
-        public empDesc()
-        {
-
-        }
-        [Display(Name = "ID Proyecto")]
-        public string id { get; set; }
-        [Display(Name = "Nombre Completo")]
-        public string employee { get; set; }
-    }
-
-
 }

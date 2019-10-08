@@ -73,7 +73,7 @@ namespace ProyectoPI.Views
             
             //db.Database.SqlQuery<TeamViewModel>(query)).ToList();
             ViewData["employees"] = (db.EMPLEADO.Where(x => x.nombre.StartsWith(searchFilter) || searchFilter == null)).ToList();
-            var tuple = new Tuple<TeamViewModel, empDesc>(new TeamViewModel(), new empDesc());
+           // var tuple = new Tuple<TeamViewModel, empDesc>(new TeamViewModel(), new empDesc());
             return View((db.Database.SqlQuery<TeamViewModel>(queryTeam)).ToList());
         }
        /* @foreach(var employee in ViewData["employees"] as IEnumerable<ProyectoPI.Models.TeamViewModel>)
