@@ -25,7 +25,7 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 400px;
 }
 
 #jumb {
@@ -34,7 +34,6 @@ textarea {
     height: 500px;
 }
 #jumb h1 {
-
     margin-top: 280px;
     font-size: 80px;
     color: white;
@@ -48,15 +47,21 @@ textarea {
     margin-left: 200px;
 }
 
+.card{
+    margin: 15px 0px 15px 0px;
+    background-color: white;
+}
 .card-body {
-    padding: 20px;
+    padding: 10px;
     text-align: center;
 }
-
 .card-img-top {
     width: 260px;
     height: 130px;
     object-fit: cover;
+}
+.marginElim{
+    margin-top: 15px;
 }
 
 .required:after {
