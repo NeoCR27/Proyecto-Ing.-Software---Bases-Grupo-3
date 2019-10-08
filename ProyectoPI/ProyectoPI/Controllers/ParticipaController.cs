@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoPI.Models;
+using System.Data.SqlClient;
 
 namespace ProyectoPI.Views
 {
@@ -14,7 +15,7 @@ namespace ProyectoPI.Views
     {
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
         private EMPLEADOController empleados = new EMPLEADOController();
-        private PROYECTOesController proyect = new PROYECTOesController();
+        //private PROYECTOesController proyect = new PROYECTOesController();
         private HABILIDADESController habilidad = new HABILIDADESController();
 
         //Get team
@@ -89,57 +90,66 @@ namespace ProyectoPI.Views
            </li>
        }*/
 
-// POST: PARTICIPA/Edit/5
-// Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-// más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-[HttpPost]
-[ValidateAntiForgeryToken]
-public ActionResult Edit([Bind(Include = "rol,cedulaEmpleadoFK,idProyectoFK")] PARTICIPA pARTICIPA)
-{
-if (ModelState.IsValid)
-{
-db.Entry(pARTICIPA).State = EntityState.Modified;
-db.SaveChanges();
-return RedirectToAction("Index");
-}
-ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", pARTICIPA.cedulaEmpleadoFK);
-ViewBag.idProyectoFK = new SelectList(db.PROYECTO, "idPK", "nombre", pARTICIPA.idProyectoFK);
-return View(pARTICIPA);
-}
+            // POST: PARTICIPA/Edit/5
+            // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+            // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public ActionResult Edit([Bind(Include = "rol,cedulaEmpleadoFK,idProyectoFK")] PARTICIPA pARTICIPA)
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Entry(pARTICIPA).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", pARTICIPA.cedulaEmpleadoFK);
+                ViewBag.idProyectoFK = new SelectList(db.PROYECTO, "idPK", "nombre", pARTICIPA.idProyectoFK);
+                return View(pARTICIPA);
+            }
 
-// GET: PARTICIPA/Delete/5
-public ActionResult Delete(string id)
-{
-if (id == null)
-{
-return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-}
-PARTICIPA pARTICIPA = db.PARTICIPA.Find(id);
-if (pARTICIPA == null)
-{
-return HttpNotFound();
-}
-return View(pARTICIPA);
-}
+            // GET: PARTICIPA/Delete/5
+            public ActionResult Delete(string id)
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                PARTICIPA pARTICIPA = db.PARTICIPA.Find(id);
+                if (pARTICIPA == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(pARTICIPA);
+            }
 
-// POST: PARTICIPA/Delete/5
-[HttpPost, ActionName("Delete")]
-[ValidateAntiForgeryToken]
-public ActionResult DeleteConfirmed(string id)
-{
-PARTICIPA pARTICIPA = db.PARTICIPA.Find(id);
-db.PARTICIPA.Remove(pARTICIPA);
-db.SaveChanges();
-return RedirectToAction("Index");
-}
+            // POST: PARTICIPA/Delete/5
+            [HttpPost, ActionName("Delete")]
+            [ValidateAntiForgeryToken]
+            public ActionResult DeleteConfirmed(string id)
+            {
+                PARTICIPA pARTICIPA = db.PARTICIPA.Find(id);
+                db.PARTICIPA.Remove(pARTICIPA);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-protected override void Dispose(bool disposing)
-{
-if (disposing)
-{
-db.Dispose();
-}
-base.Dispose(disposing);
-}
-}
+            protected override void Dispose(bool disposing)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+                base.Dispose(disposing);
+            }
+            public void agregar(string idProyectoFK, string cedulaEmpleadoFK, string rol)
+            {
+                string query = "INSERT INTO PARTICIPA (cedulaEmpleadoFK,idProyectoFK,rol) VALUES (@cedulaEmpleadoFK,@idProyectoFK,@rol)";
+                db.Database.ExecuteSqlCommand(query,
+                    new SqlParameter("@cedulaEmpleadoFK", cedulaEmpleadoFK),
+                    new SqlParameter("@idProyectoFK", idProyectoFK),
+                    new SqlParameter("@rol", rol)
+                );
+            }
+    }
 }

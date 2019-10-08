@@ -12,18 +12,32 @@ namespace ProyectoPI.Views
 {
     public class PROYECTOesController : Controller
     {
+
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
+
+        private EMPLEADOController empleadoController = new EMPLEADOController();
+
+        private PARTICIPAController participaController = new PARTICIPAController();
+
+        //private SeguridadController seguridadController = new SeguridadController();
+
+        //private string user = User.identity.name();
+
+        //private string rol = seguridadController.getRol(user);
+        private string rol = "Jefe";
 
         // GET: PROYECTOes
         public ActionResult Index()
         {
             var pROYECTO = db.PROYECTO.Include(p => p.CLIENTE);
+            ViewBag.rol = this.rol;
             return View(pROYECTO.ToList());
         }
 
         // GET: PROYECTOes/Details/5
         public ActionResult Details(string id)
         {
+            ViewBag.rol = this.rol;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,7 +53,11 @@ namespace ProyectoPI.Views
         // GET: PROYECTOes/Create
         public ActionResult Create()
         {
-            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "cedulaPK", "tel");
+            ViewBag.idPK = "0";
+            ViewBag.rol = this.rol;
+            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK");
+            List<SelectListItem> lideres = this.empleadoController.getLideresDisponibles();
+            ViewBag.lideres = lideres;
             return View();
         }
 
@@ -50,20 +68,28 @@ namespace ProyectoPI.Views
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
         {
+            pROYECTO.idPK = this.getIdAsignar();
             if (ModelState.IsValid)
             {
                 db.PROYECTO.Add(pROYECTO);
                 db.SaveChanges();
+
+                string cedulaLiderEscogido = Request.Form["Lideres"].ToString(); // Agarra el valor seleccionado en el dropdown de la vista con los lideres disponibles
+                // Guardar en la base de datos que el lider escogido para ese proyecto 
+                // pasar el ID del proyecto y cedula del lider, junto con el rol de "Lider"
+                participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider");
                 return RedirectToAction("Index");
             }
-
-            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "cedulaPK", "tel", pROYECTO.cedulaClienteFK);
             return View(pROYECTO);
         }
 
         // GET: PROYECTOes/Edit/5
         public ActionResult Edit(string id)
         {
+            ViewBag.rol = this.rol;
+            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK");
+            List<SelectListItem> lideres = this.empleadoController.getLideresDisponibles();
+            ViewBag.lideres = lideres;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -73,7 +99,7 @@ namespace ProyectoPI.Views
             {
                 return HttpNotFound();
             }
-            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "cedulaPK", "tel", pROYECTO.cedulaClienteFK);
+            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK", pROYECTO.cedulaClienteFK);
             return View(pROYECTO);
         }
 
@@ -88,15 +114,21 @@ namespace ProyectoPI.Views
             {
                 db.Entry(pROYECTO).State = EntityState.Modified;
                 db.SaveChanges();
+
+                string cedulaLiderEscogido = Request.Form["Lideres"].ToString(); // Agarra el valor seleccionado en el dropdown de la vista con los lideres disponibles
+                // Guardar en la base de datos que el lider escogido para ese proyecto 
+                // pasar el ID del proyecto y cedula del lider, junto con el rol de "Lider"
+                participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider");
                 return RedirectToAction("Index");
             }
-            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "cedulaPK", "tel", pROYECTO.cedulaClienteFK);
+            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK", pROYECTO.cedulaClienteFK);
             return View(pROYECTO);
         }
 
         // GET: PROYECTOes/Delete/5
         public ActionResult Delete(string id)
         {
+            ViewBag.rol = this.rol;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -128,5 +160,20 @@ namespace ProyectoPI.Views
             }
             base.Dispose(disposing);
         }
+
+        public string getIdAsignar() // Metodo que retorna el mayor idPK que se encuentra en la base de datos en las instancias de PROYECTOS,
+                                     // esto para comenzar a asignar este id automaticamente
+        {
+            List<PROYECTO> ids = db.PROYECTO.Where(p => p.idPK != null).ToList();
+            List<int> idsInts = new List<int>();
+            foreach (PROYECTO proy in ids)
+            {
+                idsInts.Add(Int32.Parse(proy.idPK));
+            }
+            int ultimoIdAsignado = idsInts.Max() + 1;
+            return ultimoIdAsignado.ToString();
+        }
+
+
     }
 }
