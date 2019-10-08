@@ -12,13 +12,12 @@ namespace ProyectoPI.Views
 {
     public class PROYECTOesController : Controller
     {
+
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
 
         private EMPLEADOController empleadoController = new EMPLEADOController();
 
         private PARTICIPAController participaController = new PARTICIPAController();
-
-        private int contadorProyectos = 1;
 
         //private SeguridadController seguridadController = new SeguridadController();
 
@@ -54,7 +53,7 @@ namespace ProyectoPI.Views
         // GET: PROYECTOes/Create
         public ActionResult Create()
         {
-            ViewBag.idPK = this.contadorProyectos.ToString();
+            ViewBag.idPK = "0";
             ViewBag.rol = this.rol;
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK");
             List<SelectListItem> lideres = this.empleadoController.getLideresDisponibles();
@@ -69,18 +68,15 @@ namespace ProyectoPI.Views
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
         {
-            pROYECTO.idPK = this.contadorProyectos.ToString();
-            ++this.contadorProyectos;
+            pROYECTO.idPK = this.getIdAsignar();
             if (ModelState.IsValid)
             {
                 db.PROYECTO.Add(pROYECTO);
                 db.SaveChanges();
-                string cedulaLiderEscogido = Request.Form["Lideres"].ToString();
 
+                string cedulaLiderEscogido = Request.Form["Lideres"].ToString(); // Agarra el valor seleccionado en el dropdown de la vista con los lideres disponibles
                 // Guardar en la base de datos que el lider escogido para ese proyecto 
-                // pasar el ID del proyecto, cedula del lider
-                // Pasar a PARTICIPA, con el rol de "Lider"
-
+                // pasar el ID del proyecto y cedula del lider, junto con el rol de "Lider"
                 participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider");
                 return RedirectToAction("Index");
             }
@@ -114,16 +110,14 @@ namespace ProyectoPI.Views
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
         {
-            //string liderEscogido = ViewBag.lideres.SelectValue; // Sacar valor del lider escogido en el view
-            //System.Diagnostics.Debug.WriteLine(liderEscogido + " fue el lider escogido");
             if (ModelState.IsValid)
             {
                 db.Entry(pROYECTO).State = EntityState.Modified;
                 db.SaveChanges();
+
+                string cedulaLiderEscogido = Request.Form["Lideres"].ToString(); // Agarra el valor seleccionado en el dropdown de la vista con los lideres disponibles
                 // Guardar en la base de datos que el lider escogido para ese proyecto 
-                // pasar el ID del proyecto, cedula del lider
-                // Pasar a PARTICIPA, con el rol de "Lider"
-                string cedulaLiderEscogido = Request.Form["Lideres"].ToString();
+                // pasar el ID del proyecto y cedula del lider, junto con el rol de "Lider"
                 participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider");
                 return RedirectToAction("Index");
             }
@@ -166,5 +160,20 @@ namespace ProyectoPI.Views
             }
             base.Dispose(disposing);
         }
+
+        public string getIdAsignar() // Metodo que retorna el mayor idPK que se encuentra en la base de datos en las instancias de PROYECTOS,
+                                     // esto para comenzar a asignar este id automaticamente
+        {
+            List<PROYECTO> ids = db.PROYECTO.Where(p => p.idPK != null).ToList();
+            List<int> idsInts = new List<int>();
+            foreach (PROYECTO proy in ids)
+            {
+                idsInts.Add(Int32.Parse(proy.idPK));
+            }
+            int ultimoIdAsignado = idsInts.Max() + 1;
+            return ultimoIdAsignado.ToString();
+        }
+
+
     }
 }
