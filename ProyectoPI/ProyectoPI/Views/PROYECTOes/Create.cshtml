@@ -11,7 +11,7 @@
 
 <h3>Rol: @rol</h3>
 
-<h2 class="titulosPag">Crear</h2>
+<h2 class="titulosPag">Crear Proyecto</h2>
 
 @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
 {
@@ -20,7 +20,6 @@
         @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>PROYECTO</h4>
     <hr />
 
     <input type="hidden" id="idPK" name="idPK" value="default">
