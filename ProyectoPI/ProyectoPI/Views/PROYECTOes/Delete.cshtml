@@ -87,7 +87,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eliminar">
+                    <button type="button" class="botonGeneral colorRojo" data-toggle="modal" data-target="#eliminar">
                         Eliminar
                     </button>
                     <!-- Modal -->
@@ -109,6 +109,7 @@
                     </div>
                 </div>
             </div>
+
         }
     </div>
 }
@@ -116,6 +117,6 @@ else
 {
     <h1>Los @rol NO PUEDEN ELIMINAR PROYECTOS</h1>
 }
-
-@Html.ActionLink("Regresar", "Index")
-
+    <div class="form-actions no-color">
+        @Html.ActionLink("Volver", "Index", null, new { @class = "botonGeneral colorGris" })
+    </div>

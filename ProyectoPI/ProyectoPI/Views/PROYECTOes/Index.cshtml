@@ -9,7 +9,7 @@
 @{
     string rol = ViewBag.rol;
 }
-<h3>Rol: @rol</h3>
+
 
 
 @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
@@ -25,9 +25,11 @@
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
-                    <img src="../Img/jumb.jpg" class="card-img-top" alt="...">
-                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.nombre) @Html.DisplayFor(modelItem => item.CLIENTE.cedulaPK) </h4>
-                    <p class="card-text"><small class="text-muted">@Html.DisplayFor(modelItem => item.objetivo)</small></p>
+                    <img src="../Img/proy.jpg" class="card-img-top" alt="...">
+                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.nombre) </h4>
+                    <p class="card-text"><small class="text-muted">Cliente: @Html.DisplayFor(modelItem => item.CLIENTE.nombre)</small></p>
+                    <p class="card-text"><small class="text-muted">Objetivo: @Html.DisplayFor(modelItem => item.objetivo)</small></p>
+
                     @if (@rol == "Jefe")
                     {
                         <p class="card-text">

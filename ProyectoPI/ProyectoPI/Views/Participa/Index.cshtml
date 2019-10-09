@@ -1,35 +1,41 @@
 ﻿@model IEnumerable<ProyectoPI.Models.TeamViewModel>
 @{
     ViewBag.Title = "Lista de Equipos";
-    <h2 class="titulosPag">Equipos Formados</h2>
-
+    <h2 class="titulosPag">Equipos</h2>
     <div class="row">
         @{string currentID = "0";}
-
         @foreach (var miembro in Model)
         {
-            if (!currentID.Equals(miembro.id))
-            {
-                <h4 class="card-title">
-                    @miembro.proyName
-                </h4>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="../Img/equip.jpg" class="card-img-top" alt="...">
+                        <h4 class="card-title">@miembro.proyName</h4>
+                        <p class="card-text"><small class="text-muted">@miembro.employee @miembro.role</small></p>
+               
+                        @if (!currentID.Equals(miembro.id))
+                        {
+                            currentID = @miembro.id;
+                            <p class="card-text">
+                                @Html.ActionLink("Añadir o Remover integrantes", "Edit", new { id = @miembro.id }, new { @class = "botonGeneral colorCeleste" }) 
 
-            @Html.ActionLink("Añadir o Remover integrantes", "Edit", routeValues: new { id = @miembro.id })
-                <li>
-                    @miembro.employee , @miembro.email ,@miembro.role, @miembro.id ,
-                </li>
-            currentID = @miembro.id;
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
         }
-        else
-        {
-            <li>
-                @miembro.employee, @miembro.email ,@miembro.role, @miembro.id
-            </li>
-        }
+    </div>
 
-    }
-</div>
-    }
+        
+        
+
+
+
+}
+
+
+
 
 
 

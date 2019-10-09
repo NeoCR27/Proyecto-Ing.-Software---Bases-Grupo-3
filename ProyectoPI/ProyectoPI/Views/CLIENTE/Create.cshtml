@@ -84,6 +84,10 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
+                @{
+                    string URL = Request.Url.ToString();
+                }
+                <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
                 <input type="submit" value="Crear" class="botonGeneral colorVerde" />
             </div>
         </div>

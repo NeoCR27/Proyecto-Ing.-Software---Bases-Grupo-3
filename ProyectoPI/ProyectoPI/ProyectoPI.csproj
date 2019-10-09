@@ -232,8 +232,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Img\emp.jpg" />
+    <Content Include="Img\equip.jpg" />
     <Content Include="Img\fondo.jpg" />
     <Content Include="Img\jumb.jpg" />
+    <Content Include="Img\proy.jpg" />
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
