@@ -22,27 +22,24 @@ namespace ProyectoPI.Controllers
 
         private SeguridadController seguridadController = new SeguridadController();
 
-        private string user = "";
-
-        private string rol = "Jefe";
-
         // GET: PROYECTOes
         //public async Task<ActionResult> Index()
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            this.user = User.Identity.Name;
-            //this.rol = await Task.FromResult<string>(this.seguridadController.GetRol(this.user, "").Result);
-            this.rol = "Jefe";
+            string user = User.Identity.Name;
+            string rol = await this.seguridadController.GetRol(user);
             System.Diagnostics.Debug.WriteLine(rol);
             var pROYECTO = db.PROYECTO.Include(p => p.CLIENTE);
-            ViewBag.rol = this.rol;
+            ViewBag.rol = rol;
             return View(pROYECTO.ToList());
         }
 
         // GET: PROYECTOes/Details/5
-        public ActionResult Details(string id)
+        public async Task<ActionResult> Details(string id)
         {
-            ViewBag.rol = this.rol;
+            string user = User.Identity.Name;
+            string rol = await this.seguridadController.GetRol(user);
+            ViewBag.rol = rol;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -69,12 +66,14 @@ namespace ProyectoPI.Controllers
         }
 
         // GET: PROYECTOes/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
 
             ViewBag.idPK = "0";
-            ViewBag.rol = this.rol;
-            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK");
+            string user = User.Identity.Name;
+            string rol = await this.seguridadController.GetRol(user);
+            ViewBag.rol = rol;
+            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "nombre");
             List<SelectListItem> lideres = this.empleadoController.getLideresDisponibles();
             ViewBag.lideres = lideres;
             return View();
@@ -106,8 +105,11 @@ namespace ProyectoPI.Controllers
         }
 
         // GET: PROYECTOes/Edit/5
-        public ActionResult Edit(string id)
+        public async Task<ActionResult> Edit(string id)
         {
+            string user = User.Identity.Name;
+            string rol = await this.seguridadController.GetRol(user);
+            ViewBag.rol = rol;
             // Sacar empleado con rol Lider de participa en el id del proyecto
             var nombreLiderActual = (from proy in db.PROYECTO
                                       join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
@@ -163,9 +165,11 @@ namespace ProyectoPI.Controllers
         }
 
         // GET: PROYECTOes/Delete/5
-        public ActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
-            ViewBag.rol = this.rol;
+            string user = User.Identity.Name;
+            string rol = await this.seguridadController.GetRol(user);
+            ViewBag.rol = rol;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

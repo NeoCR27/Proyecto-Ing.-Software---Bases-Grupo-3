@@ -75,7 +75,7 @@ namespace ProyectoPI.Controllers
 
         }
 
-        public async Task<string> GetRol(string correo, string rol)
+        public async Task<string> GetRol(string correo)
         {
 
             var user = await UserManager.FindByNameAsync(correo);
