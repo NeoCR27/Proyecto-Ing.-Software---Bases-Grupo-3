@@ -73,7 +73,7 @@ namespace ProyectoPI.Views
         // GET: HABILIDADES/Create
         public ActionResult Create()
         {
-            var hABILIDADES = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == "1");
+            //var hABILIDADES = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == "1");
             ViewBag.cedulaEmpleadoFK = emp_controller.get_cedulas();
             string[] values = new[] { "Tecnica", "Blanda" };
             ViewBag.tipoPK = new SelectList(values);
@@ -90,15 +90,22 @@ namespace ProyectoPI.Views
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "valorPK,tipoPK,cedulaEmpleadoFK")] HABILIDADES hABILIDADES)
         {
-            if (ModelState.IsValid)
+            HABILIDADES duplicate =  db.HABILIDADES.Find(hABILIDADES.valorPK, hABILIDADES.tipoPK, hABILIDADES.cedulaEmpleadoFK);
+            //HABILIDADES habilidad_viejas = await db.HABILIDADES.FindAsync(valor_viejo, tipo_viejo, id_viejo);
+            if (duplicate == null)
             {
-                db.HABILIDADES.Add(hABILIDADES);
-                db.SaveChanges();
-                return RedirectToAction("../EMPLEADO/index");
+                if (ModelState.IsValid)
+                {
+                    db.HABILIDADES.Add(hABILIDADES);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", new { id = hABILIDADES.cedulaEmpleadoFK });
+                }
             }
+            //else ERROR
+            
 
             //ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", hABILIDADES.cedulaEmpleadoFK);
-            return View(hABILIDADES);
+            return RedirectToAction("Index", new { id =  hABILIDADES.cedulaEmpleadoFK});
         }
 
         // GET: HABILIDADES/Edit/5
@@ -116,6 +123,7 @@ namespace ProyectoPI.Views
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ViewBag.habilidades = new SelectList(db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id && x.tipoPK == tipo && x.valorPK == valor), "cedulaEmpleadoFK", "tipoPK", "valorPK");
+            ViewBag.ced = id;
 
             var hABILIDADES = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id && x.tipoPK == tipo && x.valorPK == valor);
 
@@ -160,7 +168,7 @@ namespace ProyectoPI.Views
             }
 
             ViewBag.habilidades = new SelectList(db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id && x.tipoPK == tipo && x.valorPK == valor), "cedulaEmpleadoFK", "tipoPK", "valorPK");
-
+            ViewBag.ced = id;
             var hABILIDADES = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id && x.tipoPK == tipo && x.valorPK == valor);
 
             return View(hABILIDADES);
@@ -180,7 +188,7 @@ namespace ProyectoPI.Views
             return RedirectToAction("Index", new { id = id });
         }
 
-        public ActionResult to_empleados(string id)
+        public ActionResult to_empleados()
         {
             return RedirectToAction("../EMPLEADO/Index", new { });
         }

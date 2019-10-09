@@ -44,6 +44,9 @@ namespace ProyectoPI.Views
         {
             string[] values = new[] { "Lider", "Jefe de calidad", "Tester" };
             ViewBag.rol = new SelectList(values);
+            string[] disponible = new[] { "Disponible", "No disponible" };
+
+            ViewBag.disponible = new SelectList(disponible);
             return View();
         }
 

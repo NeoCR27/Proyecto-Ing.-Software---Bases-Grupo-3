@@ -41,6 +41,45 @@
     }
 
 </table>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="button" class="botonGeneral colorRojo" data-toggle="modal" data-target="#Editar">
+                Editar
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="Editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"><strong>¿Está seguro que desea editar el proyecto?</strong></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                            <input type="submit" value="Editar" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="form-actions no-color">
+        @{
+            string values = ViewBag.ced;
+        }
+        @Html.ActionLink("Volver", "Index", new { id = values }, new { @class = "botonGeneral colorGris" })
+    </div>
+}
+@*
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -52,6 +91,5 @@
         <input type="submit" value="Regresar" class="btn btn-danger" />
     </div>
 
-
-
 }
+*@

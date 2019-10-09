@@ -9,9 +9,10 @@
 {
     <h4> @x.Text </h4>
 }
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+    <p>
+        @Html.ActionLink("Agregar habilidad", "Create", null, new { @class = "botonGeneral colorVerde" })
+
+    </p>
 <table class="table">
     <tr>
         <th>
@@ -46,8 +47,8 @@
                 *@
 
 
-                @Html.ActionLink("Edit", "Edit", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK })
+                @Html.ActionLink("Edit", "Edit", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }, new { @class = "botonGeneral colorCeleste" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }, new { @class = "botonGeneral colorCeleste" })
 
 
 
@@ -56,3 +57,6 @@
     }
 
 </table>
+<div>
+    @Html.ActionLink("Volver", "to_empleados", null, new { @class = "botonGeneral colorGris" })
+</div>
