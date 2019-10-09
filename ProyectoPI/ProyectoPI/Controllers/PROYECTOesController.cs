@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ProyectoPI.Models;
 
-namespace ProyectoPI.Views
+namespace ProyectoPI.Controllers
 {
     public class PROYECTOesController : Controller
     {

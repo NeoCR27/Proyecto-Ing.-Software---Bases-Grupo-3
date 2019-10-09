@@ -10,7 +10,7 @@ using ProyectoPI.Models;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
-namespace ProyectoPI.Views
+namespace ProyectoPI.Controllers
 {
 
     public class HABILIDADESController : Controller

@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using ProyectoPI.Models;
 using System.Data.SqlClient;
 
-namespace ProyectoPI.Views
+namespace ProyectoPI.Controllers
 {
     public class PARTICIPAController : Controller
     {

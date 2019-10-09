@@ -10,7 +10,7 @@ using ProyectoPI.Models;
 using ProyectoPI.Controllers;
 using System.Threading.Tasks;
 
-namespace ProyectoPI.Views
+namespace ProyectoPI.Controllers
 {
     public class EMPLEADOController : Controller
     {
