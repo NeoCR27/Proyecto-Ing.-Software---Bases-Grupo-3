@@ -39,9 +39,17 @@
                 @Html.DisplayFor(modelItem => item.tipoPK)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.cedulaEmpleadoFK }) |
-                @Html.ActionLink("Details", "Details", new { id = item.cedulaEmpleadoFK }) |
+
+                @*
+                    @:@Html.ActionLink("Edit", "Edit", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }, new { @class = "botonGeneral colorCeleste" })&nbsp;
+                    @:@Html.ActionLink("Delete", "Delete", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }, new { @class = "botonGeneral colorCeleste" })
+                *@
+
+
+                @Html.ActionLink("Edit", "Edit", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK })
+
+
 
             </td>
         </tr>

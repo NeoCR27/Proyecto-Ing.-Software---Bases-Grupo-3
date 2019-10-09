@@ -5,13 +5,8 @@
 }
 
 <h2>Detalles </h2>
-@foreach (var x in ViewBag.nombre)
-{
-    <h4> @x.Text </h4>
-}
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+
 <table class="table">
     <tr>
         <th>
@@ -33,18 +28,30 @@
                 @Html.DisplayFor(modelItem => item.cedulaEmpleadoFK)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.valorPK)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tipoPK)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.cedulaEmpleadoFK }) |
-                @Html.ActionLink("Details", "Details", new { id = item.cedulaEmpleadoFK }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.cedulaEmpleadoFK })
+                @Html.EditorFor(modelItem => item.valorPK, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(modelItem => item.valorPK, "", new { @class = "text-danger" })
 
             </td>
+            <td>
+                @Html.DropDownList("tipoPK", null, htmlAttributes: new { @class = "form-control" })
+
+            </td>
+
         </tr>
     }
 
 </table>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-actions no-color">
+
+        <input type="submit" value="Editar" class="btn btn-success" /> |
+        <input type="submit" value="Regresar" class="btn btn-danger" />
+    </div>
+
+
+
+}
