@@ -11,10 +11,9 @@
 <h3>Rol: @rol</h3>
 
 
-<h2 class="titulosPag">Detalles</h2>
+<h2 class="titulosPag">Detalles Proyecto</h2>
 
 <div>
-    <h4>PROYECTO</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -91,11 +90,14 @@
 
 
         <dt>
-            @Html.Label("Líderes", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Líderes", htmlAttributes: new { @class = "control-label col-md-18"  })
         </dt>
 
+        @{
+            string liderActual = ViewBag.liderActual;
+         }
         <dd>
-            Líder del proyecto jalado de la base ...
+            @liderActual
         </dd>
 
     </dl>

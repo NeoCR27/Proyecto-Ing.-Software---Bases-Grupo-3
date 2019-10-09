@@ -52,6 +52,19 @@ namespace ProyectoPI.Controllers
             {
                 return HttpNotFound();
             }
+            var nombreLiderActual = (from proy in db.PROYECTO
+                                     join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
+                                     join empleado in db.EMPLEADO on participa.cedulaEmpleadoFK equals empleado.cedulaPK
+                                     where participa.rol == "Lider"
+                                     select new
+                                     {
+                                         nombre = empleado.nombre + " " + empleado.primerApellido
+                                     }).ToList();
+            string lideractual = nombreLiderActual.First().ToString();
+            int tamano = lideractual.Length - 2;
+            lideractual = lideractual.Substring(10);
+            lideractual = lideractual.Substring(0, lideractual.Length - 2);
+            ViewBag.liderActual = lideractual;
             return View(pROYECTO);
         }
 
@@ -96,15 +109,19 @@ namespace ProyectoPI.Controllers
         public ActionResult Edit(string id)
         {
             // Sacar empleado con rol Lider de participa en el id del proyecto
-            string nombreLiderActual = (from proy in db.PROYECTO
-                              join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
-                              join empleado in db.EMPLEADO on participa.cedulaEmpleadoFK equals empleado.cedulaPK
-                              where participa.rol == "Lider"
-                              select new
-                              {
-                                  nombre = empleado.nombre + " " + empleado.primerApellido
-                              }).ToString();
-            ViewBag.liderActual = nombreLiderActual;
+            var nombreLiderActual = (from proy in db.PROYECTO
+                                      join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
+                                      join empleado in db.EMPLEADO on participa.cedulaEmpleadoFK equals empleado.cedulaPK
+                                      where participa.rol == "Lider"
+                                      select new
+                                      {
+                                          nombre = empleado.nombre + " " + empleado.primerApellido
+                                      }).ToList();
+            string lideractual = nombreLiderActual.First().ToString();
+            int tamano = lideractual.Length - 2;
+            lideractual = lideractual.Substring(10);
+            lideractual = lideractual.Substring(0, lideractual.Length - 2);
+            ViewBag.liderActual = lideractual;
             //ViewBag.rol = this.rol;
             ViewBag.rol = "Jefe";
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK");
