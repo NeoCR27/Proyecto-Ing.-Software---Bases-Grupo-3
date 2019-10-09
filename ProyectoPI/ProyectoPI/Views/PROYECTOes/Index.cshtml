@@ -18,40 +18,43 @@
         @Html.ActionLink("Crear Nuevo Proyecto", "Create", null, new { @class = "botonGeneral colorVerde" })
     </p>
 }
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CLIENTE.cedulaPK)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CLIENTE.cedulaPK)
-            </td>
-            <td>
-                @if (@rol == "Jefe")
-                {
-                    @:@Html.ActionLink("Consultar", "Details", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })&nbsp;
-                    @:@Html.ActionLink("Modificar", "Edit", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })&nbsp;
-                    @:@Html.ActionLink("Eliminar", "Delete", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
-                }
-                else
-                {
-                    @:@Html.ActionLink("Consultar", "Details", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
-                }
+<div class="row">
+        @foreach (var item in Model)
+        {
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="../Img/jumb.jpg" class="card-img-top" alt="...">
+                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.nombre) @Html.DisplayFor(modelItem => item.CLIENTE.cedulaPK) </h4>
+                    <p class="card-text"><small class="text-muted">@Html.DisplayFor(modelItem => item.objetivo)</small></p>
+                    @if (@rol == "Jefe")
+                    {
+                        <p class="card-text">
+                            @Html.ActionLink("Consultar", "Details", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" }) |
+                            @Html.ActionLink("Modificar", "Edit", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
+                        </p>
+                        <p class="card-text marginElim">@Html.ActionLink("Eliminar", "Delete", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })</p>
+                    }
+                    else
+                    {
+                        <p class="card-text">
+                            @Html.ActionLink("Consultar", "Details", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" }) |
+                            
+                        </p>
 
-            </td>
-        </tr>
-    }
+                    }
 
-</table>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+        }
+
+    </div>
+
+   
