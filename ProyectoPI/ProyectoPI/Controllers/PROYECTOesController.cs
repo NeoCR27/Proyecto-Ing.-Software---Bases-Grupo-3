@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoPI.Models;
+using System.Threading.Tasks;
 
 namespace ProyectoPI.Controllers
 {
@@ -19,16 +20,20 @@ namespace ProyectoPI.Controllers
 
         private PARTICIPAController participaController = new PARTICIPAController();
 
-        //private SeguridadController seguridadController = new SeguridadController();
+        private SeguridadController seguridadController = new SeguridadController();
 
-        //private string user = User.identity.name();
+        private string user = "";
 
-        //private string rol = seguridadController.getRol(user);
         private string rol = "Jefe";
 
         // GET: PROYECTOes
+        //public async Task<ActionResult> Index()
         public ActionResult Index()
         {
+            this.user = User.Identity.Name;
+            //this.rol = await Task.FromResult<string>(this.seguridadController.GetRol(this.user, "").Result);
+            this.rol = "Jefe";
+            System.Diagnostics.Debug.WriteLine(rol);
             var pROYECTO = db.PROYECTO.Include(p => p.CLIENTE);
             ViewBag.rol = this.rol;
             return View(pROYECTO.ToList());
@@ -53,6 +58,7 @@ namespace ProyectoPI.Controllers
         // GET: PROYECTOes/Create
         public ActionResult Create()
         {
+
             ViewBag.idPK = "0";
             ViewBag.rol = this.rol;
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK");
@@ -86,6 +92,16 @@ namespace ProyectoPI.Controllers
         // GET: PROYECTOes/Edit/5
         public ActionResult Edit(string id)
         {
+            // Sacar empleado con rol Lider de participa en el id del proyecto
+            string nombreLider = (from proy in db.PROYECTO
+                              join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
+                              join empleado in db.EMPLEADO on participa.cedulaEmpleadoFK equals empleado.cedulaPK
+                              where participa.rol == "Lider"
+                              select new
+                              {
+                                  nombre = empleado.nombre + " " + empleado.primerApellido
+                              }).ToString();
+            ViewBag.lider = nombreLider;
             ViewBag.rol = this.rol;
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK");
             List<SelectListItem> lideres = this.empleadoController.getLideresDisponibles();
@@ -173,7 +189,5 @@ namespace ProyectoPI.Controllers
             int ultimoIdAsignado = idsInts.Max() + 1;
             return ultimoIdAsignado.ToString();
         }
-
-
     }
 }
