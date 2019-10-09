@@ -1,65 +1,99 @@
-﻿@model IEnumerable<ProyectoPI.Models.TeamViewModel>
+﻿@model Tuple<ProyectoPI.Models.EmployeeHabilityModel, ProyectoPI.Models.TeamViewModel>
 
 @{
     ViewBag.Title = "Editar Equipos";
 }
 
-<h2>Editar Equipos</h2>
+<h2 class="titulosPag">Editar Equipos</h2>
 
 
 <h2>Empleados Disponibles</h2>
-@using (Html.BeginForm("Edit","PARTICIPA",FormMethod.Get))
-{
-    @Html.TextBox("searchFilter")<input type="submit" value="Search" />
-}
 
+<p>
+    @using (Html.BeginForm("Edit", "PARTICIPA", FormMethod.Get))
+    {
 
-                                 <table class="table table-striped">
-                                     <thead>
-                                         <tr>
-                                             <th>Valor</th>
-                                             <th>Tipo</th>
-                                             <th>Cedula</th>
-                                         </tr>
-                                     </thead>
-                                     <tbody>
-                                         @if (Model.Count() == 0)
-                                         {
-                                             <tr>
-                                                 <td colspan="3" style="color:red">
-                                                     No se ha encontrado datos
-                                                 </td>
-                                             </tr>
-                                         }
-                                         else
-                                         {
+        <b> Buscar Por Habilidades:</b>
+        @Html.RadioButton("searchBy", "Tecnica") <text>Tecnicas</text>
+        @Html.RadioButton("searchBy", "Blanda") <text>Blandas</text>
+        <br />
+        @Html.TextBox("searchFilter")<input type="submit" value="Search" />
+    }
+</p>
 
-                                         }
-                                     </tbody>
-                                 
-                                 </table>
-
-
-
-
-@{
-    ViewBag.Title = "Equipos";
-    <h2>Equipo Actual</h2>
-
-    <ul>
-        @foreach (var member in Model)
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre Del Empleado</th>
+            <th>Tipo de Habilidad</th>
+            <th>Habilidad</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if ((ViewData["employees"] as IList<ProyectoPI.Models.EmployeeHabilityModel>).Count() == 0)
         {
-            <li>
-                @member.employee, @member.email ,@member.role
-            </li>
+            <tr>
+                <td colspan="4" style="color:red">
+                    No se han encontrado empleados con el criterio ingresado
+                </td>
+            </tr>
         }
-    </ul>
-}
+        else
+        {
+            foreach (var employee in ViewData["employees"] as IList<ProyectoPI.Models.EmployeeHabilityModel>)
+            {
+                <tr>
+                    <td> @employee.name</td>
+                    <td> @employee.habilityType</td>
+                    <td> @employee.hability </td>
+                    <td>
+                        @Html.HiddenFor(x => employee.personalID)
+                        @Html.RadioButtonFor(x => employee.personalID, "ID")
+                    </td>
+
+                </tr>
+
+            }
+
+        }
+
+    </tbody>
+</table>
+@Html.ActionLink("Agregar a Equipo", "Create", null, new { @class = "botonGeneral colorVerde" })
+
+
+
+<h2>Equipo Actual</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre Del Empleado</th>
+            <th>Correo de Contacto</th>
+            <th>Rol</th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var member in ViewData["team"] as IList<ProyectoPI.Models.TeamViewModel>)
+    {
+        <tr>
+            <td> @member.employee</td>
+            <td>@member.email</td>
+            <td>@member.role</td>
+            <td>
+                @Html.HiddenFor(x => member.id)
+                @Html.RadioButtonFor(x => member.id, "ID")
+            </td>
+        </tr>
+    }
+</table>
+@Html.ActionLink("Remover de Equipo", "Delete", null, new { @class = "botonGeneral colorRojo" })
+
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+ @Html.ActionLink("Volver a Lista de Equipos ", "Index", null, new { @class = "botonGeneral colorCeleste" })
 </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

@@ -1,37 +1,35 @@
 ﻿@model IEnumerable<ProyectoPI.Models.TeamViewModel>
 @{
     ViewBag.Title = "Lista de Equipos";
-    <h2>Lista de Equipos</h2>
+    <h2 class="titulosPag">Equipos Formados</h2>
 
-    <ul>
+    <div class="row">
         @{string currentID = "0";}
 
         @foreach (var miembro in Model)
         {
             if (!currentID.Equals(miembro.id))
             {
+                <h4 class="card-title">
+                    @miembro.proyName
+                </h4>
 
-        <h2>
-            @miembro.proyName
-        </h2>
-
-        @Html.ActionLink("Add or Remove Members", "Edit", routeValues: new { id = @miembro.id })
-
-        <li>
-            @miembro.employee, @miembro.email ,@miembro.role, @miembro.id,
-        </li>
-        currentID = @miembro.id;
+            @Html.ActionLink("Añadir o Remover integrantes", "Edit", routeValues: new { id = @miembro.id })
+                <li>
+                    @miembro.employee , @miembro.email ,@miembro.role, @miembro.id ,
+                </li>
+            currentID = @miembro.id;
         }
         else
         {
-        <li>
-            @miembro.employee, @miembro.email ,@miembro.role, @miembro.id
-        </li>
+            <li>
+                @miembro.employee, @miembro.email ,@miembro.role, @miembro.id
+            </li>
         }
 
-        }
-    </ul>
-}
+    }
+</div>
+    }
 
 
 

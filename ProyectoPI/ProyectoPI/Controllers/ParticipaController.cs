@@ -14,9 +14,6 @@ namespace ProyectoPI.Views
     public class PARTICIPAController : Controller
     {
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
-        private EMPLEADOController empleados = new EMPLEADOController();
-        //private PROYECTOesController proyect = new PROYECTOesController();
-        private HABILIDADESController habilidad = new HABILIDADESController();
 
         //Get team
         public ActionResult showTeam()
@@ -68,32 +65,36 @@ namespace ProyectoPI.Views
         }
 
         // GET: PARTICIPA/Edit/5
-        public ActionResult Edit(string id = "2411", string searchFilter = null)
+        public ActionResult Edit(string id = "2411", string searchBy = "", string searchFilter = "")
         {
-            string queryTeam = "SELECT Part.idProyectoFK AS 'ID Proyecto', Emp.nombre + ' ' + Emp.primerApellido + ' ' + Emp.segundoApellido AS 'employee', Emp.correo AS 'email', Part.rol AS 'role' FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK WHERE Part.idProyectoFK = " + id;
-            
-            //db.Database.SqlQuery<TeamViewModel>(query)).ToList();
-            ViewData["employees"] = (db.EMPLEADO.Where(x => x.nombre.StartsWith(searchFilter) || searchFilter == null)).ToList();
-           // var tuple = new Tuple<TeamViewModel, empDesc>(new TeamViewModel(), new empDesc());
-            return View((db.Database.SqlQuery<TeamViewModel>(queryTeam)).ToList());
+            //Se Arma el string de query
+            //  string currentID = "0";
+            string queryTeam = "SELECT Part.idProyectoFK AS 'ID Proyecto', Emp.nombre + ' ' + Emp.primerApellido + ' ' + Emp.segundoApellido AS 'employee', Emp.correo AS 'email', Part.rol AS 'role', Emp.disponibilidad FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK WHERE Part.idProyectoFK = " + id;
+            string queryEmployees = "Select Distinct emp.cedulaPK AS 'personalID', emp.Nombre + ' ' + emp.primerApellido + ' ' + emp.segundoApellido AS 'name' , hab.tipoPK AS 'habilityType' , hab.valorPK AS 'hability'From EMPLEADO emp Join HABILIDADES hab ON emp.cedulaPK = hab.cedulaEmpleadoFK WHERE hab.tipoPK LIKE '%" + searchBy + "%' AND hab.valorPK LIKE '%" + searchFilter + "%' Order BY emp.cedulaPK";
+            //Se hace el query a la base de datos
+            IList<TeamViewModel> teamQueryResult = (db.Database.SqlQuery<TeamViewModel>(queryTeam)).ToList();
+            IList<EmployeeHabilityModel> employeeQueryResult = (db.Database.SqlQuery<EmployeeHabilityModel>(queryEmployees)).ToList();
+            /* foreach(var employee in employeeQueryResult)
+             {
+                if(currentID.Equals(employee.personalID))
+                 {
+                     employee.hability += ", Otro"; 
+                 }
+                 currentID = employee.personalID;
+             }*/
+            //Se pasa a viewData para llamar desde la vista
+            ViewData["team"] = teamQueryResult;
+            ViewData["employees"] = employeeQueryResult;
+            return View();
         }
-       /* @foreach(var employee in ViewData["employees"] as IEnumerable<ProyectoPI.Models.TeamViewModel>)
-        {
-                                         < li >
-                                             @employee.employee, @employee.email ,@employee.role
-                                         </ li >
-                                     }*/
-       /*    @foreach (var employee in ViewData["employees"] as IEnumerable<ProyectoPI.Models.TeamViewModel>)
-       {
-           <li>
-               @employee.employee, @employee.email ,@employee.role
-           </li>
-       }*/
 
-            // POST: PARTICIPA/Edit/5
-            // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-            // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-            [HttpPost]
+        //@Html.HiddenFor(x => x.Item1.role);
+        //@Html.HiddenFor(x => x.Item1.Proyecto);
+
+        // POST: PARTICIPA/Edit/5
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
             [ValidateAntiForgeryToken]
             public ActionResult Edit([Bind(Include = "rol,cedulaEmpleadoFK,idProyectoFK")] PARTICIPA pARTICIPA)
             {

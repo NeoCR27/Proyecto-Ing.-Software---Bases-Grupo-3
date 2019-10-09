@@ -18,6 +18,7 @@ namespace ProyectoPI.Models
         public string rol { get; set; }
         public string cedulaEmpleadoFK { get; set; }
         public string idProyectoFK { get; set; }
+        public string nombreEmpleado { get; set; }
     
         public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual PROYECTO PROYECTO { get; set; }
@@ -25,17 +26,22 @@ namespace ProyectoPI.Models
 
     public  class TeamViewModel
     {
-
         public string id { get; set;}
-
         public string employee { get; set; }
-
         public string email { get; set; }
-
         public string role { get; set; }
-
         public string proyName { get; set; }
+        public bool available { get; set; }
+        public bool isSelected { get; set; }
+       
+    }
 
-        public string habilidades { get; set; }
+    public class EmployeeHabilityModel
+    {
+        public string personalID { get; set; }
+        public string name { get; set; }
+        public string habilityType { get; set; }
+        public string hability { get; set; }
+        public bool isSelected { get; set; }
     }
 }
