@@ -48,8 +48,7 @@
                     <td> @employee.habilityType</td>
                     <td> @employee.hability </td>
                     <td>
-                        @Html.HiddenFor(x => employee.personalID)
-                        @Html.RadioButtonFor(x => employee.personalID, "ID")
+                        @Html.RadioButtonFor(model => model.Item1.personalID,employee.personalID)
                     </td>
 
                 </tr>
@@ -90,9 +89,8 @@
 @Html.ActionLink("Remover de Equipo", "Delete", null, new { @class = "botonGeneral colorRojo" })
 <br />
 <br />
-<br />
 <div>
- @Html.ActionLink("Volver a Lista de Equipos ", "Index", null, new { @class = "botonGeneral colorCeleste" })
+ @Html.ActionLink("Volver a Lista de Equipos ", "Index", null, new { @class = "botonGeneral colorGris" })
 </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

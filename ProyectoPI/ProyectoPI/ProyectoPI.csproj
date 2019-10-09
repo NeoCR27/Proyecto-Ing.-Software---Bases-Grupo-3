@@ -356,8 +356,6 @@
     <Content Include="Views\HABILIDADES\Details.cshtml" />
     <Content Include="Views\HABILIDADES\Edit.cshtml" />
     <Content Include="Views\HABILIDADES\Index.cshtml" />
-    <Content Include="Views\PARTICIPA\Create.cshtml" />
-    <Content Include="Views\PARTICIPA\Delete.cshtml" />
     <Content Include="Views\PARTICIPA\Details.cshtml" />
     <Content Include="Views\PARTICIPA\Edit.cshtml" />
     <Content Include="Views\PARTICIPA\Index.cshtml" />

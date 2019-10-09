@@ -62,6 +62,6 @@ namespace ProyectoPI.Models
         public virtual ICollection<PARTICIPA> PARTICIPA { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<REQUERIMIENTOS> REQUERIMIENTOS { get; set; }
+        public virtual ICollection<REQUERIMIENTOS> REQUERIMIENTOS { get; set;}
     }
 }
