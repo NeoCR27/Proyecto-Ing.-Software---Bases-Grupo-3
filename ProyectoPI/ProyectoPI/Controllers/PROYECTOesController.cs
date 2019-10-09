@@ -84,6 +84,9 @@ namespace ProyectoPI.Controllers
                 // Guardar en la base de datos que el lider escogido para ese proyecto 
                 // pasar el ID del proyecto y cedula del lider, junto con el rol de "Lider"
                 participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider");
+                // Cambiar la disponibilidad del lider escogido
+                List<EMPLEADO> empleado = (db.EMPLEADO.Where(e => e.cedulaPK == cedulaLiderEscogido)).ToList();
+                empleado.First().disponibilidad = false;
                 return RedirectToAction("Index");
             }
             return View(pROYECTO);
@@ -93,7 +96,7 @@ namespace ProyectoPI.Controllers
         public ActionResult Edit(string id)
         {
             // Sacar empleado con rol Lider de participa en el id del proyecto
-            string nombreLider = (from proy in db.PROYECTO
+            string nombreLiderActual = (from proy in db.PROYECTO
                               join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
                               join empleado in db.EMPLEADO on participa.cedulaEmpleadoFK equals empleado.cedulaPK
                               where participa.rol == "Lider"
@@ -101,8 +104,9 @@ namespace ProyectoPI.Controllers
                               {
                                   nombre = empleado.nombre + " " + empleado.primerApellido
                               }).ToString();
-            ViewBag.lider = nombreLider;
-            ViewBag.rol = this.rol;
+            ViewBag.liderActual = nombreLiderActual;
+            //ViewBag.rol = this.rol;
+            ViewBag.rol = "Jefe";
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK");
             List<SelectListItem> lideres = this.empleadoController.getLideresDisponibles();
             ViewBag.lideres = lideres;
