@@ -48,11 +48,11 @@
 
                     @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }, new { @class = "botonGeneral colorCeleste" })
+                        @Html.ActionLink("Editar", "Edit", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }, new { @class = "botonGeneral colorCeleste" })
                     }
                     @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        @Html.ActionLink("Delete", "Delete", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }, new { @class = "botonGeneral colorCeleste" })
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }, new { @class = "botonGeneral colorCeleste" })
                     }
 
 

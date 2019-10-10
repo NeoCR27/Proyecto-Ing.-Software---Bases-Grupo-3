@@ -427,6 +427,8 @@
     <Content Include="Views\Account\Login_v3\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Views\Account\Login_v3\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Views\Account\Login_v3\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Views\HABILIDADES\NoDuplicados.cshtml" />
+    <Content Include="Views\EMPLEADO\NoDuplicados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

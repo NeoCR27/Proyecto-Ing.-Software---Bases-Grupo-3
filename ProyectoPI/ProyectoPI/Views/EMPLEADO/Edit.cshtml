@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2 class="titulosPag">Editar empleado</h2>
+<h2>Edit</h2>
 
 
 @using (Html.BeginForm())
@@ -12,12 +12,18 @@
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-
+    <h4>EMPLEADO</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.cedulaPK)
 
-
+    <div class="form-group">
+        @Html.LabelFor(model => model.tel, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.tel, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.tel, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -46,28 +52,24 @@
         @Html.LabelFor(model => model.fechaNacimiento, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.fechaNacimiento, new { @type = "date", @class = "form-control datepicker", })
-
             @Html.ValidationMessageFor(model => model.fechaNacimiento, "", new { @class = "text-danger" })
         </div>
     </div>
-    <br />
+
+    <p><br /></p>
     <div class="ubicActual">
-        <p><strong>Ubicacion Actual</strong></p>
+        
         @Html.LabelFor(model => model.fechaNacimiento, new { htmlAttributes = new { @class = "control-label col-md-2" } })
         @Html.DisplayFor(model => model.fechaNacimiento, new { htmlAttributes = new { @class = "col-md-10" } })
-      
+       
+    </div>
+    <p><br /></p>
+
     <div class="form-group">
         @Html.LabelFor(model => model.edad, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownListFor(m => m.edad, Enumerable.Range(18, 99).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @class = "form-control", @required = "required" })
             @Html.ValidationMessageFor(model => model.edad, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.tel, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.tel, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.tel, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
@@ -113,6 +115,7 @@
         </div>
     </div>
 
+
     <div class="form-group">
         @Html.LabelFor(model => model.disponibilidad, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -132,9 +135,7 @@
                             Value = "No disponible",
                             Selected = false
                         });
-
                     }
-
                     @Html.DropDownListFor(model => model.rol, disp, "-- Seleccione un rol--", new { htmlAttributes = new { @class = "form-control" } })
                 *@
 
@@ -194,7 +195,6 @@
                 string URL = Request.Url.ToString();
             }
             <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input type="submit" value="Guardar" class="botonGeneral colorVerde" />
         </div>
     </div>
