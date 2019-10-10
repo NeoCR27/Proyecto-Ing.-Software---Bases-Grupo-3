@@ -53,30 +53,26 @@ namespace ProyectoPI.Controllers
                     cedulaResultado = cedulaResultado.Substring(12);
                     cedulaResultado = cedulaResultado.Substring(0, cedulaResultado.Length - 2);
                     cedulaResultado = cedulaResultado.Substring(2, cedulaResultado.Length - 2);
+                    cedulaResultado = cedulaResultado.Replace(" ", "");
                     // string cedula = cedulaUsuarioLogeado.First().ToString().Substring(12, cedulaUsuarioLogeado.First().ToString().Length - 2);
-                    //  System.Diagnostics.Debug.WriteLine("Cedula del que esta ingresado: " + cedula);
-                    var proyectos = (from proy in db.PROYECTO
-                                     join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
-                                     join empleado in db.EMPLEADO on participa.cedulaEmpleadoFK equals empleado.cedulaPK
-                                     join cliente in db.CLIENTE on proy.cedulaClienteFK equals cliente.cedulaPK
-                                     where participa.cedulaEmpleadoFK == cedulaResultado
-                                     select new
-                                     {
-                                         proy,
-                                         cliente
-                                     }).ToList();
+                    System.Diagnostics.Debug.WriteLine(cedulaResultado);
+                    string queryProyecto = "Select * from PROYECTO proy join PARTICIPA participa  on proy.idPK = participa.idProyectoFK join EMPLEADO empleado on participa.cedulaEmpleadoFK = empleado.cedulaPK join CLIENTE cliente   on proy.cedulaClienteFK = cliente.cedulaPK where participa.cedulaEmpleadoFK = 111111110";
 
-                    System.Diagnostics.Debug.WriteLine("TAMANO PROYECTOS: " + proyectos.Count);
+                    var proyecto = db.Database.SqlQuery<PROYECTO>(queryProyecto).ToList();
+                    System.Diagnostics.Debug.WriteLine("COUNT: " + proyecto.Count);
+                    string queryCliente = "Select cliente.nombre from PROYECTO proy join PARTICIPA participa  on proy.idPK = participa.idProyectoFK join EMPLEADO empleado on participa.cedulaEmpleadoFK = empleado.cedulaPK join CLIENTE cliente   on proy.cedulaClienteFK = cliente.cedulaPK where participa.cedulaEmpleadoFK = 111111110";
+                    var cliente = db.Database.SqlQuery<string>(queryCliente).ToList();
+                    string nombreCliente = cliente.First().ToString();
                     List<PROYECTO> model = new List<PROYECTO>();
-                    foreach (var item in proyectos) //retrieve each item and assign to model
+                   foreach (var item in proyecto) 
                     {
-                        System.Diagnostics.Debug.WriteLine("ITEM PROYECTOS: " + item);
+                        
                         model.Add(new PROYECTO()
                         {
-                            nombre = item.proy.nombre,
-
-                            //cliente = item.cliente.nombre,
-
+                            nombre = item.nombre,
+                            objetivo = item.objetivo,
+                            CLIENTE = db.CLIENTE.Create(),
+                           // CLIENTE.nombre = cedulaResultado
                         });
                     }
 
