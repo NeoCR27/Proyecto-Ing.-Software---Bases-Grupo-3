@@ -1,20 +1,9 @@
 ﻿@model ProyectoPI.Models.RegisterViewModel
 @{
     ViewBag.Title = "Registrarse";
+    Layout = "~/Views/Shared/Inicio.cshtml";
 }
-<style>
-    .modal-dialog {
-        width: 360px;
-    }
 
-    .modal-header {
-        background-color: #337AB7;
-        padding: 16px 16px;
-        color: #FFF;
-        border-bottom: 2px dashed #337AB7;
-        font-size:1000px
-    }
-</style>
 
 <h2>@ViewBag.Title.</h2>
 
@@ -47,36 +36,17 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Rol, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Rol, new { @class = "form-control" })
+            @Html.DropDownList("rol", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Rol, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Registrarse" data-toggle="modal" data-target="#myModal"/>
+            <input type="submit" class="btn btn-default" value="Registrarse"/>
         </div>
     </div>
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-
-        <div class="modal-dialog" role="document">
-
-            <div class="modal-content">
-
-                <div class="modal-header">
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-
-                    <h4 class="modal-title" id="myModalLabel">Usuario Registrado</h4>
-
-                </div>
-
-                <div class="modal-footer">
-
-                    <button type="button" class="btn btn btn-primary" data-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
+  
 }
 
 @section Scripts {

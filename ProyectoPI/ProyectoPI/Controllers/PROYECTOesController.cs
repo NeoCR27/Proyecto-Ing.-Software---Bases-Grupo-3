@@ -31,7 +31,6 @@ namespace ProyectoPI.Controllers
             string user = User.Identity.Name;
             string rol = await this.seguridadController.GetRol(user); // Me retorna el rol del usuario logeado
             ViewBag.rol = rol;
-            System.Diagnostics.Debug.WriteLine("Cedula del que esta ingresado: " + user);
 
             if (rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase)) // Retorno todos los pryectos
             {
@@ -50,21 +49,39 @@ namespace ProyectoPI.Controllers
                                             }).ToList();
                 if (cedulaUsuarioLogeado.Count != 0) // Esta en la tabla PARTICIPA, por lo tanto ha sido parte de algun equipo
                 {
-                    string cedula = cedulaUsuarioLogeado.First().ToString().Substring(0, cedulaUsuarioLogeado.First().ToString().Length - 2);
-                    System.Diagnostics.Debug.WriteLine("Cedula del que esta ingresado: " + cedula);
+                    string cedulaResultado = cedulaUsuarioLogeado.First().ToString();
+                    cedulaResultado = cedulaResultado.Substring(12);
+                    cedulaResultado = cedulaResultado.Substring(0, cedulaResultado.Length - 2);
+                    cedulaResultado = cedulaResultado.Substring(2, cedulaResultado.Length - 2);
+                    // string cedula = cedulaUsuarioLogeado.First().ToString().Substring(12, cedulaUsuarioLogeado.First().ToString().Length - 2);
+                    //  System.Diagnostics.Debug.WriteLine("Cedula del que esta ingresado: " + cedula);
                     var proyectos = (from proy in db.PROYECTO
                                      join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
                                      join empleado in db.EMPLEADO on participa.cedulaEmpleadoFK equals empleado.cedulaPK
                                      join cliente in db.CLIENTE on proy.cedulaClienteFK equals cliente.cedulaPK
-                                     where participa.cedulaEmpleadoFK == cedula
+                                     where participa.cedulaEmpleadoFK == cedulaResultado
                                      select new
                                      {
-                                         proy, cliente
-                                         
+                                         proy,
+                                         cliente
                                      }).ToList();
 
+                    System.Diagnostics.Debug.WriteLine("TAMANO PROYECTOS: " + proyectos.Count);
+                    List<PROYECTO> model = new List<PROYECTO>();
+                    foreach (var item in proyectos) //retrieve each item and assign to model
+                    {
+                        System.Diagnostics.Debug.WriteLine("ITEM PROYECTOS: " + item);
+                        model.Add(new PROYECTO()
+                        {
+                            nombre = item.proy.nombre,
+
+                            //cliente = item.cliente.nombre,
+
+                        });
+                    }
+
                     ViewBag.proyectos = true;
-                    return View(proyectos);
+                    return View(model);
                 }
                 else
                 {
@@ -98,7 +115,6 @@ namespace ProyectoPI.Controllers
                                          nombre = empleado.nombre + " " + empleado.primerApellido
                                      }).ToList();
             string lideractual = nombreLiderActual.First().ToString();
-            int tamano = lideractual.Length - 2;
             lideractual = lideractual.Substring(10);
             lideractual = lideractual.Substring(0, lideractual.Length - 2);
             ViewBag.liderActual = lideractual;
@@ -128,7 +144,7 @@ namespace ProyectoPI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
         {
-            
+
             if (ModelState.IsValid)
             {
                 pROYECTO.idPK = this.getIdAsignar(); // Asigna el id automaticamente al proyecto
@@ -136,9 +152,9 @@ namespace ProyectoPI.Controllers
                 db.SaveChanges();
 
                 string cedulaLiderEscogido = Request.Form["Lideres"].ToString(); // Agarra el valor seleccionado en el dropdown de la vista con los lideres disponibles
-                
+
                 participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider"); // Agrego a PARTICIPA el lider escogido
-                
+
                 List<EMPLEADO> empleado = (db.EMPLEADO.Where(e => e.cedulaPK == cedulaLiderEscogido)).ToList();
                 empleado.First().disponibilidad = false; // Cambiar la disponibilidad del lider escogido
                 return RedirectToAction("Index");
@@ -154,13 +170,13 @@ namespace ProyectoPI.Controllers
             ViewBag.rol = rol;
             // Sacar empleado con rol Lider de participa en el id del proyecto
             var nombreLiderActual = (from proy in db.PROYECTO
-                                      join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
-                                      join empleado in db.EMPLEADO on participa.cedulaEmpleadoFK equals empleado.cedulaPK
-                                      where participa.rol == "Lider"
-                                      select new
-                                      {
-                                          nombre = empleado.nombre + " " + empleado.primerApellido
-                                      }).ToList();
+                                     join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
+                                     join empleado in db.EMPLEADO on participa.cedulaEmpleadoFK equals empleado.cedulaPK
+                                     where participa.rol == "Lider"
+                                     select new
+                                     {
+                                         nombre = empleado.nombre + " " + empleado.primerApellido
+                                     }).ToList();
             string lideractual = nombreLiderActual.First().ToString();
             int tamano = lideractual.Length - 2;
             lideractual = lideractual.Substring(10);
@@ -258,8 +274,6 @@ namespace ProyectoPI.Controllers
             {
                 return "1";
             }
-            
-            
         }
     }
 }

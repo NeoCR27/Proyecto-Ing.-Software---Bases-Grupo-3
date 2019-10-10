@@ -51,7 +51,7 @@ namespace ProyectoPI.Controllers
         // Despliega la vista del crear empleado
         public ActionResult Create()
         {
-            string[] values = new[] { "Lider", "Jefe de calidad", "Tester" };
+            string[] values = new[] { "Lider", "Jefe", "Tester" };
             ViewBag.rol = new SelectList(values);
             string[] disponible = new[] { "Disponible", "No disponible" };
 

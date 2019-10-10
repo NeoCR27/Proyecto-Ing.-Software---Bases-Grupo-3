@@ -111,3 +111,15 @@ h2.titulosPag{
     letter-spacing: 5px;
     padding: 10px 0px 10px 0px;
 }
+
+.modal-dialog {
+    width: 360px;
+}
+
+.modal-header {
+    background-color: darkred;
+    padding: 16px 16px;
+    color: #FFF;
+    border-bottom: 2px dashed #337AB7;
+    font-size: 1000px
+}

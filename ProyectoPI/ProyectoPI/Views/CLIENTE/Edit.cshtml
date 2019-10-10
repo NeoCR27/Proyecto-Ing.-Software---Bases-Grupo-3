@@ -2,11 +2,17 @@
 @{
     ViewBag.Title = "Edit";
 }
+@{
+    string rol = ViewBag.myRol;
+}
+
 <h2 class="titulosPag"> Modificar CLIENTE</h2>
 
-@using (Html.BeginForm())
+@if (rol == "Jefe")
 {
-    @Html.AntiForgeryToken()
+    @:@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
     <hr />
@@ -94,7 +100,8 @@
                 string URL = Request.Url.ToString();
             }
             <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
-            <input type="submit" value="Guardar" class="botonGeneral colorVerde" />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="submit" value="Guardar" class="botonGeneral colorVerde" data-toggle="modal" data-target="#guardar" />
 
         </div>
     </div>
@@ -116,7 +123,13 @@
         </div>
     </div>
 </div>
+    }
 }
+else
+{
+    <h1>SOLO LOS JEFES PUEDEN MODIFICAR CLIENTES</h1>
+}
+
 <div>
     @Html.ActionLink("Volver", "Index", null, new { @class = "botonGeneral colorGris" })
 </div>
