@@ -17,51 +17,58 @@
     @Html.AntiForgeryToken()
 
 
-    <div class="form-horizontal">
+<div class="form-horizontal">
 
 
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.valorPK, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.valorPK, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.valorPK, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.tipoPK, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("tipoPK", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.tipoPK, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.cedulaEmpleadoFK, "cedulaEmpleadoFK", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("cedulaEmpleadoFK", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.cedulaEmpleadoFK, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Crear" class="btn btn-success" />
-                @{
-                    string URL = Request.Url.ToString();
-                }
-
-                <a class="btn btn-danger" href="@URL" role="button">Cancelar</a>
-            </div>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.valorPK, htmlAttributes: new { @class = "control-label col-md-2 required" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.valorPK, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.valorPK, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.tipoPK, htmlAttributes: new { @class = "control-label col-md-2 required" })
+        <div class="col-md-10">
+
+            @Html.DropDownList("tipoPK", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.tipoPK, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @{
+        List<SelectListItem> empleados = ViewBag.empleados; // Para agarrar la lista que se le dió en el Controlador
+    }
+    <div class="form-group">
+        @Html.Label("Cedula", htmlAttributes: new { @class = "control-label col-md-2 required" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.cedulaEmpleadoFK, empleados, htmlAttributes: new { @class = "form-control", @name = "empleadosDrop", @id = "empleadosDrop" })
+            @*
+                @Html.DropDownList("cedulaEmpleadoFK", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.cedulaEmpleadoFK, "", new { @class = "text-danger" })
+            *@
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @{
+                string URL = Request.Url.ToString();
+            }
+            <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="submit" value="Guardar" class="botonGeneral colorVerde" />
+        </div>
+    </div>
+    
+</div>
 }
 
 <div>
-    @Html.ActionLink("Regresar", "to_empleados", "HABILIDADES", new { }, null)
+    @Html.ActionLink("Volver", "to_empleados", null, new { @class = "botonGeneral colorGris" })
+
 </div>
 
 @section Scripts {
