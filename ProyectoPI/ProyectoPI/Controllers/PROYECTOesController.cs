@@ -241,12 +241,21 @@ namespace ProyectoPI.Controllers
         {
             List<PROYECTO> ids = db.PROYECTO.Where(p => p.idPK != null).ToList();
             List<int> idsInts = new List<int>();
-            foreach (PROYECTO proy in ids)
+            if (ids.Count != 0)
             {
-                idsInts.Add(Int32.Parse(proy.idPK));
+                foreach (PROYECTO proy in ids)
+                {
+                    idsInts.Add(Int32.Parse(proy.idPK));
+                }
+                int ultimoIdAsignado = idsInts.Max() + 1;
+                return ultimoIdAsignado.ToString();
             }
-            int ultimoIdAsignado = idsInts.Max() + 1;
-            return ultimoIdAsignado.ToString();
+            else
+            {
+                return "1";
+            }
+            
+            
         }
     }
 }
