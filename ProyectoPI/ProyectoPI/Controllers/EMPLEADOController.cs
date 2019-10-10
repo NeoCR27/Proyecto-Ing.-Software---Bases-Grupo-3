@@ -15,15 +15,26 @@ namespace ProyectoPI.Controllers
     public class EMPLEADOController : Controller
     {
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
-        private SeguridadController ac = new SeguridadController();
+        private SeguridadController seguridad_controller = new SeguridadController();
 
         // GET: EMPLEADO
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
+            string mail = User.Identity.Name;
+            string rol = await this.seguridad_controller.GetRol(mail);
+            ViewBag.my_rol = rol;
+            if (rol == "Tester" || rol == "Lider")
+            {
+                var my_info = db.EMPLEADO.Where(x => x.correo == mail);
+                //SelectList my_data = new SelectList( db.EMPLEADO.Where(x => x.correo == mail), "", "cedula");
+                //SelectList my_id = "SELECT cedula FROM empleados"
+                //System.Diagnostics.Debug.WriteLine(my_data);
+                return View(my_info.ToList());
+            }
             return View(db.EMPLEADO.ToList());
-            
+
         }
-        
+
         // GET: EMPLEADO/Details/5
         public ActionResult Details(string id)
         {
@@ -56,10 +67,11 @@ namespace ProyectoPI.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cedulaPK,tel,nombre,primerApellido,segundoApellido,correo,distrito,canton,provincia,direccionExacta,horasLaboradas,edad,disponibilidad,rol,fechaNacimiento")] EMPLEADO eMPLEADO)
+        public async Task<ActionResult> Create([Bind(Include = "cedulaPK,tel,nombre,primerApellido,segundoApellido,correo,distrito,canton,provincia,direccionExacta,horasLaboradas,edad,disponibilidad,rol,fechaNacimiento")] EMPLEADO eMPLEADO)
         {
             if (ModelState.IsValid)
             {
+                await seguridad_controller.ChangeRol(eMPLEADO.correo, eMPLEADO.rol);
                 db.EMPLEADO.Add(eMPLEADO);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -76,7 +88,7 @@ namespace ProyectoPI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             EMPLEADO eMPLEADO = db.EMPLEADO.Find(id);
-            
+
             if (eMPLEADO == null)
             {
                 return HttpNotFound();
@@ -93,8 +105,8 @@ namespace ProyectoPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-                await ac.ChangeRol(eMPLEADO.correo, eMPLEADO.rol);
+
+                await seguridad_controller.ChangeRol(eMPLEADO.correo, eMPLEADO.rol);
                 db.Entry(eMPLEADO).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

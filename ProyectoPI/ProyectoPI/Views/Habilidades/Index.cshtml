@@ -2,61 +2,65 @@
 
 @{
     ViewBag.Title = "Detalles";
+    string rol = ViewBag.my_rol;
 }
 
-<h2>Detalles </h2>
-@foreach (var x in ViewBag.nombre)
+<h2 class="titulosPag">Habilidad</h2>
+@if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
 {
-    <h4> @x.Text </h4>
-}
     <p>
         @Html.ActionLink("Agregar habilidad", "Create", null, new { @class = "botonGeneral colorVerde" })
 
     </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.cedulaEmpleadoFK)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.valorPK)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tipoPK)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+}
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.cedulaEmpleadoFK)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.valorPK)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tipoPK)
-            </td>
-            <td>
-
-                @*
-                    @:@Html.ActionLink("Edit", "Edit", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }, new { @class = "botonGeneral colorCeleste" })&nbsp;
-                    @:@Html.ActionLink("Delete", "Delete", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }, new { @class = "botonGeneral colorCeleste" })
-                *@
-
-
-                @Html.ActionLink("Edit", "Edit", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }, new { @class = "botonGeneral colorCeleste" }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }, new { @class = "botonGeneral colorCeleste" })
-
-
-
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.cedulaEmpleadoFK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.valorPK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tipoPK)
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
-<div>
-    @Html.ActionLink("Volver", "to_empleados", null, new { @class = "botonGeneral colorGris" })
-</div>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cedulaEmpleadoFK)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valorPK)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipoPK)
+                </td>
+                <td>
+
+                    @*
+        @:@Html.ActionLink("Edit", "Edit", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }, new { @class = "botonGeneral colorCeleste" })&nbsp;
+        @:@Html.ActionLink("Delete", "Delete", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }, new { @class = "botonGeneral colorCeleste" })
+                    *@
+
+                    @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }, new { @class = "botonGeneral colorCeleste" })
+                    }
+                    @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.cedulaEmpleadoFK, valor = item.valorPK, tipo = item.tipoPK }, new { @class = "botonGeneral colorCeleste" })
+                    }
+
+
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div>
+        @Html.ActionLink("Volver", "to_empleados", null, new { @class = "botonGeneral colorGris" })
+    </div>

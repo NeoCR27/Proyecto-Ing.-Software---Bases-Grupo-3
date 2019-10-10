@@ -18,18 +18,22 @@ namespace ProyectoPI.Controllers
 
         private EMPLEADOController emp_controller = new EMPLEADOController();
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
+        private SeguridadController seguridad_controller = new SeguridadController();
 
         private static string valor_viejo = null;
         private static string tipo_viejo = null;
         private static string id_viejo = null;
 
         // GET: HABILIDADES
-        public ActionResult Index(String id)
+        public async Task<ActionResult> Index(String id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            string mail = User.Identity.Name;
+            string rol = await this.seguridad_controller.GetRol(mail);
+            ViewBag.my_rol = rol;
             var hABILIDADES = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id);
             SelectList nombre = emp_controller.get_nombres(id);
             ViewBag.nombre = nombre;
@@ -90,7 +94,7 @@ namespace ProyectoPI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "valorPK,tipoPK,cedulaEmpleadoFK")] HABILIDADES hABILIDADES)
         {
-            HABILIDADES duplicate =  db.HABILIDADES.Find(hABILIDADES.valorPK, hABILIDADES.tipoPK, hABILIDADES.cedulaEmpleadoFK);
+            HABILIDADES duplicate = db.HABILIDADES.Find(hABILIDADES.valorPK, hABILIDADES.tipoPK, hABILIDADES.cedulaEmpleadoFK);
             //HABILIDADES habilidad_viejas = await db.HABILIDADES.FindAsync(valor_viejo, tipo_viejo, id_viejo);
             if (duplicate == null)
             {
@@ -102,10 +106,10 @@ namespace ProyectoPI.Controllers
                 }
             }
             //else ERROR
-            
+
 
             //ViewBag.cedulaEmpleadoFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", hABILIDADES.cedulaEmpleadoFK);
-            return RedirectToAction("Index", new { id =  hABILIDADES.cedulaEmpleadoFK});
+            return RedirectToAction("Index", new { id = hABILIDADES.cedulaEmpleadoFK });
         }
 
         // GET: HABILIDADES/Edit/5
@@ -133,13 +137,13 @@ namespace ProyectoPI.Controllers
         // POST: HABILIDADES/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598. [Bind(Include = "valorPK,tipoPK,cedulaEmpleadoFK")] HABILIDADES hABILIDADES 
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "valorPK,tipoPK,cedulaEmpleadoFK")] HABILIDADES hABILIDADES)
-        {
-            HABILIDADES habilidad_viejas = await db.HABILIDADES.FindAsync(valor_viejo, tipo_viejo, id_viejo);
 
-            var query = from var_old in db.HABILIDADES
+        public async Task<ActionResult> Editconfirm(string id, string valor, string tipo)
+        {
+
+            /*var query = from var_old in db.HABILIDADES
                         where var_old.cedulaEmpleadoFK == id_viejo
                         && var_old.valorPK == valor_viejo
                         && var_old.tipoPK == tipo_viejo
@@ -147,16 +151,23 @@ namespace ProyectoPI.Controllers
             foreach (var index in query)
             {
                 db.HABILIDADES.Remove(index);
-            }
-
-            //db.HABILIDADES.Remove(habilidad_viejas);
+            }*/
+            HABILIDADES habilidad_viejas = await db.HABILIDADES.FindAsync(valor_viejo, tipo_viejo, id_viejo);
+            db.Configuration.ValidateOnSaveEnabled = false;
+            db.HABILIDADES.Remove(habilidad_viejas);
             await db.SaveChangesAsync();
 
-            //HABILIDADES habilidade = db.HABILIDADES.Find(valor, tipo, id);
-            db.HABILIDADES.Add(hABILIDADES);
+            HABILIDADES habilidades_actuales = db.HABILIDADES.Create();
+
+            habilidades_actuales.cedulaEmpleadoFK = id;
+            habilidades_actuales.tipoPK = tipo;
+            habilidades_actuales.valorPK = valor;
+            db.HABILIDADES.Add(habilidades_actuales);
+
+            System.Diagnostics.Debug.WriteLine(habilidades_actuales.cedulaEmpleadoFK + habilidades_actuales.valorPK + habilidades_actuales.tipoPK);
             await db.SaveChangesAsync();
 
-            return RedirectToAction("Index", new { id = hABILIDADES.cedulaEmpleadoFK });
+            return RedirectToAction("Index", new { id = habilidades_actuales.cedulaEmpleadoFK });
         }
 
         // GET: HABILIDADES/Delete/5
