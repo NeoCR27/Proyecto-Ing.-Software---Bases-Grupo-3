@@ -35,13 +35,18 @@ namespace ProyectoPI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            string mail = User.Identity.Name;
-            string rol = await this.seguridad_controller.GetRol(mail);
-            ViewBag.my_rol = rol;
-            var hABILIDADES = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id);
-            SelectList nombre = empleadosController.get_nombres(id);
+
+            string correo = User.Identity.Name;
+            string rol = await this.seguridad_controller.GetRol(correo);
+            ViewBag.miRol = rol;
+            
+            EMPLEADO empleado = db.EMPLEADO.Find(id);
+            string nombre = empleado.nombre + " " + empleado.primerApellido;
             ViewBag.nombre = nombre;
-            return View(hABILIDADES.ToList());
+            System.Diagnostics.Debug.WriteLine(nombre);
+
+            var habilidades = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id);
+            return View(habilidades.ToList());
         }
 
         // Despliega los detalles, no se usa 

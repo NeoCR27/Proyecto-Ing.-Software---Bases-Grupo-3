@@ -89,6 +89,7 @@ namespace ProyectoPI.Models
 
         [Required]
         [Display(Name = "Fecha de nacimiento")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime fechaNacimiento { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
