@@ -22,6 +22,8 @@ namespace ProyectoPI.Controllers
 
         private SeguridadController seguridadController = new SeguridadController();
 
+        private CLIENTEController clienteController = new CLIENTEController();
+
         // GET: PROYECTOes
         //public async Task<ActionResult> Index()
         public async Task<ActionResult> Index()
@@ -112,8 +114,10 @@ namespace ProyectoPI.Controllers
             string rol = await this.seguridadController.GetRol(user);
             ViewBag.rol = rol;
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "nombre");
-            List<SelectListItem> lideres = this.empleadoController.getLideresDisponibles(); // Devuelve los lideres disponibles
+            List<SelectListItem> lideres = this.empleadoController.getLideresDisponibles(); // Retorna los lideres disponibles
             ViewBag.lideres = lideres;
+            List<SelectListItem> clientes = this.clienteController.getClientes(); // Retorna los clientes
+            ViewBag.clientes = clientes;
             return View();
         }
 

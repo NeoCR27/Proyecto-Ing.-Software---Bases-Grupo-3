@@ -27,18 +27,23 @@ namespace ProyectoPI.Models
         [Display(Name = "ID del proyecto")]
         public string idPK { get; set; }
 
-        [Required]
+        [RegularExpression("^[a-zA-Z]*$", ErrorMessage = "Solo se pueden digitar letras")]
+        [MaxLength(100, ErrorMessage = "El máximo de caracteres es 100")]
+        [Required(ErrorMessage = "El campo Nombre del proyecto es obligatorio")]
         [Display(Name = "Nombre del proyecto")]
         public string nombre { get; set; }
 
-        [Required]
+        [DataType(DataType.MultilineText)]
+        [MaxLength(100, ErrorMessage = "El máximo de caracteres es 100")]
+        [Required(ErrorMessage = "El campo Objetivo del proyecto es obligatorio")]
         [Display(Name = "Objetivo del proyecto")]
         public string objetivo { get; set; }
 
-        [Display(Name = "Duracion estimada")]
+        
+        [Display(Name = "Duracion estimada (en horas)")]
         public Nullable<int> duracionEstimada { get; set; }
 
-        [Display(Name = "Duración real")]
+        [Display(Name = "Duración real (en horas)")]
         public Nullable<int> duracionReal { get; set; }
 
         [Display(Name = "Fecha de inicio")]
