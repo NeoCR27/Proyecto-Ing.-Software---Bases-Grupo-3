@@ -63,26 +63,26 @@ namespace ProyectoPI.Controllers
         // Recibe los datos de la vista del crear empleado
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "cedulaPK,tel,nombre,primerApellido,segundoApellido,correo,distrito,canton,provincia,direccionExacta,horasLaboradas,edad,disponibilidad,rol,fechaNacimiento")] EMPLEADO eMPLEADO)
+        public ActionResult Create([Bind(Include = "cedulaPK,tel,nombre,primerApellido,segundoApellido,correo,distrito,canton,provincia,direccionExacta,horasLaboradas,edad,disponibilidad,rol,fechaNacimiento")] EMPLEADO eMPLEADO)
         {
             EMPLEADO duplicado = db.EMPLEADO.Find(eMPLEADO.cedulaPK);
             if (duplicado == null)
             {
                 if (ModelState.IsValid)
                 {
-                    await seguridad_controller.ChangeRol(eMPLEADO.correo, eMPLEADO.rol);
+                    //await seguridad_controller.ChangeRol(eMPLEADO.correo, eMPLEADO.rol);
                     db.EMPLEADO.Add(eMPLEADO);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                else
-                {
-                    return RedirectToAction("NoDuplicados");
-                }
+                
             }
-            
+            else
+            {
+                return RedirectToAction("NoDuplicados");
+            }
 
-            return View(eMPLEADO);
+            return RedirectToAction("../EMPLEADO/Index");
         }
 
         // Despliega la vista del editar empleado
@@ -93,7 +93,7 @@ namespace ProyectoPI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             EMPLEADO eMPLEADO = db.EMPLEADO.Find(id);
-
+            
             if (eMPLEADO == null)
             {
                 return HttpNotFound();
@@ -116,7 +116,11 @@ namespace ProyectoPI.Controllers
             }
             return RedirectToAction("../EMPLEADO/Index");
         }
-
+        //Despliega vista para casos de elementos duplicados
+        public ActionResult NoDuplicados()
+        {
+            return View();
+        }
         // Despliega la vista del eliminar empleado
         public ActionResult Delete(string id)
         {
