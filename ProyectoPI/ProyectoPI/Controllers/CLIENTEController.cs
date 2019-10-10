@@ -125,5 +125,25 @@ namespace ProyectoPI.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public List<SelectListItem> getClientes()
+        { // Retorna los nombres y cédulas de los clientes
+            List<CLIENTE> clientes = (db.CLIENTE.ToList());
+
+            List<SelectListItem> informacion = clientes.ConvertAll(e => {
+                return new SelectListItem()
+                {
+                    Text = e.nombre + " " + e.primerApellido,
+                    Value = e.cedulaPK,
+                    Selected = false
+                };
+            });
+
+            foreach(CLIENTE e in clientes)
+            {
+                System.Diagnostics.Debug.WriteLine(e.nombre);
+            }
+            return informacion;
+        }
     }
 }
