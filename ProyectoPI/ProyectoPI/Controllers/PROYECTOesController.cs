@@ -27,11 +27,49 @@ namespace ProyectoPI.Controllers
         public async Task<ActionResult> Index()
         {
             string user = User.Identity.Name;
-            string rol = await this.seguridadController.GetRol(user);
-            System.Diagnostics.Debug.WriteLine(rol);
-            var pROYECTO = db.PROYECTO.Include(p => p.CLIENTE);
+            string rol = await this.seguridadController.GetRol(user); // Me retorna el rol del usuario logeado
             ViewBag.rol = rol;
-            return View(pROYECTO.ToList());
+            System.Diagnostics.Debug.WriteLine("Cedula del que esta ingresado: " + user);
+
+            if (rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase)) // Retorno todos los pryectos
+            {
+                ViewBag.proyectos = true;
+                return View(db.PROYECTO.Include(p => p.CLIENTE).ToList());
+            }
+            else // Retorno solo los proyectos en los que estoy
+            {
+                var cedulaUsuarioLogeado = (from proy in db.PROYECTO
+                                            join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
+                                            join empleado in db.EMPLEADO on participa.cedulaEmpleadoFK equals empleado.cedulaPK
+                                            where empleado.correo == user
+                                            select new
+                                            {
+                                                empleado.cedulaPK
+                                            }).ToList();
+                if (cedulaUsuarioLogeado.Count != 0) // Esta en la tabla PARTICIPA, por lo tanto ha sido parte de algun equipo
+                {
+                    string cedula = cedulaUsuarioLogeado.First().ToString().Substring(0, cedulaUsuarioLogeado.First().ToString().Length - 2);
+                    System.Diagnostics.Debug.WriteLine("Cedula del que esta ingresado: " + cedula);
+                    var proyectos = (from proy in db.PROYECTO
+                                     join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
+                                     join empleado in db.EMPLEADO on participa.cedulaEmpleadoFK equals empleado.cedulaPK
+                                     join cliente in db.CLIENTE on proy.cedulaClienteFK equals cliente.cedulaPK
+                                     where participa.cedulaEmpleadoFK == cedula
+                                     select new
+                                     {
+                                         proy, cliente
+                                         
+                                     }).ToList();
+
+                    ViewBag.proyectos = true;
+                    return View(proyectos);
+                }
+                else
+                {
+                    ViewBag.proyectos = false;
+                    return View();
+                }
+            }
         }
 
         // GET: PROYECTOes/Details/5
@@ -69,12 +107,12 @@ namespace ProyectoPI.Controllers
         public async Task<ActionResult> Create()
         {
 
-            ViewBag.idPK = "0";
+            ViewBag.idPK = "0"; // Valor por default de PK, luego se cambia por autogenerado
             string user = User.Identity.Name;
             string rol = await this.seguridadController.GetRol(user);
             ViewBag.rol = rol;
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "nombre");
-            List<SelectListItem> lideres = this.empleadoController.getLideresDisponibles();
+            List<SelectListItem> lideres = this.empleadoController.getLideresDisponibles(); // Devuelve los lideres disponibles
             ViewBag.lideres = lideres;
             return View();
         }
@@ -86,19 +124,19 @@ namespace ProyectoPI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
         {
-            pROYECTO.idPK = this.getIdAsignar();
+            
             if (ModelState.IsValid)
             {
+                pROYECTO.idPK = this.getIdAsignar(); // Asigna el id automaticamente al proyecto
                 db.PROYECTO.Add(pROYECTO);
                 db.SaveChanges();
 
                 string cedulaLiderEscogido = Request.Form["Lideres"].ToString(); // Agarra el valor seleccionado en el dropdown de la vista con los lideres disponibles
-                // Guardar en la base de datos que el lider escogido para ese proyecto 
-                // pasar el ID del proyecto y cedula del lider, junto con el rol de "Lider"
-                participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider");
-                // Cambiar la disponibilidad del lider escogido
+                
+                participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider"); // Agrego a PARTICIPA el lider escogido
+                
                 List<EMPLEADO> empleado = (db.EMPLEADO.Where(e => e.cedulaPK == cedulaLiderEscogido)).ToList();
-                empleado.First().disponibilidad = false;
+                empleado.First().disponibilidad = false; // Cambiar la disponibilidad del lider escogido
                 return RedirectToAction("Index");
             }
             return View(pROYECTO);
@@ -124,8 +162,6 @@ namespace ProyectoPI.Controllers
             lideractual = lideractual.Substring(10);
             lideractual = lideractual.Substring(0, lideractual.Length - 2);
             ViewBag.liderActual = lideractual;
-            //ViewBag.rol = this.rol;
-            ViewBag.rol = "Jefe";
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK");
             List<SelectListItem> lideres = this.empleadoController.getLideresDisponibles();
             ViewBag.lideres = lideres;
@@ -155,8 +191,6 @@ namespace ProyectoPI.Controllers
                 db.SaveChanges();
 
                 string cedulaLiderEscogido = Request.Form["Lideres"].ToString(); // Agarra el valor seleccionado en el dropdown de la vista con los lideres disponibles
-                // Guardar en la base de datos que el lider escogido para ese proyecto 
-                // pasar el ID del proyecto y cedula del lider, junto con el rol de "Lider"
                 participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider");
                 return RedirectToAction("Index");
             }
