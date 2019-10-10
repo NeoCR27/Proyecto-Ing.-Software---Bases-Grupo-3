@@ -50,16 +50,14 @@ namespace ProyectoPI.Controllers
                 if (cedulaUsuarioLogeado.Count != 0) // Esta en la tabla PARTICIPA, por lo tanto ha sido parte de algun equipo
                 {
                     string cedulaResultado = cedulaUsuarioLogeado.First().ToString();
-                    cedulaResultado = cedulaResultado.Substring(12);
-                    cedulaResultado = cedulaResultado.Substring(0, cedulaResultado.Length - 2);
-                    cedulaResultado = cedulaResultado.Substring(2, cedulaResultado.Length - 2);
+                    cedulaResultado = cedulaResultado.Replace("{", "");
+                    cedulaResultado = cedulaResultado.Replace("}", "");
+                    cedulaResultado = cedulaResultado.Replace("cedulaPK", "");
                     cedulaResultado = cedulaResultado.Replace(" ", "");
-                    // string cedula = cedulaUsuarioLogeado.First().ToString().Substring(12, cedulaUsuarioLogeado.First().ToString().Length - 2);
-                    System.Diagnostics.Debug.WriteLine(cedulaResultado);
-                    string queryProyecto = "Select * from PROYECTO proy join PARTICIPA participa  on proy.idPK = participa.idProyectoFK join EMPLEADO empleado on participa.cedulaEmpleadoFK = empleado.cedulaPK join CLIENTE cliente   on proy.cedulaClienteFK = cliente.cedulaPK where participa.cedulaEmpleadoFK = 111111110";
-
+                    cedulaResultado = cedulaResultado.Replace("=", "");
+                    System.Diagnostics.Debug.WriteLine("CEDULA: " + cedulaResultado);
+                    string queryProyecto = "Select * from PROYECTO proy join PARTICIPA participa  on proy.idPK = participa.idProyectoFK join EMPLEADO empleado on participa.cedulaEmpleadoFK = empleado.cedulaPK join CLIENTE cliente   on proy.cedulaClienteFK = cliente.cedulaPK where participa.cedulaEmpleadoFK = " + cedulaResultado;
                     var proyecto = db.Database.SqlQuery<PROYECTO>(queryProyecto).ToList();
-                    System.Diagnostics.Debug.WriteLine("COUNT: " + proyecto.Count);
                     string queryCliente = "Select cliente.nombre from PROYECTO proy join PARTICIPA participa  on proy.idPK = participa.idProyectoFK join EMPLEADO empleado on participa.cedulaEmpleadoFK = empleado.cedulaPK join CLIENTE cliente   on proy.cedulaClienteFK = cliente.cedulaPK where participa.cedulaEmpleadoFK = 111111110";
                     var cliente = db.Database.SqlQuery<string>(queryCliente).ToList();
                     string nombreCliente = cliente.First().ToString();
@@ -69,6 +67,7 @@ namespace ProyectoPI.Controllers
                         
                         model.Add(new PROYECTO()
                         {
+                            idPK = item.idPK,
                             nombre = item.nombre,
                             objetivo = item.objetivo,
                             CLIENTE = db.CLIENTE.Create(),
