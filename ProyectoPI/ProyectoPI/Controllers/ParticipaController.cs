@@ -14,32 +14,66 @@ namespace ProyectoPI.Controllers
     public class PARTICIPAController : Controller
     {
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
-       // private SeguridadController seguridadController = new SeguridadController();
+        private SeguridadController seguridadController = new SeguridadController();
 
-        // GET: PARTICIPA
-        public /*async Task<ActionResult>*/ ActionResult Index()
+        // GET: PROYECTOes
+        //public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index()
         {
-           /* string mail = User.Identity.Name;
-            string rol = await this.seguridadController.GetRol(mail);
-            ViewBag.my_role = rol;
-            if(rol == "Tester" || rol == "Lider")
+            string user = User.Identity.Name;
+            string rol = await this.seguridadController.GetRol(user); // Me retorna el rol del usuario logeado
+            ViewBag.rol = rol;
+            System.Diagnostics.Debug.WriteLine("Cedula del que esta ingresado: " + user);
+
+            if (rol.Equals("Cliente", StringComparison.InvariantCultureIgnoreCase)) // Retorno todos los equipos
             {
-                var nombreLiderActual = (from emp in db.EMPLEADO
-                                         where emp.correo == mail
-                                         select new
-                                         {
-                                             emp.cedulaPK
-                                         }).ToList();
-                
-                string empActual = nombreLiderActual.First().ToString();
-                int tamano = empActual.Length - 2;
-                empActual = empActual.Substring(1);
-                empActual = empActual.Substring(0, empActual.Length - 2);
-                System.Diagnostics.Debug.WriteLine(empActual);
-                ViewBag.empActual = empActual;
-            }*/
-            string query = "SELECT Part.idProyectoFK AS 'IDProyecto', Emp.nombre + ' ' + Emp.primerApellido + ' ' + Emp.segundoApellido AS 'empleado', Emp.correo AS 'email', Part.rol AS 'rol', Proy.nombre AS 'proyNom' FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK Join PROYECTO proy ON proy.idPK = Part.idProyectoFK WHERE Part.idProyectoFK = proy.idPK ORDER BY part.idProyectoFK";
-            return View((db.Database.SqlQuery<EquipoModel>(query)).ToList());
+                var cedulaUsuarioLogeado = (from proy in db.PROYECTO
+                                            join cliente in db.CLIENTE on proy.cedulaClienteFK equals cliente.cedulaPK                              
+                                            where cliente.correo == user
+                                            select new
+                                            {
+                                                cliente.cedulaPK
+                                            }).ToList();
+                if (cedulaUsuarioLogeado.Count != 0) // Esta en la tabla PARTICIPA, por lo tanto ha sido parte de algun equipo
+                {
+                    string cedula = cedulaUsuarioLogeado.First().ToString().Substring(0, cedulaUsuarioLogeado.First().ToString().Length - 2);
+                    System.Diagnostics.Debug.WriteLine("Cedula del que esta ingresado: " + cedula);
+
+                    string query = "SELECT Part.idProyectoFK AS 'IDProyecto', Emp.nombre + ' ' + Emp.primerApellido + ' ' + Emp.segundoApellido AS 'empleado', Emp.correo AS 'email', Part.rol AS 'rol', Proy.nombre AS 'proyNom' FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK Join PROYECTO proy ON proy.idPK = Part.idProyectoFK  Join CLIENTE cliente ON proy.cedulaClienteFK = cliente.cedulaPK WHERE Part.idProyectoFK = proy.idPK AND Emp.cedulaPK = " + cedula + "AND Part.cedulaEmpleadoFK= " + cedula + "ORDER BY part.idProyectoFK";
+                    return View((db.Database.SqlQuery<EquipoModel>(query)).ToList());
+                }
+            }
+
+            if (rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase)) // Retorno todos los equipos
+            {
+                string query = "SELECT Part.idProyectoFK AS 'IDProyecto', Emp.nombre + ' ' + Emp.primerApellido + ' ' + Emp.segundoApellido AS 'empleado', Emp.correo AS 'email', Part.rol AS 'rol', Proy.nombre AS 'proyNom' FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK Join PROYECTO proy ON proy.idPK = Part.idProyectoFK WHERE Part.idProyectoFK = proy.idPK  ORDER BY part.idProyectoFK";
+                return View((db.Database.SqlQuery<EquipoModel>(query)).ToList());
+            }
+            else // Retorno solo los equipos en los que estoy
+            {
+                var cedulaUsuarioLogeado = (from proy in db.PROYECTO
+                                            join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
+                                            join empleado in db.EMPLEADO on participa.cedulaEmpleadoFK equals empleado.cedulaPK
+                                            where empleado.correo == user
+                                            select new
+                                            {
+                                                empleado.cedulaPK
+                                            }).ToList();
+                if (cedulaUsuarioLogeado.Count != 0) // Esta en la tabla PARTICIPA, por lo tanto ha sido parte de algun equipo
+                {
+                    string cedula = cedulaUsuarioLogeado.First().ToString().Substring(0, cedulaUsuarioLogeado.First().ToString().Length - 2);
+                    System.Diagnostics.Debug.WriteLine("Cedula del que esta ingresado: " + cedula);
+
+                   string query = "SELECT Part.idProyectoFK AS 'IDProyecto', Emp.nombre + ' ' + Emp.primerApellido + ' ' + Emp.segundoApellido AS 'empleado', Emp.correo AS 'email', Part.rol AS 'rol', Proy.nombre AS 'proyNom' FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK Join PROYECTO proy ON proy.idPK = Part.idProyectoFK WHERE Part.idProyectoFK = proy.idPK AND Emp.cedulaPK = "+ cedula + "AND Part.cedulaEmpleadoFK= " + cedula + "ORDER BY part.idProyectoFK";
+                    return View((db.Database.SqlQuery<EquipoModel>(query)).ToList());
+                }
+                else
+                {
+                    
+                    return View();
+                }
+            }
+            
         }
 
         // GET: PARTICIPA/Edit/5

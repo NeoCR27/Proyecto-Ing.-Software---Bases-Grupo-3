@@ -53,7 +53,7 @@ namespace ProyectoPI.Controllers
         // GET: EMPLEADO/Create
         public ActionResult Create()
         {
-            string[] values = new[] { "Lider", "Jefe de calidad", "Tester" };
+            string[] values = new[] { "Lider", "Jefe", "Tester" };
             ViewBag.rol = new SelectList(values);
             string[] disponible = new[] { "Disponible", "No disponible" };
 

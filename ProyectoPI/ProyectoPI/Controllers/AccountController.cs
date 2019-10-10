@@ -141,6 +141,8 @@ namespace ProyectoPI.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            string[] values = new[] { "Lider", "Jefe", "Tester" , "Cliente"};
+            ViewBag.rol = new SelectList(values);
             return View();
         }
 
