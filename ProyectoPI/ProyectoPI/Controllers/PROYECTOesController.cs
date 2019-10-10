@@ -55,7 +55,6 @@ namespace ProyectoPI.Controllers
                     cedulaResultado = cedulaResultado.Replace("cedulaPK", "");
                     cedulaResultado = cedulaResultado.Replace(" ", "");
                     cedulaResultado = cedulaResultado.Replace("=", "");
-                    System.Diagnostics.Debug.WriteLine("CEDULA: " + cedulaResultado);
                     string queryProyecto = "Select * from PROYECTO proy join PARTICIPA participa  on proy.idPK = participa.idProyectoFK join EMPLEADO empleado on participa.cedulaEmpleadoFK = empleado.cedulaPK join CLIENTE cliente   on proy.cedulaClienteFK = cliente.cedulaPK where participa.cedulaEmpleadoFK = " + cedulaResultado;
                     var proyecto = db.Database.SqlQuery<PROYECTO>(queryProyecto).ToList();
                     string queryCliente = "Select cliente.nombre from PROYECTO proy join PARTICIPA participa  on proy.idPK = participa.idProyectoFK join EMPLEADO empleado on participa.cedulaEmpleadoFK = empleado.cedulaPK join CLIENTE cliente   on proy.cedulaClienteFK = cliente.cedulaPK where participa.cedulaEmpleadoFK = 111111110";
@@ -173,11 +172,10 @@ namespace ProyectoPI.Controllers
                                          nombre = empleado.nombre + " " + empleado.primerApellido
                                      }).ToList();
             string lideractual = nombreLiderActual.First().ToString();
-            int tamano = lideractual.Length - 2;
             lideractual = lideractual.Substring(10);
             lideractual = lideractual.Substring(0, lideractual.Length - 2);
             ViewBag.liderActual = lideractual;
-            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK");
+            
             List<SelectListItem> lideres = this.empleadoController.getLideresDisponibles();
             ViewBag.lideres = lideres;
             if (id == null)
@@ -198,7 +196,7 @@ namespace ProyectoPI.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
+        public ActionResult Edit(string idkPK, [Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
         {
             if (ModelState.IsValid)
             {
@@ -206,6 +204,7 @@ namespace ProyectoPI.Controllers
                 db.SaveChanges();
 
                 string cedulaLiderEscogido = Request.Form["Lideres"].ToString(); // Agarra el valor seleccionado en el dropdown de la vista con los lideres disponibles
+                //if()
                 participaController.Eliminar(pROYECTO.idPK, cedulaLiderEscogido);
                 participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider");
                 
