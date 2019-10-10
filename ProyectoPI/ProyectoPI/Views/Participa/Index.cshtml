@@ -16,7 +16,7 @@
                             <h4 class="card-title">@miembro.proyNom</h4>
                             <p class="card-text"><small class="text-muted">@miembro.empleado @miembro.rol</small></p>
 
-                            @if (@rol.Equals("Lider", StringComparison.InvariantCultureIgnoreCase))
+                            @if ((@rol.Equals("Lider", StringComparison.InvariantCultureIgnoreCase)) || @rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
                             {
                                 <p class="card-text">
                                     @Html.ActionLink("Añadir o Remover integrantes", "Edit", new { id = @miembro.IDProyecto }, new { @class = "botonGeneral colorCeleste" })
