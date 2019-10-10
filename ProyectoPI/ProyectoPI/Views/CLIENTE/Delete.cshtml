@@ -1,108 +1,117 @@
 ﻿@model ProyectoPI.Models.CLIENTE
-
 @{
     ViewBag.Title = "Delete";
 }
-
+@{
+    string rol = ViewBag.myRol;
+}
 <h2 class="titulosPag">ELIMINAR CLIENTE</h2>
 
-<h3>¿Esta seguro que quiere eliminar este cliente?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.primerApellido)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.primerApellido)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.segundoApellido)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.segundoApellido)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.cedulaPK)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.cedulaPK)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.tel)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.tel)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.correo)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.correo)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.provincia)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.provincia)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.canton)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.canton)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.distrito)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.distrito)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.direccionExacta)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.direccionExacta)
-        </dd>
-    </dl>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+@if (rol == "Jefe")
+{
+    <h3>¿Esta seguro que quiere eliminar este cliente?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.primerApellido)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.primerApellido)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.segundoApellido)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.segundoApellido)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.cedulaPK)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.cedulaPK)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.tel)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.tel)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.correo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.correo)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.provincia)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.provincia)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.canton)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.canton)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.distrito)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.distrito)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.direccionExacta)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.direccionExacta)
+            </dd>
+        </dl>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
 
-      
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="button" class="botonGeneral colorRojo" data-toggle="modal" data-target="#eliminar">
-                    Eliminar
-                </button>
-                <!-- Modal -->
-                <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel"><strong>¿Está seguro que desea elimiar el proyecto?</strong></h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                <input type="submit" value="Eliminar" class="btn btn-success" />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="button" class="botonGeneral colorRojo" data-toggle="modal" data-target="#eliminar">
+                        Eliminar
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"><strong>¿Está seguro que desea elimiar el proyecto?</strong></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                    <input type="submit" value="Eliminar" class="btn btn-success" />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="form-actions no-color">
-            @Html.ActionLink("Volver", "Index", null, new { @class = "botonGeneral colorGris" })
-        </div>
-    }
+        }
+    </div>
+}
+else
+{
+    <h1>SOLO LOS JEFES PUEDEN MODIFICAR CLIENTES</h1>
+}
+
+<div class="form-actions no-color">
+    @Html.ActionLink("Volver", "Index", null, new { @class = "botonGeneral colorGris" })
 </div>

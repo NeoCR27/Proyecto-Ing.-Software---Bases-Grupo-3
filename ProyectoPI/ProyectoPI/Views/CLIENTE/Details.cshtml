@@ -2,80 +2,86 @@
 @{
     ViewBag.Title = "Details";
 }
+
+@{
+    string rol = ViewBag.myRol;
+}
+
 <h2 class="titulosPag">CONSULTAR CLIENTE</h2>
 
-    <div>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.nombre)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.nombre)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.primerApellido)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.primerApellido)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.segundoApellido)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.segundoApellido)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.cedulaPK)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.cedulaPK)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.tel)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.tel)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.correo)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.correo)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.provincia)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.provincia)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.canton)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.canton)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.distrito)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.distrito)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.direccionExacta)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.direccionExacta)
-            </dd>
-        </dl>
-    </div>
-    <div class="col-md-offset-2 col-md-10">
-        @Html.ActionLink("Modificar", "Edit", new { id = Model.cedulaPK }, new { @class = "botonGeneral colorVerde" })
-        @Html.ActionLink("Eliminar", "Delete", new { id = Model.cedulaPK }, new { @class = "botonGeneral colorRojo" })
-
-
-
-    </div>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.primerApellido)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.primerApellido)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.segundoApellido)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.segundoApellido)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.cedulaPK)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.cedulaPK)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.tel)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.tel)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.correo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.correo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.provincia)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.provincia)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.canton)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.canton)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.distrito)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.distrito)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.direccionExacta)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.direccionExacta)
+        </dd>
+    </dl>
+</div>
+@if (rol == "Jefe")
+{
+<div class="col-md-offset-2 col-md-10">
+    @Html.ActionLink("Modificar", "Edit", new { id = Model.cedulaPK }, new { @class = "botonGeneral colorVerde" })
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    @Html.ActionLink("Eliminar", "Delete", new { id = Model.cedulaPK }, new { @class = "botonGeneral colorRojo" })
+</div>
+}
 
     <div class="form-actions no-color">
         @Html.ActionLink("Volver", "Index", null, new { @class = "botonGeneral colorGris" })

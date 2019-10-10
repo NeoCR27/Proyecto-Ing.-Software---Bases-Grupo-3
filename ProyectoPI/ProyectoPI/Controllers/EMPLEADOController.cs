@@ -17,7 +17,7 @@ namespace ProyectoPI.Controllers
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
         private SeguridadController seguridad_controller = new SeguridadController();
 
-        // GET: EMPLEADO
+        // Despliega la vista de todos los empleados o su propia infomacion, depende de sus permisos
         public async Task<ActionResult> Index()
         {
             string mail = User.Identity.Name;
@@ -26,16 +26,14 @@ namespace ProyectoPI.Controllers
             if (rol == "Tester" || rol == "Lider")
             {
                 var my_info = db.EMPLEADO.Where(x => x.correo == mail);
-                //SelectList my_data = new SelectList( db.EMPLEADO.Where(x => x.correo == mail), "", "cedula");
-                //SelectList my_id = "SELECT cedula FROM empleados"
-                //System.Diagnostics.Debug.WriteLine(my_data);
+
                 return View(my_info.ToList());
             }
             return View(db.EMPLEADO.ToList());
 
         }
 
-        // GET: EMPLEADO/Details/5
+        // Despliega la vista de  detalles de un empleado en especifico
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -50,7 +48,7 @@ namespace ProyectoPI.Controllers
             return View(eMPLEADO);
         }
 
-        // GET: EMPLEADO/Create
+        // Despliega la vista del crear empleado
         public ActionResult Create()
         {
             string[] values = new[] { "Lider", "Jefe", "Tester" };
@@ -62,25 +60,32 @@ namespace ProyectoPI.Controllers
         }
 
 
-        // POST: EMPLEADO/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Recibe los datos de la vista del crear empleado
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "cedulaPK,tel,nombre,primerApellido,segundoApellido,correo,distrito,canton,provincia,direccionExacta,horasLaboradas,edad,disponibilidad,rol,fechaNacimiento")] EMPLEADO eMPLEADO)
         {
-            if (ModelState.IsValid)
+            EMPLEADO duplicado = db.EMPLEADO.Find(eMPLEADO.cedulaPK);
+            if (duplicado == null)
             {
-                await seguridad_controller.ChangeRol(eMPLEADO.correo, eMPLEADO.rol);
-                db.EMPLEADO.Add(eMPLEADO);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    await seguridad_controller.ChangeRol(eMPLEADO.correo, eMPLEADO.rol);
+                    db.EMPLEADO.Add(eMPLEADO);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("NoDuplicados");
+                }
             }
+            
 
             return View(eMPLEADO);
         }
 
-        // GET: EMPLEADO/Edit/5
+        // Despliega la vista del editar empleado
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -96,9 +101,7 @@ namespace ProyectoPI.Controllers
             return View(eMPLEADO);
         }
 
-        // POST: EMPLEADO/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Recibe los datos de la vista del editar empleado
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(EMPLEADO eMPLEADO)
@@ -109,12 +112,12 @@ namespace ProyectoPI.Controllers
                 await seguridad_controller.ChangeRol(eMPLEADO.correo, eMPLEADO.rol);
                 db.Entry(eMPLEADO).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("../EMPLEADO/Index");
             }
-            return View(eMPLEADO);
+            return RedirectToAction("../EMPLEADO/Index");
         }
 
-        // GET: EMPLEADO/Delete/5
+        // Despliega la vista del eliminar empleado
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -129,7 +132,7 @@ namespace ProyectoPI.Controllers
             return View(eMPLEADO);
         }
 
-        // POST: EMPLEADO/Delete/5
+        // Recibe los datos de la vista del eliminar empleado
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
@@ -139,20 +142,25 @@ namespace ProyectoPI.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        //Redirecciona la al controlador de habilidades
         public ActionResult to_habilidades(string id)
         {
             return RedirectToAction("../HABILIDADES/index", new { id = id });
         }
 
+        //Devuelve una lista con todas los nombres de los empleados
         public SelectList get_nombres(String id)
         {
             return new SelectList(db.EMPLEADO.Where(empleado => empleado.cedulaPK == id), "", "nombre");
         }
 
+        //Devuelve una lista con todas las posibles cedulas de los empleados
         public SelectList get_cedulas()
         {
             return new SelectList(db.EMPLEADO, "", "cedulaPK");
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -161,6 +169,8 @@ namespace ProyectoPI.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //Devuelve una lista con todos los lideres disponibles
         public List<SelectListItem> getLideresDisponibles()
         { // Retorna los nombres y cédulas de los empleados líderes disponibles
             List<EMPLEADO> empleados = (db.EMPLEADO.Where((e => e.disponibilidad == true && e.rol == "Lider"))).ToList();
@@ -173,6 +183,26 @@ namespace ProyectoPI.Controllers
                     Selected = false
                 };
             });
+            return informacion;
+        }
+        //Devuelve una lista con todo los nombres y cedulas de todos los clientes, de manera de conjunto o diccionario
+        public List<SelectListItem> getEmpleados()
+        { // Retorna los nombres y cédulas de los clientes
+            List<EMPLEADO> empleados = db.EMPLEADO.ToList();
+
+            List<SelectListItem> informacion = empleados.ConvertAll(e => {
+                return new SelectListItem()
+                {
+                    Text = e.nombre + " " + e.primerApellido,
+                    Value = e.cedulaPK,
+                    Selected = false
+                };
+            });
+            
+            foreach (EMPLEADO e in empleados)
+            {
+                System.Diagnostics.Debug.WriteLine(e.nombre);
+            }
             return informacion;
         }
     }

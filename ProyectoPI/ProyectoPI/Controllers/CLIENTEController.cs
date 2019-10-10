@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoPI.Models;
@@ -13,17 +14,30 @@ namespace ProyectoPI.Controllers
     public class CLIENTEController : Controller
     {
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
+        private SeguridadController seguridadController = new SeguridadController();
 
         // GET: CLIENTE
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-           
+            string mail = User.Identity.Name;
+            string rol = await this.seguridadController.GetRol(mail);
+            ViewBag.myRol = rol;
+            System.Diagnostics.Debug.WriteLine(rol);
+            if (rol == "Cliente")
+            {
+                var miInfo = db.CLIENTE.Where(x => x.correo == mail);
+                return View(miInfo.ToList());
+            }
+
             return View(db.CLIENTE.ToList());
         }
 
         // GET: CLIENTE/Details/5
-        public ActionResult Details(string id)
+        public async Task<ActionResult> Details(string id)
         {
+            string mail = User.Identity.Name;
+            string rol = await this.seguridadController.GetRol(mail);
+            ViewBag.myRol = rol;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -37,8 +51,11 @@ namespace ProyectoPI.Controllers
         }
 
         // GET: CLIENTE/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            string mail = User.Identity.Name;
+            string rol = await this.seguridadController.GetRol(mail);
+            ViewBag.myRol = rol;
             return View();
         }
 
@@ -49,19 +66,30 @@ namespace ProyectoPI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "cedulaPK,tel,nombre,primerApellido,segundoApellido,correo,distrito,canton,provincia,direccionExacta")] CLIENTE cLIENTE)
         {
-            if (ModelState.IsValid)
+            CLIENTE duplicate = db.CLIENTE.Find(cLIENTE.cedulaPK);
+            if (duplicate == null)
             {
-                db.CLIENTE.Add(cLIENTE);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.CLIENTE.Add(cLIENTE);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                return RedirectToAction("NoDuplicados");
             }
 
             return View(cLIENTE);
         }
 
         // GET: CLIENTE/Edit/5
-        public ActionResult Edit(string id)
+        public async Task<ActionResult> Edit(string id)
         {
+            string mail = User.Identity.Name;
+            string rol = await this.seguridadController.GetRol(mail);
+            ViewBag.myRol = rol;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -92,8 +120,11 @@ namespace ProyectoPI.Controllers
         }
 
         // GET: CLIENTE/Delete/5
-        public ActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
+            string mail = User.Identity.Name;
+            string rol = await this.seguridadController.GetRol(mail);
+            ViewBag.myRol = rol;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -115,6 +146,11 @@ namespace ProyectoPI.Controllers
             db.CLIENTE.Remove(cLIENTE);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult NoDuplicados()
+        {
+            return View();
         }
 
         protected override void Dispose(bool disposing)
