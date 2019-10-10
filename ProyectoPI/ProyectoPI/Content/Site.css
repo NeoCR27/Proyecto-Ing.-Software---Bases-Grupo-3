@@ -25,7 +25,7 @@
 input,
 select,
 textarea {
-    max-width: 400px;
+    max-width: 500px;
 }
 
 #jumb {
@@ -43,6 +43,10 @@ textarea {
 }
 
 .container {
+    margin-right: 200px;
+    margin-left: 200px;
+}
+.ubicActual {
     margin-right: 200px;
     margin-left: 200px;
 }
@@ -77,6 +81,7 @@ textarea {
     padding: 6px 12px;
     border: 1px solid transparent;
     border-radius: 4px;
+    margin-right: 2px;
 }
 .botonGeneral:hover {
     opacity: 0.8;
