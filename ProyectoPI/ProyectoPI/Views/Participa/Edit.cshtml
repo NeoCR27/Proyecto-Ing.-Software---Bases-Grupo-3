@@ -1,4 +1,4 @@
-﻿@model Tuple<ProyectoPI.Models.EmployeeHabilityModel, ProyectoPI.Models.TeamViewModel>
+﻿@model Tuple<ProyectoPI.Models.HabilidadEmpleadoModel, ProyectoPI.Models.EquipoModel>
 
 @{
     ViewBag.Title = "Editar Equipos";
@@ -6,6 +6,9 @@
 
 <h2 class="titulosPag">Editar Equipos</h2>
 
+@{ 
+    string id = ViewBag.id;
+}
 
 <h2>Empleados Disponibles</h2>
 
@@ -14,10 +17,10 @@
     {
 
         <b> Buscar Por Habilidades:</b>
-        @Html.RadioButton("searchBy", "Tecnica") <text>Tecnicas</text>
-        @Html.RadioButton("searchBy", "Blanda") <text>Blandas</text>
+        @Html.RadioButton("buscarPor", "Tecnica") <text>Tecnicas</text>
+        @Html.RadioButton("buscarPor", "Blanda") <text>Blandas</text>
         <br />
-        @Html.TextBox("searchFilter")<input type="submit" value="Search" />
+        @Html.TextBox("filtroBusqueda")<input type="submit" value="Search" />
     }
 </p>
 
@@ -31,7 +34,7 @@
         </tr>
     </thead>
     <tbody>
-        @if ((ViewData["employees"] as IList<ProyectoPI.Models.EmployeeHabilityModel>).Count() == 0)
+        @if ((ViewData["empleados"] as IList<ProyectoPI.Models.HabilidadEmpleadoModel>).Count() == 0)
         {
             <tr>
                 <td colspan="4" style="color:red">
@@ -41,14 +44,20 @@
         }
         else
         {
-            foreach (var employee in ViewData["employees"] as IList<ProyectoPI.Models.EmployeeHabilityModel>)
+            foreach (var empleado in ViewData["empleados"] as IList<ProyectoPI.Models.HabilidadEmpleadoModel>)
             {
                 <tr>
-                    <td> @employee.name</td>
-                    <td> @employee.habilityType</td>
-                    <td> @employee.hability </td>
+                    <td> @empleado.nombre</td>
+                    <td> @empleado.tipoHabilidad</td>
+                    <td> @empleado.habilidad </td>
                     <td>
-                        @Html.RadioButtonFor(model => model.Item1.personalID,employee.personalID)
+                        @using (Html.BeginForm("AgregarTester", "PARTICIPA"))
+                        {
+                            @Html.Hidden("idProyecto", @id)
+                            @Html.Hidden("idEmpleado", empleado.personalID)
+                            <input class = "botonGeneral colorVerde" type="submit" value="Agregar" />
+                        }
+
                     </td>
 
                 </tr>
@@ -59,7 +68,7 @@
 
     </tbody>
 </table>
-@Html.ActionLink("Agregar a Equipo", "Create", null, new { @class = "botonGeneral colorVerde" })
+
 
 
 
@@ -73,20 +82,25 @@
             <th></th>
         </tr>
     </thead>
-    @foreach (var member in ViewData["team"] as IList<ProyectoPI.Models.TeamViewModel>)
+    @foreach (var integrante in ViewData["equipo"] as IList<ProyectoPI.Models.EquipoModel>)
     {
-        <tr>
-            <td> @member.employee</td>
-            <td>@member.email</td>
-            <td>@member.role</td>
-            <td>
-                @Html.HiddenFor(x => member.id)
-                @Html.RadioButtonFor(x => member.id, "ID")
-            </td>
-        </tr>
+<tr>
+    <td>@integrante.empleado</td>
+    <td>@integrante.email</td>
+    <td>@integrante.rol</td>
+    
+    <td>
+        @using (Html.BeginForm("RemoverTester", "PARTICIPA"))
+        {
+            @Html.Hidden("idProyecto", @id)
+            @Html.Hidden("idEmpleado", integrante.idEmp)
+            <input class = "botonGeneral colorRojo" type="submit" value="Remover" />
+        }
+    </td>
+</tr>
     }
 </table>
-@Html.ActionLink("Remover de Equipo", "Delete", null, new { @class = "botonGeneral colorRojo" })
+
 <br />
 <br />
 <div>

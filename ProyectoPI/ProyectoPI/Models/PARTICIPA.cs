@@ -23,25 +23,24 @@ namespace ProyectoPI.Models
         public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual PROYECTO PROYECTO { get; set; }
     }
-
-    public  class TeamViewModel
+    //Clase para query de empleados por
+    public  class EquipoModel
     {
-        public string id { get; set;}
-        public string employee { get; set; }
+        public string IDProyecto { get; set;}
+        public string empleado { get; set; }
         public string email { get; set; }
-        public string role { get; set; }
-        public string proyName { get; set; }
-        public bool available { get; set; }
-        public bool isSelected { get; set; }
+        public string rol { get; set; }
+        public string proyNom { get; set; }
+        public bool dispon { get; set; }
+        public string idEmp { get; set; }
        
     }
-
-    public class EmployeeHabilityModel
+    //Clase para query de empleados por habilidad
+    public class HabilidadEmpleadoModel
     {
         public string personalID { get; set; }
-        public string name { get; set; }
-        public string habilityType { get; set; }
-        public string hability { get; set; }
-        public bool isSelected { get; set; }
+        public string nombre { get; set; }
+        public string tipoHabilidad { get; set; }
+        public string habilidad { get; set; }
     }
 }

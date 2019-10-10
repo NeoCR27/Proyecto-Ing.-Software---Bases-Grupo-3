@@ -8,39 +8,50 @@ using System.Web;
 using System.Web.Mvc;
 using ProyectoPI.Models;
 using System.Data.SqlClient;
-
+using System.Threading.Tasks;
 namespace ProyectoPI.Controllers
 {
     public class PARTICIPAController : Controller
     {
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
+       // private SeguridadController seguridadController = new SeguridadController();
 
         // GET: PARTICIPA
-        public ActionResult Index()
+        public /*async Task<ActionResult>*/ ActionResult Index()
         {
-            string query = "SELECT Part.idProyectoFK AS 'id', Emp.nombre + ' ' + Emp.primerApellido + ' ' + Emp.segundoApellido AS 'employee', Emp.correo AS 'email', Part.rol AS 'role', Proy.nombre AS 'proyName' FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK Join PROYECTO proy ON proy.idPK = Part.idProyectoFK WHERE Part.idProyectoFK = proy.idPK ORDER BY part.idProyectoFK";
-            return View((db.Database.SqlQuery<TeamViewModel>(query)).ToList());
+           /* string mail = User.Identity.Name;
+            string rol = await this.seguridadController.GetRol(mail);
+            ViewBag.my_role = rol;
+            if(rol == "Tester" || rol == "Lider")
+            {
+                var nombreLiderActual = (from emp in db.EMPLEADO
+                                         where emp.correo == mail
+                                         select new
+                                         {
+                                             emp.cedulaPK
+                                         }).ToList();
+                
+                string empActual = nombreLiderActual.First().ToString();
+                int tamano = empActual.Length - 2;
+                empActual = empActual.Substring(1);
+                empActual = empActual.Substring(0, empActual.Length - 2);
+                System.Diagnostics.Debug.WriteLine(empActual);
+                ViewBag.empActual = empActual;
+            }*/
+            string query = "SELECT Part.idProyectoFK AS 'IDProyecto', Emp.nombre + ' ' + Emp.primerApellido + ' ' + Emp.segundoApellido AS 'empleado', Emp.correo AS 'email', Part.rol AS 'rol', Proy.nombre AS 'proyNom' FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK Join PROYECTO proy ON proy.idPK = Part.idProyectoFK WHERE Part.idProyectoFK = proy.idPK ORDER BY part.idProyectoFK";
+            return View((db.Database.SqlQuery<EquipoModel>(query)).ToList());
         }
-
-        // GET: PARTICIPA/Details/5
-        public ActionResult Details()
-        {
-         
-            return View();
-        }
-
-
-
 
         // GET: PARTICIPA/Edit/5
-        public ActionResult Edit(string id = "2411", string searchBy = "", string searchFilter = "")
+        public ActionResult Edit(string id = "2411", string buscarPor = "", string filtroBusqueda = "")
         {
             //Se Arma los  string de query
-            string queryTeam = "SELECT Part.idProyectoFK AS 'ID Proyecto', Emp.nombre + ' ' + Emp.primerApellido + ' ' + Emp.segundoApellido AS 'employee', Emp.correo AS 'email', Part.rol AS 'role', Emp.disponibilidad FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK WHERE Part.idProyectoFK = " + id;
-            string queryEmployees = "Select Distinct emp.cedulaPK AS 'personalID', emp.Nombre + ' ' + emp.primerApellido + ' ' + emp.segundoApellido AS 'name' , hab.tipoPK AS 'habilityType' , hab.valorPK AS 'hability'From EMPLEADO emp Join HABILIDADES hab ON emp.cedulaPK = hab.cedulaEmpleadoFK WHERE hab.tipoPK LIKE '%" + searchBy + "%' AND hab.valorPK LIKE '%" + searchFilter + "%' AND Emp.rol != 'Lider' AND Emp.rol != 'Jefe' Order BY emp.cedulaPK";
+            ViewBag.id = id;
+            string queryEquipo = "SELECT Part.idProyectoFK AS 'IDProyecto', Emp.nombre + ' ' + Emp.primerApellido + ' ' + Emp.segundoApellido AS 'empleado', Emp.correo AS 'email', Part.rol AS 'rol', Emp.disponibilidad AS 'dispon', Emp.cedulaPK AS 'idEmp' FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK WHERE Part.idProyectoFK = " + id;
+            string queryEmpleado = "Select Distinct emp.cedulaPK AS 'personalID', emp.Nombre + ' ' + emp.primerApellido + ' ' + emp.segundoApellido AS 'nombre' , hab.tipoPK AS 'tipoHabilidad' , hab.valorPK AS 'habilidad' From EMPLEADO emp Join HABILIDADES hab ON emp.cedulaPK = hab.cedulaEmpleadoFK WHERE hab.tipoPK LIKE '%" + buscarPor + "%' AND hab.valorPK LIKE '%" + filtroBusqueda + "%' AND Emp.rol != 'Lider' AND Emp.rol != 'Jefe' AND Emp.Disponibilidad != 0 Order BY emp.cedulaPK";
             //Se hace el query a la base de datos
-            IList<TeamViewModel> teamQueryResult = (db.Database.SqlQuery<TeamViewModel>(queryTeam)).ToList();
-            IList<EmployeeHabilityModel> employeeQueryResult = (db.Database.SqlQuery<EmployeeHabilityModel>(queryEmployees)).ToList();
+            IList<EquipoModel> resultadoQueryEquipo = (db.Database.SqlQuery<EquipoModel>(queryEquipo)).ToList();
+            IList<HabilidadEmpleadoModel> resultadoQueryEmpleado = (db.Database.SqlQuery<HabilidadEmpleadoModel>(queryEmpleado)).ToList();
             /* foreach(var employee in employeeQueryResult)
              {
                 if(currentID.Equals(employee.personalID))
@@ -50,18 +61,8 @@ namespace ProyectoPI.Controllers
                  currentID = employee.personalID;
              }*/
             //Se pasa a viewData para llamar desde la vista
-            ViewData["team"] = teamQueryResult;
-            ViewData["employees"] = employeeQueryResult;
-            
-            if (ModelState.IsValid)
-            {
-                /* string cedulaEmpleadoEscogido = Request.Form["Tester"].ToString(); // Agarra el valor seleccionado en la lista
-                 // Guardar en la base de datos que el tester escogido para el proyecto
-                 // pasar el ID del proyecto y cedula del lider, junto con el rol de "Tester"
-                 this.agregar((teamQueryResult.First()).id, cedulaEmpleadoEscogido, "Tester");*/
-                //return RedirectToAction("Index");
-            }
-
+            ViewData["equipo"] = resultadoQueryEquipo;
+            ViewData["empleados"] = resultadoQueryEmpleado;           
             return View();
         }
 
@@ -87,42 +88,46 @@ namespace ProyectoPI.Controllers
                 ViewBag.idProyectoFK = new SelectList(db.PROYECTO, "idPK", "nombre", pARTICIPA.idProyectoFK);
                 return View(pARTICIPA);
             }
-
-            // GET: PARTICIPA/Delete/5
-            public ActionResult Delete(string id)
-            {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                PARTICIPA pARTICIPA = db.PARTICIPA.Find(id);
-                if (pARTICIPA == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(pARTICIPA);
-            }
-
-
-   
-            public void agregar(string idProyectoFK, string cedulaEmpleadoFK, string rol)
-            {
-                string query = "INSERT INTO PARTICIPA (cedulaEmpleadoFK,idProyectoFK,rol) VALUES (@cedulaEmpleadoFK,@idProyectoFK,@rol)";
-                db.Database.ExecuteSqlCommand(query,
-                    new SqlParameter("@cedulaEmpleadoFK", cedulaEmpleadoFK),
-                    new SqlParameter("@idProyectoFK", idProyectoFK),
-                    new SqlParameter("@rol", rol)
-                );
-            }
-
-        public void eliminar(string idProyectoFK, string cedulaEmpleadoFK, string rol)
+        //Agrega un tester recibiendo los datos para crear la relación con el proyecto
+        [HttpPost]
+        public ActionResult AgregarTester(string idProyecto, string idEmpleado)
         {
-            string query = "DELETE FROM PARTICIPA (cedulaEmpleadoFK,idProyectoFK,rol) VALUES (@cedulaEmpleadoFK,@idProyectoFK,@rol)";
+            EMPLEADO eMPLEADO = db.EMPLEADO.Find(idEmpleado);
+            eMPLEADO.disponibilidad = false;
+            db.Entry(eMPLEADO).State = EntityState.Modified;
+            db.SaveChanges();
+            agregar(idProyecto, idEmpleado, "Tester");
+            return RedirectToAction("Edit", new { id = idProyecto });
+        }
+        //Elimina un tester de la relación con el proyecto.
+        [HttpPost]
+        public ActionResult RemoverTester(string idProyecto, string idEmpleado)
+        {
+            EMPLEADO eMPLEADO = db.EMPLEADO.Find(idEmpleado);
+            eMPLEADO.disponibilidad = true;
+            db.Entry(eMPLEADO).State = EntityState.Modified;
+            db.SaveChanges();
+            Eliminar(idProyecto, idEmpleado);
+            return RedirectToAction("Edit", new { id = idProyecto });
+        }
+
+        //Agrega un empleado a un proyecto con un rol específico haciendo el query en la DB
+        public void agregar(string idProyectoFK, string cedulaEmpleadoFK, string rol)
+        {
+            string query = "INSERT INTO PARTICIPA (cedulaEmpleadoFK,idProyectoFK,rol) VALUES (@cedulaEmpleadoFK,@idProyectoFK,@rol)";
             db.Database.ExecuteSqlCommand(query,
                 new SqlParameter("@cedulaEmpleadoFK", cedulaEmpleadoFK),
                 new SqlParameter("@idProyectoFK", idProyectoFK),
                 new SqlParameter("@rol", rol)
             );
+        }
+
+        //Elimina un empleado de un proyecto haciendo el query en la DB
+        public void Eliminar(string idProyectoFK, string cedulaEmpleadoFK)
+        {
+            PARTICIPA pARTICIPA = db.PARTICIPA.Find(cedulaEmpleadoFK, idProyectoFK);
+            db.PARTICIPA.Remove(pARTICIPA);
+            db.SaveChanges();
         }
     }
 }
