@@ -20,21 +20,24 @@ namespace ProyectoPI.Models
         {
             this.PROYECTO = new HashSet<PROYECTO>();
         }
-
+        [RegularExpression("^[a-zA-Z]*$", ErrorMessage = "Solo se pueden digitar letras")]
         [MaxLength(20,ErrorMessage = "El máximo de caracteres es 20")]
         [Required(ErrorMessage="El campo Nombre es obligatorio")]
         [Display(Name = "Nombre")]
         public string nombre { get; set; }
 
+        [RegularExpression("^[a-zA-Z]*$", ErrorMessage = "Solo se pueden digitar letras")]
         [MaxLength(20, ErrorMessage = "El máximo de caracteres es 20")]
         [Required(ErrorMessage = "El campo Primer Apellido es obligatorio")]
         [Display(Name = "Primer Apellido")]
         public string primerApellido { get; set; }
 
+        [RegularExpression("^[a-zA-Z]*$", ErrorMessage = "Solo se pueden digitar letras")]
         [MaxLength(20, ErrorMessage = "El máximo de caracteres es 20")]
         [Display(Name = "Segundo Apellido")]
         public string segundoApellido { get; set; }
 
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Solo se pueden digitar numeros")]
         [MaxLength(20, ErrorMessage = "El máximo de caracteres es 20")]
         [Required(ErrorMessage = "El campo Cédula es obligatorio")]
         [Display(Name = "Cédula")]
