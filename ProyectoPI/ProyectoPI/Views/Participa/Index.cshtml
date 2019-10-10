@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<ProyectoPI.Models.EquipoModel>
 @{
     ViewBag.Title = "Lista de Equipos";
+    string rol = ViewBag.rol;
 
     <h2 class="titulosPag">Equipos</h2>
     <div class="row">
@@ -15,10 +16,14 @@
                             <h4 class="card-title">@miembro.proyNom</h4>
                             <p class="card-text"><small class="text-muted">@miembro.empleado @miembro.rol</small></p>
 
+                            @if (@rol.Equals("Lider", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                <p class="card-text">
+                                    @Html.ActionLink("Añadir o Remover integrantes", "Edit", new { id = @miembro.IDProyecto }, new { @class = "botonGeneral colorCeleste" })
+                                </p>
 
-                            <p class="card-text">
-                                @Html.ActionLink("Añadir o Remover integrantes", "Edit", new { id = @miembro.IDProyecto }, new { @class = "botonGeneral colorCeleste" })
-                            </p>
+                            }
+
                         </div>
                     </div>
                 </div>
