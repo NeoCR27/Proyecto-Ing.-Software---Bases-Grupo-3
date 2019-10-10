@@ -58,10 +58,10 @@
 
     <p><br /></p>
     <div class="ubicActual">
-        
+
         @Html.LabelFor(model => model.fechaNacimiento, new { htmlAttributes = new { @class = "control-label col-md-2" } })
         @Html.DisplayFor(model => model.fechaNacimiento, new { htmlAttributes = new { @class = "col-md-10" } })
-       
+
     </div>
     <p><br /></p>
 
@@ -195,7 +195,26 @@
                 string URL = Request.Url.ToString();
             }
             <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
-            <input type="submit" value="Guardar" class="botonGeneral colorVerde" />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="botonGeneral colorVerde" data-toggle="modal" data-target="#guardar">
+                Guardar
+            </button>
+        </div>
+    </div>
+    <div class="modal fade" id="guardar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><strong>¿Está seguro que desea guardar los cambios realizados?</strong></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                </div>
+            </div>
         </div>
     </div>
 </div>

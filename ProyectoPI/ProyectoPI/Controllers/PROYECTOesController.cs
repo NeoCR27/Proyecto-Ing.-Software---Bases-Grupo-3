@@ -207,7 +207,9 @@ namespace ProyectoPI.Controllers
                 db.SaveChanges();
 
                 string cedulaLiderEscogido = Request.Form["Lideres"].ToString(); // Agarra el valor seleccionado en el dropdown de la vista con los lideres disponibles
+                participaController.Eliminar(pROYECTO.idPK, cedulaLiderEscogido);
                 participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider");
+                
                 return RedirectToAction("Index");
             }
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK", pROYECTO.cedulaClienteFK);

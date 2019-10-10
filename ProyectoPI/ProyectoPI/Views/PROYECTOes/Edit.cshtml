@@ -121,10 +121,13 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 @{
-                string URL = Request.Url.ToString();
+                    string URL = Request.Url.ToString();
                 }
                 <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
-                <input type="submit" value="Guardar" class="botonGeneral colorVerde" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="botonGeneral colorVerde" data-toggle="modal" data-target="#guardar">
+                    Guardar
+                </button>
 
             </div>
         </div>
