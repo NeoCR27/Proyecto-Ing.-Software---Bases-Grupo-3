@@ -1,78 +1,88 @@
 ﻿@model Tuple<ProyectoPI.Models.HabilidadEmpleadoModel, ProyectoPI.Models.EquipoModel>
 
 @{
-    ViewBag.Title = "Editar Equipos";
+    ViewBag.Title = "Editar Equipo:";
 }
 
-<h2 class="titulosPag">Editar Equipos</h2>
 
-@{ 
+@{
     string id = ViewBag.id;
+    string rol = ViewBag.rol;
+    bool soyTester = rol.Equals("Tester", StringComparison.InvariantCultureIgnoreCase);
+    bool soyCliente = rol.Equals("Cliente", StringComparison.InvariantCultureIgnoreCase);
+    bool soyLider = rol.Equals("Lider", StringComparison.InvariantCultureIgnoreCase);
 }
 
-<h2>Empleados Disponibles</h2>
 
-<p>
-    @using (Html.BeginForm("Edit", "PARTICIPA", FormMethod.Get))
-    {
-
-        <b> Buscar Por Habilidades:</b>
-        @Html.RadioButton("buscarPor", "Tecnica") <text>Tecnicas</text>
-        @Html.RadioButton("buscarPor", "Blanda") <text>Blandas</text>
-        <br />
-        @Html.TextBox("filtroBusqueda")<input type="submit" value="Search" />
-    }
-</p>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nombre Del Empleado</th>
-            <th>Tipo de Habilidad</th>
-            <th>Habilidad</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @if ((ViewData["empleados"] as IList<ProyectoPI.Models.HabilidadEmpleadoModel>).Count() == 0)
+@if (!soyTester && !soyCliente)
+{
+    <h2 class="titulosPag">Editar Equipo: @ViewBag.nomProyecto</h2>
+    <h2>Empleados Disponibles</h2>
+    <p>
+        @using (Html.BeginForm("Edit", "PARTICIPA", FormMethod.Get))
         {
-            <tr>
-                <td colspan="4" style="color:red">
-                    No se han encontrado empleados con el criterio ingresado
-                </td>
-            </tr>
+            <b> Buscar Por Habilidades:</b>
+            @Html.RadioButton("buscarPor", "Tecnica") <text>Tecnicas</text>
+            @Html.RadioButton("buscarPor", "Blanda") <text>Blandas</text>
+            <br />
+            @Html.TextBox("filtroBusqueda")<input type="submit" value="Search" />
         }
-        else
-        {
-            foreach (var empleado in ViewData["empleados"] as IList<ProyectoPI.Models.HabilidadEmpleadoModel>)
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre Del Empleado</th>
+                <th>Tipo de Habilidad</th>
+                <th>Habilidad</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if ((ViewData["empleados"] as IList<ProyectoPI.Models.HabilidadEmpleadoModel>).Count() == 0)
             {
                 <tr>
-                    <td> @empleado.nombre</td>
-                    <td> @empleado.tipoHabilidad</td>
-                    <td> @empleado.habilidad </td>
-                    <td>
-                        @using (Html.BeginForm("AgregarTester", "PARTICIPA"))
-                        {
-                            @Html.Hidden("idProyecto", @id)
-                            @Html.Hidden("idEmpleado", empleado.personalID)
-                            <input class = "botonGeneral colorVerde" type="submit" value="Agregar" />
-                        }
-
+                    <td colspan="4" style="color:red">
+                        No se han encontrado empleados con el criterio ingresado
                     </td>
-
                 </tr>
-
             }
+            else
+            {
+                foreach (var empleado in ViewData["empleados"] as IList<ProyectoPI.Models.HabilidadEmpleadoModel>)
+                {
+                    <tr>
+                        <td> @empleado.nombre</td>
+                        <td> @empleado.tipoHabilidad</td>
+                        <td> @empleado.habilidad </td>
+                        <td>
+                            @using (Html.BeginForm("AgregarTester", "PARTICIPA"))
+                            {
+                                @Html.Hidden("idProyecto", @id)
+                                @Html.Hidden("idEmpleado", empleado.personalID)
+                                <input class="botonGeneral colorVerde" type="submit" value="Agregar" />
+                            }
 
-        }
+                        </td>
 
-    </tbody>
-</table>
+                    </tr>
+
+                }
+            }
+        </tbody>
+    </table>
+    <h2>Equipo Actual</h2>
+}
+else
+{
+    <h2 class="titulosPag">@ViewBag.nomProyecto </h2>
+    <h2>Equipo Actual</h2>
+}
 
 
 
 
-<h2>Equipo Actual</h2>
+
 <table class="table">
     <thead>
         <tr>
@@ -84,29 +94,36 @@
     </thead>
     @foreach (var integrante in ViewData["equipo"] as IList<ProyectoPI.Models.EquipoModel>)
     {
-<tr>
-    <td>@integrante.empleado</td>
-    <td>@integrante.email</td>
-    <td>@integrante.rol</td>
-    
-    <td>
-        @using (Html.BeginForm("RemoverTester", "PARTICIPA"))
-        {
-            @Html.Hidden("idProyecto", @id)
-            @Html.Hidden("idEmpleado", integrante.idEmp)
-            <input class = "botonGeneral colorRojo" type="submit" value="Remover" />
-        }
-    </td>
-</tr>
+        <tr>
+            <td>@integrante.empleado</td>
+            <td>@integrante.email</td>
+            <td>@integrante.rol</td>
+            @if (!soyTester && !soyCliente)
+            {
+                if (!rol.Equals(@integrante.rol, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    <td>
+                        @using (Html.BeginForm("RemoverTester", "PARTICIPA"))
+                        {
+                            @Html.Hidden("idProyecto", @id)
+                            @Html.Hidden("idEmpleado", integrante.idEmp)
+                            <input class="botonGeneral colorRojo" type="submit" value="Remover" />
+                        }
+                    </td>
+                }
+
+            }
+
+        </tr>
     }
 </table>
 
 <br />
 <br />
 <div>
- @Html.ActionLink("Volver a Lista de Equipos ", "Index", null, new { @class = "botonGeneral colorGris" })
+    @Html.ActionLink("Volver a Lista de Equipos ", "Index", null, new { @class = "botonGeneral colorGris" })
 </div>
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 

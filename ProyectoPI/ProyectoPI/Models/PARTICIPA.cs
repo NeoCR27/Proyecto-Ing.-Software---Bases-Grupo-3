@@ -33,7 +33,8 @@ namespace ProyectoPI.Models
         public string proyNom { get; set; }
         public bool dispon { get; set; }
         public string idEmp { get; set; }
-       
+        public string idCli { get; set; }
+
     }
     //Clase para query de empleados por habilidad
     public class HabilidadEmpleadoModel

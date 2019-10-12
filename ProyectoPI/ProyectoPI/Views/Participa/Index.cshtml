@@ -2,42 +2,134 @@
 @{
     ViewBag.Title = "Lista de Equipos";
     string rol = ViewBag.rol;
+    bool equipos = ViewBag.equipos;
+    bool soyTester = rol.Equals("Tester", StringComparison.InvariantCultureIgnoreCase);
+    bool soyCliente = rol.Equals("Cliente", StringComparison.InvariantCultureIgnoreCase);
+    bool soyLider = rol.Equals("Lider", StringComparison.InvariantCultureIgnoreCase);
+    bool soyJefe = rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase);
 
     <h2 class="titulosPag">Equipos</h2>
-    <div class="row">
-        @foreach (var miembro in Model)
-        {
-            if (miembro.rol == "Lider")
+        <div class="row">
+            @if (soyTester)
             {
-                <div class="col-sm-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <img src="../Img/equip.jpg" class="card-img-top" alt="...">
-                            <h4 class="card-title">@miembro.proyNom</h4>
-                            <p class="card-text"><small class="text-muted">@miembro.empleado @miembro.rol</small></p>
-
-                            @if ((@rol.Equals("Lider", StringComparison.InvariantCultureIgnoreCase)) || @rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
-                            {
-                                <p class="card-text">
-                                    @Html.ActionLink("Añadir o Remover integrantes", "Edit", new { id = @miembro.IDProyecto }, new { @class = "botonGeneral colorCeleste" })
-                                </p>
-
-                            }
-
-                        </div>
-                    </div>
-                </div>
+                if (equipos == true)
+                {
+                    foreach (var miembro in Model)
+                    {
+                        if (miembro.idEmp.Equals((ViewBag.miID as String), StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            <div class="col-sm-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <img src="../Img/equip.jpg" class="card-img-top" alt="...">
+                                        <h4 class="card-title">@miembro.proyNom</h4>
+                                        <p class="card-text"><small class="text-muted">@miembro.empleado como @miembro.rol</small></p>
+                                        <p class="card-text">
+                                            @Html.ActionLink("Ver Detalles del Equipo", "Edit", new { id = @miembro.IDProyecto }, new { @class = "botonGeneral colorCeleste" })
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+                else
+                {
+                    <h1> No ha participado en ningún proyecto </h1>
+                }
             }
+            else
+            {
+                if (soyLider)
+                {
+                    if (equipos == true)
+                    {
+                        foreach (var miembro in Model)
+                        {
 
+                            if (miembro.idEmp.Equals((ViewBag.miID as String), StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                <div class="col-sm-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <img src="../Img/equip.jpg" class="card-img-top" alt="...">
+                                            <h4 class="card-title">@miembro.proyNom</h4>
+                                            <p class="card-text"><small class="text-muted">@miembro.empleado como @miembro.rol</small></p>
+                                            <p class="card-text">
+                                                @Html.ActionLink("Añadir o Remover integrantes", "Edit", new { id = @miembro.IDProyecto }, new { @class = "botonGeneral colorCeleste" })
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <h1> No ha participado en ningún proyecto </h1>
+                    }
+                }
+                else
+                {
+                    if (soyJefe)
+                    {
+                        foreach (var miembro in Model)
+                        {
+                            if (miembro.rol == "Lider")
+                            {
+                                <div class="col-sm-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <img src="../Img/equip.jpg" class="card-img-top" alt="...">
+                                            <h4 class="card-title">@miembro.proyNom</h4>
+                                            <p class="card-text"><small class="text-muted">@miembro.empleado @miembro.rol</small></p>
+                                            <p class="card-text">
+                                                @Html.ActionLink("Añadir o Remover integrantes", "Edit", new { id = @miembro.IDProyecto }, new { @class = "botonGeneral colorCeleste" })
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (soyCliente)
+                        {
+                            if (equipos == true)
+                            {
+                                foreach (var miembro in Model)
+                                {
+                                    if (miembro.idCli.Equals((ViewBag.miID as String), StringComparison.InvariantCultureIgnoreCase))
+                                    {
+                                        if (miembro.rol == "Lider")
+                                        {
+                                            <div class="col-sm-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <img src="../Img/equip.jpg" class="card-img-top" alt="...">
+                                                        <h4 class="card-title">@miembro.proyNom</h4>
+                                                        <p class="card-text"><small class="text-muted">@miembro.empleado como @miembro.rol</small></p>
+                                                        <p class="card-text">
+                                                            @Html.ActionLink("Ver Detalles del Equipo", "Edit", new { id = @miembro.IDProyecto }, new { @class = "botonGeneral colorCeleste" })
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <h1> No ha contratado ninguna  revisión de proyecto </h1>
+                            }
+                        }
+                    }
+                }
+            }
+        </div>
         }
-    </div>
-
-        
-        
-
-
-
-}
 
 
 
