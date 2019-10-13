@@ -7,7 +7,6 @@
 @{
     string rol = ViewBag.rol;
 }
-<h3>Rol: @rol</h3>
 
 <h2 class="titulosPag">Modificar Proyecto</h2>
 
@@ -96,14 +95,16 @@
         </div>
     </div>
 
-    <input type="hidden" id="idPK" name="idPK" value="default">
-
-
     @{
-        List<SelectListItem>
-            lideres = ViewBag.lideres; // Para agarrar la lista que se le dió en el Controlador
+        List<SelectListItem> lideres = ViewBag.lideres; // Para agarrar la lista que se le dió en el Controlador
         string liderActual = ViewBag.liderActual;
+        string cedulaLiderActual = ViewBag.cedulaLiderActual;
+        string idProyecto = ViewBag.idPK;
     }
+
+
+    <input type="hidden" id="idPK" name="idPK" value=@idProyecto>
+    <input type="hidden" id="cedulaLiderActual" name="cedulaLiderActual" value=@cedulaLiderActual>
 
     <div class="form-group">
         @Html.Label("Lider actual", htmlAttributes: new { @class = "control-label col-md-2" })

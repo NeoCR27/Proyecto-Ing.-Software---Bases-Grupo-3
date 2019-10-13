@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <img src="../Img/proy.jpg" class="card-img-top" alt="...">
                         <h4 class="card-title">@Html.DisplayFor(modelItem => item.nombre) </h4>
-                        <p class="card-text"><small class="text-muted">Cliente: @Html.DisplayFor(modelItem => item.CLIENTE.nombre)</small></p>
+                        <p class="card-text"><small class="text-muted">Cliente: @Html.DisplayFor(modelItem => item.CLIENTE.nombre)</small>
                         <p class="card-text"><small class="text-muted">Objetivo: @Html.DisplayFor(modelItem => item.objetivo)</small></p>
 
                         @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))

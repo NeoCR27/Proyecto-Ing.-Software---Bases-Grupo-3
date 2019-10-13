@@ -126,15 +126,14 @@ namespace ProyectoPI.Controllers
         //Agrega un empleado a un proyecto con un rol específico haciendo el query en la DB
         public void agregar(string idProyectoFK, string cedulaEmpleadoFK, string rol)
         {
-            string query = "INSERT INTO PARTICIPA (cedulaEmpleadoFK,idProyectoFK,rol) VALUES (@cedulaEmpleadoFK,@idProyectoFK,@rol)";
-            db.Database.ExecuteSqlCommand(query,
-                new SqlParameter("@cedulaEmpleadoFK", cedulaEmpleadoFK),
-                new SqlParameter("@idProyectoFK", idProyectoFK),
-                new SqlParameter("@rol", rol)
-            );
+            PARTICIPA participa = db.PARTICIPA.Create();
+            participa.cedulaEmpleadoFK = cedulaEmpleadoFK;
+            participa.idProyectoFK = idProyectoFK;
+            participa.rol = rol;
+            db.PARTICIPA.Add(participa);
         }
 
-        //Elimina un empleado de un proyecto haciendo el query en la DB
+        // Elimina un empleado de un proyecto
         public void Eliminar(string idProyectoFK, string cedulaEmpleadoFK)
         {
             PARTICIPA pARTICIPA = db.PARTICIPA.Find(cedulaEmpleadoFK, idProyectoFK);

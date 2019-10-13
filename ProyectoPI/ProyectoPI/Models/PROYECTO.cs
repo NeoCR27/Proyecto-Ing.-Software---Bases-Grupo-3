@@ -63,6 +63,8 @@ namespace ProyectoPI.Models
 
         public virtual EMPLEADO EMPLEADO { get; set; }
 
+        public string nombreCompletoCliente { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PARTICIPA> PARTICIPA { get; set; }
 

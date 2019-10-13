@@ -49,29 +49,32 @@ namespace ProyectoPI.Controllers
                                             }).ToList();
                 if (cedulaUsuarioLogeado.Count != 0) // Esta en la tabla PARTICIPA, por lo tanto ha sido parte de algun equipo
                 {
-                    string cedulaResultado = cedulaUsuarioLogeado.First().ToString();
-                    cedulaResultado = cedulaResultado.Replace("{", "");
-                    cedulaResultado = cedulaResultado.Replace("}", "");
-                    cedulaResultado = cedulaResultado.Replace("cedulaPK", "");
-                    cedulaResultado = cedulaResultado.Replace(" ", "");
-                    cedulaResultado = cedulaResultado.Replace("=", "");
+                    string cedulaResultado = cedulaUsuarioLogeado.First().ToString(); // Tiene la fomra "{ cedulaPK = cedula }"
+                    cedulaResultado = cedulaResultado.Replace("{", ""); // " cedulaPK = cedula }"
+                    cedulaResultado = cedulaResultado.Replace("}", ""); // " cedulaPK = cedula "
+                    cedulaResultado = cedulaResultado.Replace("cedulaPK", ""); // "  = cedula }"
+                    cedulaResultado = cedulaResultado.Replace(" ", ""); // "=cedula}"
+                    cedulaResultado = cedulaResultado.Replace("=", ""); // "cedula"
+
                     string queryProyecto = "Select * from PROYECTO proy join PARTICIPA participa  on proy.idPK = participa.idProyectoFK join EMPLEADO empleado on participa.cedulaEmpleadoFK = empleado.cedulaPK join CLIENTE cliente   on proy.cedulaClienteFK = cliente.cedulaPK where participa.cedulaEmpleadoFK = " + cedulaResultado;
                     var proyecto = db.Database.SqlQuery<PROYECTO>(queryProyecto).ToList();
-                    string queryCliente = "Select cliente.nombre from PROYECTO proy join PARTICIPA participa  on proy.idPK = participa.idProyectoFK join EMPLEADO empleado on participa.cedulaEmpleadoFK = empleado.cedulaPK join CLIENTE cliente   on proy.cedulaClienteFK = cliente.cedulaPK where participa.cedulaEmpleadoFK = 111111110";
+                    string queryCliente = "Select cliente.nombre from PROYECTO proy join PARTICIPA participa  on proy.idPK = participa.idProyectoFK join EMPLEADO empleado on participa.cedulaEmpleadoFK = empleado.cedulaPK join CLIENTE cliente   on proy.cedulaClienteFK = cliente.cedulaPK where participa.cedulaEmpleadoFK = " + cedulaResultado;
                     var cliente = db.Database.SqlQuery<string>(queryCliente).ToList();
                     string nombreCliente = cliente.First().ToString();
-                    List<PROYECTO> model = new List<PROYECTO>();
+                    string queryClienteApellido = "Select cliente.primerApellido from PROYECTO proy join PARTICIPA participa  on proy.idPK = participa.idProyectoFK join EMPLEADO empleado on participa.cedulaEmpleadoFK = empleado.cedulaPK join CLIENTE cliente   on proy.cedulaClienteFK = cliente.cedulaPK where participa.cedulaEmpleadoFK = " + cedulaResultado;
+                    var clienteApellido = db.Database.SqlQuery<string>(queryCliente).ToList();
+                    string apellidoCliente = clienteApellido.First().ToString();
+                    string nombreCompletoCliente = nombreCliente + " " + apellidoCliente;
+                    List <PROYECTO> model = new List<PROYECTO>();
                    foreach (var item in proyecto) 
                     {
-                        
-                        model.Add(new PROYECTO()
-                        {
-                            idPK = item.idPK,
-                            nombre = item.nombre,
-                            objetivo = item.objetivo,
-                            CLIENTE = db.CLIENTE.Create(),
-                           // CLIENTE.nombre = cedulaResultado
-                        });
+                        PROYECTO proy = new PROYECTO();
+                        proy.idPK = item.idPK;
+                        proy.nombre = item.nombre;
+                        proy.objetivo = item.objetivo;
+                        proy.CLIENTE = new CLIENTE();
+                        proy.CLIENTE.nombre = nombreCompletoCliente;
+                        model.Add(proy);
                     }
 
                     ViewBag.proyectos = true;
@@ -108,9 +111,9 @@ namespace ProyectoPI.Controllers
                                      {
                                          nombre = empleado.nombre + " " + empleado.primerApellido
                                      }).ToList();
-            string lideractual = nombreLiderActual.First().ToString();
-            lideractual = lideractual.Substring(10);
-            lideractual = lideractual.Substring(0, lideractual.Length - 2);
+            string lideractual = nombreLiderActual.First().ToString(); // Queda con la forma "{ nombre = nombre apellido }"
+            lideractual = lideractual.Substring(10); // Queda con la forma "nombre apellido }"
+            lideractual = lideractual.Substring(0, lideractual.Length - 2); // Queda con la forma "nombre apellido"
             ViewBag.liderActual = lideractual;
             return View(pROYECTO);
         }
@@ -118,15 +121,13 @@ namespace ProyectoPI.Controllers
         // GET: PROYECTOes/Create
         public async Task<ActionResult> Create()
         {
-
-            ViewBag.idPK = "0"; // Valor por default de PK, luego se cambia por autogenerado
             string user = User.Identity.Name;
             string rol = await this.seguridadController.GetRol(user);
             ViewBag.rol = rol;
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "nombre");
-            List<SelectListItem> lideres = this.empleadoController.getLideresDisponibles(); // Retorna los lideres disponibles
+            List<SelectListItem> lideres = this.empleadoController.GetLideresDisponibles(); // Retorna los lideres disponibles
             ViewBag.lideres = lideres;
-            List<SelectListItem> clientes = this.clienteController.getClientes(); // Retorna los clientes
+            List<SelectListItem> clientes = this.clienteController.GetClientes(); // Retorna los clientes
             ViewBag.clientes = clientes;
             return View();
         }
@@ -141,16 +142,20 @@ namespace ProyectoPI.Controllers
 
             if (ModelState.IsValid)
             {
-                pROYECTO.idPK = this.getIdAsignar(); // Asigna el id automaticamente al proyecto
+                pROYECTO.idPK = this.GetIdAsignar(); // Asigna el id automaticamente al proyecto
                 db.PROYECTO.Add(pROYECTO);
+
                 db.SaveChanges();
 
                 string cedulaLiderEscogido = Request.Form["Lideres"].ToString(); // Agarra el valor seleccionado en el dropdown de la vista con los lideres disponibles
 
                 participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider"); // Agrego a PARTICIPA el lider escogido
 
-                List<EMPLEADO> empleado = (db.EMPLEADO.Where(e => e.cedulaPK == cedulaLiderEscogido)).ToList();
-                empleado.First().disponibilidad = false; // Cambiar la disponibilidad del lider escogido
+                EMPLEADO lider = db.EMPLEADO.Find(cedulaLiderEscogido);
+                lider.disponibilidad = false; // Cambiar la disponibilidad del lider escogido
+
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(pROYECTO);
@@ -159,25 +164,6 @@ namespace ProyectoPI.Controllers
         // GET: PROYECTOes/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
-            string user = User.Identity.Name;
-            string rol = await this.seguridadController.GetRol(user);
-            ViewBag.rol = rol;
-            // Sacar empleado con rol Lider de participa en el id del proyecto
-            var nombreLiderActual = (from proy in db.PROYECTO
-                                     join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
-                                     join empleado in db.EMPLEADO on participa.cedulaEmpleadoFK equals empleado.cedulaPK
-                                     where participa.rol == "Lider"
-                                     select new
-                                     {
-                                         nombre = empleado.nombre + " " + empleado.primerApellido
-                                     }).ToList();
-            string lideractual = nombreLiderActual.First().ToString();
-            lideractual = lideractual.Substring(10);
-            lideractual = lideractual.Substring(0, lideractual.Length - 2);
-            ViewBag.liderActual = lideractual;
-            
-            List<SelectListItem> lideres = this.empleadoController.getLideresDisponibles();
-            ViewBag.lideres = lideres;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -187,7 +173,37 @@ namespace ProyectoPI.Controllers
             {
                 return HttpNotFound();
             }
+
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK", pROYECTO.cedulaClienteFK);
+            string user = User.Identity.Name;
+            string rol = await this.seguridadController.GetRol(user);
+            ViewBag.rol = rol;
+            ViewBag.idPK = pROYECTO.idPK;
+            // Sacar empleado con rol Lider de participa en el id del proyecto
+            var informacionLider = (from proy in db.PROYECTO
+                                     join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
+                                     join empleado in db.EMPLEADO on participa.cedulaEmpleadoFK equals empleado.cedulaPK
+                                     where participa.rol == "Lider" && proy.idPK == id
+                                     select new
+                                     {
+                                         nombre = empleado.nombre + " " + empleado.primerApellido,
+                                         cedula = empleado.cedulaPK
+                                     }).ToList();
+
+            string lideractual = informacionLider.First().ToString();
+            string[] nombreYCedulaLiderActual = lideractual.Split(',');
+            string nombreLiderActual = nombreYCedulaLiderActual[0]; // "{ nombre = nombre apellido"
+            nombreLiderActual = nombreLiderActual.Substring(10); // "nombre apellido"
+            string cedulaLiderActual = nombreYCedulaLiderActual[1]; // "cedulaPK = cedula }"
+            cedulaLiderActual = cedulaLiderActual.Substring(10); // "cedula }"
+            cedulaLiderActual = cedulaLiderActual.Replace("}", ""); // "cedula "
+            cedulaLiderActual = cedulaLiderActual.Replace(" ", ""); // "cedula"
+
+            ViewBag.liderACtual = nombreLiderActual;
+            ViewBag.cedulaLiderActual = cedulaLiderActual;
+            List<SelectListItem> lideres = this.empleadoController.GetLideresDisponibles();
+            ViewBag.lideres = lideres;
+            
             return View(pROYECTO);
         }
 
@@ -196,18 +212,25 @@ namespace ProyectoPI.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(string idkPK, [Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
+        public ActionResult Edit(string cedulaLiderActual, [Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
         {
             if (ModelState.IsValid)
             {
+                string cedulaLiderEscogido = Request.Form["Lideres"].ToString(); // Agarra el valor seleccionado en el dropdown de la vista con los lideres disponibles
+                if (cedulaLiderActual.Equals(cedulaLiderEscogido) == false) // Se cambio al lider
+                {
+                    participaController.Eliminar(pROYECTO.idPK, cedulaLiderEscogido); // Elimina que participa en ese proyecto
+                    participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider"); // Agrega al nuevo lider a la relacion participa
+                    EMPLEADO antiguoLider = db.EMPLEADO.Find(cedulaLiderActual); // Cambio de la disponibilidad del lider antiguo
+                    antiguoLider.disponibilidad = true;
+                    EMPLEADO nuevoLider = db.EMPLEADO.Find(cedulaLiderEscogido);
+                    nuevoLider.disponibilidad = false;
+                }
+
                 db.Entry(pROYECTO).State = EntityState.Modified;
                 db.SaveChanges();
 
-                string cedulaLiderEscogido = Request.Form["Lideres"].ToString(); // Agarra el valor seleccionado en el dropdown de la vista con los lideres disponibles
-                //if()
-                participaController.Eliminar(pROYECTO.idPK, cedulaLiderEscogido);
-                participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider");
-                
+
                 return RedirectToAction("Index");
             }
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "", "cedulaPK", pROYECTO.cedulaClienteFK);
@@ -220,6 +243,7 @@ namespace ProyectoPI.Controllers
             string user = User.Identity.Name;
             string rol = await this.seguridadController.GetRol(user);
             ViewBag.rol = rol;
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -229,16 +253,37 @@ namespace ProyectoPI.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.idPK = pROYECTO.idPK;
+            var informacionLider = (from proy in db.PROYECTO
+                                    join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
+                                    join empleado in db.EMPLEADO on participa.cedulaEmpleadoFK equals empleado.cedulaPK
+                                    where participa.rol == "Lider" && proy.idPK == id
+                                    select new
+                                    {
+                                        cedula = empleado.cedulaPK
+                                    }).ToList();
+
+            string cedulaLiderActual = informacionLider.First().ToString();  // "{ cedula = cedula }"
+            cedulaLiderActual = cedulaLiderActual.Replace("{", ""); // " cedula = cedula }
+            cedulaLiderActual = cedulaLiderActual.Replace("}", ""); // " cedula = cedula "
+            cedulaLiderActual = cedulaLiderActual.Replace(" ", ""); // "cedula=cedula"
+            cedulaLiderActual = cedulaLiderActual.Replace("cedula=", "");
+
+            ViewBag.cedulaLiderActual = cedulaLiderActual;
+
             return View(pROYECTO);
         }
 
         // POST: PROYECTOes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string cedulaLiderActual, string id)
         {
             PROYECTO pROYECTO = db.PROYECTO.Find(id);
             db.PROYECTO.Remove(pROYECTO);
+            PARTICIPA participa = db.PARTICIPA.Find(cedulaLiderActual, id);
+            db.PARTICIPA.Remove(participa);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -252,7 +297,7 @@ namespace ProyectoPI.Controllers
             base.Dispose(disposing);
         }
 
-        public string getIdAsignar() // Metodo que retorna el mayor idPK que se encuentra en la base de datos en las instancias de PROYECTOS,
+        public string GetIdAsignar() // Metodo que retorna el mayor idPK que se encuentra en la base de datos en las instancias de PROYECTOS,
                                      // esto para comenzar a asignar este id automaticamente
         {
             List<PROYECTO> ids = db.PROYECTO.Where(p => p.idPK != null).ToList();

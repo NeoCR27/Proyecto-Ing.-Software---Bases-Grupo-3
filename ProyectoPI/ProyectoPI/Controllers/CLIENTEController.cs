@@ -162,7 +162,7 @@ namespace ProyectoPI.Controllers
             base.Dispose(disposing);
         }
 
-        public List<SelectListItem> getClientes()
+        public List<SelectListItem> GetClientes()
         { // Retorna los nombres y cédulas de los clientes
             List<CLIENTE> clientes = (db.CLIENTE.ToList());
 
