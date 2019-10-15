@@ -1048,3 +1048,4 @@ C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software-
 C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csproj.CopyComplete
 C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.dll
 C:\Users\Esteban\Desktop\UCR\II-2019\Proyecto Integrador\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.pdb
+C:\Users\b73404\Desktop\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csproj.CoreCompileInputs.cache

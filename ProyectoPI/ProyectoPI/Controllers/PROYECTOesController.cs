@@ -149,7 +149,7 @@ namespace ProyectoPI.Controllers
 
                 string cedulaLiderEscogido = Request.Form["Lideres"].ToString(); // Agarra el valor seleccionado en el dropdown de la vista con los lideres disponibles
 
-                participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider"); // Agrego a PARTICIPA el lider escogido
+                participaController.Agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider"); // Agrego a PARTICIPA el lider escogido
 
                 EMPLEADO lider = db.EMPLEADO.Find(cedulaLiderEscogido);
                 lider.disponibilidad = false; // Cambiar la disponibilidad del lider escogido
@@ -180,7 +180,7 @@ namespace ProyectoPI.Controllers
             ViewBag.rol = rol;
             ViewBag.idPK = pROYECTO.idPK;
             // Sacar empleado con rol Lider de participa en el id del proyecto
-            var informacionLider = (from proy in db.PROYECTO
+            var cedulaYnombreLiderActual = (from proy in db.PROYECTO
                                      join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
                                      join empleado in db.EMPLEADO on participa.cedulaEmpleadoFK equals empleado.cedulaPK
                                      where participa.rol == "Lider" && proy.idPK == id
@@ -190,17 +190,17 @@ namespace ProyectoPI.Controllers
                                          cedula = empleado.cedulaPK
                                      }).ToList();
 
-            string lideractual = informacionLider.First().ToString();
-            string[] nombreYCedulaLiderActual = lideractual.Split(',');
-            string nombreLiderActual = nombreYCedulaLiderActual[0]; // "{ nombre = nombre apellido"
-            nombreLiderActual = nombreLiderActual.Substring(10); // "nombre apellido"
-            string cedulaLiderActual = nombreYCedulaLiderActual[1]; // "cedulaPK = cedula }"
-            cedulaLiderActual = cedulaLiderActual.Substring(10); // "cedula }"
-            cedulaLiderActual = cedulaLiderActual.Replace("}", ""); // "cedula "
-            cedulaLiderActual = cedulaLiderActual.Replace(" ", ""); // "cedula"
+            string informacionLider = cedulaYnombreLiderActual.First().ToString();
+            string[] nombreYCedula = informacionLider.Split(',');
+            string nombre = nombreYCedula[0]; // "{ nombre = nombre apellido"
+            nombre = nombre.Substring(10); // "nombre apellido"
+            string cedula = nombreYCedula[1]; // "cedula = cedula }"
+            cedula = cedula.Replace(" ", ""); // "cedula=cedula}"
+            cedula = cedula.Replace("}", ""); // "cedula=cedula"
+            cedula = cedula.Replace("cedula=", ""); // "cedula"
 
-            ViewBag.liderACtual = nombreLiderActual;
-            ViewBag.cedulaLiderActual = cedulaLiderActual;
+            ViewBag.liderActual = nombre;
+            ViewBag.cedulaLiderActual = cedula;
             List<SelectListItem> lideres = this.empleadoController.GetLideresDisponibles();
             ViewBag.lideres = lideres;
             
@@ -217,19 +217,17 @@ namespace ProyectoPI.Controllers
             if (ModelState.IsValid)
             {
                 string cedulaLiderEscogido = Request.Form["Lideres"].ToString(); // Agarra el valor seleccionado en el dropdown de la vista con los lideres disponibles
-                if (cedulaLiderActual.Equals(cedulaLiderEscogido) == false) // Se cambio al lider
+                if (cedulaLiderEscogido.Equals("") == false) // SI se cambio al lider
                 {
-                    participaController.Eliminar(pROYECTO.idPK, cedulaLiderEscogido); // Elimina que participa en ese proyecto
-                    participaController.agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider"); // Agrega al nuevo lider a la relacion participa
+                    participaController.Eliminar(pROYECTO.idPK, cedulaLiderActual); // Elimina que participa en ese proyecto
+                    participaController.Agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider"); // Agrega al nuevo lider a la relacion participa
                     EMPLEADO antiguoLider = db.EMPLEADO.Find(cedulaLiderActual); // Cambio de la disponibilidad del lider antiguo
                     antiguoLider.disponibilidad = true;
                     EMPLEADO nuevoLider = db.EMPLEADO.Find(cedulaLiderEscogido);
                     nuevoLider.disponibilidad = false;
+                    db.Entry(pROYECTO).State = EntityState.Modified;
+                    db.SaveChanges();
                 }
-
-                db.Entry(pROYECTO).State = EntityState.Modified;
-                db.SaveChanges();
-
 
                 return RedirectToAction("Index");
             }
@@ -258,17 +256,16 @@ namespace ProyectoPI.Controllers
             var informacionLider = (from proy in db.PROYECTO
                                     join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
                                     join empleado in db.EMPLEADO on participa.cedulaEmpleadoFK equals empleado.cedulaPK
-                                    where participa.rol == "Lider" && proy.idPK == id
+                                    where participa.rol == "Lider" && proy.idPK == pROYECTO.idPK
                                     select new
                                     {
                                         cedula = empleado.cedulaPK
                                     }).ToList();
 
-            string cedulaLiderActual = informacionLider.First().ToString();  // "{ cedula = cedula }"
-            cedulaLiderActual = cedulaLiderActual.Replace("{", ""); // " cedula = cedula }
-            cedulaLiderActual = cedulaLiderActual.Replace("}", ""); // " cedula = cedula "
-            cedulaLiderActual = cedulaLiderActual.Replace(" ", ""); // "cedula=cedula"
-            cedulaLiderActual = cedulaLiderActual.Replace("cedula=", "");
+            string cedulaLiderActual = informacionLider.First().ToString();
+            cedulaLiderActual = cedulaLiderActual.Substring(10); // " { cedula = cedula }"
+            cedulaLiderActual = cedulaLiderActual.Replace(" ", ""); // "cedula} "
+            cedulaLiderActual = cedulaLiderActual.Replace("}", ""); // "cedula";
 
             ViewBag.cedulaLiderActual = cedulaLiderActual;
 

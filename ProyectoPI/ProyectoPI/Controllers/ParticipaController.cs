@@ -108,7 +108,7 @@ namespace ProyectoPI.Controllers
             eMPLEADO.disponibilidad = false;
             db.Entry(eMPLEADO).State = EntityState.Modified;
             db.SaveChanges();
-            agregar(idProyecto, idEmpleado, "Tester");
+            Agregar(idProyecto, idEmpleado, "Tester");
             return RedirectToAction("Edit", new { id = idProyecto });
         }
         //Elimina un tester de la relación con el proyecto.
@@ -124,13 +124,14 @@ namespace ProyectoPI.Controllers
         }
 
         //Agrega un empleado a un proyecto con un rol específico haciendo el query en la DB
-        public void agregar(string idProyectoFK, string cedulaEmpleadoFK, string rol)
+        public void Agregar(string idProyectoFK, string cedulaEmpleadoFK, string rol)
         {
             PARTICIPA participa = db.PARTICIPA.Create();
             participa.cedulaEmpleadoFK = cedulaEmpleadoFK;
             participa.idProyectoFK = idProyectoFK;
             participa.rol = rol;
             db.PARTICIPA.Add(participa);
+            db.SaveChanges();
         }
 
         // Elimina un empleado de un proyecto
