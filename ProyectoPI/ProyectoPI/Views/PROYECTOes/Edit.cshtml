@@ -80,18 +80,22 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.cedulaClienteFK, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("cedulaClienteFK", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.cedulaClienteFK, "", new { @class = "text-danger" })
+            <select class="form-control" id="estado" name="estado">
+                <option>No iniciado</option>
+                <option>En proceso</option>
+                <option>Finalizado</option>
+                <option>Cancelado</option>
+            </select>
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.cedulaClienteFK, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.estado, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
+            @Html.DropDownList("cedulaClienteFK", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.cedulaClienteFK, "", new { @class = "text-danger" })
         </div>
     </div>
 
