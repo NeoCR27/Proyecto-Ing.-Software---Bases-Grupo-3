@@ -106,7 +106,12 @@
             @Html.DisplayNameFor(model => model.disponibilidad)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.disponibilidad)
+
+
+            @if (Model.disponibilidad == true)
+            {<text>Disponible</text>}
+        else
+        {<text>No disponible</text>}
         </dd>
         <br />
         <dt>

@@ -122,10 +122,50 @@
     <div class="form-group">
         @Html.LabelFor(model => model.disponibilidad, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
+            @*
+        <select class="form-control" id="estado" name="estado">
+            <option value="true" selected>Disponible</option>
+            <option value="false" selected>No disponible</option>
+
+
+            @Html.ValidationMessageFor(model => model.disponibilidad, "", new { @class = "text-danger" })
+        </select>
+            *@
+
             <div class="checkbox">
-                @Html.EditorFor(model => model.disponibilidad)
+
+                @{
+                    List<SelectListItem> listItems = new List<SelectListItem>();
+                    listItems.Add(new SelectListItem
+                    {
+                        Text = "No disponible",
+                        Value = "false"
+                    });
+                    listItems.Add(new SelectListItem
+                    {
+                        Text = "Disponible",
+                        Value = "true",
+                        Selected = true
+                    });
+                    
+                }
+                @Html.DropDownListFor(model => model.disponibilidad, listItems, new { htmlAttributes = new { @class = "form-control" } })
+
                 @Html.ValidationMessageFor(model => model.disponibilidad, "", new { @class = "text-danger" })
+
+                @*
+                    @Html.DropDownListFor(m =>m.disponibilidad, new SelectList(
+            new[]
+            {
+                new { Value = "true", Text = "Disponible" },
+                new { Value = "false", Text = "No Disponible" },
+            },
+            "Value",
+            "Text",
+            Model
+        ))*@
             </div>
+
         </div>
     </div>
 

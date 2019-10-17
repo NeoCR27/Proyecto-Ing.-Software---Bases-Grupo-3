@@ -120,26 +120,23 @@
         @Html.LabelFor(model => model.disponibilidad, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="checkbox">
-                @*
-                    @{
-                        List<SelectListItem> disp = new List<SelectListItem>();
-                        disp.Add(new SelectListItem
-                        {
-                            Text = "Disponible",
-                            Value = "Disponible",
-                            Selected = true
-                        });
-                        disp.Add(new SelectListItem
-                        {
-                            Text = "No disponible",
-                            Value = "No disponible",
-                            Selected = false
-                        });
-                    }
-                    @Html.DropDownListFor(model => model.rol, disp, "-- Seleccione un rol--", new { htmlAttributes = new { @class = "form-control" } })
-                *@
+                @{
+                    List<SelectListItem> list = new List<SelectListItem>();
+                    list.Add(new SelectListItem
+                    {
+                        Text = "No disponible",
+                        Value = "false"
+                    });
+                    list.Add(new SelectListItem
+                    {
+                        Text = "Disponible",
+                        Value = "true",
+                        Selected = true
+                    });
 
-                @Html.EditorFor(model => model.disponibilidad)
+                }
+                @Html.DropDownListFor(model => model.disponibilidad, list, new { htmlAttributes = new { @class = "form-control" } })
+
                 @Html.ValidationMessageFor(model => model.disponibilidad, "", new { @class = "text-danger" })
             </div>
         </div>
