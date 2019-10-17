@@ -73,7 +73,8 @@ namespace ProyectoPI.Controllers
         {
             List<SelectListItem> empleados = this.empleadosController.getEmpleados();
 
-            ViewBag.cedulaEmpleadoFK = empleadosController.get_cedulas();
+            //ViewBag.cedulaEmpleadoFK = empleadosController.get_cedulas();
+            ViewBag.cedulaEmpleadoFK = empleados;
             string[] values = new[] { "Tecnica", "Blanda" };
             ViewBag.tipoPK = new SelectList(values);
 
