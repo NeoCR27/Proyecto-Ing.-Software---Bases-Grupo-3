@@ -9,7 +9,7 @@
     string idProyecto = ViewBag.idPK;
     List<SelectListItem> clientes = ViewBag.clientes; // Para agarrar la lista que se le dió en el Controlador
     string estadoActual = Model.estado;
-}
+    }
 
 <h2 class="titulosPag">Modificar Proyecto</h2>
 
@@ -46,14 +46,14 @@
             <strong class="form-control">@Model.estado</strong>
         </text>
     </div>
-    @if(Model.estado.Equals("No iniciado"))
+    @if(Model.estado.Equals("No-iniciado"))
     {
         <div class="form-group">
             @Html.Label("Nuevo estado", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <select class="form-control" id="estado" name="estado">
                     <option>Mantener el mismo</option>
-                    <option>En proceso</option>
+                    <option>En-proceso</option>
                     <option>Finalizado</option>
                     <option>Cancelado</option>
                 </select>
@@ -67,21 +67,21 @@
             <div class="col-md-10">
                 <select class="form-control" id="estado" name="estado">
                     <option>Mantener el mismo</option>
-                    <option>No iniciado</option>
-                    <option>En proceso</option>
+                    <option>No-iniciado</option>
+                    <option>En-proceso</option>
                     <option>Cancelado</option>
                 </select>
             </div>
         </div>
     }
-    else if (Model.estado.Equals("En proceso"))
+    else if (Model.estado.Equals("En-proceso"))
     {
         <div class="form-group">
             @Html.Label("Nuevo estado", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <select class="form-control" id="estado" name="estado">
                     <option>Mantener el mismo</option>
-                    <option>No iniciado</option>
+                    <option>No-iniciado</option>
                     <option>Finalizado</option>
                     <option>Cancelado</option>
                 </select>
@@ -95,9 +95,9 @@
             <div class="col-md-10">
                 <select class="form-control" id="estado" name="estado">
                     <option>Mantener el mismo</option>
-                    <option>En proceso</option>
+                    <option>En-proceso</option>
                     <option>Finalizado</option>
-                    <option>No iniciado</option>
+                    <option>No-iniciado</option>
                 </select>
             </div>
         </div>

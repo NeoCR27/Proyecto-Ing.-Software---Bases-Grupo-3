@@ -289,8 +289,10 @@ namespace ProyectoPI.Controllers
         {
             PROYECTO pROYECTO = db.PROYECTO.Find(id);
             db.PROYECTO.Remove(pROYECTO);
-            PARTICIPA participa = db.PARTICIPA.Find(cedulaLiderActual, id);
-            db.PARTICIPA.Remove(participa);
+            EMPLEADO lider = db.EMPLEADO.Find(cedulaLiderActual); // Pone la disponibilidad del lider en TRUE
+            lider.disponibilidad = true;
+            PARTICIPA participa = db.PARTICIPA.Find(cedulaLiderActual, id); 
+            db.PARTICIPA.Remove(participa); // Elimina la tupla de PARTICIPA
             db.SaveChanges();
             return RedirectToAction("Index");
         }
