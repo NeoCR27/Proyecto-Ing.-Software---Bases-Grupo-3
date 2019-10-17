@@ -127,3 +127,7 @@ h2.titulosPag{
 .botonCrear {
     background-color: #02C39A;
 }
+
+dt{
+    margin-bottom: 15px;
+}
