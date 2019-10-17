@@ -2,12 +2,13 @@
 
 @{
     ViewBag.Title = "Create";
-}
-
-@{
     string rol = ViewBag.rol;
     string idPK = ViewBag.idPK;
+    List<SelectListItem> lideres = ViewBag.lideres; // Para agarrar la lista que se le dió en el Controlador
+    List<SelectListItem> clientes = ViewBag.clientes; // Para agarrar la lista que se le dió en el Controlador
+    ;
 }
+
 
 <h2 class="titulosPag">Crear Proyecto</h2>
 
@@ -39,18 +40,28 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.duracionEstimada, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.duracionEstimada, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.duracionEstimada, "", new { @class = "text-danger", @name = "duracionEstimada" })
+            <select class="form-control" id="estado" name="estado">
+                <option>No iniciado</option>
+                <option>En proceso</option>
+                <option>Finalizado</option>
+                <option>Cancelado</option>
+            </select>
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.duracionReal, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Líder del proyecto", htmlAttributes: new { @class = "control-label col-md-2 required" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.duracionReal, new { htmlAttributes = new { @class = "form-control", @name = "duracionReal" } })
-            @Html.ValidationMessageFor(model => model.duracionReal, "", new { @class = "text-danger", @name = "duracionReal" })
+            @Html.DropDownList("Lideres", lideres, null, htmlAttributes: new { @class = "form-control", @name = "lideresDrop", @id = "lideresDrop" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Cliente a asignar el proyecto", htmlAttributes: new { @class = "control-label col-md-2 required" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.cedulaClienteFK, clientes, htmlAttributes: new { @class = "form-control", @name = "clientesDrop", @id = "clientesDrop" })
         </div>
     </div>
 
@@ -73,60 +84,41 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.duracionEstimada, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <select class="form-control" id="estado" name="estado">
-                <option>No iniciado</option>
-                <option>En proceso</option>
-                <option>Finalizado</option>
-                <option>Cancelado</option>
-            </select>
+            @Html.EditorFor(model => model.duracionEstimada, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.duracionEstimada, "", new { @class = "text-danger", @name = "duracionEstimada" })
         </div>
     </div>
 
-    @{
-    List<SelectListItem>
-        clientes = ViewBag.clientes; // Para agarrar la lista que se le dió en el Controlador
-        }
-
-        <div class="form-group">
-            @Html.Label("Cliente a asignar el proyecto", htmlAttributes: new { @class = "control-label col-md-2 required" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.cedulaClienteFK, clientes, htmlAttributes: new { @class = "form-control", @name = "clientesDrop", @id = "clientesDrop" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.duracionReal, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.duracionReal, new { htmlAttributes = new { @class = "form-control", @name = "duracionReal" } })
+            @Html.ValidationMessageFor(model => model.duracionReal, "", new { @class = "text-danger", @name = "duracionReal" })
         </div>
-
-
-        @{
-        List<SelectListItem>
-            lideres = ViewBag.lideres; // Para agarrar la lista que se le dió en el Controlador
+    </div>
+    <br />
+    <p><strong>Los campos con <font color="red">*</font> son obligatorios.</strong></p>
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @{
+                string URL = Request.Url.ToString();
             }
+            <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="submit" value="Aceptar" class="botonGeneral colorVerde" />
+        </div>
+    </div>
 
-            <div class="form-group">
-                @Html.Label("Líder del proyecto", htmlAttributes: new { @class = "control-label col-md-2 required" })
-                <div class="col-md-10">
-                    @Html.DropDownList("Lideres", lideres, null, htmlAttributes: new { @class = "form-control", @name = "lideresDrop", @id = "lideresDrop" })
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    @{
-                    string URL = Request.Url.ToString();
-                    }
-                    <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="submit" value="Guardar" class="botonGeneral colorVerde" />
-                </div>
-            </div>
 
 </div>
     }
 }
 else
 {
-<h1>Los @rol NO PUEDEN CREAR PROYECTOS</h1>
+    <h1>Los @rol NO PUEDEN CREAR PROYECTOS</h1>
 }
 
 

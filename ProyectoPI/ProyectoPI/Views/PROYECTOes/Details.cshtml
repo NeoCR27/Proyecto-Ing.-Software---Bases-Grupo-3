@@ -17,86 +17,69 @@
         <dt>
             @Html.DisplayNameFor(model => model.nombre)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.nombre)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CLIENTE.cedulaPK)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CLIENTE.cedulaPK)
-        </dd>
-
+        <br />
         <dt>
             @Html.DisplayNameFor(model => model.objetivo)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.objetivo)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.duracionReal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.duracionReal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.duracionEstimada)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.duracionEstimada)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaInicio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.fechaInicio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaFinalizacion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.fechaFinalizacion)
-        </dd>
-
+        <br />
         <dt>
             @Html.DisplayNameFor(model => model.estado)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.estado)
         </dd>
-
+        <br />
         <dt>
-            @Html.DisplayNameFor(model => model.CLIENTE.tel)
+            @Html.Label("Líder del proyecto", htmlAttributes: new { @class = "control-label col-md-18" })
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CLIENTE.tel)
-        </dd>
-
-
-        <dt>
-            @Html.Label("Lider actual", htmlAttributes: new { @class = "control-label col-md-18"  })
-        </dt>
-
         @{
             string liderActual = ViewBag.liderActual;
-         }
+        }
         <dd>
             @liderActual
         </dd>
+        <br />
+        <dt>
+            @Html.Label("Cliente asignado al proyecto")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CLIENTE.nombre)&nbsp;@Html.DisplayFor(model => model.CLIENTE.primerApellido)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaInicio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.fechaInicio)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaFinalizacion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.fechaFinalizacion)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.duracionEstimada)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.duracionEstimada)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.duracionReal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.duracionReal)
+        </dd>
+        <br />
 
     </dl>
 </div>

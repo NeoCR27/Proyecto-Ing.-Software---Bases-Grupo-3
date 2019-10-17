@@ -27,7 +27,6 @@ namespace ProyectoPI.Models
         [Display(Name = "ID del proyecto")]
         public string idPK { get; set; }
 
-        [RegularExpression("^[a-zA-Z]*$", ErrorMessage = "Solo se pueden digitar letras")]
         [MaxLength(100, ErrorMessage = "El máximo de caracteres es 100")]
         [Required(ErrorMessage = "El campo Nombre del proyecto es obligatorio")]
         [Display(Name = "Nombre del proyecto")]
@@ -52,7 +51,7 @@ namespace ProyectoPI.Models
         [Display(Name = "Fecha de finalización")]
         public Nullable<System.DateTime> fechaFinalizacion { get; set; }
 
-        [Display(Name = "Estado")]
+        [Display(Name = "Estado del proyecto")]
         public string estado { get; set; }
 
         [Required]

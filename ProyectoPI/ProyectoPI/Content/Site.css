@@ -123,3 +123,7 @@ h2.titulosPag{
     border-bottom: 2px dashed #337AB7;
     font-size: 1000px
 }
+
+.botonCrear {
+    background-color: #02C39A;
+}

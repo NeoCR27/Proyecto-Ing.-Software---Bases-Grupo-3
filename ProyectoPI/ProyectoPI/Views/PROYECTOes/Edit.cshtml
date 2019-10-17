@@ -2,10 +2,13 @@
 
 @{
     ViewBag.Title = "Edit";
-}
-
-@{
     string rol = ViewBag.rol;
+    List<SelectListItem> lideres = ViewBag.lideres; // Para agarrar la lista que se le dió en el Controlador
+    string liderActual = ViewBag.liderActual;
+    string cedulaLiderActual = ViewBag.cedulaLiderActual;
+    string idProyecto = ViewBag.idPK;
+    List<SelectListItem> clientes = ViewBag.clientes; // Para agarrar la lista que se le dió en el Controlador
+    string estadoActual = Model.estado;
 }
 
 <h2 class="titulosPag">Modificar Proyecto</h2>
@@ -15,7 +18,7 @@
     @:@using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
+<input type="hidden" id="estadoActual" name="estadoActual" value=@estadoActual>
 <div class="form-horizontal">
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -38,6 +41,113 @@
     </div>
 
     <div class="form-group">
+        @Html.Label("Estado actual", htmlAttributes: new { @class = "control-label col-md-2" })
+        <text class="col-xs-4">
+            <strong class="form-control">@Model.estado</strong>
+        </text>
+    </div>
+    @if(Model.estado.Equals("No iniciado"))
+    {
+        <div class="form-group">
+            @Html.Label("Nuevo estado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" id="estado" name="estado">
+                    <option>Mantener el mismo</option>
+                    <option>En proceso</option>
+                    <option>Finalizado</option>
+                    <option>Cancelado</option>
+                </select>
+            </div>
+        </div>
+    }
+    else if (Model.estado.Equals("Finalizado"))
+    {
+        <div class="form-group">
+            @Html.Label("Nuevo estado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" id="estado" name="estado">
+                    <option>Mantener el mismo</option>
+                    <option>No iniciado</option>
+                    <option>En proceso</option>
+                    <option>Cancelado</option>
+                </select>
+            </div>
+        </div>
+    }
+    else if (Model.estado.Equals("En proceso"))
+    {
+        <div class="form-group">
+            @Html.Label("Nuevo estado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" id="estado" name="estado">
+                    <option>Mantener el mismo</option>
+                    <option>No iniciado</option>
+                    <option>Finalizado</option>
+                    <option>Cancelado</option>
+                </select>
+            </div>
+        </div>
+    }
+    else if (Model.estado.Equals("Cancelado"))
+    {
+        <div class="form-group">
+            @Html.Label("Nuevo estado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" id="estado" name="estado">
+                    <option>Mantener el mismo</option>
+                    <option>En proceso</option>
+                    <option>Finalizado</option>
+                    <option>No iniciado</option>
+                </select>
+            </div>
+        </div>
+    }
+
+    <div class="form-group">
+        @Html.Label("Lider actual", htmlAttributes: new { @class = "control-label col-md-2" })
+        <text class="col-xs-4">
+            <strong class="form-control">@liderActual</strong>
+        </text>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Lideres disponibles", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Lideres", lideres, "Mantener el mismo lider", htmlAttributes: new { @class = "form-control", @name = "lideresDrop", @id = "lideresDrop" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Cliente asignado al proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
+        <text class="col-xs-4">
+            <strong class="form-control">@Model.CLIENTE.nombre &nbsp; @Model.CLIENTE.primerApellido</strong>
+        </text>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Cliente a asignar el proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.cedulaClienteFK, clientes, htmlAttributes: new { @class = "form-control", @name = "clientesDrop", @id = "clientesDrop" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.fechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.fechaInicio, new { @type = "date", @class = "form-control datepicker", })
+            @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.fechaFinalizacion, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.fechaFinalizacion, new { @type = "date", @class = "form-control datepicker", })
+            @Html.ValidationMessageFor(model => model.fechaFinalizacion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
         @Html.LabelFor(model => model.duracionEstimada, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.duracionEstimada, new { htmlAttributes = new { @class = "form-control" } })
@@ -53,76 +163,8 @@
         </div>
     </div>
 
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.fechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.fechaFinalizacion, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.fechaFinalizacion, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.fechaFinalizacion, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Estado actual", htmlAttributes: new { @class = "control-label col-md-2" })
-        <text class="col-xs-4">
-            <strong class="form-control">@Model.estado</strong>
-        </text>
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Nuevo estado", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <select class="form-control" id="estado" name="estado">
-                <option>No iniciado</option>
-                <option>En proceso</option>
-                <option>Finalizado</option>
-                <option>Cancelado</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.cedulaClienteFK, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("cedulaClienteFK", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.cedulaClienteFK, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    @{
-        List<SelectListItem> lideres = ViewBag.lideres; // Para agarrar la lista que se le dió en el Controlador
-        string liderActual = ViewBag.liderActual;
-        string cedulaLiderActual = ViewBag.cedulaLiderActual;
-        string idProyecto = ViewBag.idPK;
-    }
-
-
     <input type="hidden" id="idPK" name="idPK" value=@idProyecto>
     <input type="hidden" id="cedulaLiderActual" name="cedulaLiderActual" value=@cedulaLiderActual>
-
-    <div class="form-group">
-        @Html.Label("Lider actual", htmlAttributes: new { @class = "control-label col-md-2" })
-        <text class="col-xs-4">
-            <strong class="form-control">@liderActual</strong>
-        </text>
-
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Lideres disponibles", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("Lideres", lideres, "Mantener el mismo", htmlAttributes: new { @class = "form-control", @name = "lideresDrop", @id = "lideresDrop" })
-        </div>
-    </div>
 
 
     <div class="form-group">
@@ -133,7 +175,7 @@
             <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button type="button" class="botonGeneral colorVerde" data-toggle="modal" data-target="#guardar">
-                Guardar
+                Aceptar
             </button>
 
         </div>
@@ -150,7 +192,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    <input type="submit" value="Guardar" class="btn btn-success" />
+                    <input type="submit" value="Aceptar" class="btn btn-success" />
                 </div>
             </div>
         </div>
@@ -161,7 +203,7 @@
 }
 else
 {
-<h1> Los @rol NO PUEDEN EDITAR PROYECTOS </h1>
+    <h1> Los @rol NO PUEDEN EDITAR PROYECTOS </h1>
 }
 
 
