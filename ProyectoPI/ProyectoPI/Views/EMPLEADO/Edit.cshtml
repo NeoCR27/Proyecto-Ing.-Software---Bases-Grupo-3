@@ -188,7 +188,9 @@
         @Html.DisplayFor(model => model.distrito, new { htmlAttributes = new { @class = "col-md-10" } })
     </div>
     <p><br /></p>
-
+    <br />
+    <p><strong>Los campos con <font color="red">*</font> son obligatorios.</strong></p>
+    <br />
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             @{
@@ -205,7 +207,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    
+
                     <h5 class="modal-title" id="exampleModalLabel"><strong>¿Está seguro que desea guardar los cambios realizados?</strong></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>

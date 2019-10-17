@@ -15,10 +15,11 @@
 
 @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
 {
-    <p>
-        @Html.ActionLink("Agregar habilidad", "Create", null, new { @class = "botonGeneral colorVerde" })
+<p>
+    @Html.ActionLink("Agregar habilidad", "Create", null, new { @class = "botonGeneral botonCrear" })
 
-    </p>
+  
+</p>
 }
 <table class="table">
     <tr>
