@@ -6,14 +6,12 @@
 //     Los cambios manuales en este archivo se sobrescribirán si se regenera el código.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
+
 namespace ProyectoPI.Models
 {
-
     using System;
     using System.Collections.Generic;
-
-
+    
     public partial class PROYECTO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,52 +20,21 @@ namespace ProyectoPI.Models
             this.PARTICIPA = new HashSet<PARTICIPA>();
             this.REQUERIMIENTOS = new HashSet<REQUERIMIENTOS>();
         }
-
-        [Required]
-        [Display(Name = "ID del proyecto")]
+    
         public string idPK { get; set; }
-
-        [MaxLength(100, ErrorMessage = "El máximo de caracteres es 100")]
-        [Required(ErrorMessage = "El campo Nombre del proyecto es obligatorio")]
-        [Display(Name = "Nombre del proyecto")]
         public string nombre { get; set; }
-
-        [DataType(DataType.MultilineText)]
-        [MaxLength(100, ErrorMessage = "El máximo de caracteres es 100")]
-        [Required(ErrorMessage = "El campo Objetivo del proyecto es obligatorio")]
-        [Display(Name = "Objetivo del proyecto")]
         public string objetivo { get; set; }
-
-        
-        [Display(Name = "Duracion estimada (en horas)")]
-        public Nullable<int> duracionEstimada { get; set; }
-
-        [Display(Name = "Duración real (en horas)")]
         public Nullable<int> duracionReal { get; set; }
-
-        [Display(Name = "Fecha de inicio")]
+        public Nullable<int> duracionEstimada { get; set; }
         public Nullable<System.DateTime> fechaInicio { get; set; }
-
-        [Display(Name = "Fecha de finalización")]
         public Nullable<System.DateTime> fechaFinalizacion { get; set; }
-
-        [Display(Name = "Estado del proyecto")]
         public string estado { get; set; }
-
-        [Required]
-        [Display(Name = "Cédula del cliente a asignar")]
         public string cedulaClienteFK { get; set; }
-
+    
         public virtual CLIENTE CLIENTE { get; set; }
-
-        public virtual EMPLEADO EMPLEADO { get; set; }
-
-        public string nombreCompletoCliente { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PARTICIPA> PARTICIPA { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<REQUERIMIENTOS> REQUERIMIENTOS { get; set;}
+        public virtual ICollection<REQUERIMIENTOS> REQUERIMIENTOS { get; set; }
     }
 }

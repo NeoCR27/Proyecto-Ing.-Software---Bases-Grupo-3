@@ -6,27 +6,18 @@
 //     Los cambios manuales en este archivo se sobrescribirán si se regenera el código.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
 
 namespace ProyectoPI.Models
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class HABILIDADES
     {
-        [Required]
-        [Display(Name = "Descripcion")]
         public string valorPK { get; set; }
-
-        [Required]
-        [Display(Name = "Tipo")]
         public string tipoPK { get; set; }
-
-        [Required]
-        [Display(Name = "Cedula")]
         public string cedulaEmpleadoFK { get; set; }
-
+    
         public virtual EMPLEADO EMPLEADO { get; set; }
     }
 }

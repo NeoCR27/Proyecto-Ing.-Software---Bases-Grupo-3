@@ -45,6 +45,16 @@
     <Property Name="tipoPK" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="cedulaEmpleadoFK" Type="varchar" MaxLength="20" Nullable="false" />
   </EntityType>
+  <EntityType Name="HISTORIAL">
+    <Key>
+      <PropertyRef Name="idProyFK" />
+      <PropertyRef Name="nombreReqFK" />
+      <PropertyRef Name="idEmpFK" />
+    </Key>
+    <Property Name="idProyFK" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nombreReqFK" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="idEmpFK" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
   <EntityType Name="PARTICIPA">
     <Key>
       <PropertyRef Name="cedulaEmpleadoFK" />
@@ -68,6 +78,26 @@
     <Property Name="estado" Type="varchar" MaxLength="25" />
     <Property Name="cedulaClienteFK" Type="varchar" MaxLength="20" />
   </EntityType>
+  <EntityType Name="PRUEBAS">
+    <Key>
+      <PropertyRef Name="idProyFK" />
+      <PropertyRef Name="nombreReqFK" />
+      <PropertyRef Name="nombrePK" />
+    </Key>
+    <Property Name="idProyFK" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nombreReqFK" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="nombrePK" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="resultFinal" Type="varchar" MaxLength="15" />
+    <Property Name="estado" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="proposito" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="entradaDatos" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="flujo" Type="varchar" MaxLength="100" />
+    <Property Name="resultEsperado" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="prioridad" Type="varchar" MaxLength="20" />
+    <Property Name="descripcionErr" Type="varchar" MaxLength="100" />
+    <Property Name="imagenErr" Type="image" />
+    <Property Name="estadoErr" Type="varchar" MaxLength="20" />
+  </EntityType>
   <EntityType Name="REQUERIMIENTOS">
     <Key>
       <PropertyRef Name="idFK" />
@@ -81,16 +111,6 @@
     <Property Name="horasEstimadas" Type="time" Precision="7" Nullable="false" />
     <Property Name="dificultad" Type="varchar" MaxLength="15" />
     <Property Name="cedulaFK" Type="varchar" MaxLength="20" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <Association Name="cedulaClienteFKProyecto">
     <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
@@ -144,6 +164,50 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ERRORIDEmpleado">
+    <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+    <End Role="HISTORIAL" Type="Self.HISTORIAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLEADO">
+        <PropertyRef Name="cedulaPK" />
+      </Principal>
+      <Dependent Role="HISTORIAL">
+        <PropertyRef Name="idEmpFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ERRORIDNombrePrueba">
+    <End Role="REQUERIMIENTOS" Type="Self.REQUERIMIENTOS" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PRUEBAS" Type="Self.PRUEBAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REQUERIMIENTOS">
+        <PropertyRef Name="nombrePK" />
+        <PropertyRef Name="idFK" />
+      </Principal>
+      <Dependent Role="PRUEBAS">
+        <PropertyRef Name="nombreReqFK" />
+        <PropertyRef Name="idProyFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ERRORIDNombrePruebaHistorial">
+    <End Role="REQUERIMIENTOS" Type="Self.REQUERIMIENTOS" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="HISTORIAL" Type="Self.HISTORIAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REQUERIMIENTOS">
+        <PropertyRef Name="nombrePK" />
+        <PropertyRef Name="idFK" />
+      </Principal>
+      <Dependent Role="HISTORIAL">
+        <PropertyRef Name="nombreReqFK" />
+        <PropertyRef Name="idProyFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="ERRORIDRequerimientos">
     <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -176,10 +240,11 @@
     <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HABILIDADES" EntityType="Self.HABILIDADES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HISTORIAL" EntityType="Self.HISTORIAL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PARTICIPA" EntityType="Self.PARTICIPA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PROYECTO" EntityType="Self.PROYECTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRUEBAS" EntityType="Self.PRUEBAS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="REQUERIMIENTOS" EntityType="Self.REQUERIMIENTOS" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="cedulaClienteFKProyecto" Association="Self.cedulaClienteFKProyecto">
       <End Role="CLIENTE" EntitySet="CLIENTE" />
       <End Role="PROYECTO" EntitySet="PROYECTO" />
@@ -195,6 +260,18 @@
     <AssociationSet Name="ERRORCedRequerimientos" Association="Self.ERRORCedRequerimientos">
       <End Role="EMPLEADO" EntitySet="EMPLEADO" />
       <End Role="REQUERIMIENTOS" EntitySet="REQUERIMIENTOS" />
+    </AssociationSet>
+    <AssociationSet Name="ERRORIDEmpleado" Association="Self.ERRORIDEmpleado">
+      <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+      <End Role="HISTORIAL" EntitySet="HISTORIAL" />
+    </AssociationSet>
+    <AssociationSet Name="ERRORIDNombrePrueba" Association="Self.ERRORIDNombrePrueba">
+      <End Role="REQUERIMIENTOS" EntitySet="REQUERIMIENTOS" />
+      <End Role="PRUEBAS" EntitySet="PRUEBAS" />
+    </AssociationSet>
+    <AssociationSet Name="ERRORIDNombrePruebaHistorial" Association="Self.ERRORIDNombrePruebaHistorial">
+      <End Role="REQUERIMIENTOS" EntitySet="REQUERIMIENTOS" />
+      <End Role="HISTORIAL" EntitySet="HISTORIAL" />
     </AssociationSet>
     <AssociationSet Name="ERRORIDRequerimientos" Association="Self.ERRORIDRequerimientos">
       <End Role="PROYECTO" EntitySet="PROYECTO" />

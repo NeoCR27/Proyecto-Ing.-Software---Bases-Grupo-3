@@ -14,6 +14,13 @@ namespace ProyectoPI.Models
     
     public partial class REQUERIMIENTOS
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public REQUERIMIENTOS()
+        {
+            this.PRUEBAS = new HashSet<PRUEBAS>();
+            this.EMPLEADO1 = new HashSet<EMPLEADO>();
+        }
+    
         public string idFK { get; set; }
         public string nombrePK { get; set; }
         public System.DateTime fechaInicio { get; set; }
@@ -25,5 +32,9 @@ namespace ProyectoPI.Models
     
         public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual PROYECTO PROYECTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PRUEBAS> PRUEBAS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EMPLEADO> EMPLEADO1 { get; set; }
     }
 }

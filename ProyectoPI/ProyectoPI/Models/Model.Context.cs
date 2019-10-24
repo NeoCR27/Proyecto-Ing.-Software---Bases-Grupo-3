@@ -30,7 +30,7 @@ namespace ProyectoPI.Models
         public virtual DbSet<HABILIDADES> HABILIDADES { get; set; }
         public virtual DbSet<PARTICIPA> PARTICIPA { get; set; }
         public virtual DbSet<PROYECTO> PROYECTO { get; set; }
+        public virtual DbSet<PRUEBAS> PRUEBAS { get; set; }
         public virtual DbSet<REQUERIMIENTOS> REQUERIMIENTOS { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

@@ -12,21 +12,21 @@ namespace ProyectoPI.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class PARTICIPA
     {
         public string rol { get; set; }
         public string cedulaEmpleadoFK { get; set; }
         public string idProyectoFK { get; set; }
         public string nombreEmpleado { get; set; }
-    
+
         public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual PROYECTO PROYECTO { get; set; }
     }
     //Clase para query de empleados por
-    public  class EquipoModel
+    public class EquipoModel
     {
-        public string IDProyecto { get; set;}
+        public string IDProyecto { get; set; }
         public string empleado { get; set; }
         public string email { get; set; }
         public string rol { get; set; }

@@ -38,6 +38,7 @@
     <NavigationProperty Name="HABILIDADES" Relationship="Self.cedulaFKHabilidades" FromRole="EMPLEADO" ToRole="HABILIDADES" />
     <NavigationProperty Name="PARTICIPA" Relationship="Self.cedulaFKParticipa" FromRole="EMPLEADO" ToRole="PARTICIPA" />
     <NavigationProperty Name="REQUERIMIENTOS" Relationship="Self.ERRORCedRequerimientos" FromRole="EMPLEADO" ToRole="REQUERIMIENTOS" />
+    <NavigationProperty Name="REQUERIMIENTOS1" Relationship="Self.HISTORIAL" FromRole="EMPLEADO" ToRole="REQUERIMIENTOS" />
   </EntityType>
   <EntityType Name="HABILIDADES">
     <Key>
@@ -78,6 +79,27 @@
     <NavigationProperty Name="PARTICIPA" Relationship="Self.idProyectoFKParticipa" FromRole="PROYECTO" ToRole="PARTICIPA" />
     <NavigationProperty Name="REQUERIMIENTOS" Relationship="Self.ERRORIDRequerimientos" FromRole="PROYECTO" ToRole="REQUERIMIENTOS" />
   </EntityType>
+  <EntityType Name="PRUEBAS">
+    <Key>
+      <PropertyRef Name="idProyFK" />
+      <PropertyRef Name="nombreReqFK" />
+      <PropertyRef Name="nombrePK" />
+    </Key>
+    <Property Name="idProyFK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombreReqFK" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombrePK" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="resultFinal" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="proposito" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="entradaDatos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="flujo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="resultEsperado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="prioridad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="descripcionErr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="imagenErr" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="estadoErr" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="REQUERIMIENTOS" Relationship="Self.ERRORIDNombrePrueba" FromRole="PRUEBAS" ToRole="REQUERIMIENTOS" />
+  </EntityType>
   <EntityType Name="REQUERIMIENTOS">
     <Key>
       <PropertyRef Name="idFK" />
@@ -93,16 +115,8 @@
     <Property Name="cedulaFK" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="EMPLEADO" Relationship="Self.ERRORCedRequerimientos" FromRole="REQUERIMIENTOS" ToRole="EMPLEADO" />
     <NavigationProperty Name="PROYECTO" Relationship="Self.ERRORIDRequerimientos" FromRole="REQUERIMIENTOS" ToRole="PROYECTO" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="PRUEBAS" Relationship="Self.ERRORIDNombrePrueba" FromRole="REQUERIMIENTOS" ToRole="PRUEBAS" />
+    <NavigationProperty Name="EMPLEADO1" Relationship="Self.HISTORIAL" FromRole="REQUERIMIENTOS" ToRole="EMPLEADO" />
   </EntityType>
   <Association Name="cedulaClienteFKProyecto">
     <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
@@ -184,14 +198,34 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ERRORIDNombrePrueba">
+    <End Role="REQUERIMIENTOS" Type="Self.REQUERIMIENTOS" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PRUEBAS" Type="Self.PRUEBAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REQUERIMIENTOS">
+        <PropertyRef Name="nombrePK" />
+        <PropertyRef Name="idFK" />
+      </Principal>
+      <Dependent Role="PRUEBAS">
+        <PropertyRef Name="nombreReqFK" />
+        <PropertyRef Name="idProyFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HISTORIAL">
+    <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="*" />
+    <End Role="REQUERIMIENTOS" Type="Self.REQUERIMIENTOS" Multiplicity="*" />
+  </Association>
   <EntityContainer Name="Gr03Proy4Entities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
     <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" />
     <EntitySet Name="HABILIDADES" EntityType="Self.HABILIDADES" />
     <EntitySet Name="PARTICIPA" EntityType="Self.PARTICIPA" />
     <EntitySet Name="PROYECTO" EntityType="Self.PROYECTO" />
+    <EntitySet Name="PRUEBAS" EntityType="Self.PRUEBAS" />
     <EntitySet Name="REQUERIMIENTOS" EntityType="Self.REQUERIMIENTOS" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <AssociationSet Name="cedulaClienteFKProyecto" Association="Self.cedulaClienteFKProyecto">
       <End Role="CLIENTE" EntitySet="CLIENTE" />
       <End Role="PROYECTO" EntitySet="PROYECTO" />
@@ -214,6 +248,14 @@
     </AssociationSet>
     <AssociationSet Name="ERRORIDRequerimientos" Association="Self.ERRORIDRequerimientos">
       <End Role="PROYECTO" EntitySet="PROYECTO" />
+      <End Role="REQUERIMIENTOS" EntitySet="REQUERIMIENTOS" />
+    </AssociationSet>
+    <AssociationSet Name="ERRORIDNombrePrueba" Association="Self.ERRORIDNombrePrueba">
+      <End Role="REQUERIMIENTOS" EntitySet="REQUERIMIENTOS" />
+      <End Role="PRUEBAS" EntitySet="PRUEBAS" />
+    </AssociationSet>
+    <AssociationSet Name="HISTORIAL" Association="Self.HISTORIAL">
+      <End Role="EMPLEADO" EntitySet="EMPLEADO" />
       <End Role="REQUERIMIENTOS" EntitySet="REQUERIMIENTOS" />
     </AssociationSet>
   </EntityContainer>
