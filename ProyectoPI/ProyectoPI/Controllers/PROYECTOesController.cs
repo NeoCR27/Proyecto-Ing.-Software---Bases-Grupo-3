@@ -215,7 +215,7 @@ namespace ProyectoPI.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(string cedulaLiderActual, string estado, string estadoActual, [Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
+        public ActionResult Edit(string cedulaLiderActual, string estado, [Bind(Include = "idPK,nombre,objetivo,duracionReal,duracionEstimada,fechaInicio,fechaFinalizacion,estado,cedulaClienteFK")] PROYECTO pROYECTO)
         {
             if (ModelState.IsValid)
             {
@@ -229,14 +229,7 @@ namespace ProyectoPI.Controllers
                     EMPLEADO nuevoLider = db.EMPLEADO.Find(cedulaLiderEscogido);
                     nuevoLider.disponibilidad = false; 
                 }
-                if (estado.Equals("Mantener el mismo") == false)
-                {
-                    pROYECTO.estado = Request.Form["estado"].ToString();
-                }
-                else
-                {
-                    pROYECTO.estado = estadoActual;
-                }
+                pROYECTO.estado = Request.Form["estado"].ToString();
                 db.Entry(pROYECTO).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

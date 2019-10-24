@@ -18,7 +18,6 @@
     @:@using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-<input type="hidden" id="estadoActual" name="estadoActual" value=@estadoActual>
 <div class="form-horizontal">
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -40,19 +39,13 @@
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.Label("Estado actual", htmlAttributes: new { @class = "control-label col-md-2" })
-        <text class="col-xs-4">
-            <strong class="form-control">@Model.estado</strong>
-        </text>
-    </div>
-    @if(Model.estado.Equals("No-iniciado"))
+    @if (estadoActual == "No-iniciado")
     {
         <div class="form-group">
-            @Html.Label("Nuevo estado", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Estado", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <select class="form-control" id="estado" name="estado">
-                    <option>Mantener el mismo</option>
+                    <option selected>No-iniciado</option>
                     <option>En-proceso</option>
                     <option>Finalizado</option>
                     <option>Cancelado</option>
@@ -60,44 +53,16 @@
             </div>
         </div>
     }
-    else if (Model.estado.Equals("Finalizado"))
+    else if (estadoActual == "En-proceso")
     {
         <div class="form-group">
-            @Html.Label("Nuevo estado", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Estado", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <select class="form-control" id="estado" name="estado">
-                    <option>Mantener el mismo</option>
-                    <option>No-iniciado</option>
-                    <option>En-proceso</option>
-                    <option>Cancelado</option>
-                </select>
-            </div>
-        </div>
-    }
-    else if (Model.estado.Equals("En-proceso"))
-    {
-        <div class="form-group">
-            @Html.Label("Nuevo estado", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select class="form-control" id="estado" name="estado">
-                    <option>Mantener el mismo</option>
-                    <option>No-iniciado</option>
+                    <option selected>No-iniciado</option>
+                    <option selected>En-proceso</option>
                     <option>Finalizado</option>
                     <option>Cancelado</option>
-                </select>
-            </div>
-        </div>
-    }
-    else if (Model.estado.Equals("Cancelado"))
-    {
-        <div class="form-group">
-            @Html.Label("Nuevo estado", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select class="form-control" id="estado" name="estado">
-                    <option>Mantener el mismo</option>
-                    <option>En-proceso</option>
-                    <option>Finalizado</option>
-                    <option>No-iniciado</option>
                 </select>
             </div>
         </div>
