@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ProyectoPI.Models.REQUERIMIENTOS>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaEntrega)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.horasReales)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.horasEstimadas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dificultad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMPLEADO.tel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PROYECTO.nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaEntrega)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.horasReales)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.horasEstimadas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dificultad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMPLEADO.tel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PROYECTO.nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

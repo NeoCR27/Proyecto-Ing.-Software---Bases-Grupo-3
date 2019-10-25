@@ -86,11 +86,20 @@
 
 @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
 {
-<div class="col-md-offset-2 col-md-10">
-    @Html.ActionLink("Modificar", "Edit", new { id = Model.idPK }, new { @class = "botonGeneral colorVerde" })
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    @Html.ActionLink("Eliminar", "Delete", new { id = Model.idPK }, new { @class = "botonGeneral colorRojo" })
-</div>
+    if(Model.estado == "Cancelado")
+    {
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("Eliminar", "Delete", new { id = Model.idPK }, new { @class = "botonGeneral colorRojo" })
+        </div>
+    }
+    else if(Model.estado != "Finalizado")
+    {
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("Modificar", "Edit", new { id = Model.idPK }, new { @class = "botonGeneral colorVerde" })
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            @Html.ActionLink("Eliminar", "Delete", new { id = Model.idPK }, new { @class = "botonGeneral colorRojo" })
+        </div>
+    } 
 }
 
 <div class="form-actions no-color">
