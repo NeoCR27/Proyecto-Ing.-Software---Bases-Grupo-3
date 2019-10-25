@@ -7,28 +7,42 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoPI.Models;
-
+using System.Threading.Tasks;
 namespace ProyectoPI.Controllers
 {
     public class REQUERIMIENTOSController : Controller
     {
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
-
+        private SeguridadController seguridad_controller = new SeguridadController();
+        private string idProyecto;
         // GET: REQUERIMIENTOS
-        public ActionResult Index()
+        public async Task<ActionResult> Index(String id)
         {
-            var rEQUERIMIENTOS = db.REQUERIMIENTOS.Include(r => r.EMPLEADO).Include(r => r.PROYECTO);
-            return View(rEQUERIMIENTOS.ToList());
+          
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            string correo = User.Identity.Name;
+            string rol = await this.seguridad_controller.GetRol(correo);
+            ViewBag.myRol = rol;
+            ViewBag.idProy = id;
+            PROYECTO proy = db.PROYECTO.Find(id);
+            string nombre = proy.nombre;
+            ViewBag.nombre = nombre;
+
+            var req = db.REQUERIMIENTOS.Where(x => x.idFK == id);
+            return View(req.ToList());
         }
 
         // GET: REQUERIMIENTOS/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(string id, String idpro)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            REQUERIMIENTOS rEQUERIMIENTOS = db.REQUERIMIENTOS.Find(id);
+            REQUERIMIENTOS rEQUERIMIENTOS = db.REQUERIMIENTOS.Find(id,idpro);
             if (rEQUERIMIENTOS == null)
             {
                 return HttpNotFound();
@@ -37,12 +51,16 @@ namespace ProyectoPI.Controllers
         }
 
         // GET: REQUERIMIENTOS/Create
-        public ActionResult Create()
+        public ActionResult Create(string id)
+
         {
-            ViewBag.cedulaFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel");
-            ViewBag.idFK = new SelectList(db.PROYECTO, "idPK", "nombre");
+            ViewBag.idProy = id;
+            idProyecto = id;
+
             return View();
         }
+
+        
 
         // POST: REQUERIMIENTOS/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -52,14 +70,15 @@ namespace ProyectoPI.Controllers
         public ActionResult Create([Bind(Include = "idFK,nombrePK,fechaInicio,fechaEntrega,horasReales,horasEstimadas,dificultad,cedulaFK")] REQUERIMIENTOS rEQUERIMIENTOS)
         {
             if (ModelState.IsValid)
+
             {
+                rEQUERIMIENTOS.idFK = idProyecto;
                 db.REQUERIMIENTOS.Add(rEQUERIMIENTOS);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.cedulaFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", rEQUERIMIENTOS.cedulaFK);
-            ViewBag.idFK = new SelectList(db.PROYECTO, "idPK", "nombre", rEQUERIMIENTOS.idFK);
+        
             return View(rEQUERIMIENTOS);
         }
 

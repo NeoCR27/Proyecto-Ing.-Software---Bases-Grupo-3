@@ -318,5 +318,11 @@ namespace ProyectoPI.Controllers
                 return "1";
             }
         }
+
+        //Redirecciona la al controlador de habilidades
+        public ActionResult get_req(string id)
+        {
+            return RedirectToAction("../REQUERIMIENTOS/index", new { id = id });
+        }
     }
 }

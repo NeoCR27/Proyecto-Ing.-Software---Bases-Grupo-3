@@ -7,6 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
 namespace ProyectoPI.Models
 {
     using System;
@@ -22,6 +23,9 @@ namespace ProyectoPI.Models
         }
     
         public string idFK { get; set; }
+
+        [Required]
+        [Display(Name = "Nombre")]
         public string nombrePK { get; set; }
         public System.DateTime fechaInicio { get; set; }
         public System.DateTime fechaEntrega { get; set; }

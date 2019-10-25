@@ -34,23 +34,26 @@
                         {
                             if (item.estado == "Cancelado") // Se puede eliminar y consultar
                             {
-                                <p class="card-text">
-                                    @Html.ActionLink("Consultar", "Details", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
-                                    @Html.ActionLink("Eliminar", "Delete", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
-                                </p>
+                        <p class="card-text">
+                            @Html.ActionLink("Consultar", "Details", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
+                            @Html.ActionLink("Requerimientos", "get_req", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
+                        </p>
                             }
                             else if (item.estado == "Finalizado") // Se puede consultar
                             {
-                                <p class="card-text">
-                                    @Html.ActionLink("Consultar", "Details", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
-                                </p>
+                        <p class="card-text">
+                            @Html.ActionLink("Consultar", "Details", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
+                            @Html.ActionLink("Requerimientos", "get_req", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
+                        </p>
                             }
                             else // Esta en proceso o No-iniciado
                             {
-                                <p class="card-text">
-                                    @Html.ActionLink("Consultar", "Details", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
-                                    @Html.ActionLink("Modificar", "Edit", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
-                                </p>
+                        <p class="card-text">
+                            @Html.ActionLink("Consultar", "Details", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
+                            @Html.ActionLink("Modificar", "Edit", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
+                            @Html.ActionLink("Requerimientos", "get_req",new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
+                        </p>
                             }
                         }
                         else

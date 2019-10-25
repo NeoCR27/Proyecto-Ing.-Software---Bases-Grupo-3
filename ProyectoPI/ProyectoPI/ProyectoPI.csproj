@@ -172,6 +172,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PRUEBASController.cs" />
+    <Compile Include="Controllers\REQUERIMIENTOSController.cs" />
     <Compile Include="Controllers\SeguridadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -229,6 +231,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fondo.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -237,6 +240,8 @@
     <Content Include="Img\fondo.jpg" />
     <Content Include="Img\jumb.jpg" />
     <Content Include="Img\proy.jpg" />
+    <Content Include="Img\req.jpg" />
+    <Content Include="jumb.jpg" />
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
@@ -429,6 +434,11 @@
     <Content Include="Views\Account\Login_v3\vendor\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="Views\HABILIDADES\NoDuplicados.cshtml" />
     <Content Include="Views\EMPLEADO\NoDuplicados.cshtml" />
+    <Content Include="Views\REQUERIMIENTOS\Index.cshtml" />
+    <Content Include="Views\REQUERIMIENTOS\Create.cshtml" />
+    <Content Include="Views\REQUERIMIENTOS\Delete.cshtml" />
+    <Content Include="Views\REQUERIMIENTOS\Details.cshtml" />
+    <Content Include="Views\REQUERIMIENTOS\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
