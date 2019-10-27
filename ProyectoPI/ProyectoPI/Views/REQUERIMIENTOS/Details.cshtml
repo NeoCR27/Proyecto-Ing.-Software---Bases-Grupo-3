@@ -4,71 +4,86 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@{
+    string rol = ViewBag.rol;
+}
+
+
+<h2 class="titulosPag">Detalles Requerimiento</h2>
 
 <div>
-    <h4>REQUERIMIENTOS</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.nombrePK)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nombrePK)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.PROYECTO.nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PROYECTO.nombre)
+        </dd>
+        <br />
+        <dt>
+            Tester Asignado
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EMPLEADO.nombre)
+        </dd>
+        <br />
+        <dt>
             @Html.DisplayNameFor(model => model.fechaInicio)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.fechaInicio)
         </dd>
-
+        <br />
         <dt>
             @Html.DisplayNameFor(model => model.fechaEntrega)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.fechaEntrega)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.horasReales)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.horasReales)
-        </dd>
-
+        <br />
         <dt>
             @Html.DisplayNameFor(model => model.horasEstimadas)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.horasEstimadas)
         </dd>
-
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.horasReales)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.horasReales)
+        </dd>
+        <br />
         <dt>
             @Html.DisplayNameFor(model => model.dificultad)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.dificultad)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EMPLEADO.tel)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EMPLEADO.tel)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PROYECTO.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PROYECTO.nombre)
-        </dd>
-
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+@if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
+{
+   
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("Modificar", "Edit", new { id = Model.idFK }, new { @class = "botonGeneral colorVerde" })
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            @Html.ActionLink("Eliminar", "Delete", new { id = Model.idFK }, new { @class = "botonGeneral colorRojo" })
+        </div>
+    }
+
+
+<div class="form-actions no-color">
+    @Html.ActionLink("Volver", "Index", new { id = Model.idFK }, new { @class = "botonGeneral colorGris" })
+</div>

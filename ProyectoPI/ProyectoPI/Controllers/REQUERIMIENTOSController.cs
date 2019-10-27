@@ -36,13 +36,16 @@ namespace ProyectoPI.Controllers
         }
 
         // GET: REQUERIMIENTOS/Details/5
-        public ActionResult Details(string id, String idpro)
+        public async Task<ActionResult> Details(string id, string idpro)
         {
+            string user = User.Identity.Name;
+            string rol = await this.seguridad_controller.GetRol(user);
+            ViewBag.rol = rol;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            REQUERIMIENTOS rEQUERIMIENTOS = db.REQUERIMIENTOS.Find(id,idpro);
+            REQUERIMIENTOS rEQUERIMIENTOS = db.REQUERIMIENTOS.Find(idpro,id);
             if (rEQUERIMIENTOS == null)
             {
                 return HttpNotFound();
@@ -72,10 +75,10 @@ namespace ProyectoPI.Controllers
             if (ModelState.IsValid)
 
             {
-                rEQUERIMIENTOS.idFK = idProyecto;
+                System.Diagnostics.Debug.WriteLine(rEQUERIMIENTOS.idFK);
                 db.REQUERIMIENTOS.Add(rEQUERIMIENTOS);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", rEQUERIMIENTOS.idFK);
             }
 
         

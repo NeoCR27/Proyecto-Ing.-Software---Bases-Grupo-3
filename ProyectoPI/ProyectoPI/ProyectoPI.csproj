@@ -241,6 +241,7 @@
     <Content Include="Img\jumb.jpg" />
     <Content Include="Img\proy.jpg" />
     <Content Include="Img\req.jpg" />
+    <Content Include="Img\req.png" />
     <Content Include="jumb.jpg" />
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -314,6 +315,7 @@
     <Content Include="Views\Account\Login_v3\vendor\select2\select2.js" />
     <Content Include="Views\Account\Login_v3\vendor\select2\select2.min.css" />
     <Content Include="Views\Account\Login_v3\vendor\select2\select2.min.js" />
+    <Content Include="Views\REQUERIMIENTOS\req.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
