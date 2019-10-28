@@ -27,28 +27,28 @@ namespace ProyectoPI.Models
 
         [Required]
         [MaxLength(9)]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Cedula constituida unicamente por numeros")]
-        [Display(Name = "Cedula")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Cédula constituida unicamente por numeros")]
+        [Display(Name = "Cédula")]
         public string cedulaPK { get; set; }
 
         [Required]
         [Phone]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Telefono constituido unicamente por valores numericos")]
-        [Display(Name = "Telefono")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Télefono constituido unicamente por valores numéricos")]
+        [Display(Name = "Teléfono")]
         public string tel { get; set; }
 
         [Required]
-        [RegularExpression(@"^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage = "Nombre no puede contener valores numericos")]
+        [RegularExpression(@"^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage = "Nombre no puede contener valores numéricos")]
         [Display(Name = "Nombre")]
         public string nombre { get; set; }
 
         [Required]
-        [RegularExpression(@"^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage = "Apellido no puede contener valores numericos")]
+        [RegularExpression(@"^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage = "Apellido no puede contener valores numéricos")]
         [Display(Name = "Primer apellido")]
         public string primerApellido { get; set; }
 
 
-        [RegularExpression(@"^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage = "Apellido no puede contener valores numericos")]
+        [RegularExpression(@"^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage = "Apellido no puede contener valores numéricos")]
         [Display(Name = "Segundo apellido")]
         public string segundoApellido { get; set; }
 
@@ -62,7 +62,7 @@ namespace ProyectoPI.Models
         public string distrito { get; set; }
 
         [Required]
-        [Display(Name = "Canton")]
+        [Display(Name = "Cantón")]
         public string canton { get; set; }
 
         [Required]
@@ -70,16 +70,16 @@ namespace ProyectoPI.Models
         public string provincia { get; set; }
 
 
-        [Display(Name = "Direccion exacta")]
+        [Display(Name = "Dirección exacta")]
         public string direccionExacta { get; set; }
 
         //[Required] SE CAE!!!!!
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Horas laboradas constituida unicamente por valores numericos")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Horas laboradas constituida unicamente por valores numéricos")]
         [Display(Name = "Horas laboradas")]
         public Nullable<int> horasLaboradas { get; set; }
 
         [Required]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Edad constituida unicamente por valores numericos")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Edad constituida unicamente por valores numéricos")]
         [Display(Name = "Edad")]
         public int edad { get; set; }
 
