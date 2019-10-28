@@ -89,7 +89,7 @@ namespace ProyectoPI.Controllers
             //Se Arma los  string de query
             ViewBag.id = id;
             string queryEquipo = "SELECT Part.idProyectoFK AS 'IDProyecto', Emp.nombre + ' ' + Emp.primerApellido AS 'empleado', Emp.correo AS 'email', Part.rol AS 'rol', Emp.disponibilidad AS 'dispon', Emp.cedulaPK AS 'idEmp', Proy.nombre AS 'proyNom' FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK JOIN Proyecto Proy ON Proy.idPK = Part.idProyectoFK WHERE Part.idProyectoFK = " + id;
-            string queryEmpleado = "Select Distinct emp.cedulaPK AS 'personalID', emp.Nombre + ' ' + emp.primerApellido AS 'nombre' , hab.tipoPK AS 'tipoHabilidad' , hab.valorPK AS 'habilidad' From EMPLEADO emp Join HABILIDADES hab ON emp.cedulaPK = hab.cedulaEmpleadoFK WHERE hab.tipoPK LIKE '%" + buscarPor + "%' AND hab.valorPK LIKE '%" + filtroBusqueda + "%' AND Emp.rol != 'Lider' AND Emp.rol != 'Jefe' AND Emp.Disponibilidad != 0 Order BY emp.cedulaPK";
+            string queryEmpleado = "Select Distinct emp.cedulaPK AS 'personalID', emp.Nombre + ' ' + emp.primerApellido AS 'nombre' , hab.tipoPK AS 'tipoHabilidad' , hab.valorPK AS 'habilidad' From EMPLEADO emp Join HABILIDADES hab ON emp.cedulaPK = hab.cedulaEmpleadoFK WHERE hab.tipoPK LIKE '%" + buscarPor + "%' AND hab.valorPK LIKE '%" + filtroBusqueda + "%' AND Emp.rol != 'Lider' AND Emp.rol != 'Jefe' AND Emp.Disponibilidad != 'No Disponible' Order BY emp.cedulaPK";
             //Se hace el query a la base de datos
             IList<EquipoModel> resultadoQueryEquipo = (db.Database.SqlQuery<EquipoModel>(queryEquipo)).ToList();
             IList<HabilidadEmpleadoModel> resultadoQueryEmpleado = (db.Database.SqlQuery<HabilidadEmpleadoModel>(queryEmpleado)).ToList();
