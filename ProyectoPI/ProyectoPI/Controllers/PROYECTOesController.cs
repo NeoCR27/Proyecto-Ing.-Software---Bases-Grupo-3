@@ -37,7 +37,59 @@ namespace ProyectoPI.Controllers
                 ViewBag.proyectos = true;
                 return View(db.PROYECTO.Include(p => p.CLIENTE).ToList());
             }
-            else // Retorno solo los proyectos en los que estoy
+            else if (rol.Equals("Cliente", StringComparison.InvariantCultureIgnoreCase))
+            {
+                var cedulaUsuarioLogeado = (from cliente in db.CLIENTE
+                                            where cliente.correo == user
+                                            select new
+                                            {
+                                                cliente.cedulaPK
+                                            }).ToList();
+                string cedulaResultado = cedulaUsuarioLogeado.First().ToString(); // Tiene la fomra "{ cedulaPK = cedula }"
+                cedulaResultado = cedulaResultado.Replace("{", ""); // " cedulaPK = cedula }"
+                cedulaResultado = cedulaResultado.Replace("}", ""); // " cedulaPK = cedula "
+                cedulaResultado = cedulaResultado.Replace("cedulaPK", ""); // "  = cedula }"
+                cedulaResultado = cedulaResultado.Replace(" ", ""); // "=cedula}"
+                cedulaResultado = cedulaResultado.Replace("=", ""); // "cedula"
+
+                // Obtener proyectos que tienen la cedula de ese cliente
+                string queryProyecto = "Select * from PROYECTO proy join CLIENTE cliente on proy.cedulaClienteFK = cliente.cedulaPK where cliente.cedulaPK= " + cedulaResultado;
+                var proyecto = db.Database.SqlQuery<PROYECTO>(queryProyecto).ToList();
+                if (proyecto.Count() > 0) // Hay proyectos
+                {
+                    ViewBag.proyectos = true;
+                    // Obtener el nombre del cliente
+                    string queryCliente = "Select cliente.nombre from PROYECTO proy join CLIENTE cliente on proy.cedulaClienteFK = cliente.cedulaPK where cliente.cedulaPK= " + cedulaResultado;
+                    var clienteNombre = db.Database.SqlQuery<string>(queryCliente).ToList();
+                    string nombreCliente = clienteNombre.First().ToString();
+                    // Obtener el apellido del cliente
+                    string queryClienteApellido = "Select cliente.nombre from PROYECTO proy join CLIENTE cliente on proy.cedulaClienteFK = cliente.cedulaPK where cliente.cedulaPK= " + cedulaResultado;
+                    var clienteApellido = db.Database.SqlQuery<string>(queryClienteApellido).ToList();
+                    string apellidoCliente = clienteApellido.First().ToString();
+                    string nombreCompletoCliente = nombreCliente + " " + apellidoCliente;
+                    List<PROYECTO> model = new List<PROYECTO>();
+                    foreach (var item in proyecto)
+                    {
+                        PROYECTO proy = new PROYECTO();
+                        proy.idPK = item.idPK;
+                        proy.nombre = item.nombre;
+                        proy.objetivo = item.objetivo;
+                        proy.estado = item.estado;
+                        proy.CLIENTE = new CLIENTE();
+                        proy.CLIENTE.nombre = nombreCompletoCliente;
+                        model.Add(proy);
+                    }
+                    return View(model);
+                }
+                else
+                {
+                    ViewBag.proyectos = false;
+                    return View();
+                }
+
+               
+            }
+            else // Retorno solo los proyectos en los que estoy (soy lider o tester)
             {
                 var cedulaUsuarioLogeado = (from proy in db.PROYECTO
                                             join participa in db.PARTICIPA on proy.idPK equals participa.idProyectoFK
@@ -71,6 +123,7 @@ namespace ProyectoPI.Controllers
                         PROYECTO proy = new PROYECTO();
                         proy.idPK = item.idPK;
                         proy.nombre = item.nombre;
+                        proy.estado = item.estado;
                         proy.objetivo = item.objetivo;
                         proy.CLIENTE = new CLIENTE();
                         proy.CLIENTE.nombre = nombreCompletoCliente;
