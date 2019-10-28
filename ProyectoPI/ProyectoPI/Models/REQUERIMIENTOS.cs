@@ -6,7 +6,6 @@
 //     Los cambios manuales en este archivo se sobrescribirán si se regenera el código.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
 using System.ComponentModel.DataAnnotations;
 namespace ProyectoPI.Models
 {
@@ -23,16 +22,15 @@ namespace ProyectoPI.Models
         }
     
         public string idFK { get; set; }
-
         [Required]
         [Display(Name = "Nombre")]
         public string nombrePK { get; set; }
         public System.DateTime fechaInicio { get; set; }
         public System.DateTime fechaEntrega { get; set; }
-        public Nullable<System.TimeSpan> horasReales { get; set; }
-        public System.TimeSpan horasEstimadas { get; set; }
+        public Nullable<int> horasReales { get; set; }
         public string dificultad { get; set; }
         public string cedulaFK { get; set; }
+        public Nullable<int> horasEstimadas { get; set; }
     
         public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual PROYECTO PROYECTO { get; set; }

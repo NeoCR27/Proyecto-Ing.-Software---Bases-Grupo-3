@@ -11,42 +11,21 @@ namespace ProyectoPI.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class PRUEBAS
     {
-
         public string idProyFK { get; set; }
         public string nombreReqFK { get; set; }
         public string nombrePK { get; set; }
-
-        [Display(Name = "Resultado final")]
         public string resultFinal { get; set; }
-
-        [Display(Name = "Estado")]
         public string estado { get; set; }
-
-        [Display(Name = "Propósito")]
         public string proposito { get; set; }
-
-        [Display(Name = "Entrada de datos esperada")]
         public string entradaDatos { get; set; }
-
-
-        [Display(Name = "Flujo ")]
         public string flujo { get; set; }
-
-        [Display(Name = "Resultado esperado")]
         public string resultEsperado { get; set; }
-
-        [Display(Name = "Prioridad")]
         public string prioridad { get; set; }
-
-        [Display(Name = "Descripción del error")]
         public string descripcionErr { get; set; }
         public byte[] imagenErr { get; set; }
-
-        [Display(Name = "Estado del error")]
         public string estadoErr { get; set; }
     
         public virtual REQUERIMIENTOS REQUERIMIENTOS { get; set; }

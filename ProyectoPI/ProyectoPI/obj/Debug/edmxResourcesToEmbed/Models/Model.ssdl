@@ -31,7 +31,7 @@
     <Property Name="direccionExacta" Type="varchar" MaxLength="200" />
     <Property Name="horasLaboradas" Type="int" />
     <Property Name="edad" Type="int" Nullable="false" />
-    <Property Name="disponibilidad" Type="bit" />
+    <Property Name="disponibilidad" Type="varchar" MaxLength="50" />
     <Property Name="rol" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="fechaNacimiento" Type="date" Nullable="false" />
   </EntityType>
@@ -107,10 +107,10 @@
     <Property Name="nombrePK" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="fechaInicio" Type="date" Nullable="false" />
     <Property Name="fechaEntrega" Type="date" Nullable="false" />
-    <Property Name="horasReales" Type="time" Precision="7" />
-    <Property Name="horasEstimadas" Type="time" Precision="7" Nullable="false" />
+    <Property Name="horasReales" Type="int" />
     <Property Name="dificultad" Type="varchar" MaxLength="15" />
     <Property Name="cedulaFK" Type="varchar" MaxLength="20" />
+    <Property Name="horasEstimadas" Type="int" />
   </EntityType>
   <Association Name="cedulaClienteFKProyecto">
     <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />

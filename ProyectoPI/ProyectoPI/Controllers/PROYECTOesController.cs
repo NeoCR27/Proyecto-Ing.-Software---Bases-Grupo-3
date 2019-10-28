@@ -152,7 +152,7 @@ namespace ProyectoPI.Controllers
                 participaController.Agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider"); // Agrego a PARTICIPA el lider escogido
 
                 EMPLEADO lider = db.EMPLEADO.Find(cedulaLiderEscogido);
-                lider.disponibilidad = false; // Cambiar la disponibilidad del lider escogido
+                lider.disponibilidad = "No Disponible"; // Cambiar la disponibilidad del lider escogido
 
                 db.SaveChanges();
 
@@ -225,9 +225,9 @@ namespace ProyectoPI.Controllers
                     participaController.Eliminar(pROYECTO.idPK, cedulaLiderActual); // Elimina que participa en ese proyecto
                     participaController.Agregar(pROYECTO.idPK, cedulaLiderEscogido, "Lider"); // Agrega al nuevo lider a la relacion participa
                     EMPLEADO antiguoLider = db.EMPLEADO.Find(cedulaLiderActual); // Cambio de la disponibilidad del lider antiguo
-                    antiguoLider.disponibilidad = true;
+                    antiguoLider.disponibilidad = "Disponible";
                     EMPLEADO nuevoLider = db.EMPLEADO.Find(cedulaLiderEscogido);
-                    nuevoLider.disponibilidad = false; 
+                    nuevoLider.disponibilidad = "No Disponible"; 
                 }
                 pROYECTO.estado = Request.Form["estado"].ToString();
                 db.Entry(pROYECTO).State = EntityState.Modified;
@@ -283,7 +283,7 @@ namespace ProyectoPI.Controllers
             PROYECTO pROYECTO = db.PROYECTO.Find(id);
             db.PROYECTO.Remove(pROYECTO);
             EMPLEADO lider = db.EMPLEADO.Find(cedulaLiderActual); // Pone la disponibilidad del lider en TRUE
-            lider.disponibilidad = true;
+            lider.disponibilidad = "Disponible";
             PARTICIPA participa = db.PARTICIPA.Find(cedulaLiderActual, id); 
             db.PARTICIPA.Remove(participa); // Elimina la tupla de PARTICIPA
             db.SaveChanges();
@@ -320,7 +320,7 @@ namespace ProyectoPI.Controllers
         }
 
         //Redirecciona la al controlador de habilidades
-        public ActionResult get_req(string id)
+        public ActionResult GetReq(string id)
         {
             return RedirectToAction("../REQUERIMIENTOS/index", new { id = id });
         }

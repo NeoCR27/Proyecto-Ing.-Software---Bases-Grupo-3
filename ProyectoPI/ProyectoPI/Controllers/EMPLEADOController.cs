@@ -177,7 +177,7 @@ namespace ProyectoPI.Controllers
         //Devuelve una lista con todos los lideres disponibles
         public List<SelectListItem> GetLideresDisponibles()
         { // Retorna los nombres y cédulas de los empleados líderes disponibles
-            List<EMPLEADO> empleados = (db.EMPLEADO.Where((e => e.disponibilidad == true && e.rol == "Lider"))).ToList();
+            List<EMPLEADO> empleados = (db.EMPLEADO.Where((e => e.disponibilidad == "Disponible" && e.rol == "Lider"))).ToList();
 
             List<SelectListItem> informacion = empleados.ConvertAll(e => {
                 return new SelectListItem()

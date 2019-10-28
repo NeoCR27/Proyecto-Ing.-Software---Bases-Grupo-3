@@ -32,7 +32,7 @@
     <Property Name="direccionExacta" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="horasLaboradas" Type="Int32" />
     <Property Name="edad" Type="Int32" Nullable="false" />
-    <Property Name="disponibilidad" Type="Boolean" />
+    <Property Name="disponibilidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="rol" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="fechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
     <NavigationProperty Name="HABILIDADES" Relationship="Self.cedulaFKHabilidades" FromRole="EMPLEADO" ToRole="HABILIDADES" />
@@ -109,10 +109,10 @@
     <Property Name="nombrePK" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="fechaEntrega" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="horasReales" Type="Time" Precision="7" />
-    <Property Name="horasEstimadas" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="horasReales" Type="Int32" />
     <Property Name="dificultad" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="cedulaFK" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="horasEstimadas" Type="Int32" />
     <NavigationProperty Name="EMPLEADO" Relationship="Self.ERRORCedRequerimientos" FromRole="REQUERIMIENTOS" ToRole="EMPLEADO" />
     <NavigationProperty Name="PROYECTO" Relationship="Self.ERRORIDRequerimientos" FromRole="REQUERIMIENTOS" ToRole="PROYECTO" />
     <NavigationProperty Name="PRUEBAS" Relationship="Self.ERRORIDNombrePrueba" FromRole="REQUERIMIENTOS" ToRole="PRUEBAS" />

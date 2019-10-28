@@ -16,7 +16,7 @@ namespace ProyectoPI.Controllers
         private SeguridadController seguridad_controller = new SeguridadController();
         private string idProyecto;
         // GET: REQUERIMIENTOS
-        public async Task<ActionResult> Index(String id)
+        public async Task<ActionResult> Index(string id)
         {
           
             if (id == null)
@@ -78,7 +78,7 @@ namespace ProyectoPI.Controllers
                 System.Diagnostics.Debug.WriteLine(rEQUERIMIENTOS.idFK);
                 db.REQUERIMIENTOS.Add(rEQUERIMIENTOS);
                 db.SaveChanges();
-                return RedirectToAction("Index", rEQUERIMIENTOS.idFK);
+                return RedirectToAction("../REQUERIMIENTOS/index", new { id = rEQUERIMIENTOS.idFK });
             }
 
         

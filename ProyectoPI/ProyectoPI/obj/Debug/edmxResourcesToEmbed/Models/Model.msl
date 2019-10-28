@@ -98,9 +98,9 @@
           <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
           <ScalarProperty Name="fechaEntrega" ColumnName="fechaEntrega" />
           <ScalarProperty Name="horasReales" ColumnName="horasReales" />
-          <ScalarProperty Name="horasEstimadas" ColumnName="horasEstimadas" />
           <ScalarProperty Name="dificultad" ColumnName="dificultad" />
           <ScalarProperty Name="cedulaFK" ColumnName="cedulaFK" />
+          <ScalarProperty Name="horasEstimadas" ColumnName="horasEstimadas" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

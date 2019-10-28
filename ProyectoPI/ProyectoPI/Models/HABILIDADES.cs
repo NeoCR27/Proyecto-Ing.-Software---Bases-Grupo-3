@@ -14,7 +14,6 @@ namespace ProyectoPI.Models
     
     public partial class HABILIDADES
     {
-
         public string valorPK { get; set; }
         public string tipoPK { get; set; }
         public string cedulaEmpleadoFK { get; set; }

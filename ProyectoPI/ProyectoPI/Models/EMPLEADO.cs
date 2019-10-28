@@ -12,7 +12,7 @@ namespace ProyectoPI.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class EMPLEADO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -85,7 +85,7 @@ namespace ProyectoPI.Models
 
         [Required]
         [Display(Name = "Disponibilidad")]
-        public Nullable<bool> disponibilidad { get; set; }
+        public string disponibilidad { get; set; }
 
         [Display(Name = "Rol")]
         public string rol { get; set; }

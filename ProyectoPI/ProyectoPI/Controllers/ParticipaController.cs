@@ -105,7 +105,7 @@ namespace ProyectoPI.Controllers
         public ActionResult AgregarTester(string idProyecto, string idEmpleado)
         {
             EMPLEADO eMPLEADO = db.EMPLEADO.Find(idEmpleado);
-            eMPLEADO.disponibilidad = false;
+            eMPLEADO.disponibilidad = "No Disponible";
             db.Entry(eMPLEADO).State = EntityState.Modified;
             db.SaveChanges();
             Agregar(idProyecto, idEmpleado, "Tester");
@@ -116,7 +116,7 @@ namespace ProyectoPI.Controllers
         public ActionResult RemoverTester(string idProyecto, string idEmpleado)
         {
             EMPLEADO eMPLEADO = db.EMPLEADO.Find(idEmpleado);
-            eMPLEADO.disponibilidad = true;
+            eMPLEADO.disponibilidad = "Disponible";
             db.Entry(eMPLEADO).State = EntityState.Modified;
             db.SaveChanges();
             Eliminar(idProyecto, idEmpleado);
