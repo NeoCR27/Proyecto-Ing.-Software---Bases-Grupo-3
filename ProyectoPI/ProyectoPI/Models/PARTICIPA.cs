@@ -31,7 +31,7 @@ namespace ProyectoPI.Models
         public string email { get; set; }
         public string rol { get; set; }
         public string proyNom { get; set; }
-        public bool dispon { get; set; }
+        public string dispon { get; set; }
         public string idEmp { get; set; }
         public string idCli { get; set; }
 
