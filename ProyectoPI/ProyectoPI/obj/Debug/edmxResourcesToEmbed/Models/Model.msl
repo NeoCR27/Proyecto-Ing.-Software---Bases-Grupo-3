@@ -93,24 +93,28 @@
     <EntitySetMapping Name="REQUERIMIENTOS">
       <EntityTypeMapping TypeName="Gr03Proy4Model.REQUERIMIENTOS">
         <MappingFragment StoreEntitySet="REQUERIMIENTOS">
-          <ScalarProperty Name="idFK" ColumnName="idFK" />
-          <ScalarProperty Name="nombrePK" ColumnName="nombrePK" />
-          <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
-          <ScalarProperty Name="fechaEntrega" ColumnName="fechaEntrega" />
-          <ScalarProperty Name="horasReales" ColumnName="horasReales" />
-          <ScalarProperty Name="dificultad" ColumnName="dificultad" />
-          <ScalarProperty Name="cedulaFK" ColumnName="cedulaFK" />
+          <ScalarProperty Name="descripcion_resultado" ColumnName="descripcion_resultado" />
+          <ScalarProperty Name="estado_final" ColumnName="estado_final" />
+          <ScalarProperty Name="estado_actual" ColumnName="estado_actual" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="horasEstimadas" ColumnName="horasEstimadas" />
+          <ScalarProperty Name="cedulaFK" ColumnName="cedulaFK" />
+          <ScalarProperty Name="dificultad" ColumnName="dificultad" />
+          <ScalarProperty Name="horasReales" ColumnName="horasReales" />
+          <ScalarProperty Name="fechaEntrega" ColumnName="fechaEntrega" />
+          <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+          <ScalarProperty Name="nombrePK" ColumnName="nombrePK" />
+          <ScalarProperty Name="idFK" ColumnName="idFK" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <AssociationSetMapping Name="HISTORIAL" TypeName="Gr03Proy4Model.HISTORIAL" StoreEntitySet="HISTORIAL">
+      <EndProperty Name="REQUERIMIENTOS">
+        <ScalarProperty Name="nombrePK" ColumnName="nombreReqFK" />
+        <ScalarProperty Name="idFK" ColumnName="idProyFK" />
+      </EndProperty>
       <EndProperty Name="EMPLEADO">
         <ScalarProperty Name="cedulaPK" ColumnName="idEmpFK" />
-      </EndProperty>
-      <EndProperty Name="REQUERIMIENTOS">
-        <ScalarProperty Name="idFK" ColumnName="idProyFK" />
-        <ScalarProperty Name="nombrePK" ColumnName="nombreReqFK" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

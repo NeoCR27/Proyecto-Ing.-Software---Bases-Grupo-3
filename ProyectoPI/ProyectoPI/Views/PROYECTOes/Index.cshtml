@@ -37,14 +37,14 @@
                         <p class="card-text">
                             @Html.ActionLink("Consultar", "Details", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
                             @Html.ActionLink("Eliminar", "Delete", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
-                            @Html.ActionLink("Requerimientos", "get_req", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
+                            @Html.ActionLink("Requerimientos", "GetReq", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
                         </p>
                             }
                             else if (item.estado == "Finalizado") // Se puede consultar
                             {
                         <p class="card-text">
                             @Html.ActionLink("Consultar", "Details", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
-                            @Html.ActionLink("Requerimientos", "get_req", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
+                            @Html.ActionLink("Requerimientos", "GetReq", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
                         </p>
                             }
                             else // Esta en proceso o No-iniciado

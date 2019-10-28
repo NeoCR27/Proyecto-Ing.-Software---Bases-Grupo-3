@@ -111,6 +111,10 @@
     <Property Name="dificultad" Type="varchar" MaxLength="15" />
     <Property Name="cedulaFK" Type="varchar" MaxLength="20" />
     <Property Name="horasEstimadas" Type="int" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="500" />
+    <Property Name="estado_actual" Type="varchar" MaxLength="50" />
+    <Property Name="estado_final" Type="varchar" MaxLength="50" />
+    <Property Name="descripcion_resultado" Type="varchar" MaxLength="50" />
   </EntityType>
   <Association Name="cedulaClienteFKProyecto">
     <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />

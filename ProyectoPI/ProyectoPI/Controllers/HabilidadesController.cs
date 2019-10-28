@@ -185,7 +185,7 @@ namespace ProyectoPI.Controllers
         // Recibe los valores del eliminar
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(string id, string valor, string tipo)
+        public ActionResult DeleteConfirmed(string id, string valor, string tipo)
         {
 
             HABILIDADES habilidade = db.HABILIDADES.Find(valor, tipo, id);
