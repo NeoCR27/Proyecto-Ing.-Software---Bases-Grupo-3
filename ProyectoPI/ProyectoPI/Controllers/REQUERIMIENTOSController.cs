@@ -18,7 +18,7 @@ namespace ProyectoPI.Controllers
         // GET: REQUERIMIENTOS
         public async Task<ActionResult> Index(string id)
         {
-          
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -45,7 +45,7 @@ namespace ProyectoPI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            REQUERIMIENTOS rEQUERIMIENTOS = db.REQUERIMIENTOS.Find(idpro,id);
+            REQUERIMIENTOS rEQUERIMIENTOS = db.REQUERIMIENTOS.Find(idpro, id);
             if (rEQUERIMIENTOS == null)
             {
                 return HttpNotFound();
@@ -64,14 +64,14 @@ namespace ProyectoPI.Controllers
             return View();
         }
 
-        
+
 
         // POST: REQUERIMIENTOS/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idFK,nombrePK,fechaInicio,fechaEntrega,horasReales,horasEstimadas,dificultad,cedulaFK,Descripcion,estado_actual,estado_final,descripcion_resultado")] REQUERIMIENTOS rEQUERIMIENTOS)
+        public ActionResult Create([Bind(Include = "idFK,nombrePK,fechaInicio,fechaEntrega,horasReales,horasEstimadas,dificultad,cedulaFK")] REQUERIMIENTOS rEQUERIMIENTOS)
         {
             if (ModelState.IsValid)
 
@@ -82,23 +82,26 @@ namespace ProyectoPI.Controllers
                 return RedirectToAction("../REQUERIMIENTOS/index", new { id = rEQUERIMIENTOS.idFK });
             }
 
-        
+
             return View(rEQUERIMIENTOS);
         }
 
         // GET: REQUERIMIENTOS/Edit/5
-        public ActionResult Edit(string id)
+        public async Task<ActionResult> Edit(string id, string idpro)
         {
+            string user = User.Identity.Name;
+            string rol = await this.seguridad_controller.GetRol(user);
+            ViewBag.rol = rol;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            REQUERIMIENTOS rEQUERIMIENTOS = db.REQUERIMIENTOS.Find(id);
+            REQUERIMIENTOS rEQUERIMIENTOS = db.REQUERIMIENTOS.Find(idpro, id);
             if (rEQUERIMIENTOS == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.cedulaFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", rEQUERIMIENTOS.cedulaFK);
+            ViewBag.cedulaFK = new SelectList(db.EMPLEADO, "cedulaPK", "cedulaPK", rEQUERIMIENTOS.cedulaFK);
             ViewBag.idFK = new SelectList(db.PROYECTO, "idPK", "nombre", rEQUERIMIENTOS.idFK);
             return View(rEQUERIMIENTOS);
         }
@@ -122,13 +125,16 @@ namespace ProyectoPI.Controllers
         }
 
         // GET: REQUERIMIENTOS/Delete/5
-        public ActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id, string idpro)
         {
+            string user = User.Identity.Name;
+            string rol = await this.seguridad_controller.GetRol(user);
+            ViewBag.rol = rol;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            REQUERIMIENTOS rEQUERIMIENTOS = db.REQUERIMIENTOS.Find(id);
+            REQUERIMIENTOS rEQUERIMIENTOS = db.REQUERIMIENTOS.Find(idpro, id);
             if (rEQUERIMIENTOS == null)
             {
                 return HttpNotFound();
@@ -139,9 +145,9 @@ namespace ProyectoPI.Controllers
         // POST: REQUERIMIENTOS/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string id, string idpro)
         {
-            REQUERIMIENTOS rEQUERIMIENTOS = db.REQUERIMIENTOS.Find(id);
+            REQUERIMIENTOS rEQUERIMIENTOS = db.REQUERIMIENTOS.Find(idpro, id);
             db.REQUERIMIENTOS.Remove(rEQUERIMIENTOS);
             db.SaveChanges();
             return RedirectToAction("Index");
