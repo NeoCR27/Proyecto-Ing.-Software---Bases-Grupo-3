@@ -17,16 +17,8 @@ namespace ProyectoPI.Models
         public string idProyFK { get; set; }
         public string nombreReqFK { get; set; }
         public string nombrePK { get; set; }
-        public string resultFinal { get; set; }
-        public string estado { get; set; }
-        public string proposito { get; set; }
-        public string entradaDatos { get; set; }
-        public string flujo { get; set; }
-        public string resultEsperado { get; set; }
-        public string prioridad { get; set; }
-        public string descripcionErr { get; set; }
-        public byte[] imagenErr { get; set; }
-        public string estadoErr { get; set; }
+        public string EstadoFinal { get; set; }
+        public string resultadoDetalles { get; set; }
     
         public virtual REQUERIMIENTOS REQUERIMIENTOS { get; set; }
     }

@@ -57,6 +57,7 @@ namespace ProyectoPI.Controllers
         public ActionResult Create(string id)
 
         {
+            ViewBag.Tester = new SelectList(db.EMPLEADO, "cedulaPK", "tel");
             ViewBag.idProy = id;
             idProyecto = id;
 

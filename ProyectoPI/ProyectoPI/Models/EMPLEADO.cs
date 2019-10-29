@@ -20,7 +20,6 @@ namespace ProyectoPI.Models
             this.HABILIDADES = new HashSet<HABILIDADES>();
             this.PARTICIPA = new HashSet<PARTICIPA>();
             this.REQUERIMIENTOS = new HashSet<REQUERIMIENTOS>();
-            this.REQUERIMIENTOS1 = new HashSet<REQUERIMIENTOS>();
         }
     
         public string cedulaPK { get; set; }
@@ -45,7 +44,5 @@ namespace ProyectoPI.Models
         public virtual ICollection<PARTICIPA> PARTICIPA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REQUERIMIENTOS> REQUERIMIENTOS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<REQUERIMIENTOS> REQUERIMIENTOS1 { get; set; }
     }
 }

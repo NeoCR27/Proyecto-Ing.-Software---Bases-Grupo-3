@@ -38,7 +38,6 @@
     <NavigationProperty Name="HABILIDADES" Relationship="Self.cedulaFKHabilidades" FromRole="EMPLEADO" ToRole="HABILIDADES" />
     <NavigationProperty Name="PARTICIPA" Relationship="Self.cedulaFKParticipa" FromRole="EMPLEADO" ToRole="PARTICIPA" />
     <NavigationProperty Name="REQUERIMIENTOS" Relationship="Gr03Proy4Model.ERRORCedRequerimientos" FromRole="EMPLEADO" ToRole="REQUERIMIENTOS" />
-    <NavigationProperty Name="REQUERIMIENTOS1" Relationship="Gr03Proy4Model.HISTORIAL" FromRole="EMPLEADO" ToRole="REQUERIMIENTOS" />
   </EntityType>
   <EntityType Name="HABILIDADES">
     <Key>
@@ -78,27 +77,6 @@
     <NavigationProperty Name="CLIENTE" Relationship="Self.cedulaClienteFKProyecto" FromRole="PROYECTO" ToRole="CLIENTE" />
     <NavigationProperty Name="PARTICIPA" Relationship="Self.idProyectoFKParticipa" FromRole="PROYECTO" ToRole="PARTICIPA" />
     <NavigationProperty Name="REQUERIMIENTOS" Relationship="Gr03Proy4Model.ERRORIDRequerimientos" FromRole="PROYECTO" ToRole="REQUERIMIENTOS" />
-  </EntityType>
-  <EntityType Name="PRUEBAS">
-    <Key>
-      <PropertyRef Name="idProyFK" />
-      <PropertyRef Name="nombreReqFK" />
-      <PropertyRef Name="nombrePK" />
-    </Key>
-    <Property Name="idProyFK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nombreReqFK" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nombrePK" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="resultFinal" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-    <Property Name="estado" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="proposito" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="entradaDatos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="flujo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="resultEsperado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="prioridad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="descripcionErr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="imagenErr" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="estadoErr" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="REQUERIMIENTOS" Relationship="Gr03Proy4Model.ERRORIDNombrePrueba" FromRole="PRUEBAS" ToRole="REQUERIMIENTOS" />
   </EntityType>
   <Association Name="cedulaClienteFKProyecto">
     <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
@@ -160,7 +138,6 @@
     <EntitySet Name="HABILIDADES" EntityType="Self.HABILIDADES" />
     <EntitySet Name="PARTICIPA" EntityType="Self.PARTICIPA" />
     <EntitySet Name="PROYECTO" EntityType="Self.PROYECTO" />
-    <EntitySet Name="PRUEBAS" EntityType="Self.PRUEBAS" />
     <AssociationSet Name="cedulaClienteFKProyecto" Association="Self.cedulaClienteFKProyecto">
       <End Role="CLIENTE" EntitySet="CLIENTE" />
       <End Role="PROYECTO" EntitySet="PROYECTO" />
@@ -186,13 +163,14 @@
       <End Role="PROYECTO" EntitySet="PROYECTO" />
       <End Role="REQUERIMIENTOS" EntitySet="REQUERIMIENTOS" />
     </AssociationSet>
-    <AssociationSet Name="ERRORIDNombrePrueba" Association="Gr03Proy4Model.ERRORIDNombrePrueba">
-      <End Role="REQUERIMIENTOS" EntitySet="REQUERIMIENTOS" />
-      <End Role="PRUEBAS" EntitySet="PRUEBAS" />
-    </AssociationSet>
     <AssociationSet Name="HISTORIAL" Association="Gr03Proy4Model.HISTORIAL">
       <End Role="EMPLEADO" EntitySet="EMPLEADO" />
       <End Role="REQUERIMIENTOS" EntitySet="REQUERIMIENTOS" />
+    </AssociationSet>
+    <EntitySet Name="PRUEBAS" EntityType="Gr03Proy4Model.PRUEBAS" />
+    <AssociationSet Name="ERRORIDNombrePrueba" Association="Gr03Proy4Model.ERRORIDNombrePrueba">
+      <End Role="REQUERIMIENTOS" EntitySet="REQUERIMIENTOS" />
+      <End Role="PRUEBAS" EntitySet="PRUEBAS" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="REQUERIMIENTOS">
@@ -214,8 +192,8 @@
     <Property Name="descripcion_resultado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="EMPLEADO" Relationship="Gr03Proy4Model.ERRORCedRequerimientos" FromRole="REQUERIMIENTOS" ToRole="EMPLEADO" />
     <NavigationProperty Name="PROYECTO" Relationship="Gr03Proy4Model.ERRORIDRequerimientos" FromRole="REQUERIMIENTOS" ToRole="PROYECTO" />
-    <NavigationProperty Name="PRUEBAS" Relationship="Gr03Proy4Model.ERRORIDNombrePrueba" FromRole="REQUERIMIENTOS" ToRole="PRUEBAS" />
     <NavigationProperty Name="EMPLEADO1" Relationship="Gr03Proy4Model.HISTORIAL" FromRole="REQUERIMIENTOS" ToRole="EMPLEADO" />
+    <NavigationProperty Name="PRUEBAS" Relationship="Gr03Proy4Model.ERRORIDNombrePrueba" FromRole="REQUERIMIENTOS" ToRole="PRUEBAS" />
   </EntityType>
   <Association Name="ERRORCedRequerimientos">
     <End Type="Gr03Proy4Model.EMPLEADO" Role="EMPLEADO" Multiplicity="0..1" />
@@ -243,6 +221,23 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="HISTORIAL">
+    <End Type="Gr03Proy4Model.EMPLEADO" Role="EMPLEADO" Multiplicity="*" />
+    <End Type="Gr03Proy4Model.REQUERIMIENTOS" Role="REQUERIMIENTOS" Multiplicity="*" />
+  </Association>
+  <EntityType Name="PRUEBAS">
+    <Key>
+      <PropertyRef Name="idProyFK" />
+      <PropertyRef Name="nombreReqFK" />
+      <PropertyRef Name="nombrePK" />
+    </Key>
+    <Property Name="idProyFK" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="nombreReqFK" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="nombrePK" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EstadoFinal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="resultadoDetalles" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="REQUERIMIENTOS" Relationship="Gr03Proy4Model.ERRORIDNombrePrueba" FromRole="PRUEBAS" ToRole="REQUERIMIENTOS" />
+  </EntityType>
   <Association Name="ERRORIDNombrePrueba">
     <End Type="Gr03Proy4Model.REQUERIMIENTOS" Role="REQUERIMIENTOS" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -258,9 +253,5 @@
         <PropertyRef Name="idProyFK" />
       </Dependent>
     </ReferentialConstraint>
-  </Association>
-  <Association Name="HISTORIAL">
-    <End Type="Gr03Proy4Model.EMPLEADO" Role="EMPLEADO" Multiplicity="*" />
-    <End Type="Gr03Proy4Model.REQUERIMIENTOS" Role="REQUERIMIENTOS" Multiplicity="*" />
   </Association>
 </Schema>

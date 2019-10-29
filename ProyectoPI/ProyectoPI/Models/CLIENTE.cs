@@ -20,7 +20,6 @@ namespace ProyectoPI.Models
         {
             this.PROYECTO = new HashSet<PROYECTO>();
         }
-
         [RegularExpression("^[a-zA-Z]*$", ErrorMessage = "Solo se pueden digitar letras")]
         [MaxLength(20, ErrorMessage = "El máximo de caracteres es 20")]
         [Required(ErrorMessage = "El campo Nombre es obligatorio")]

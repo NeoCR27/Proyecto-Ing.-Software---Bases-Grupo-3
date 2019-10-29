@@ -87,16 +87,8 @@
     <Property Name="idProyFK" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="nombreReqFK" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="nombrePK" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="resultFinal" Type="varchar" MaxLength="15" />
-    <Property Name="estado" Type="varchar" MaxLength="15" Nullable="false" />
-    <Property Name="proposito" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="entradaDatos" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="flujo" Type="varchar" MaxLength="100" />
-    <Property Name="resultEsperado" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="prioridad" Type="varchar" MaxLength="20" />
-    <Property Name="descripcionErr" Type="varchar" MaxLength="100" />
-    <Property Name="imagenErr" Type="image" />
-    <Property Name="estadoErr" Type="varchar" MaxLength="20" />
+    <Property Name="EstadoFinal" Type="varchar" MaxLength="50" />
+    <Property Name="resultadoDetalles" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="REQUERIMIENTOS">
     <Key>

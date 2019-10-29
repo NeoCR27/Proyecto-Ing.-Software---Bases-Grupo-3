@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="Gr03Proy4Model.HABILIDADES" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Gr03Proy4Model.PARTICIPA" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Gr03Proy4Model.PROYECTO" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Gr03Proy4Model.PRUEBAS" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
         <AssociationConnector Association="Gr03Proy4Model.cedulaClienteFKProyecto" ManuallyRouted="false" />
         <AssociationConnector Association="Gr03Proy4Model.cedulaFKHabilidades" ManuallyRouted="false" />
         <AssociationConnector Association="Gr03Proy4Model.cedulaFKParticipa" ManuallyRouted="false" />
@@ -18,8 +17,9 @@
         <EntityTypeShape EntityType="Gr03Proy4Model.REQUERIMIENTOS" Width="1.5" PointX="6" PointY="3.25" />
         <AssociationConnector Association="Gr03Proy4Model.ERRORCedRequerimientos" />
         <AssociationConnector Association="Gr03Proy4Model.ERRORIDRequerimientos" />
-        <AssociationConnector Association="Gr03Proy4Model.ERRORIDNombrePrueba" />
         <AssociationConnector Association="Gr03Proy4Model.HISTORIAL" />
+        <EntityTypeShape EntityType="Gr03Proy4Model.PRUEBAS" Width="1.5" PointX="8.25" PointY="4.25" />
+        <AssociationConnector Association="Gr03Proy4Model.ERRORIDNombrePrueba" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

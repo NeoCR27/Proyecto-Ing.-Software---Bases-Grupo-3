@@ -71,25 +71,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PRUEBAS">
-      <EntityTypeMapping TypeName="Gr03Proy4Model.PRUEBAS">
-        <MappingFragment StoreEntitySet="PRUEBAS">
-          <ScalarProperty Name="idProyFK" ColumnName="idProyFK" />
-          <ScalarProperty Name="nombreReqFK" ColumnName="nombreReqFK" />
-          <ScalarProperty Name="nombrePK" ColumnName="nombrePK" />
-          <ScalarProperty Name="resultFinal" ColumnName="resultFinal" />
-          <ScalarProperty Name="estado" ColumnName="estado" />
-          <ScalarProperty Name="proposito" ColumnName="proposito" />
-          <ScalarProperty Name="entradaDatos" ColumnName="entradaDatos" />
-          <ScalarProperty Name="flujo" ColumnName="flujo" />
-          <ScalarProperty Name="resultEsperado" ColumnName="resultEsperado" />
-          <ScalarProperty Name="prioridad" ColumnName="prioridad" />
-          <ScalarProperty Name="descripcionErr" ColumnName="descripcionErr" />
-          <ScalarProperty Name="imagenErr" ColumnName="imagenErr" />
-          <ScalarProperty Name="estadoErr" ColumnName="estadoErr" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="REQUERIMIENTOS">
       <EntityTypeMapping TypeName="Gr03Proy4Model.REQUERIMIENTOS">
         <MappingFragment StoreEntitySet="REQUERIMIENTOS">
@@ -117,5 +98,16 @@
         <ScalarProperty Name="cedulaPK" ColumnName="idEmpFK" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="PRUEBAS">
+      <EntityTypeMapping TypeName="Gr03Proy4Model.PRUEBAS">
+        <MappingFragment StoreEntitySet="PRUEBAS">
+          <ScalarProperty Name="resultadoDetalles" ColumnName="resultadoDetalles" />
+          <ScalarProperty Name="EstadoFinal" ColumnName="EstadoFinal" />
+          <ScalarProperty Name="nombrePK" ColumnName="nombrePK" />
+          <ScalarProperty Name="nombreReqFK" ColumnName="nombreReqFK" />
+          <ScalarProperty Name="idProyFK" ColumnName="idProyFK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
