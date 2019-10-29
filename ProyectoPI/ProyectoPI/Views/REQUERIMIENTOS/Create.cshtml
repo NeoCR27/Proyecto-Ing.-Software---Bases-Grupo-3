@@ -8,133 +8,122 @@
 
 
 <h2 class="titulosPag">CREAR REQUERIMIENTO</h2>
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
 
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
 
-    <input type="hidden" id="idFK" name="idFK" value=@idProy>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.nombrePK, htmlAttributes: new { @class = "control-label col-md-2 required" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.nombrePK, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.nombrePK, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
-        </div>
-    </div>
+        <input type="hidden" id="idFK" name="idFK" value=@idProy>
 
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.fechaInicio, htmlAttributes: new { @class = "control-label col-md-2 required" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.fechaInicio, new { @type = "date", @class = "form-control datepicker", })
-
-            @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.fechaEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.fechaEntrega, new { @type = "date", @class = "form-control datepicker", })
-
-            @Html.ValidationMessageFor(model => model.fechaEntrega, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.horasReales, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.horasReales, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.horasReales, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.horasEstimadas, htmlAttributes: new { @class = "control-label col-md-2 required" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.horasEstimadas, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.horasEstimadas, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.dificultad, htmlAttributes: new { @class = "control-label col-md-2 required" })
-        <div class="col-md-10" place>
-            <select class="form-control" id="estado" name="estado">
-                <option value="" disabled selected>Seleccione la Dificultad</option>
-                <option>Alta</option>
-                <option>Baja</option>
-                <option>Intermedio</option>
-
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.estado_actual, htmlAttributes: new { @class = "control-label col-md-2 required" })
-        <div class="col-md-10">
-            <select class="form-control" id="estado" name="estado">
-                <option value="" disabled selected>Seleccione el Estado</option>
-                <option>No-iniciado</option>
-                <option>En-proceso</option>
-                <option>Finalizado</option>
-                <option>Cancelado</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.cedulaFK, "cedulaFK", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("Tester", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.cedulaFK, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <br />
-    <p><strong>Los campos con <font color="red">*</font> son obligatorios.</strong></p>
-    <br />
-
-    <div style=" right:3000px;width:800px " class="jumbotron">
-        <p style="text-align:center" display-1">Resultados Finales</p>
         <div class="form-group">
-            @Html.LabelFor(model => model.estado_final, htmlAttributes: new { @class = "control-label col-md-2" })
-
+            @Html.LabelFor(model => model.nombrePK, htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nombrePK, new { htmlAttributes = new { @class = "form-control" , required = "required" } })
+                @Html.ValidationMessageFor(model => model.nombrePK, "", new { @class = "text-danger" })
+            </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.descripcion_resultado, htmlAttributes: new { @class = "control-label col-md-2" })
-
+            @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+            </div>
         </div>
 
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            @{
-                string URL = Request.Url.ToString();
-            }
-            <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="submit" value="Aceptar" class="botonGeneral colorVerde" />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fechaInicio, htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.fechaInicio, new { @type = "date", @class = "form-control datepicker", required = "required" })
+
+                @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.fechaEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.fechaEntrega, new { @type = "date", @class = "form-control datepicker", required = "required" })
+
+                @Html.ValidationMessageFor(model => model.fechaEntrega, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.horasReales, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.horasReales, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.horasReales, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.horasEstimadas, htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.horasEstimadas, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.horasEstimadas, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.dificultad, htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10" place>
+                <select class="form-control" id="estado" name="estado" required = "required" >
+                    <option value="" disabled selected>Seleccione la Dificultad</option>
+                    <option>Alta</option>
+                    <option>Baja</option>
+                    <option>Intermedio</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.estado_actual, htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10">
+                <select class="form-control" id="estado" name="estado"  required = "required" >
+                    <option value="" disabled selected>Seleccione el Estado</option>
+                    <option>No-iniciado</option>
+                    <option>En-proceso</option>
+                    <option>Finalizado</option>
+                    <option>Cancelado</option>
+                </select>
+            </div>
+        </div>
+
+
+
+        <br />
+        <p><strong>Los campos con <font color="red">*</font> son obligatorios.</strong></p>
+        <br />
+
+        <div style=" right:3000px;width:800px " class="jumbotron">
+            <p style="text-align:center" display-1">Resultados Finales</p>
+            <div class="form-group">
+                @Html.LabelFor(model => model.estado_final, htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.descripcion_resultado, htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @{
+                    string URL = Request.Url.ToString();
+                }
+                <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="submit" value="Aceptar" class="botonGeneral colorVerde" />
+            </div>
         </div>
     </div>
-</div>
 }
-
-    <div>
-        @Html.ActionLink("Volver", "Index", new { id =idProy }, new { @class = "botonGeneral colorGris" })
-    </div>
+<div>
+    @Html.ActionLink("Volver", "Index", new { id = idProy }, new { @class = "botonGeneral colorGris" })
+</div>

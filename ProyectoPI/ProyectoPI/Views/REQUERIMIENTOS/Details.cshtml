@@ -22,6 +22,13 @@
         </dd>
         <br />
         <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <br />
+        <dt>
             @Html.DisplayNameFor(model => model.PROYECTO.nombre)
         </dt>
         <dd>
@@ -29,10 +36,10 @@
         </dd>
         <br />
         <dt>
-            Tester Asignado
+            @Html.DisplayNameFor(model => model.dificultad)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.EMPLEADO.nombre)
+            @Html.DisplayFor(model => model.dificultad)
         </dd>
         <br />
         <dt>
@@ -64,11 +71,30 @@
         </dd>
         <br />
         <dt>
-            @Html.DisplayNameFor(model => model.dificultad)
+            Tester Asignado
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.dificultad)
+            @Html.DisplayFor(model => model.EMPLEADO.nombre)
         </dd>
+        <div style=" right:3000px;width:800px " class="jumbotron">
+            <p style="text-align:center" display-1">Resultados Finales</p>
+            <br />
+            <dt>
+                @Html.DisplayNameFor(model => model.estado_final)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.estado_final)
+            </dd>
+            <br />
+            <dt>
+                @Html.DisplayNameFor(model => model.descripcion_resultado)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.descripcion_resultado)
+            </dd>
+
+        </div>
+
 
     </dl>
 </div>

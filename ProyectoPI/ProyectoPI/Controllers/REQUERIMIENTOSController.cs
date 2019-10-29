@@ -57,7 +57,7 @@ namespace ProyectoPI.Controllers
         public ActionResult Create(string id)
 
         {
-            ViewBag.Tester = new SelectList(db.EMPLEADO, "cedulaPK", "tel");
+            ViewBag.cedulaFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel");
             ViewBag.idProy = id;
             idProyecto = id;
 
@@ -71,7 +71,7 @@ namespace ProyectoPI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idFK,nombrePK,fechaInicio,fechaEntrega,horasReales,horasEstimadas,dificultad,cedulaFK")] REQUERIMIENTOS rEQUERIMIENTOS)
+        public ActionResult Create([Bind(Include = "idFK,nombrePK,fechaInicio,fechaEntrega,horasReales,dificultad,cedulaFK,horasEstimadas,Descripcion,estado_actual,estado_final,descripcion_resultado")] REQUERIMIENTOS rEQUERIMIENTOS)
         {
             if (ModelState.IsValid)
 
