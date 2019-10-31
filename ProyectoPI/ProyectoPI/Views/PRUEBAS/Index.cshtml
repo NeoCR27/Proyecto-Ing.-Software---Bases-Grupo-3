@@ -1,40 +1,50 @@
 ﻿@model IEnumerable<ProyectoPI.Models.PRUEBAS>
 
-    @{
-    ViewBag.Title = "Pruebas";
-    }
-    <h2 class="titulosPag">Prueba</h2>
-    @Html.ActionLink("Crear prueba", "Create", null, new { @class = "botonGeneral botonCrear" })
+@{
+    ViewBag.Title = "Index";
+    string idProyecto = ViewBag.idProy;
+    string nombreReq = ViewBag.nomReq;
+}
 
-    <table class="table">
+<h2>Index</h2>
+<h1> id =  @idProyecto </h1>
+<h1> nombre =  @nombreReq </h1>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { id = @idProyecto, nombre = @nombreReq }, new { @class = "botonGeneral colorVerde" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EstadoFinal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.resultadoDetalles)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombrePK)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
         <tr>
-
-            <th>
-                @Html.DisplayNameFor(model => model.EstadoFinal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.resultadoDetalles)
-            </th>
-
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model) {
-        <tr>
-
             <td>
                 @Html.DisplayFor(modelItem => item.EstadoFinal)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.resultadoDetalles)
             </td>
-
+            <td>
+                @Html.DisplayFor(modelItem => item.nombrePK)
+            </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Delete", "Delete", new { id = @idProyecto, nombre = @nombreReq, nombrePrueba = item.nombrePK }, new { @class = "botonGeneral colorCeleste" })
             </td>
         </tr>
-        }
+    }
 
-    </table>
+</table>

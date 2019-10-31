@@ -172,7 +172,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PRUEBASController.cs" />
     <Compile Include="Controllers\REQUERIMIENTOSController.cs" />
     <Compile Include="Controllers\SeguridadController.cs" />
     <Compile Include="Global.asax.cs">
@@ -214,6 +213,7 @@
     <Compile Include="Models\PRUEBAS.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PRUEBASController.cs" />
     <Compile Include="Models\REQUERIMIENTOS.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -441,6 +441,11 @@
     <Content Include="Views\REQUERIMIENTOS\Delete.cshtml" />
     <Content Include="Views\REQUERIMIENTOS\Details.cshtml" />
     <Content Include="Views\REQUERIMIENTOS\Edit.cshtml" />
+    <Content Include="Views\PRUEBAS\Create.cshtml" />
+    <Content Include="Views\PRUEBAS\Delete.cshtml" />
+    <Content Include="Views\PRUEBAS\Details.cshtml" />
+    <Content Include="Views\PRUEBAS\Edit.cshtml" />
+    <Content Include="Views\PRUEBAS\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

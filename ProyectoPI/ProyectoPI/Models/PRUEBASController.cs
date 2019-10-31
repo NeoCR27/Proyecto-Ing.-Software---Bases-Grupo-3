@@ -6,17 +6,21 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ProyectoPI.Models;
 
-namespace ProyectoPI.Controllers
+namespace ProyectoPI.Models
 {
     public class PRUEBASController : Controller
     {
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
 
         // GET: PRUEBAS
-        public ActionResult Index()
+        public ActionResult Index(string id, string nombre)
         {
+            System.Diagnostics.Debug.WriteLine(id);
+            System.Diagnostics.Debug.WriteLine("hola");
+            ViewBag.idProy = id;
+            ViewBag.nomReq = nombre;
+
             var pRUEBAS = db.PRUEBAS.Include(p => p.REQUERIMIENTOS);
             return View(pRUEBAS.ToList());
         }
@@ -37,8 +41,10 @@ namespace ProyectoPI.Controllers
         }
 
         // GET: PRUEBAS/Create
-        public ActionResult Create()
+        public ActionResult Create(string id, string nombre)
         {
+            ViewBag.idProy = id;
+            ViewBag.nomReq = nombre;
             ViewBag.idProyFK = new SelectList(db.REQUERIMIENTOS, "idFK", "dificultad");
             return View();
         }
@@ -48,13 +54,13 @@ namespace ProyectoPI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProyFK,nombreReqFK,nombrePK,resultFinal,estado,proposito,entradaDatos,flujo,resultEsperado,prioridad,descripcionErr,imagenErr,estadoErr")] PRUEBAS pRUEBAS)
+        public ActionResult Create([Bind(Include = "idProyFK,nombreReqFK,nombrePK,EstadoFinal,resultadoDetalles")] PRUEBAS pRUEBAS)
         {
             if (ModelState.IsValid)
             {
                 db.PRUEBAS.Add(pRUEBAS);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = pRUEBAS.idProyFK, nombre = pRUEBAS.nombreReqFK });
             }
 
             ViewBag.idProyFK = new SelectList(db.REQUERIMIENTOS, "idFK", "dificultad", pRUEBAS.idProyFK);
@@ -82,26 +88,26 @@ namespace ProyectoPI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idProyFK,nombreReqFK,nombrePK,resultFinal,estado,proposito,entradaDatos,flujo,resultEsperado,prioridad,descripcionErr,imagenErr,estadoErr")] PRUEBAS pRUEBAS)
+        public ActionResult Edit([Bind(Include = "idProyFK,nombreReqFK,nombrePK,EstadoFinal,resultadoDetalles")] PRUEBAS pRUEBAS)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(pRUEBAS).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = pRUEBAS.idProyFK, nombre = pRUEBAS.nombreReqFK });
             }
             ViewBag.idProyFK = new SelectList(db.REQUERIMIENTOS, "idFK", "dificultad", pRUEBAS.idProyFK);
             return View(pRUEBAS);
         }
 
         // GET: PRUEBAS/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string id, string nombre, string nombrePrueba)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRUEBAS pRUEBAS = db.PRUEBAS.Find(id);
+            PRUEBAS pRUEBAS = db.PRUEBAS.Find(id,nombre,nombrePrueba);
             if (pRUEBAS == null)
             {
                 return HttpNotFound();
@@ -112,12 +118,12 @@ namespace ProyectoPI.Controllers
         // POST: PRUEBAS/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string id,string nombre,string nombrePrueba)
         {
-            PRUEBAS pRUEBAS = db.PRUEBAS.Find(id);
+            PRUEBAS pRUEBAS = db.PRUEBAS.Find(id, nombre, nombrePrueba);
             db.PRUEBAS.Remove(pRUEBAS);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = id, nombre = nombre });
         }
 
         protected override void Dispose(bool disposing)
