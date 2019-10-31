@@ -114,13 +114,8 @@ namespace ProyectoPI.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.idProy = idpro;
-            ViewBag.dificultad = rEQUERIMIENTOS.dificultad;
-            ViewBag.estadoActual = rEQUERIMIENTOS.estado_actual;
-            ViewBag.tester = rEQUERIMIENTOS.cedulaFK;
-
-          /*  //Datos para desplegar miembros de equipo disponibles
-            string queryTesterDisp = "Exec recuperar_tester_disponible" + "'" + id + "'";
+            //Datos para desplegar miembros de equipo disponibles
+            string queryTesterDisp = "Exec recuperar_tester_disponible" + "'" + idpro + "'";
             //Se hace el query a la base de datos
             var tempTesterDisp = (db.Database.SqlQuery<testerDisp>(queryTesterDisp)).ToList();
             //Se pasa a un Select List para hacer dropdown
@@ -128,7 +123,12 @@ namespace ProyectoPI.Controllers
             {
                 testerDisp.Add(new SelectListItem { Text = item.NombreEmpleado, Value = item.cedulaPK });
             }
-            ViewBag.testerDisp = testerDisp;*/
+
+            ViewBag.idProy = idpro;
+            ViewBag.dificultad = rEQUERIMIENTOS.dificultad;
+            ViewBag.estadoActual = rEQUERIMIENTOS.estado_actual;
+            ViewBag.tester = rEQUERIMIENTOS.cedulaFK;
+            ViewBag.testerDisp = testerDisp;
             return View(rEQUERIMIENTOS);
         }
 
@@ -160,7 +160,7 @@ namespace ProyectoPI.Controllers
                     rEQUERIMIENTOS.estado_actual = Request.Form["estado"].ToString();
                 }
 
-                /* 
+                 
                 if (Request.Form["testers"] == null) // No se selecciono ningun tester
                 {
                     rEQUERIMIENTOS.dificultad = dificultadAnterior;
@@ -169,7 +169,7 @@ namespace ProyectoPI.Controllers
                 {
                     rEQUERIMIENTOS.estado_actual = Request.Form["testers"].ToString();
                 }
-                */
+                
                 db.Entry(rEQUERIMIENTOS).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("../REQUERIMIENTOS/index", new { id = rEQUERIMIENTOS.idFK });
