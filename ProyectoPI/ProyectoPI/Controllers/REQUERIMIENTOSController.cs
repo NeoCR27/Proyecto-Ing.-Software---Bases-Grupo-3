@@ -60,6 +60,18 @@ namespace ProyectoPI.Controllers
             ViewBag.cedulaFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel");
             ViewBag.idProy = id;
             idProyecto = id;
+            List<SelectListItem> testerDisp = new List<SelectListItem>();
+
+            /*Datos para desplegar miembros de equipo disponibles*/
+            string queryTesterDisp = "Exec recuperar_tester_disponible" + "'" + id + "'";
+            //Se hace el query a la base de datos
+            var tempTesterDisp = (db.Database.SqlQuery<testerDisp>(queryTesterDisp)).ToList();
+            /*Se pasa a un Select List para hacer dropdown*/
+            foreach (testerDisp item in tempTesterDisp)
+            {
+                testerDisp.Add(new SelectListItem { Text = item.NombreEmpleado, Value = item.cedulaPK });
+            }
+            ViewBag.testerDisp = testerDisp;
 
             return View();
         }
@@ -92,6 +104,7 @@ namespace ProyectoPI.Controllers
             string user = User.Identity.Name;
             string rol = await this.seguridad_controller.GetRol(user);
             ViewBag.rol = rol;
+            List<SelectListItem> testerDisp = new List<SelectListItem>();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -105,6 +118,17 @@ namespace ProyectoPI.Controllers
             ViewBag.dificultad = rEQUERIMIENTOS.dificultad;
             ViewBag.estadoActual = rEQUERIMIENTOS.estado_actual;
             ViewBag.tester = rEQUERIMIENTOS.cedulaFK;
+
+          /*  //Datos para desplegar miembros de equipo disponibles
+            string queryTesterDisp = "Exec recuperar_tester_disponible" + "'" + id + "'";
+            //Se hace el query a la base de datos
+            var tempTesterDisp = (db.Database.SqlQuery<testerDisp>(queryTesterDisp)).ToList();
+            //Se pasa a un Select List para hacer dropdown
+            foreach (testerDisp item in tempTesterDisp)
+            {
+                testerDisp.Add(new SelectListItem { Text = item.NombreEmpleado, Value = item.cedulaPK });
+            }
+            ViewBag.testerDisp = testerDisp;*/
             return View(rEQUERIMIENTOS);
         }
 

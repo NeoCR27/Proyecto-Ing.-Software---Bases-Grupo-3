@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Create";
     string idProy = ViewBag.idProy;
-
+    List<SelectListItem> testersDisp = ViewBag.testerDisp; 
 }
 
 
@@ -96,7 +96,12 @@
         </div>
     </div>
 
-
+    <div class="form-group">
+        @Html.LabelFor(model => model.cedulaFK, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Testers", testersDisp, "Seleccione un Tester", htmlAttributes: new { @class = "form-control", @name = "testersDispDrop", @id = "´testersDispDrop" })
+        </div>
+    </div>
 
     <br />
     <p><strong>Los campos con <font color="red">*</font> son obligatorios.</strong></p>

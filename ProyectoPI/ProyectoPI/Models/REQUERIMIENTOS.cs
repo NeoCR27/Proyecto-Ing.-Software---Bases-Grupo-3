@@ -69,4 +69,9 @@ namespace ProyectoPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRUEBAS> PRUEBAS { get; set; }
     }
+    public class testerDisp
+    {
+        public string NombreEmpleado { get; set; }
+        public string cedulaPK { get; set; }
+    }
 }
