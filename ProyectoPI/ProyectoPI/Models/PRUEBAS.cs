@@ -11,13 +11,16 @@ namespace ProyectoPI.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class PRUEBAS
     {
         public string idProyFK { get; set; }
         public string nombreReqFK { get; set; }
         public string nombrePK { get; set; }
         public string EstadoFinal { get; set; }
+
+        [DataType(DataType.MultilineText)]
         public string resultadoDetalles { get; set; }
     
         public virtual REQUERIMIENTOS REQUERIMIENTOS { get; set; }

@@ -2,92 +2,49 @@
 
 @{
     ViewBag.Title = "Index";
+    string idProyecto = ViewBag.idProy;
+    string nombreReq = ViewBag.nomReq;
 }
 
 <h2>Index</h2>
+<h1> id =  @idProyecto </h1>
+<h1> nombre =  @nombreReq </h1>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", new { id = @idProyecto, nombre = @nombreReq }, new { @class = "botonGeneral colorVerde" })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.resultFinal)
+            @Html.DisplayNameFor(model => model.EstadoFinal)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.estado)
+            @Html.DisplayNameFor(model => model.resultadoDetalles)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.proposito)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.entradaDatos)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.flujo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.resultEsperado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.prioridad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcionErr)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.imagenErr)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estadoErr)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.REQUERIMIENTOS.dificultad)
+            @Html.DisplayNameFor(model => model.nombrePK)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.resultFinal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.proposito)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.entradaDatos)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.flujo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.resultEsperado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.prioridad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcionErr)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.imagenErr)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estadoErr)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.REQUERIMIENTOS.dificultad)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoFinal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.resultadoDetalles)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombrePK)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { id = @idProyecto, nombre = @nombreReq, nombrePrueba = item.nombrePK }, new { @class = "botonGeneral colorCeleste" })
+            </td>
+        </tr>
+    }
 
 </table>

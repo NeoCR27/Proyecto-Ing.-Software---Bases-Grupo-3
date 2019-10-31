@@ -191,5 +191,15 @@ namespace ProyectoPI.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //Redirecciona la al controlador de pruebas
+        public ActionResult to_pruebas(string id, string nombre)
+        {
+            System.Diagnostics.Debug.WriteLine(id);
+            System.Diagnostics.Debug.WriteLine(nombre);
+            System.Diagnostics.Debug.WriteLine("hola2");
+            return RedirectToAction("../PRUEBAS/index", new { id = id, nombre = nombre });
+        }
+
     }
 }

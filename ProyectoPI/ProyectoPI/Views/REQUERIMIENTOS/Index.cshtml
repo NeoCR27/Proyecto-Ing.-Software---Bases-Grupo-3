@@ -42,6 +42,9 @@
                                 @Html.ActionLink("Eliminar", "Delete", new { id = item.nombrePK, idpro = idProy }, new { @class = "botonGeneral colorCeleste" })
 
                             }
+                       
+                            @Html.ActionLink("Pruebas", "to_pruebas", new { id = idProy, nombre = item.nombrePK }, new { @class = "botonGeneral colorCeleste" })
+
                         </p>
                     </div>
                 </div>
