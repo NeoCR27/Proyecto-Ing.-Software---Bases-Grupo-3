@@ -372,7 +372,7 @@ namespace ProyectoPI.Controllers
             }
         }
 
-        //Redirecciona la al controlador de habilidades
+        //Redirecciona al controlador de requerimientos
         public ActionResult GetReq(string id)
         {
             return RedirectToAction("../REQUERIMIENTOS/index", new { id = id });

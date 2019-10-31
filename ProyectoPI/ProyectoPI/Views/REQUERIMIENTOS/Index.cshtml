@@ -18,35 +18,35 @@
 
 
 
-<div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <img src="~/Img/req.png" class="card-img-top" alt="...">
-                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.nombrePK) </h4>
-                    <p class="card-text"><small class="text-muted">@Html.DisplayFor(modelItem => item.cedulaFK)</small></p>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="~/Img/req.png" class="card-img-top" alt="...">
+                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.nombrePK) </h4>
+                        <p class="card-text"><small class="text-muted">@Html.DisplayFor(modelItem => item.cedulaFK)</small></p>
 
-                    <p class="card-text">
+                        <p class="card-text">
 
-                        @Html.ActionLink("Consultar", "Details", new { id = item.nombrePK, idpro = idProy }, new { @class = "botonGeneral colorCeleste" })
-                        @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            @Html.ActionLink("Modificar", "Edit", new { id = item.nombrePK, idpro = idProy }, new { @class = "botonGeneral colorCeleste" })
-                        }
-                    </p>
-                    <p class="card-text marginElim">
-                        @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            @Html.ActionLink("Eliminar", "Delete", new { id = item.nombrePK, idpro = idProy }, new { @class = "botonGeneral colorCeleste" })
+                            @Html.ActionLink("Consultar", "Details", new { id = item.nombrePK, idpro = idProy }, new { @class = "botonGeneral colorCeleste" })
+                            @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                @Html.ActionLink("Modificar", "Edit", new { id = item.nombrePK, idpro = idProy }, new { @class = "botonGeneral colorCeleste" })
+                            }
+                        </p>
+                        <p class="card-text marginElim">
+                            @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                @Html.ActionLink("Eliminar", "Delete", new { id = item.nombrePK, idpro = idProy }, new { @class = "botonGeneral colorCeleste" })
 
-                        }
-                    </p>
+                            }
+                        </p>
+                    </div>
                 </div>
+
             </div>
+        }
 
-        </div>
-    }
-
-</div>
+    </div>

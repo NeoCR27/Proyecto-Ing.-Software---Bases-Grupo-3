@@ -9,7 +9,7 @@
     string idProyecto = ViewBag.idPK;
     List<SelectListItem> clientes = ViewBag.clientes; // Para agarrar la lista que se le dió en el Controlador
     string estadoActual = Model.estado;
-    }
+}
 
 <h2 class="titulosPag">Modificar Proyecto</h2>
 
@@ -24,7 +24,7 @@
     @Html.HiddenFor(model => model.idPK)
 
     <div class="form-group">
-        @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2 required" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
@@ -32,7 +32,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.objetivo, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.objetivo, htmlAttributes: new { @class = "control-label col-md-2 required" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.objetivo, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.objetivo, "", new { @class = "text-danger" })
@@ -76,7 +76,7 @@
     </div>
 
     <div class="form-group">
-        @Html.Label("Lideres disponibles", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Lideres disponibles", htmlAttributes: new { @class = "control-label col-md-2 required" })
         <div class="col-md-10">
             @Html.DropDownList("Lideres", lideres, "Mantener el mismo lider", htmlAttributes: new { @class = "form-control", @name = "lideresDrop", @id = "lideresDrop" })
         </div>
@@ -90,7 +90,7 @@
     </div>
 
     <div class="form-group">
-        @Html.Label("Cliente a asignar el proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Cliente a asignar el proyecto", htmlAttributes: new { @class = "control-label col-md-2 required" })
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.cedulaClienteFK, clientes, htmlAttributes: new { @class = "form-control", @name = "clientesDrop", @id = "clientesDrop" })
         </div>
@@ -128,6 +128,11 @@
         </div>
     </div>
 
+
+    <br />
+    <p><strong>Los campos con <font color="red">*</font> son obligatorios.</strong></p>
+    <br />
+
     <input type="hidden" id="idPK" name="idPK" value=@idProyecto>
     <input type="hidden" id="cedulaLiderActual" name="cedulaLiderActual" value=@cedulaLiderActual>
 
@@ -145,14 +150,19 @@
 
         </div>
     </div>
+
     <!-- Modal -->
     <div class="modal fade" id="guardar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"><strong>¿Está seguro que desea guardar los cambios realizados?</strong></h5>
-                    <h5 class="modal-body" id="exampleModalLabel"><strong>En caso de modificar el ESTADO y ponerlo en CANCELADO o FINALIZADO el proyecto se FINALIZARÁ y se harán los cálculos finales
-                          de duración.</strong></h5>
+                    <h5 class="modal-body" id="exampleModalLabel">
+                        <strong>
+                            En caso de modificar el ESTADO y ponerlo en CANCELADO o FINALIZADO el proyecto se FINALIZARÁ y se harán los cálculos finales
+                            de duración.
+                        </strong>
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

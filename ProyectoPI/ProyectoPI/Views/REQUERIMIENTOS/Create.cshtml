@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.fechaEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.fechaEntrega, htmlAttributes: new { @class = "control-label col-md-2 required" })
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.fechaEntrega, new { @type = "date", @class = "form-control datepicker", required = "required" })
 

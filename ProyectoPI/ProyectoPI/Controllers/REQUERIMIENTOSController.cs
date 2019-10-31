@@ -101,8 +101,7 @@ namespace ProyectoPI.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.cedulaFK = new SelectList(db.EMPLEADO, "cedulaPK", "cedulaPK", rEQUERIMIENTOS.cedulaFK);
-            ViewBag.idFK = new SelectList(db.PROYECTO, "idPK", "nombre", rEQUERIMIENTOS.idFK);
+            ViewBag.idProy = idpro;
             return View(rEQUERIMIENTOS);
         }
 
@@ -117,10 +116,9 @@ namespace ProyectoPI.Controllers
             {
                 db.Entry(rEQUERIMIENTOS).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("../REQUERIMIENTOS/index", new { id = rEQUERIMIENTOS.idFK });
             }
-            ViewBag.cedulaFK = new SelectList(db.EMPLEADO, "cedulaPK", "tel", rEQUERIMIENTOS.cedulaFK);
-            ViewBag.idFK = new SelectList(db.PROYECTO, "idPK", "nombre", rEQUERIMIENTOS.idFK);
+
             return View(rEQUERIMIENTOS);
         }
 
