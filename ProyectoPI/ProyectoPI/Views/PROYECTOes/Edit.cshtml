@@ -24,7 +24,7 @@
     @Html.HiddenFor(model => model.idPK)
 
     <div class="form-group">
-        @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2 required" })
+        @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
@@ -32,7 +32,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.objetivo, htmlAttributes: new { @class = "control-label col-md-2 required" })
+        @Html.LabelFor(model => model.objetivo, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.objetivo, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.objetivo, "", new { @class = "text-danger" })
@@ -59,7 +59,6 @@
             @Html.Label("Estado", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <select class="form-control" id="estado" name="estado">
-                    <option selected>No-iniciado</option>
                     <option selected>En-proceso</option>
                     <option>Finalizado</option>
                     <option>Cancelado</option>
@@ -76,7 +75,7 @@
     </div>
 
     <div class="form-group">
-        @Html.Label("Lideres disponibles", htmlAttributes: new { @class = "control-label col-md-2 required" })
+        @Html.Label("Lideres disponibles", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("Lideres", lideres, "Mantener el mismo lider", htmlAttributes: new { @class = "form-control", @name = "lideresDrop", @id = "lideresDrop" })
         </div>
@@ -90,7 +89,7 @@
     </div>
 
     <div class="form-group">
-        @Html.Label("Cliente a asignar el proyecto", htmlAttributes: new { @class = "control-label col-md-2 required" })
+        @Html.Label("Cliente a asignar el proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.cedulaClienteFK, clientes, htmlAttributes: new { @class = "form-control", @name = "clientesDrop", @id = "clientesDrop" })
         </div>
@@ -127,11 +126,6 @@
             @Html.ValidationMessageFor(model => model.duracionReal, "", new { @class = "text-danger" })
         </div>
     </div>
-
-
-    <br />
-    <p><strong>Los campos con <font color="red">*</font> son obligatorios.</strong></p>
-    <br />
 
     <input type="hidden" id="idPK" name="idPK" value=@idProyecto>
     <input type="hidden" id="cedulaLiderActual" name="cedulaLiderActual" value=@cedulaLiderActual>

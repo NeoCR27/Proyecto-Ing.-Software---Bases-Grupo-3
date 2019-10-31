@@ -8,7 +8,7 @@
     string proy = ViewBag.nombre;
 }
 <h2 class="titulosPag">Requerimientos @proy</h2>
-@if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
+@if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase) || rol.Equals("Lider", StringComparison.InvariantCultureIgnoreCase))
 {
     <p>
         @Html.ActionLink("Crear Nuevo Requerimiento", "Create", new { id = idProy }, new { @class = "botonGeneral botonCrear" })
@@ -31,13 +31,13 @@
                         <p class="card-text">
 
                             @Html.ActionLink("Consultar", "Details", new { id = item.nombrePK, idpro = idProy }, new { @class = "botonGeneral colorCeleste" })
-                            @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
+                            @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase) || rol.Equals("Tester", StringComparison.InvariantCultureIgnoreCase))
                             {
                                 @Html.ActionLink("Modificar", "Edit", new { id = item.nombrePK, idpro = idProy }, new { @class = "botonGeneral colorCeleste" })
                             }
                         </p>
                         <p class="card-text marginElim">
-                            @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
+                            @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase) || rol.Equals("Lider", StringComparison.InvariantCultureIgnoreCase))
                             {
                                 @Html.ActionLink("Eliminar", "Delete", new { id = item.nombrePK, idpro = idProy }, new { @class = "botonGeneral colorCeleste" })
 

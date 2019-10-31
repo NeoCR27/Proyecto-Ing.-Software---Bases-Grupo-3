@@ -102,6 +102,9 @@ namespace ProyectoPI.Controllers
                 return HttpNotFound();
             }
             ViewBag.idProy = idpro;
+            ViewBag.dificultad = rEQUERIMIENTOS.dificultad;
+            ViewBag.estadoActual = rEQUERIMIENTOS.estado_actual;
+            ViewBag.tester = rEQUERIMIENTOS.cedulaFK;
             return View(rEQUERIMIENTOS);
         }
 
@@ -110,10 +113,39 @@ namespace ProyectoPI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idFK,nombrePK,fechaInicio,fechaEntrega,horasReales,horasEstimadas,dificultad,cedulaFK")] REQUERIMIENTOS rEQUERIMIENTOS)
+        public ActionResult Edit(string idProy, string dificultadAnterior, string estadoAnterior, string testerAnterior, [Bind(Include = "idFK,nombrePK,fechaInicio,fechaEntrega,horasReales,horasEstimadas,dificultad,cedulaFK")] REQUERIMIENTOS rEQUERIMIENTOS)
         {
             if (ModelState.IsValid)
             {
+                rEQUERIMIENTOS.idFK = idProy;
+                if(Request.Form["estado"] == null) // No se selecciono ningun estado actual
+                {
+                    rEQUERIMIENTOS.estado_actual = estadoAnterior;
+                }
+                else // Se selecciono una opcion
+                {
+                    rEQUERIMIENTOS.estado_actual = Request.Form["estado"].ToString();
+                }
+
+                if (Request.Form["dificultad"] == null) // No se selecciono ninguna dificultad
+                {
+                    rEQUERIMIENTOS.dificultad = dificultadAnterior;
+                }
+                else // Se selecciono una opcion
+                {
+                    rEQUERIMIENTOS.estado_actual = Request.Form["estado"].ToString();
+                }
+
+                /* 
+                if (Request.Form["testers"] == null) // No se selecciono ningun tester
+                {
+                    rEQUERIMIENTOS.dificultad = dificultadAnterior;
+                }
+                else // Se selecciono un nuevo tester
+                {
+                    rEQUERIMIENTOS.estado_actual = Request.Form["testers"].ToString();
+                }
+                */
                 db.Entry(rEQUERIMIENTOS).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("../REQUERIMIENTOS/index", new { id = rEQUERIMIENTOS.idFK });
