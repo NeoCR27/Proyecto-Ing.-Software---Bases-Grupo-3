@@ -1,93 +1,40 @@
 ﻿@model IEnumerable<ProyectoPI.Models.PRUEBAS>
 
-@{
-    ViewBag.Title = "Index";
-}
+    @{
+    ViewBag.Title = "Pruebas";
+    }
+    <h2 class="titulosPag">Prueba</h2>
+    @Html.ActionLink("Crear prueba", "Create", null, new { @class = "botonGeneral botonCrear" })
 
-<h2>Index</h2>
+    <table class="table">
+        <tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.resultFinal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.proposito)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.entradaDatos)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.flujo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.resultEsperado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.prioridad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcionErr)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.imagenErr)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estadoErr)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.REQUERIMIENTOS.dificultad)
-        </th>
-        <th></th>
-    </tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadoFinal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.resultadoDetalles)
+            </th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.resultFinal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.proposito)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.entradaDatos)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.flujo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.resultEsperado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.prioridad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcionErr)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.imagenErr)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estadoErr)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.REQUERIMIENTOS.dificultad)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model) {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoFinal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.resultadoDetalles)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+        }
+
+    </table>

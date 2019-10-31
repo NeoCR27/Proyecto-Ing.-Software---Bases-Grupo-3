@@ -159,5 +159,12 @@ namespace ProyectoPI.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //Redirecciona la al controlador de pruebas
+        public ActionResult to_pruebas(string id, string nombre)
+        {
+            return RedirectToAction("../PRUEBAS/index", new { id = id, nombre_req = nombre });
+        }
+
     }
 }
