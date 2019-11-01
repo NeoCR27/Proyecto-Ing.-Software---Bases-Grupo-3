@@ -107,11 +107,15 @@
         </dt>
         <dd>
 
-
+            @*
             @if (Model.disponibilidad == true)
             {<text>Disponible</text>}
         else
         {<text>No disponible</text>}
+                *@
+        <dt>
+            @Html.DisplayFor(model => model.disponibilidad)
+        </dt>
         </dd>
         <br />
         <dt>
