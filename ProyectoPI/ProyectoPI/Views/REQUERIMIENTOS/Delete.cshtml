@@ -2,13 +2,15 @@
 
 @{
     ViewBag.Title = "Delete";
+    string idProy = ViewBag.idProy;
+    string estadoActual = ViewBag.estadoActual;
+    string dificultad = ViewBag.dificultad;
+    string tester = ViewBag.tester;
+    List<SelectListItem> testersDisp = ViewBag.testerDisp;
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h2 class="titulosPag">ELIMINAR REQUERIMIENTO: @Model.nombrePK</h2>
 <div>
-    <h4>REQUERIMIENTOS</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -69,12 +71,12 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        <div>
+            @Html.ActionLink("Volver", "Index", new { id = Model.idFK }, new { @class = "botonGeneral colorGris" })
         </div>
     }
 </div>
