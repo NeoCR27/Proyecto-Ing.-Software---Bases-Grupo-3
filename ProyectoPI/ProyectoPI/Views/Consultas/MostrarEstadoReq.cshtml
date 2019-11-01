@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Requerimiento";
+}
+@{
+    string rol = ViewBag.myRol;
+    int final = ViewBag.final;
+    int proceso = ViewBag.proceso;
+
+
+}
+<h2 class="titulosPag">Estado de los Requerimientos</h2>
+
+<div style=" right:3000px;width:800px ;height:200px" class="jumbotron">
+    <p style="text-align:center" display-1">Resultados</p>
+    <div class="col-md-4">
+        Requerimientos En Proceso
+    </div>
+    <div class="col-md-2">
+        @proceso
+    </div>
+    </br>
+    </br>
+    </br>
+    <div class="col-md-4">
+        Requerimientos Finalizados
+    </div>
+    <div class="col-md-2">
+        @final
+    </div>
+
+    
+
+</div>
+
+
+
+
+
+

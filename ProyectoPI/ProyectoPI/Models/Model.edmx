@@ -237,6 +237,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Consulta_Cant_Req_Estado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idproy" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Consulta_Cantidad_Req_Tester" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idproy" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Get_Proy_Correo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="correo" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="Gr03Proy4ModelStoreContainer">
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="dbo" store:Type="Tables" />
@@ -459,6 +468,15 @@
             <End Role="REQUERIMIENTOS" EntitySet="REQUERIMIENTOS" />
             <End Role="PRUEBAS" EntitySet="PRUEBAS" />
           </AssociationSet>
+          <FunctionImport Name="Consulta_Cant_Req_Estado">
+          <Parameter Name="idproy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Consulta_Cantidad_Req_Tester">
+          <Parameter Name="idproy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Get_Proy_Correo" ReturnType="Collection(String)">
+          <Parameter Name="correo" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="REQUERIMIENTOS">
           <Key>
@@ -655,6 +673,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Consulta_Cant_Req_Estado" FunctionName="Gr03Proy4Model.Store.Consulta_Cant_Req_Estado" />
+          <FunctionImportMapping FunctionImportName="Consulta_Cantidad_Req_Tester" FunctionName="Gr03Proy4Model.Store.Consulta_Cantidad_Req_Tester" />
+          <FunctionImportMapping FunctionImportName="Get_Proy_Correo" FunctionName="Gr03Proy4Model.Store.Get_Proy_Correo" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

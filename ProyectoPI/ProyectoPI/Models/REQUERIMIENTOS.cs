@@ -21,14 +21,14 @@ namespace ProyectoPI.Models
             this.EMPLEADO1 = new HashSet<EMPLEADO>();
             this.PRUEBAS = new HashSet<PRUEBAS>();
         }
-    
+
         public string idFK { get; set; }
 
-       
+
         [Display(Name = "Nombre")]
         public string nombrePK { get; set; }
 
-       
+
         [Display(Name = "Fecha de Inicio")]
         public System.DateTime fechaInicio { get; set; }
 
@@ -44,14 +44,14 @@ namespace ProyectoPI.Models
         [Display(Name = "Tester")]
         public string cedulaFK { get; set; }
 
-        
+
         [Display(Name = "Horas Estimadas")]
         public Nullable<int> horasEstimadas { get; set; }
 
 
         [Display(Name = "Descripcion")]
         public string Descripcion { get; set; }
-        
+
 
         [Display(Name = "Estado Actual")]
         public string estado_actual { get; set; }

@@ -1,0 +1,21 @@
+﻿@model List<ProyectoPI.Models.CantReq>
+@{
+    ViewBag.Title = "Requerimiento";
+}
+@{
+    string rol = ViewBag.myRol;
+    string idProy = ViewBag.idProy;
+    string proy = ViewBag.nombre;
+}
+<h2 class="titulosPag">Cantidad de Requerimientos por Tester</h2>
+
+@foreach (var item in Model)
+{
+    @Html.DisplayFor(modelItem => item.cedulaPK)
+    @Html.DisplayFor(modelItem => item.nombre)
+    @Html.DisplayFor(modelItem => item.Cantidad)
+
+}
+
+
+

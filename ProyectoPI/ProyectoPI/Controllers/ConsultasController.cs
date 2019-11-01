@@ -34,17 +34,75 @@ namespace ProyectoPI.Controllers
            
             return View();
         }
-
-        public async Task<ActionResult> CantReq()
+        
+        public ActionResult CantReq()
         {
-
-            string correo = User.Identity.Name;
-            string rol = await this.seguridad_controller.GetRol(correo);
-            ViewBag.miRol = rol;
-
+            ViewBag.proy = new SelectList(db.PROYECTO,"idPK","nombre");
 
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CantReq(string proyecto)
+        {
+            return RedirectToAction("MostrarTotalReq", new { proy = Request.Form["proy"].ToString() });
+            
+
+
+        }
+
+        public ActionResult MostrarTotalReq(string proy)
+        {
+            
+            string queryCantReq = "Exec Consulta_Cantidad_Req_Tester" + "'" + proy + "'";
+            //Se hace el query a la base de datos
+            var tempCantReq = (db.Database.SqlQuery<CantReq>(queryCantReq)).ToList();
+         
+
+            return View(tempCantReq);
+        }
+
+
+        public ActionResult EstadoReq()
+        {
+            ViewBag.proy = new SelectList(db.PROYECTO, "idPK", "nombre");
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EstadoReq(string proyecto)
+        {
+            return RedirectToAction("MostrarEstadoReq", new { proy = Request.Form["proy"].ToString() });
+
+
+
+        }
+
+        public ActionResult MostrarEstadoReq(string proy)
+        {
+            string queryEstadoReq = "Exec Consulta_Cant_Req_Estado" + "'" + proy + "'";
+            //Se hace el query a la base de datos
+            var tempEstadoReq = (db.Database.SqlQuery<EstadoReq>(queryEstadoReq)).ToList();
+            ViewBag.final = 0;
+            ViewBag.proceso = 0;
+            foreach (var item in tempEstadoReq)
+            {
+                if (item.estado_actual=="Finalizado")
+                {
+                    ViewBag.final = item.Cantidad;
+
+                }else
+                {
+                    ViewBag.proceso = item.Cantidad;
+
+                }
+            }
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

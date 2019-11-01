@@ -66,7 +66,7 @@ namespace ProyectoPI.Models
         [Display(Name = "Provincia")]
         public string provincia { get; set; }
 
-        [DataType(DataType.MultilineText)]
+
         [Display(Name = "Direccion exacta")]
         public string direccionExacta { get; set; }
 

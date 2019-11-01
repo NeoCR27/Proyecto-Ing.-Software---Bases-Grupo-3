@@ -109,5 +109,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Consulta_Cant_Req_Estado" FunctionName="Gr03Proy4Model.Store.Consulta_Cant_Req_Estado" />
+    <FunctionImportMapping FunctionImportName="Consulta_Cantidad_Req_Tester" FunctionName="Gr03Proy4Model.Store.Consulta_Cantidad_Req_Tester" />
+    <FunctionImportMapping FunctionImportName="Get_Proy_Correo" FunctionName="Gr03Proy4Model.Store.Get_Proy_Correo" />
   </EntityContainerMapping>
 </Mapping>

@@ -232,6 +232,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="Consulta_Cant_Req_Estado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idproy" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Consulta_Cantidad_Req_Tester" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idproy" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Get_Proy_Correo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="correo" Type="varchar" Mode="In" />
+  </Function>
   <EntityContainer Name="Gr03Proy4ModelStoreContainer">
     <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="dbo" store:Type="Tables" />

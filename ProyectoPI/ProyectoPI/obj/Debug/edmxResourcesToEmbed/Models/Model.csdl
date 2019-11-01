@@ -172,6 +172,15 @@
       <End Role="REQUERIMIENTOS" EntitySet="REQUERIMIENTOS" />
       <End Role="PRUEBAS" EntitySet="PRUEBAS" />
     </AssociationSet>
+    <FunctionImport Name="Consulta_Cant_Req_Estado">
+      <Parameter Name="idproy" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Consulta_Cantidad_Req_Tester">
+      <Parameter Name="idproy" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Get_Proy_Correo" ReturnType="Collection(String)">
+      <Parameter Name="correo" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="REQUERIMIENTOS">
     <Key>

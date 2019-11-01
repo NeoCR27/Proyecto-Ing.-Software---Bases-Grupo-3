@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ConsultasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\REQUERIMIENTOSController.cs" />
@@ -188,6 +189,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Consultas.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Model.Context.cs">
       <AutoGen>True</AutoGen>
@@ -235,6 +237,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Img\cons.png" />
     <Content Include="Img\emp.jpg" />
     <Content Include="Img\equip.jpg" />
     <Content Include="Img\fondo.jpg" />
@@ -446,6 +449,11 @@
     <Content Include="Views\PRUEBAS\Details.cshtml" />
     <Content Include="Views\PRUEBAS\Edit.cshtml" />
     <Content Include="Views\PRUEBAS\Index.cshtml" />
+    <Content Include="Views\Consultas\CantReq.cshtml" />
+    <Content Include="Views\Consultas\Index.cshtml" />
+    <Content Include="Views\Consultas\MostrarTotalReq.cshtml" />
+    <Content Include="Views\Consultas\EstadoReq.cshtml" />
+    <Content Include="Views\Consultas\MostrarEstadoReq.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
