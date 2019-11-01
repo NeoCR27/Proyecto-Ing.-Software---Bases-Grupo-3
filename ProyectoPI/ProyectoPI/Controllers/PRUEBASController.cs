@@ -21,8 +21,9 @@ namespace ProyectoPI.Models
             ViewBag.idProy = id;
             ViewBag.nomReq = nombre;
 
-            var pRUEBAS = db.PRUEBAS.Include(p => p.REQUERIMIENTOS);
-            return View(pRUEBAS.ToList());
+            var pruebas = db.PRUEBAS.Where(x => x.idProyFK == id && x.nombrePK == nombre);
+
+            return View(pruebas.ToList());
         }
 
         // GET: PRUEBAS/Details/5

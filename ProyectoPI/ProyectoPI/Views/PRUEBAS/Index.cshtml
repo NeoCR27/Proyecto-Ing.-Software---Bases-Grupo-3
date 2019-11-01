@@ -6,9 +6,6 @@
     string nombreReq = ViewBag.nomReq;
 }
 
-<h2>Index</h2>
-<h1> id =  @idProyecto </h1>
-<h1> nombre =  @nombreReq </h1>
 
 <p>
     @Html.ActionLink("Create New", "Create", new { id = @idProyecto, nombre = @nombreReq }, new { @class = "botonGeneral colorVerde" })

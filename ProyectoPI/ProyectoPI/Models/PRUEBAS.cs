@@ -17,10 +17,15 @@ namespace ProyectoPI.Models
     {
         public string idProyFK { get; set; }
         public string nombreReqFK { get; set; }
+
+        [Display(Name = "Nombre")]
         public string nombrePK { get; set; }
+
+        [Display(Name = "Estado final")]
         public string EstadoFinal { get; set; }
 
         [DataType(DataType.MultilineText)]
+        [Display(Name = "Detalles de los resultados")]
         public string resultadoDetalles { get; set; }
     
         public virtual REQUERIMIENTOS REQUERIMIENTOS { get; set; }
