@@ -25,15 +25,6 @@
     <input type="hidden" id="dificultadAnterior" name="dificultadAnterior" value=@dificultad>
     <input type="hidden" id="testerAnterior" name="testerAnterior" value=@dificultad>
 
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.nombrePK, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.nombrePK, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.nombrePK, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
     <div class="form-group">
         @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
