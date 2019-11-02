@@ -129,6 +129,7 @@ namespace ProyectoPI.Controllers
             ViewBag.estadoActual = rEQUERIMIENTOS.estado_actual;
             ViewBag.tester = rEQUERIMIENTOS.cedulaFK;
             ViewBag.testerDisp = testerDisp;
+            ViewBag.nombrePK = rEQUERIMIENTOS.nombrePK; 
             return View(rEQUERIMIENTOS);
         }
 
@@ -137,10 +138,11 @@ namespace ProyectoPI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(string idProy, string dificultadAnterior, string estadoAnterior, string testerAnterior, [Bind(Include = "idFK,nombrePK,fechaInicio,fechaEntrega,horasReales,horasEstimadas,dificultad,cedulaFK")] REQUERIMIENTOS rEQUERIMIENTOS)
+        public ActionResult Edit(string nombrePK, string idProy, string dificultadAnterior, string estadoAnterior, string testerAnterior, [Bind(Include = "idFK,nombrePK,fechaInicio,fechaEntrega,horasReales,horasEstimadas,dificultad,cedulaFK")] REQUERIMIENTOS rEQUERIMIENTOS)
         {
             if (ModelState.IsValid)
             {
+                rEQUERIMIENTOS.nombrePK = nombrePK;
                 rEQUERIMIENTOS.idFK = idProy;
                 if(Request.Form["estado"] == null) // No se selecciono ningun estado actual
                 {
@@ -163,16 +165,16 @@ namespace ProyectoPI.Controllers
                  
                 if (Request.Form["testers"] == null) // No se selecciono ningun tester
                 {
-                    rEQUERIMIENTOS.dificultad = dificultadAnterior;
+                    rEQUERIMIENTOS.cedulaFK = testerAnterior;
                 }
                 else // Se selecciono un nuevo tester
                 {
-                    rEQUERIMIENTOS.estado_actual = Request.Form["testers"].ToString();
+                    rEQUERIMIENTOS.cedulaFK = Request.Form["testers"].ToString();
                 }
                 
                 db.Entry(rEQUERIMIENTOS).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("../REQUERIMIENTOS/index", new { id = rEQUERIMIENTOS.idFK });
+                return RedirectToAction("../REQUERIMIENTOS/Index", new { id = rEQUERIMIENTOS.idFK });
             }
 
             return View(rEQUERIMIENTOS);
@@ -204,7 +206,7 @@ namespace ProyectoPI.Controllers
             REQUERIMIENTOS rEQUERIMIENTOS = db.REQUERIMIENTOS.Find(idpro, id);
             db.REQUERIMIENTOS.Remove(rEQUERIMIENTOS);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("../REQUERIMIENTOS/Index", new { id = rEQUERIMIENTOS.idFK });
         }
 
         protected override void Dispose(bool disposing)

@@ -88,11 +88,12 @@ namespace ProyectoPI.Controllers
             ViewBag.rol = rol;
             //Se Arma los  string de query
             ViewBag.id = id;
-            string queryEquipo = "SELECT Part.idProyectoFK AS 'IDProyecto', Emp.nombre + ' ' + Emp.primerApellido AS 'empleado', Emp.correo AS 'email', Part.rol AS 'rol', Emp.disponibilidad AS 'dispon', Emp.cedulaPK AS 'idEmp', Proy.nombre AS 'proyNom' FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK JOIN Proyecto Proy ON Proy.idPK = Part.idProyectoFK WHERE Part.idProyectoFK = " + id;
+            string queryEquipo = "SELECT Part.idProyectoFK AS 'IDProyecto', Emp.nombre + ' ' + Emp.primerApellido AS 'empleado', Emp.correo AS 'email', Part.rol AS 'rol', Emp.disponibilidad AS 'dispon', Emp.cedulaPK AS 'idEmp', Proy.nombre AS 'proyNom' FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK JOIN Proyecto Proy ON Proy.idPK = Part.idProyectoFK WHERE Part.idProyectoFK = " + id + "Order by part.rol";
             string queryEmpleado = ("Exec recuperarHabilidad" + "'"+ buscarPor + "','" + filtroBusqueda + "'");
             //Se hace el query a la base de datos
             IList<EquipoModel> resultadoQueryEquipo = (db.Database.SqlQuery<EquipoModel>(queryEquipo)).ToList();
             IList<HabilidadEmpleadoModel> resultadoQueryEmpleado = (db.Database.SqlQuery<HabilidadEmpleadoModel>(queryEmpleado)).ToList();
+            ViewBag.maximoEq = AlcanzadoMaxEquipo(id);
             ViewBag.nomProyecto = resultadoQueryEquipo.First().proyNom;
             //Se pasa a viewData para llamar desde la vista
             ViewData["equipo"] = resultadoQueryEquipo;
@@ -140,6 +141,21 @@ namespace ProyectoPI.Controllers
             PARTICIPA pARTICIPA = db.PARTICIPA.Find(cedulaEmpleadoFK, idProyectoFK);
             db.PARTICIPA.Remove(pARTICIPA);
             db.SaveChanges();
+        }
+
+        public bool AlcanzadoMaxEquipo (string proyID)
+        {
+            bool maxAlcanzado=false;
+            string query = "Exec recuperar_Cant_Miemb_Equipo" + "'" + proyID + "'";
+            var resul = db.Database.SqlQuery<numEquipModel>(query).ToList<numEquipModel>();
+            foreach (numEquipModel item in resul)
+            {
+                if(item.numInt>=4)
+                {
+                    maxAlcanzado = true;
+                }
+            }
+            return maxAlcanzado;
         }
     }
 }

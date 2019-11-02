@@ -44,4 +44,9 @@ namespace ProyectoPI.Models
         public string tipoHabilidad { get; set; }
         public string habilidad { get; set; }
     }
+
+    public class numEquipModel
+    {
+        public int numInt { get; set; }
+    }
 }
