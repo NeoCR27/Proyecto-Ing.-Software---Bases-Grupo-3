@@ -4,18 +4,22 @@
 }
 @{
     string rol = ViewBag.myRol;
-    string idProy = ViewBag.idProy;
+    string idProy = ViewBag.idproy;
     string proy = ViewBag.nombre;
 }
 <h2 class="titulosPag">Cantidad de Requerimientos por Tester</h2>
-
-@foreach (var item in Model)
-{
-    @Html.DisplayFor(modelItem => item.cedulaPK)
-    @Html.DisplayFor(modelItem => item.nombre)
-    @Html.DisplayFor(modelItem => item.Cantidad)
-
-}
+<h4>Resultados</h4>
 
 
 
+<img src="@Url.Action("GraficoTotalReq",new { proy = idProy })" alt="Pie Chart using MVC" />
+</br>
+</br>
+
+
+
+
+
+<div>
+    @Html.ActionLink("Volver", "CantReq", null, new { @class = "botonGeneral colorGris" })
+</div>

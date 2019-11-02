@@ -173,6 +173,7 @@
     <Compile Include="Controllers\ConsultasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PRUEBASController.cs" />
     <Compile Include="Controllers\REQUERIMIENTOSController.cs" />
     <Compile Include="Controllers\SeguridadController.cs" />
     <Compile Include="Global.asax.cs">
@@ -215,7 +216,6 @@
     <Compile Include="Models\PRUEBAS.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PRUEBASController.cs" />
     <Compile Include="Models\REQUERIMIENTOS.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -454,6 +454,9 @@
     <Content Include="Views\Consultas\MostrarTotalReq.cshtml" />
     <Content Include="Views\Consultas\EstadoReq.cshtml" />
     <Content Include="Views\Consultas\MostrarEstadoReq.cshtml" />
+    <Content Include="Views\Consultas\EstadoTesterReq.cshtml" />
+    <Content Include="Views\Consultas\MostrarEstadoTesterReq.cshtml" />
+    <Content Include="Views\Consultas\grafico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

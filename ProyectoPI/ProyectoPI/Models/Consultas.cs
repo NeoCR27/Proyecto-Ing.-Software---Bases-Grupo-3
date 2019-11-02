@@ -18,4 +18,13 @@ namespace ProyectoPI.Models
         public string nombre { get; set; }
 
     }
+
+    public class EstadoAsigReq
+    {
+        public string nombrePK { get; set; }
+        public string cedulaPK { get; set; }
+        public string nombre { get; set; }
+        public string estado_actual { get; set; }
+
+    }
 }
