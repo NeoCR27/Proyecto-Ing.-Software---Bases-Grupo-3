@@ -6,6 +6,7 @@
     string estadoActual = ViewBag.estadoActual;
     string dificultad = ViewBag.dificultad;
     string tester = ViewBag.tester;
+    string nombrePK = ViewBag.nombrePK;
     List<SelectListItem> testersDisp = ViewBag.testerDisp; 
 }
 
@@ -20,10 +21,11 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+    <input type="hidden" id="nombrePK" name="nombrePK" value=@nombrePK>
     <input type="hidden" id="idProy" name="idProy" value=@idProy>
     <input type="hidden" id="estadoAnterior" name="estadoAnterior" value=@estadoActual>
     <input type="hidden" id="dificultadAnterior" name="dificultadAnterior" value=@dificultad>
-    <input type="hidden" id="testerAnterior" name="testerAnterior" value=@dificultad>
+    <input type="hidden" id="testerAnterior" name="testerAnterior" value=@tester>
 
     <div class="form-group">
         @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -74,9 +76,9 @@
         <div class="col-md-10" place>
             <select class="form-control" id="dificultad" name="dificultad">
                 <option value="" disabled selected>Seleccione la Dificultad</option>
-                <option>Alta</option>
                 <option>Baja</option>
-                <option>Intermedio</option>
+                <option>Intermedia</option>
+                <option>Alta</option>
 
             </select>
         </div>
@@ -134,8 +136,7 @@
                     <h5 class="modal-title" id="exampleModalLabel"><strong>¿Está seguro que desea guardar los cambios realizados?</strong></h5>
                     <h5 class="modal-body" id="exampleModalLabel">
                         <strong>
-                            En caso de modificar el ESTADO y ponerlo en CANCELADO o FINALIZADO el proyecto se FINALIZARÁ y se harán los cálculos finales
-                            de duración.
+                            En caso de actualizar el ESTADO FINAL, NO se podrá modificar más el requerimiento, desea realmente continuar?
                         </strong>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
