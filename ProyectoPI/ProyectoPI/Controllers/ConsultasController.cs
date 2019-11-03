@@ -54,11 +54,63 @@ namespace ProyectoPI.Controllers
 
         public ActionResult MostrarTotalReq(string proy)
         {
+            ViewBag.idproy = proy;
             
             string queryCantReq = "Exec Consulta_Cantidad_Req_Tester" + "'" + proy + "'";
             //Se hace el query a la base de datos
             var tempCantReq = (db.Database.SqlQuery<CantReq>(queryCantReq)).ToList();
-         
+           
+
+            return View(tempCantReq);
+        }
+
+        public ActionResult GraficoTotalReq(string proy)
+        {
+            ViewBag.idproy = proy;
+            System.Diagnostics.Debug.WriteLine("entro");
+            string queryCantReq = "Exec Consulta_Cantidad_Req_Tester" + "'" + proy + "'";
+            //Se hace el query a la base de datos
+            var tempCantReq = (db.Database.SqlQuery<CantReq>(queryCantReq)).ToList();
+            string[] nombres = tempCantReq.Select(l => l.nombre.ToString()).ToArray();
+            string[] cantidad = tempCantReq.Select(l => l.Cantidad.ToString()).ToArray();
+
+            var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
+    .       AddSeries(name:"Testers",
+                    xValue: nombres,
+                    yValues: cantidad)
+            .AddLegend()
+            .AddTitle("Cantidad de Requerimientos por Tester")
+            .SetYAxis("Cantidad de Requerimientos")
+            .SetXAxis("Nombre")
+            .GetBytes("png");
+            return File(chart, "image/bytes");
+        }
+
+
+        public ActionResult EstadoTesterReq()
+        {
+            ViewBag.proy = new SelectList(db.PROYECTO, "idPK", "nombre");
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EstadoTesterReq(string proyecto)
+        {
+            return RedirectToAction("MostrarEstadoTesterReq", new { proy = Request.Form["proy"].ToString() });
+
+
+
+        }
+
+        public ActionResult MostrarEstadoTesterReq(string proy)
+        {
+
+            string queryCantReq = "Exec Consulta_Estado_Tester_Req" + "'" + proy + "'";
+            //Se hace el query a la base de datos
+            var tempCantReq = (db.Database.SqlQuery<EstadoAsigReq>(queryCantReq)).ToList();
+
 
             return View(tempCantReq);
         }
@@ -75,6 +127,7 @@ namespace ProyectoPI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EstadoReq(string proyecto)
         {
+
             return RedirectToAction("MostrarEstadoReq", new { proy = Request.Form["proy"].ToString() });
 
 
@@ -83,6 +136,7 @@ namespace ProyectoPI.Controllers
 
         public ActionResult MostrarEstadoReq(string proy)
         {
+            ViewBag.idproy = proy;
             string queryEstadoReq = "Exec Consulta_Cant_Req_Estado" + "'" + proy + "'";
             //Se hace el query a la base de datos
             var tempEstadoReq = (db.Database.SqlQuery<EstadoReq>(queryEstadoReq)).ToList();
@@ -103,6 +157,27 @@ namespace ProyectoPI.Controllers
             return View();
         }
 
+        public ActionResult GraficoEstadoReq(string proy)
+        {
+            ViewBag.idproy = proy;
+            System.Diagnostics.Debug.WriteLine("entro");
+            string queryEstadoReq = "Exec Consulta_Cant_Req_Estado" + "'" + proy + "'";
+            //Se hace el query a la base de datos
+            var tempEstadoReq = (db.Database.SqlQuery<EstadoReq>(queryEstadoReq)).ToList();
+            string[] estados = tempEstadoReq.Select(l => l.estado_actual.ToString()).ToArray();
+            string[] cantidad = tempEstadoReq.Select(l => l.Cantidad.ToString()).ToArray();
+
+            var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
+            .AddSeries(name: "Requerimientos",
+                    xValue: estados,
+                    yValues: cantidad)
+            .AddLegend()
+            .AddTitle("Estado de los Requerimientos")
+            .SetYAxis("Cantidad de Requerimientos")
+            .SetXAxis("Estado Actual")
+            .GetBytes("png");
+            return File(chart, "image/bytes");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
