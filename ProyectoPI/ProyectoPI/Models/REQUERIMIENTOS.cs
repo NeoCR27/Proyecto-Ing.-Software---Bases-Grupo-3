@@ -49,7 +49,7 @@ namespace ProyectoPI.Models
         public Nullable<int> horasEstimadas { get; set; }
 
 
-        [Display(Name = "Descripcion")]
+        [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
 
 
@@ -59,7 +59,7 @@ namespace ProyectoPI.Models
         [Display(Name = "Estado Final")]
         public string estado_final { get; set; }
 
-        [Display(Name = "Descripcion")]
+        [Display(Name = "Descripción Resultado")]
         public string descripcion_resultado { get; set; }
 
         public virtual EMPLEADO EMPLEADO { get; set; }

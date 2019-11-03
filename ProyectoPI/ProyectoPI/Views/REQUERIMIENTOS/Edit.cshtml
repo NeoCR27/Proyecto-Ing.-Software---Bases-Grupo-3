@@ -64,7 +64,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.horasReales, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.horasReales, new { htmlAttributes = new { @class = "form-control", @disabled = true } })
+            @Html.EditorFor(model => model.horasReales, new { htmlAttributes = new { @class = "form-control", @disabled = true, @placeholder = "Campo autocalculado cuando se finaliza el requerimiento" } })
             @Html.ValidationMessageFor(model => model.horasReales, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -100,7 +100,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.cedulaFK, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("Testers", testersDisp, "Seleccione un Tester", htmlAttributes: new { @class = "form-control", @name = "testersDispDrop", @id = "´testersDispDrop" })
+            @Html.DropDownList("Testers", testersDisp, "Seleccione un Tester", htmlAttributes: new { @class = "form-control", @name = "Testers", @id = "Testers" })
         </div>
     </div>
 
@@ -136,7 +136,7 @@
                     <h5 class="modal-title" id="exampleModalLabel"><strong>¿Está seguro que desea guardar los cambios realizados?</strong></h5>
                     <h5 class="modal-body" id="exampleModalLabel">
                         <strong>
-                            En caso de actualizar el ESTADO FINAL, NO se podrá modificar más el requerimiento, desea realmente continuar?
+                            En caso de actualizar el ESTADO FINAL, NO se podrá modificar más el requerimiento
                         </strong>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

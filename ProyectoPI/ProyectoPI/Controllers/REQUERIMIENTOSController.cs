@@ -30,9 +30,19 @@ namespace ProyectoPI.Controllers
             PROYECTO proy = db.PROYECTO.Find(id);
             string nombre = proy.nombre;
             ViewBag.nombre = nombre;
-
             var req = db.REQUERIMIENTOS.Where(x => x.idFK == id);
-            return View(req.ToList());
+
+            var listaRequerimientos = req.ToList();
+
+            List<int> requerimientosSePuedenBorrar = new List<int>();
+            foreach (REQUERIMIENTOS requerimiento in listaRequerimientos)
+            {
+                string queryCantidadPruebasAsociadas = "EXEC cantidad_pruebas_asociadas " + "'" + requerimiento.nombrePK + "','" + requerimiento.idFK + "';";
+                var resultado = (db.Database.SqlQuery<int>(queryCantidadPruebasAsociadas)).ToList().First(); // "Count = #"
+                requerimientosSePuedenBorrar.Add(resultado);
+            }
+            ViewBag.requerimientosSePuedenBorrar = requerimientosSePuedenBorrar;
+            return View(listaRequerimientos);
         }
 
         // GET: REQUERIMIENTOS/Details/5
@@ -88,10 +98,10 @@ namespace ProyectoPI.Controllers
             if (ModelState.IsValid)
 
             {
-                System.Diagnostics.Debug.WriteLine(rEQUERIMIENTOS.idFK);
+                System.Diagnostics.Debug.WriteLine(rEQUERIMIENTOS.cedulaFK);
                 db.REQUERIMIENTOS.Add(rEQUERIMIENTOS);
                 db.SaveChanges();
-                return RedirectToAction("../REQUERIMIENTOS/index", new { id = rEQUERIMIENTOS.idFK });
+                return RedirectToAction("../REQUERIMIENTOS/Index", new { id = rEQUERIMIENTOS.idFK });
             }
 
 
@@ -138,7 +148,7 @@ namespace ProyectoPI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(string nombrePK, string idProy, string dificultadAnterior, string estadoAnterior, string testerAnterior, [Bind(Include = "idFK,nombrePK,fechaInicio,fechaEntrega,horasReales,horasEstimadas,dificultad,cedulaFK")] REQUERIMIENTOS rEQUERIMIENTOS)
+        public ActionResult Edit(string nombrePK, string idProy, string dificultadAnterior, string estadoAnterior, string testerAnterior, [Bind(Include = "idFK,nombrePK,Descripcion,fechaInicio,fechaEntrega,horasReales,horasEstimadas,dificultad,cedulaFK")] REQUERIMIENTOS rEQUERIMIENTOS)
         {
             if (ModelState.IsValid)
             {
@@ -159,17 +169,17 @@ namespace ProyectoPI.Controllers
                 }
                 else // Se selecciono una opcion
                 {
-                    rEQUERIMIENTOS.estado_actual = Request.Form["estado"].ToString();
+                    rEQUERIMIENTOS.estado_actual = Request.Form["dificultad"].ToString();
                 }
 
                  
-                if (Request.Form["testers"] == null) // No se selecciono ningun tester
+                if (Request.Form["Testers"] == "") // No se selecciono ningun tester
                 {
                     rEQUERIMIENTOS.cedulaFK = testerAnterior;
                 }
                 else // Se selecciono un nuevo tester
                 {
-                    rEQUERIMIENTOS.cedulaFK = Request.Form["testers"].ToString();
+                    rEQUERIMIENTOS.cedulaFK = Request.Form["Testers"].ToString();
                 }
                 
                 db.Entry(rEQUERIMIENTOS).State = EntityState.Modified;
