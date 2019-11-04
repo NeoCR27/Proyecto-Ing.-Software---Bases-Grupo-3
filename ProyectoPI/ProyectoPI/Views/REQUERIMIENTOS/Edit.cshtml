@@ -7,11 +7,12 @@
     string dificultad = ViewBag.dificultad;
     string tester = ViewBag.tester;
     string nombrePK = ViewBag.nombrePK;
-    List<SelectListItem> testersDisp = ViewBag.testerDisp; 
+    List<SelectListItem> testersDisp = ViewBag.testerDisp;
+    //<input type="hidden" id="idProy" name="idProy" value=@idProy>
 }
 
 
-<h2 class="titulosPag">MODIFICAR REQUERIMIENTO: @Model.nombrePK</h2>
+<h2 class="titulosPag">MODIFICAR REQUERIMIENTO: @nombrePK</h2>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -21,11 +22,11 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <input type="hidden" id="nombrePK" name="nombrePK" value=@nombrePK>
-    <input type="hidden" id="idProy" name="idProy" value=@idProy>
-    <input type="hidden" id="estadoAnterior" name="estadoAnterior" value=@estadoActual>
-    <input type="hidden" id="dificultadAnterior" name="dificultadAnterior" value=@dificultad>
-    <input type="hidden" id="testerAnterior" name="testerAnterior" value=@tester>
+    <input type="hidden" id="nombrePK" name="nombrePK" value="@nombrePK">
+    <input type="hidden" id="idProy" name="idProy" value="@idProy">
+    <input type="hidden" id="estadoAnterior" name="estadoAnterior" value="@estadoActual">
+    <input type="hidden" id="dificultadAnterior" name="dificultadAnterior" value="@dificultad">
+    <input type="hidden" id="testerAnterior" name="testerAnterior" value="@tester">
 
     <div class="form-group">
         @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
