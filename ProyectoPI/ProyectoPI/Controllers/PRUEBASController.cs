@@ -14,26 +14,31 @@ namespace ProyectoPI.Models
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
 
         // GET: PRUEBAS
-        public ActionResult Index(string id, string nombre)
+        public ActionResult Index(string id, string nombre, string nombreProyecto)
         {
-            System.Diagnostics.Debug.WriteLine(id);
-            System.Diagnostics.Debug.WriteLine("hola");
+
+            ViewBag.nomProy = nombreProyecto;
             ViewBag.idProy = id;
             ViewBag.nomReq = nombre;
 
-            var pruebas = db.PRUEBAS.Where(x => x.idProyFK == id && x.nombrePK == nombre);
+            var pruebas = db.PRUEBAS.Where(x => x.idProyFK == id && x.nombreReqFK == nombre);
 
             return View(pruebas.ToList());
         }
 
         // GET: PRUEBAS/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(string id, string nombreReq, string nombrePK, string nombreProyecto)
         {
+            ViewBag.nomProy = nombreProyecto;
+            ViewBag.idProy = id;
+            ViewBag.nomReq = nombreReq;
+            ViewBag.nomPK = nombrePK;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRUEBAS pRUEBAS = db.PRUEBAS.Find(id);
+            PRUEBAS pRUEBAS = db.PRUEBAS.Find(id, nombreReq, nombrePK);
             if (pRUEBAS == null)
             {
                 return HttpNotFound();
@@ -42,11 +47,15 @@ namespace ProyectoPI.Models
         }
 
         // GET: PRUEBAS/Create
-        public ActionResult Create(string id, string nombre)
+        public ActionResult Create(string id, string nombre, string nombreProyecto)
         {
+            ViewBag.nomProy = nombreProyecto;
             ViewBag.idProy = id;
             ViewBag.nomReq = nombre;
-            ViewBag.idProyFK = new SelectList(db.REQUERIMIENTOS, "idFK", "dificultad");
+            Console.WriteLine("id");
+            Console.WriteLine(id);
+
+
             return View();
         }
 
@@ -57,25 +66,34 @@ namespace ProyectoPI.Models
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idProyFK,nombreReqFK,nombrePK,EstadoFinal,resultadoDetalles")] PRUEBAS pRUEBAS)
         {
+            PROYECTO proyecto = db.PROYECTO.Find(pRUEBAS.idProyFK);
+            string nombre = proyecto.nombre;
             if (ModelState.IsValid)
             {
                 db.PRUEBAS.Add(pRUEBAS);
                 db.SaveChanges();
-                return RedirectToAction("Index", new { id = pRUEBAS.idProyFK, nombre = pRUEBAS.nombreReqFK });
+                return RedirectToAction("Index", new { id = pRUEBAS.idProyFK, nombre = pRUEBAS.nombreReqFK, nombreProyecto = nombre });
             }
-
-            ViewBag.idProyFK = new SelectList(db.REQUERIMIENTOS, "idFK", "dificultad", pRUEBAS.idProyFK);
-            return View(pRUEBAS);
+            //no es valido, agregar codigo aqui!!!!!!!!
+            return RedirectToAction("Index", new { id = pRUEBAS.idProyFK, nombre = pRUEBAS.nombreReqFK });
         }
 
         // GET: PRUEBAS/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string id, string nombreReq, string nombrePK, string nombreProyecto)
         {
+            ViewBag.nomProy = nombreProyecto;
+            ViewBag.idProy = id;
+            ViewBag.nomReq = nombreReq;
+            ViewBag.nomPK= nombrePK;
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRUEBAS pRUEBAS = db.PRUEBAS.Find(id);
+            //var pruebas = db.PRUEBAS.Where(x => x.idProyFK == id && x.nombreReqFK == nombreReq && x.nombrePK == nombrePK);
+
+            PRUEBAS pRUEBAS = db.PRUEBAS.Find(id, nombreReq, nombrePK);
             if (pRUEBAS == null)
             {
                 return HttpNotFound();
@@ -91,24 +109,32 @@ namespace ProyectoPI.Models
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idProyFK,nombreReqFK,nombrePK,EstadoFinal,resultadoDetalles")] PRUEBAS pRUEBAS)
         {
+            PROYECTO proyecto = db.PROYECTO.Find(pRUEBAS.idProyFK);
+            string nombre = proyecto.nombre;
             if (ModelState.IsValid)
             {
                 db.Entry(pRUEBAS).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", new { id = pRUEBAS.idProyFK, nombre = pRUEBAS.nombreReqFK });
+                return RedirectToAction("Index", new { id = pRUEBAS.idProyFK, nombre = pRUEBAS.nombreReqFK, nombreProyecto = nombre });
             }
             ViewBag.idProyFK = new SelectList(db.REQUERIMIENTOS, "idFK", "dificultad", pRUEBAS.idProyFK);
+            //no es valido, agregar codigo aqui!!!!!!!!
             return View(pRUEBAS);
         }
 
         // GET: PRUEBAS/Delete/5
-        public ActionResult Delete(string id, string nombre, string nombrePrueba)
+        public ActionResult Delete(string id, string nombreReq, string nombrePK, string nombreProyecto)
         {
+            ViewBag.nomProy = nombreProyecto;
+            ViewBag.idProy = id;
+            ViewBag.nomReq = nombreReq;
+            ViewBag.nomPK = nombrePK;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRUEBAS pRUEBAS = db.PRUEBAS.Find(id,nombre,nombrePrueba);
+            PRUEBAS pRUEBAS = db.PRUEBAS.Find(id, nombreReq, nombrePK);
             if (pRUEBAS == null)
             {
                 return HttpNotFound();
@@ -119,12 +145,14 @@ namespace ProyectoPI.Models
         // POST: PRUEBAS/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id,string nombre,string nombrePrueba)
+        public ActionResult DeleteConfirmed(string id,string nombreReq, string nombrePK)
         {
-            PRUEBAS pRUEBAS = db.PRUEBAS.Find(id, nombre, nombrePrueba);
+            PROYECTO proyecto = db.PROYECTO.Find(id);
+            string nombre = proyecto.nombre;
+            PRUEBAS pRUEBAS = db.PRUEBAS.Find(id, nombreReq, nombrePK);
             db.PRUEBAS.Remove(pRUEBAS);
             db.SaveChanges();
-            return RedirectToAction("Index", new { id = id, nombre = nombre });
+            return RedirectToAction("Index", new { id = pRUEBAS.idProyFK, nombre = pRUEBAS.nombreReqFK, nombreProyecto = nombre });
         }
 
         protected override void Dispose(bool disposing)
