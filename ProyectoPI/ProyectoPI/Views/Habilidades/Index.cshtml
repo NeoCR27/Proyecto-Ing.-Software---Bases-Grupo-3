@@ -4,10 +4,13 @@
     ViewBag.Title = "Detalles";
     string rol = ViewBag.miRol;
     string nombre = ViewBag.nombre;
+    string cedula = ViewBag.cedula;
 }
 
 <h2 class="titulosPag">Habilidad</h2>
 <h1>Nombre: @nombre</h1>
+
+
 
 <input type="hidden" id="nombre" name="nombre" value="default">
 
@@ -15,11 +18,11 @@
 
 @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
 {
-<p>
-    @Html.ActionLink("Agregar habilidad", "Create", null, new { @class = "botonGeneral botonCrear" })
+    <p>
+        @Html.ActionLink("Agregar habilidad", "Create", new { cedula = @cedula }, new { @class = "botonGeneral botonCrear" })
 
-  
-</p>
+
+    </p>
 }
 <table class="table">
     <tr>

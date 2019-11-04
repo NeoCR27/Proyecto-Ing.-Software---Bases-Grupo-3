@@ -11,11 +11,19 @@ namespace ProyectoPI.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+
     public partial class HABILIDADES
     {
+        [Display(Name = "Descripcion")]
+        [DataType(DataType.MultilineText)]
         public string valorPK { get; set; }
+
+        [Display(Name = "Tipo")]
         public string tipoPK { get; set; }
+
+        [Display(Name = "Cedula")]
         public string cedulaEmpleadoFK { get; set; }
     
         public virtual EMPLEADO EMPLEADO { get; set; }

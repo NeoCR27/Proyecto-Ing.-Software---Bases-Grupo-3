@@ -36,6 +36,7 @@ namespace ProyectoPI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            
             string correo = User.Identity.Name;
             string rol = await this.seguridad_controller.GetRol(correo);
             ViewBag.miRol = rol;
@@ -43,7 +44,8 @@ namespace ProyectoPI.Controllers
             EMPLEADO empleado = db.EMPLEADO.Find(id);
             string nombre = empleado.nombre + " " + empleado.primerApellido;
             ViewBag.nombre = nombre;
-            System.Diagnostics.Debug.WriteLine(nombre);
+
+            ViewBag.cedula = id;
 
             var habilidades = db.HABILIDADES.Where(x => x.cedulaEmpleadoFK == id);
             return View(habilidades.ToList());
@@ -69,14 +71,18 @@ namespace ProyectoPI.Controllers
 
 
         // Despliega la vista para crear habilidades
-        public ActionResult Create()
+        public ActionResult Create(string cedula)
         {
-            List<SelectListItem> empleados = this.empleadosController.getEmpleados();
+            //List<SelectListItem> empleados = this.empleadosController.getEmpleados();
 
             //ViewBag.cedulaEmpleadoFK = empleadosController.get_cedulas();
-            ViewBag.cedulaEmpleadoFK = empleados;
+           // ViewBag.cedulaEmpleadoFK = empleados;
             string[] values = new[] { "Tecnica", "Blanda" };
             ViewBag.tipoPK = new SelectList(values);
+            ViewBag.cedula = cedula;
+            System.Diagnostics.Debug.WriteLine("cedula");
+            System.Diagnostics.Debug.WriteLine(cedula);
+
 
             //return View(hABILIDADES.ToList());
             return View();
