@@ -2,12 +2,17 @@
 
 @{
     ViewBag.Title = "Details";
+    string idProyecto = ViewBag.idProy;
+    string nombreReq = ViewBag.nomReq;
+    string nombrePK = ViewBag.nomPK;
+    string nombreProyecto = ViewBag.nomProy;
 }
 
-<h2>Details</h2>
+<h2 class="titulosPag">consultar prueba @nombrePK</h2>
+<h3 class="miniTitulosPag">Proyecto: @nombreProyecto</h3>
+<h3 class="miniTitulosPag">Requerimiento: @nombreReq</h3>
 
 <div>
-    <h4>PRUEBAS</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -25,18 +30,13 @@
         <dd>
             @Html.DisplayFor(model => model.resultadoDetalles)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.REQUERIMIENTOS.dificultad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.REQUERIMIENTOS.dificultad)
-        </dd>
-
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="col-md-offset-2 col-md-10">
+    @Html.ActionLink("Modificar", "Edit", new { id = @idProyecto, nombreReq = @nombreReq, nombrePK = nombrePK, nombreProyecto = @nombreProyecto }, new { @class = "botonGeneral colorVerde" })
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    @Html.ActionLink("Eliminar", "Delete", new { id = @idProyecto, nombreReq = @nombreReq, nombrePK = nombrePK, nombreProyecto = @nombreProyecto }, new { @class = "botonGeneral colorRojo" })
+</div>
+<div class="form-actions no-color">
+    @Html.ActionLink("Volver", "Index", new { id = @idProyecto, nombre = @nombreReq, nombreProyecto = @nombreProyecto }, new { @class = "botonGeneral colorGris" })
+</div>
