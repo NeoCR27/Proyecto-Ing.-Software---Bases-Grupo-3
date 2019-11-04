@@ -46,11 +46,12 @@ namespace ProyectoPI.Controllers
         }
 
         // GET: REQUERIMIENTOS/Details/5
-        public async Task<ActionResult> Details(string id, string idpro)
+        public async Task<ActionResult> Details(string id, string idpro, bool puedeBorrarse)
         {
             string user = User.Identity.Name;
             string rol = await this.seguridad_controller.GetRol(user);
             ViewBag.rol = rol;
+            ViewBag.puedeBorrarse = puedeBorrarse;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

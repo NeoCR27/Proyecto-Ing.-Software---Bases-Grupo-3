@@ -7,6 +7,7 @@
     string idProy = ViewBag.idProy;
     string proy = ViewBag.nombre;
     List<int> requerimientosSePuedenBorrar = ViewBag.requerimientosSePuedenBorrar; // Lista con la cantidad de pruebas asociadas a cada requerimiento
+    List<bool> sePuedeBorrar = new List<bool>();
 }
 <h2 class="titulosPag">Requerimientos @proy</h2>
 @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase) || rol.Equals("Lider", StringComparison.InvariantCultureIgnoreCase))
@@ -16,40 +17,52 @@
 
     </p>
 }
-  
-    <div class="row">
-        @for (int i = 0; i < Model.Count(); ++i)
-        {
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <img src="~/Img/req.png" class="card-img-top" alt="...">
-                        <h4 class="card-title">@Html.DisplayFor(modelItem => Model.ElementAt(i).nombrePK) </h4>
 
-                        <p class="card-text">
+<div class="row">
+    @for (int i = 0; i < Model.Count(); ++i)
+    {
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/Img/req.png" class="card-img-top" alt="...">
+                    <h4 class="card-title">@Html.DisplayFor(modelItem => Model.ElementAt(i).nombrePK) </h4>
+                    @{ 
+                        if (Model.ElementAt(i).cedulaFK == null && requerimientosSePuedenBorrar[i] == 0)
+                        {
+                            sePuedeBorrar.Add(true);
+                        }
+                        else
+                        {
+                            sePuedeBorrar.Add(false);
+                        }
+                    }
+                    <p class="card-text">
 
-                            @Html.ActionLink("Consultar", "Details", new { id = Model.ElementAt(i).nombrePK, idpro = idProy }, new { @class = "botonGeneral colorCeleste" })
-                            @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase) || rol.Equals("Tester", StringComparison.InvariantCultureIgnoreCase))
+                        @Html.ActionLink("Consultar", "Details", new { id = Model.ElementAt(i).nombrePK, idpro = idProy, puedeBorrarse = sePuedeBorrar[i] }, new { @class = "botonGeneral colorCeleste" })
+                        @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase) || rol.Equals("Tester", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            @Html.ActionLink("Modificar", "Edit", new { id = Model.ElementAt(i).nombrePK, idpro = idProy }, new { @class = "botonGeneral colorCeleste" })
+                        }
+                    </p>
+                    <p class="card-text marginElim">
+
+
+                        @Html.ActionLink("Pruebas", "to_pruebas", new { id = idProy, nombre = Model.ElementAt(i).nombrePK, nombreProyecto = proy }, new { @class = "botonGeneral colorCeleste" })
+
+                        @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase) || rol.Equals("Lider", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            if (Model.ElementAt(i).cedulaFK == null && requerimientosSePuedenBorrar[i] == 0) // Se puede eliminar, no tiene pruebas ni tester asociado
                             {
-                                @Html.ActionLink("Modificar", "Edit", new { id = Model.ElementAt(i).nombrePK, idpro = idProy }, new { @class = "botonGeneral colorCeleste" })
-                            }
-                        </p>
-                        <p class="card-text marginElim">
-                            @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase) || rol.Equals("Lider", StringComparison.InvariantCultureIgnoreCase))
-                            {
-                                if (Model.ElementAt(i).cedulaFK == null && requerimientosSePuedenBorrar[i] == 0) // Se puede eliminar, no tiene pruebas ni tester asociado
-                                {
-                                    @Html.ActionLink("Eliminar", "Delete", new { id = Model.ElementAt(i).nombrePK, idpro = idProy }, new { @class = "botonGeneral colorCeleste" })
-                                }
-                            }
+                                @Html.ActionLink("Eliminar", "Delete", new { id = Model.ElementAt(i).nombrePK, idpro = idProy }, new { @class = "botonGeneral colorCeleste" })
 
-                            @Html.ActionLink("Pruebas", "to_pruebas", new { id = idProy, nombre = Model.ElementAt(i).nombrePK, nombreProyecto = proy }, new { @class = "botonGeneral colorCeleste" })
+                            }
+                        }
 
-                        </p>
-                    </div>
+                    </p>
                 </div>
-
             </div>
-        }
 
-    </div>
+        </div>
+    }
+
+</div>

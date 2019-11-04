@@ -6,6 +6,7 @@
 
 @{
     string rol = ViewBag.rol;
+    bool puedeBorrarse = ViewBag.puedeBorrarse;
 }
 
 
@@ -69,25 +70,20 @@
         <dd>
             @Html.DisplayFor(model => model.EMPLEADO.nombre)
         </dd>
-        <div style=" right:3000px;width:800px " class="jumbotron">
-            <p style="text-align:center" display-1">Resultados Finales</p>
-            <br />
-            <dt>
-                @Html.DisplayNameFor(model => model.estado_final)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.estado_final)
-            </dd>
-            <br />
-            <dt>
-                @Html.DisplayNameFor(model => model.descripcion_resultado)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.descripcion_resultado)
-            </dd>
-
-        </div>
-
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.estado_final)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.estado_final)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion_resultado)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.descripcion_resultado)
+        </dd>
 
     </dl>
 </div>
@@ -95,12 +91,16 @@
 @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
 {
    
-        <div class="col-md-offset-2 col-md-10">
-            @Html.ActionLink("Modificar", "Edit", new { id= Model.nombrePK,idpro= Model.idFK }, new { @class = "botonGeneral colorVerde" })
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            @Html.ActionLink("Eliminar", "Delete", new { id = Model.nombrePK, idpro = Model.idFK }, new { @class = "botonGeneral colorRojo" })
-        </div>
+<div class="col-md-offset-2 col-md-10">
+    @Html.ActionLink("Modificar", "Edit", new { id = Model.nombrePK, idpro = Model.idFK }, new { @class = "botonGeneral colorVerde" })
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    @if (puedeBorrarse == true)
+    {
+        @Html.ActionLink("Eliminar", "Delete", new { id = Model.nombrePK, idpro = Model.idFK }, new { @class = "botonGeneral colorRojo" })
     }
+
+</div>
+}
 
 
 <div class="form-actions no-color">
