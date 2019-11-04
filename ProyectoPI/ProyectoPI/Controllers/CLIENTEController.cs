@@ -21,8 +21,7 @@ namespace ProyectoPI.Controllers
         {
             string mail = User.Identity.Name;
             string rol = await this.seguridadController.GetRol(mail);
-            ViewBag.myRol = rol;
-            System.Diagnostics.Debug.WriteLine(rol);
+            ViewBag.rol = rol;
             if (rol == "Cliente")
             {
                 var miInfo = db.CLIENTE.Where(x => x.correo == mail);
@@ -37,7 +36,7 @@ namespace ProyectoPI.Controllers
         {
             string mail = User.Identity.Name;
             string rol = await this.seguridadController.GetRol(mail);
-            ViewBag.myRol = rol;
+            ViewBag.rol = rol;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -55,7 +54,7 @@ namespace ProyectoPI.Controllers
         {
             string mail = User.Identity.Name;
             string rol = await this.seguridadController.GetRol(mail);
-            ViewBag.myRol = rol;
+            ViewBag.rol = rol;
             return View();
         }
 
@@ -64,10 +63,14 @@ namespace ProyectoPI.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cedulaPK,tel,nombre,primerApellido,segundoApellido,correo,distrito,canton,provincia,direccionExacta")] CLIENTE cLIENTE)
+        public async Task<ActionResult> Create([Bind(Include = "cedulaPK,tel,nombre,primerApellido,segundoApellido,correo,distrito,canton,provincia,direccionExacta")] CLIENTE cLIENTE)
         {
+            string mail = User.Identity.Name;
+            string rol = await this.seguridadController.GetRol(mail);
+            ViewBag.rol = rol;
+
             CLIENTE duplicate = db.CLIENTE.Find(cLIENTE.cedulaPK);
-            if (duplicate == null)
+            if ((duplicate == null) && (!db.CLIENTE.Any(x => x.tel == cLIENTE.tel)) && (!db.CLIENTE.Any(x => x.correo == cLIENTE.correo)))
             {
                 if (ModelState.IsValid)
                 {
@@ -78,7 +81,20 @@ namespace ProyectoPI.Controllers
             }
             else
             {
-                return RedirectToAction("NoDuplicados");
+                if (duplicate != null)
+                {
+                    this.ModelState.AddModelError("", "YA EXISTE UN CLIENTE CON LA MISMA CÉDULA");
+                }
+                else if (db.CLIENTE.Any(x => x.tel == cLIENTE.tel))
+                {
+                    this.ModelState.AddModelError("", "YA EXISTE UN CLIENTE CON EL MISMO TELÉFONO");
+                }
+                else if (db.CLIENTE.Any(x => x.correo == cLIENTE.correo))
+                {
+                    this.ModelState.AddModelError("", "YA EXISTE UN CLIENTE CON EL MISMO CORREO");
+                }
+
+                return View(cLIENTE);
             }
 
             return View(cLIENTE);
@@ -89,7 +105,7 @@ namespace ProyectoPI.Controllers
         {
             string mail = User.Identity.Name;
             string rol = await this.seguridadController.GetRol(mail);
-            ViewBag.myRol = rol;
+            ViewBag.rol = rol;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -108,8 +124,24 @@ namespace ProyectoPI.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "cedulaPK,tel,nombre,primerApellido,segundoApellido,correo,distrito,canton,provincia,direccionExacta")] CLIENTE cLIENTE)
+        public async Task<ActionResult> Edit([Bind(Include = "cedulaPK,tel,nombre,primerApellido,segundoApellido,correo,distrito,canton,provincia,direccionExacta")] CLIENTE cLIENTE)
         {
+            string mail = User.Identity.Name;
+            string rol = await this.seguridadController.GetRol(mail);
+            ViewBag.rol = rol;
+
+            var datosOriginales = db.CLIENTE.AsNoTracking().Where(x => x.cedulaPK == cLIENTE.cedulaPK).FirstOrDefault();
+            if ((datosOriginales.tel != cLIENTE.tel) && (db.CLIENTE.Any(x => x.tel == cLIENTE.tel)))
+            {
+                this.ModelState.AddModelError("", "YA EXISTE UN CLIENTE CON EL MISMO TELÉFONO");
+                return View(cLIENTE);
+            }
+            if ((datosOriginales.correo != cLIENTE.correo) && (db.CLIENTE.Any(x => x.correo == cLIENTE.correo)))
+            {
+                this.ModelState.AddModelError("", "YA EXISTE UN CLIENTE CON EL MISMO CORREO");
+                return View(cLIENTE);
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(cLIENTE).State = EntityState.Modified;
@@ -124,7 +156,7 @@ namespace ProyectoPI.Controllers
         {
             string mail = User.Identity.Name;
             string rol = await this.seguridadController.GetRol(mail);
-            ViewBag.myRol = rol;
+            ViewBag.rol = rol;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
