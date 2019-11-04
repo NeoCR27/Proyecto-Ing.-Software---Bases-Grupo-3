@@ -96,9 +96,9 @@
 {
    
         <div class="col-md-offset-2 col-md-10">
-            @Html.ActionLink("Modificar", "Edit", new { id = Model.idFK }, new { @class = "botonGeneral colorVerde" })
+            @Html.ActionLink("Modificar", "Edit", new { id= Model.nombrePK,idpro= Model.idFK }, new { @class = "botonGeneral colorVerde" })
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            @Html.ActionLink("Eliminar", "Delete", new { id = Model.idFK }, new { @class = "botonGeneral colorRojo" })
+            @Html.ActionLink("Eliminar", "Delete", new { id = Model.nombrePK, idpro = Model.idFK }, new { @class = "botonGeneral colorRojo" })
         </div>
     }
 
