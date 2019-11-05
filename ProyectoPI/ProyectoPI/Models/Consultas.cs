@@ -11,6 +11,13 @@ namespace ProyectoPI.Models
         public int Cantidad { get; set; }
     }
 
+    public class GetReq
+    {
+        public string nombrePK { get; set; }
+        public string nombre { get; set; }
+        public string estado_actual { get; set; }
+    }
+
     public class CantReq
     {
         public int Cantidad { get; set; }
@@ -22,9 +29,12 @@ namespace ProyectoPI.Models
     public class EstadoAsigReq
     {
         public string nombrePK { get; set; }
-        public string cedulaPK { get; set; }
+        public string correo { get; set; }
         public string nombre { get; set; }
         public string estado_actual { get; set; }
+        public string FechaInicio { get; set; }
+        public string FechaActual { get; set; }
+        public string FechaEntrega { get; set; }
 
     }
 }
