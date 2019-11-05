@@ -98,9 +98,19 @@ namespace ProyectoPI.Controllers
             if (ModelState.IsValid)
 
             {
-                System.Diagnostics.Debug.WriteLine(rEQUERIMIENTOS.cedulaFK);
-                db.REQUERIMIENTOS.Add(rEQUERIMIENTOS);
-                db.SaveChanges();
+                if (Request.Form["Testers"] != "")
+                {
+                    rEQUERIMIENTOS.cedulaFK = Request.Form["Testers"].ToString();
+                    db.REQUERIMIENTOS.Add(rEQUERIMIENTOS);
+                    db.SaveChanges();
+                    String queryAgregarAHistorial = "exec agregar_Historial_Req" + "'" + rEQUERIMIENTOS.idFK + "'," + "'" + rEQUERIMIENTOS.nombrePK + "'," + "'" + rEQUERIMIENTOS.cedulaFK + "'";
+                    db.Database.SqlQuery<EquipoModel>(queryAgregarAHistorial).ToList();
+                }
+                else
+                {
+                    db.REQUERIMIENTOS.Add(rEQUERIMIENTOS);
+                    db.SaveChanges();
+                }
                 return RedirectToAction("../REQUERIMIENTOS/Index", new { id = rEQUERIMIENTOS.idFK });
             }
 
@@ -180,6 +190,8 @@ namespace ProyectoPI.Controllers
                 else // Se selecciono un nuevo tester
                 {
                     rEQUERIMIENTOS.cedulaFK = Request.Form["Testers"].ToString();
+                    String queryAgregarAHistorial = "exec agregar_Historial_Req" + "'" + idProy + "'," + "'" + nombrePK + "'," + "'" + rEQUERIMIENTOS.cedulaFK + "'";
+                    db.Database.SqlQuery<EquipoModel>(queryAgregarAHistorial).ToList();
                 }
                 
                 db.Entry(rEQUERIMIENTOS).State = EntityState.Modified;
