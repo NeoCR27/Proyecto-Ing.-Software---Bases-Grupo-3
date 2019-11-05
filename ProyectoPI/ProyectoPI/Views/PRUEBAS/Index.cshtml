@@ -4,44 +4,35 @@
     ViewBag.Title = "Index";
     string idProyecto = ViewBag.idProy;
     string nombreReq = ViewBag.nomReq;
+    string nombreProyecto = ViewBag.nomProy;
 }
-
+<h2 class="titulosPag">Pruebas</h2>
+<h3 class="miniTitulosPag">Proyecto: @nombreProyecto</h3>
+<h3 class="miniTitulosPag">Requerimiento: @nombreReq</h3>
 
 <p>
-    @Html.ActionLink("Create New", "Create", new { id = @idProyecto, nombre = @nombreReq }, new { @class = "botonGeneral colorVerde" })
+    @Html.ActionLink("Crear Nueva Prueba", "Create", new { id = @idProyecto, nombre = @nombreReq, nombreProyecto = @nombreProyecto }, new { @class = "botonGeneral colorVerde" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.EstadoFinal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.resultadoDetalles)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombrePK)
-        </th>
-        <th></th>
-    </tr>
 
+<div class="row">
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstadoFinal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.resultadoDetalles)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombrePK)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { id = @idProyecto, nombre = @nombreReq, nombrePrueba = item.nombrePK }, new { @class = "botonGeneral colorCeleste" })
-            </td>
-        </tr>
-    }
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="../Img/emp.jpg" class="card-img-top" alt="..."/>
+                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.nombrePK) </h4>
+                    <p class="card-text"><small class="text-muted">@Html.DisplayFor(model => item.EstadoFinal)</small></p>
 
-</table>
+                    <p class="card-text">
+                        @Html.ActionLink("Consultar", "Details", new { id = item.idProyFK, nombreReq = item.nombreReqFK, nombrePK = item.nombrePK, nombreProyecto = @nombreProyecto }, new { @class = "botonGeneral colorCeleste" })
+                        @Html.ActionLink("Modificar", "Edit", new { id = item.idProyFK, nombreReq = item.nombreReqFK, nombrePK = item.nombrePK, nombreProyecto = @nombreProyecto }, new { @class = "botonGeneral colorCeleste" })
+                    </p>
+                    <p class="card-text marginElim">
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.idProyFK, nombreReq = item.nombreReqFK, nombrePK = item.nombrePK, nombreProyecto = @nombreProyecto }, new { @class = "botonGeneral colorCeleste" })
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

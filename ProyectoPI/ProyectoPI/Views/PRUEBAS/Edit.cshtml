@@ -2,48 +2,78 @@
 
 @{
     ViewBag.Title = "Edit";
+    string idProyecto = ViewBag.idProy;
+    string nombreReq = ViewBag.nomReq;
+    string nombrePK = ViewBag.nomPK;
+    string nombreProyecto = ViewBag.nomProy;
 }
 
-<h2>Edit</h2>
+<h2 class="titulosPag">editar prueba @nombrePK</h2>
+<h3 class="miniTitulosPag">Proyecto: @nombreProyecto</h3>
+<h3 class="miniTitulosPag">Requerimiento: @nombreReq</h3>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>PRUEBAS</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.idProyFK)
 
-        @Html.HiddenFor(model => model.nombreReqFK)
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.idProyFK)
 
-        @Html.HiddenFor(model => model.nombrePK)
+    @Html.HiddenFor(model => model.nombreReqFK)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.EstadoFinal, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EstadoFinal, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EstadoFinal, "", new { @class = "text-danger" })
-            </div>
+    @Html.HiddenFor(model => model.nombrePK)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.EstadoFinal, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.EstadoFinal, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.EstadoFinal, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.resultadoDetalles, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.resultadoDetalles, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.resultadoDetalles, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.resultadoDetalles, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.resultadoDetalles, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.resultadoDetalles, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @{
+                string URL = Request.Url.ToString();
+            }
+            <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="botonGeneral colorVerde" data-toggle="modal" data-target="#guardar">
+                Aceptar
+            </button>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="guardar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><strong>¿Está seguro que desea guardar los cambios realizados?</strong></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <input type="submit" value="Aceptar" class="btn btn-success" />
+                </div>
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+}
+    <div class="form-actions no-color">
+        @Html.ActionLink("Volver", "Index", new { id = @idProyecto, nombre = @nombreReq, nombreProyecto = @nombreProyecto }, new { @class = "botonGeneral colorGris" })
+    </div>

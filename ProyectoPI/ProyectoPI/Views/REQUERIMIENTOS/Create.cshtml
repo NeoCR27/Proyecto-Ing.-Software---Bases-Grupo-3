@@ -103,19 +103,27 @@
         </div>
     </div>
 
+    <div class="form-group">
+        @Html.LabelFor(model => model.estado_final, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.estado_final, new { htmlAttributes = new { @class = "form-control", @disabled = true } })
+            @Html.ValidationMessageFor(model => model.estado_final, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.descripcion_resultado, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.descripcion_resultado, new { htmlAttributes = new { @class = "form-control", @disabled = true } })
+            @Html.ValidationMessageFor(model => model.descripcion_resultado, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
     <br />
     <p><strong>Los campos con <font color="red">*</font> son obligatorios.</strong></p>
     <br />
 
-    <div style=" right:3000px;width:800px " class="jumbotron">
-        <p style="text-align:center" display-1">Resultados Finales</p>
-        <div class="form-group">
-            @Html.LabelFor(model => model.estado_final, htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.descripcion_resultado, htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-    </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             @{
