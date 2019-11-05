@@ -148,14 +148,56 @@ namespace ProyectoPI.Controllers
             // Query que me retorna la cantidad de pruebas por el estado
 
             string queryPruebasPorEstado = "EXEC cantidad_pruebas_por_estado " + "'" + rEQUERIMIENTOS.nombrePK + "','" + rEQUERIMIENTOS.idFK + "';";
-            /*List<PruebasPorEstado> resultado = (db.Database.SqlQuery<PruebasPorEstado>(queryPruebasPorEstado)).ToList();
-            foreach(PruebasPorEstado a in resultado)
-            {
-                // 
-            }*/
-            // Pequeño problema, si no hay de un estado, no viene esa informacion en la tabla, hay que iterar sobre lista buscando los 3 tipos 
+            List<PruebasPorEstado> resultado = (db.Database.SqlQuery<PruebasPorEstado>(queryPruebasPorEstado)).ToList();
+            bool pruebasIncompletas = false;
+            bool pruebasFallidas = false;
+            bool pruebasExitosas = false;
 
-            
+            // Hay que revisar de que tipo de pruebas hay
+            if (resultado.Count() == 3) // Hay incompletas, fallidas y exitosas
+            {
+                pruebasIncompletas = true;
+                pruebasFallidas = true;
+                pruebasExitosas = true;
+            }
+            else if(resultado.Count() == 2) // Solo hay de 2 tipos
+            {
+                
+                PruebasPorEstado incompletas = resultado.Find(x => x.estadoFinal == "Incompleto");
+                if(incompletas != null)
+                {
+                    pruebasIncompletas = true;
+                }
+                PruebasPorEstado exitosas = resultado.Find(x => x.estadoFinal == "Exitoso");
+                if (exitosas != null)
+                {
+                    pruebasExitosas = true;
+                }
+                PruebasPorEstado fallidas = resultado.Find(x => x.estadoFinal == "Fallido");
+                if (fallidas != null)
+                {
+                    pruebasFallidas = true;
+                }
+            }
+            else if(resultado.Count() == 1) // Solo hay de un tipo
+            {
+                if(resultado.ElementAt(0).estadoFinal == "Exitoso")
+                {
+                    pruebasExitosas = true;
+                }else if (resultado.ElementAt(0).estadoFinal == "Fallido")
+                {
+                    pruebasFallidas = true;
+                }
+                else
+                {
+                    pruebasIncompletas = true;
+                }
+            }
+
+            ViewBag.pruebasIncompletas = pruebasIncompletas;
+            ViewBag.pruebasFallidas = pruebasFallidas;
+            ViewBag.pruebasExitosas = pruebasExitosas;
+
             ViewBag.idProy = idpro;
             ViewBag.dificultad = rEQUERIMIENTOS.dificultad;
             ViewBag.estadoActual = rEQUERIMIENTOS.estado_actual;

@@ -41,7 +41,10 @@
                         @Html.ActionLink("Consultar", "Details", new { id = Model.ElementAt(i).nombrePK, idpro = idProy, puedeBorrarse = sePuedeBorrar[i] }, new { @class = "botonGeneral colorCeleste" })
                         @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase) || rol.Equals("Tester", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            @Html.ActionLink("Modificar", "Edit", new { id = Model.ElementAt(i).nombrePK, idpro = idProy }, new { @class = "botonGeneral colorCeleste" })
+                            if (Model.ElementAt(i).estado_final == null)
+                            {
+                                @Html.ActionLink("Modificar", "Edit", new { id = Model.ElementAt(i).nombrePK, idpro = idProy }, new { @class = "botonGeneral colorCeleste" })
+                            }
                         }
                     </p>
                     <p class="card-text marginElim">

@@ -50,8 +50,8 @@ namespace ProyectoPI.Models
 
 
         [Display(Name = "Descripción")]
+        [DataType(DataType.MultilineText)]
         public string Descripcion { get; set; }
-
 
         [Display(Name = "Estado Actual")]
         public string estado_actual { get; set; }
@@ -60,6 +60,7 @@ namespace ProyectoPI.Models
         public string estado_final { get; set; }
 
         [Display(Name = "Descripción Resultado")]
+        [DataType(DataType.MultilineText)]
         public string descripcion_resultado { get; set; }
 
         public virtual EMPLEADO EMPLEADO { get; set; }

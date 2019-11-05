@@ -8,7 +8,9 @@
     string tester = ViewBag.tester;
     string nombrePK = ViewBag.nombrePK;
     List<SelectListItem> testersDisp = ViewBag.testerDisp;
-    //<input type="hidden" id="idProy" name="idProy" value=@idProy>
+    bool pruebasExitosas = ViewBag.pruebasExitosas;
+    bool pruebasFallidas = ViewBag.pruebasFallidas;
+    bool pruebasIncompletas = ViewBag.pruebasIncompletas;
 }
 
 
@@ -105,24 +107,79 @@
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.estado_final, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <select class="form-control" id="estadoFinal" name="estadoFinal">
-                <option selected disabled>Seleccione un Estado Final</option>
-                <option>Exitoso</option>
-                <option>Fallido</option>
-            </select>
+    @if (pruebasIncompletas == true)
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.estado_final, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.estado_final, new { htmlAttributes = new { @class = "form-control", @disabled = true, @placeholder = "Hay pruebas incompletas, no se puede finalizar" } })
+                @Html.ValidationMessageFor(model => model.estado_final, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.descripcion_resultado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.descripcion_resultado, new { htmlAttributes = new { @class = "form-control", @disabled = true, @placeholder = "Hay pruebas incompletas, no se puede brindar una descripción final" } })
+                @Html.ValidationMessageFor(model => model.descripcion_resultado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    }
+    else if (pruebasFallidas == true)
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.estado_final, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" id="estadoFinal" name="estadoFinal">
+                    <option selected disabled>Hay pruebas fallidas</option>
+                    <option>Fallido</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.descripcion_resultado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.descripcion_resultado, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.descripcion_resultado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    }
+    else if (pruebasFallidas == false && pruebasExitosas == false && pruebasIncompletas == false)
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.estado_final, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.estado_final, new { htmlAttributes = new { @class = "form-control", @disabled = true, @placeholder = "No tiene pruebas asociadas" } })
+                @Html.ValidationMessageFor(model => model.estado_final, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.descripcion_resultado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.descripcion_resultado, new { htmlAttributes = new { @class = "form-control", @disabled = true, @placeholder = "No tiene pruebas asociadas" } })
+                @Html.ValidationMessageFor(model => model.descripcion_resultado, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.descripcion_resultado, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.descripcion_resultado, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.descripcion_resultado, "", new { @class = "text-danger" })
+    }
+    else
+    { 
+        <div class="form-group">
+            @Html.LabelFor(model => model.estado_final, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" id="estadoFinal" name="estadoFinal">
+                    <option selected disabled>Todas las pruebas son exitosas</option>
+                    <option>Exitoso</option>
+                </select>
+            </div>
         </div>
-    </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.descripcion_resultado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.descripcion_resultado, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.descripcion_resultado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    }
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
