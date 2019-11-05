@@ -5,6 +5,7 @@
     string rol = ViewBag.myRol;
     string idProy = ViewBag.idproy;
     string proy = ViewBag.nombre;
+    List<ProyectoPI.Models.GetReq> req = ViewBag.Req;
 }
 <h2 class="titulosPag">Estado de los Requerimientos</h2>
 <h4>Resultados</h4>
@@ -15,6 +16,35 @@
 </br>
 </br>
 
+<div style=" right:3000px;width:600px ;height:auto" class="jumbotron">
+    <p style="text-align:center" display-1">Resultados</p>
+    <p style="font-size:15px">
+    </p>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+
+                <th scope="col">Nombre del Tester</th>
+                <th scope="col">Nombre del Requerimiento</th>
+                <th scope="col">Estado del Requerimiento</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in req)
+            {
+            <tr>
+
+                <td>@item.nombre</td>
+                <td>@item.nombrePK</td>
+                <td>@item.estado_actual</td>
+
+
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 
 
