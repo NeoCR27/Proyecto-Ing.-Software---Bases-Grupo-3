@@ -7,6 +7,11 @@
 
 
 <h2 class="titulosPag">Detalles </h2>
+
+
+
+
+
 <div>
 
     <hr />
@@ -129,13 +134,13 @@
     </dl>
     @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
     {
-        
-            <div class="col-md-offset-2 col-md-10">
-                @Html.ActionLink("Modificar", "Edit", new { id = Model.cedulaPK }, new { @class = "botonGeneral colorVerde" })
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                @Html.ActionLink("Eliminar", "Delete", new { id = Model.cedulaPK }, new { @class = "botonGeneral colorRojo" })
-            </div>
-        
+
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("Modificar", "Edit", new { id = Model.cedulaPK }, new { @class = "botonGeneral colorVerde" })
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            @Html.ActionLink("Eliminar", "Delete", new { id = Model.cedulaPK }, new { @class = "botonGeneral colorRojo" })
+        </div>
+
     }
     @using (Html.BeginForm())
     {

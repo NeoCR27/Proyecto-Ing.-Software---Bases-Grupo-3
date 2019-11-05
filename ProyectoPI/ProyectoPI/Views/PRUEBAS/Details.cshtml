@@ -6,6 +6,9 @@
     string nombreReq = ViewBag.nomReq;
     string nombrePK = ViewBag.nomPK;
     string nombreProyecto = ViewBag.nomProy;
+    string rol = ViewBag.my_rol;
+
+
 }
 
 <h2 class="titulosPag">consultar prueba @nombrePK</h2>
@@ -32,11 +35,14 @@
         </dd>
     </dl>
 </div>
-<div class="col-md-offset-2 col-md-10">
-    @Html.ActionLink("Modificar", "Edit", new { id = @idProyecto, nombreReq = @nombreReq, nombrePK = nombrePK, nombreProyecto = @nombreProyecto }, new { @class = "botonGeneral colorVerde" })
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    @Html.ActionLink("Eliminar", "Delete", new { id = @idProyecto, nombreReq = @nombreReq, nombrePK = nombrePK, nombreProyecto = @nombreProyecto }, new { @class = "botonGeneral colorRojo" })
-</div>
+@if (!@rol.Equals("Cliente", StringComparison.InvariantCultureIgnoreCase))
+{
+    <div class="col-md-offset-2 col-md-10">
+        @Html.ActionLink("Modificar", "Edit", new { id = @idProyecto, nombreReq = @nombreReq, nombrePK = nombrePK, nombreProyecto = @nombreProyecto }, new { @class = "botonGeneral colorVerde" })
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        @Html.ActionLink("Eliminar", "Delete", new { id = @idProyecto, nombreReq = @nombreReq, nombrePK = nombrePK, nombreProyecto = @nombreProyecto }, new { @class = "botonGeneral colorRojo" })
+    </div>
+}
 <div class="form-actions no-color">
     @Html.ActionLink("Volver", "Index", new { id = @idProyecto, nombre = @nombreReq, nombreProyecto = @nombreProyecto }, new { @class = "botonGeneral colorGris" })
 </div>

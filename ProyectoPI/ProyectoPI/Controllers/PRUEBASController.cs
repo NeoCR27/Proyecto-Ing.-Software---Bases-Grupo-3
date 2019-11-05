@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ProyectoPI.Controllers;
+using System.Threading.Tasks;
 
 namespace ProyectoPI.Models
 {
@@ -13,9 +15,15 @@ namespace ProyectoPI.Models
     {
         private Gr03Proy4Entities db = new Gr03Proy4Entities();
 
+        private SeguridadController seguridad_controller = new SeguridadController();
+
         // GET: PRUEBAS
-        public ActionResult Index(string id, string nombre, string nombreProyecto)
+        public async Task<ActionResult> Index(string id, string nombre, string nombreProyecto)
         {
+
+            string mail = User.Identity.Name;
+            string rol = await this.seguridad_controller.GetRol(mail);
+            ViewBag.my_rol = rol;
 
             ViewBag.nomProy = nombreProyecto;
             ViewBag.idProy = id;
@@ -27,8 +35,11 @@ namespace ProyectoPI.Models
         }
 
         // GET: PRUEBAS/Details/5
-        public ActionResult Details(string id, string nombreReq, string nombrePK, string nombreProyecto)
+        public ActionResult Details(string id, string nombreReq, string nombrePK, string nombreProyecto, string rol )
         {
+
+            ViewBag.my_rol = rol;
+
             ViewBag.nomProy = nombreProyecto;
             ViewBag.idProy = id;
             ViewBag.nomReq = nombreReq;

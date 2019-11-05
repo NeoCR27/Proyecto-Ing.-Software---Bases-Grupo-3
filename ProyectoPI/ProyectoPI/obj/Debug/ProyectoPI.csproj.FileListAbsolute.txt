@@ -460,7 +460,6 @@ C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\
 C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
 C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
 C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csprojAssemblyReference.cache
-C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csproj.CoreCompileInputs.cache
 C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csproj.CopyComplete
 C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.dll
 C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.pdb
