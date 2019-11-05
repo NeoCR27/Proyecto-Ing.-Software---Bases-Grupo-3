@@ -34,8 +34,10 @@ namespace ProyectoPI.Controllers
         }
 
         // Despliega la vista de  detalles de un empleado en especifico
-        public ActionResult Details(string id)
+        public ActionResult Details(string id, string rol )
         {
+            ViewBag.my_rol = rol;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

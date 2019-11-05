@@ -2,8 +2,8 @@
 
 @{
     ViewBag.Title = "Delete";
+    string rol = ViewBag.my_rol;
 }
-
 
 
 <h2 class="titulosPag">Detalles </h2>
@@ -108,14 +108,14 @@
         <dd>
 
             @*
-            @if (Model.disponibilidad == true)
-            {<text>Disponible</text>}
-        else
-        {<text>No disponible</text>}
-                *@
-        <dt>
+                    @if (Model.disponibilidad == true)
+                    {<text>Disponible</text>}
+                else
+                {<text>No disponible</text>}
+            *@
+
             @Html.DisplayFor(model => model.disponibilidad)
-        </dt>
+
         </dd>
         <br />
         <dt>
@@ -127,7 +127,16 @@
         <br />
 
     </dl>
-
+    @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
+    {
+        
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Modificar", "Edit", new { id = Model.cedulaPK }, new { @class = "botonGeneral colorVerde" })
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.ActionLink("Eliminar", "Delete", new { id = Model.cedulaPK }, new { @class = "botonGeneral colorRojo" })
+            </div>
+        
+    }
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()

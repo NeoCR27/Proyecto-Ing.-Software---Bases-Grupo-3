@@ -30,7 +30,7 @@
                         <p class="card-text"><small class="text-muted">@Html.DisplayFor(modelItem => item.rol)</small></p>
                         <p class="card-text">
 
-                            @Html.ActionLink("Consultar", "Details", new { id = item.cedulaPK }, new { @class = "botonGeneral colorCeleste" })
+                            @Html.ActionLink("Consultar", "Details", new { id = item.cedulaPK, rol = @rol  }, new { @class = "botonGeneral colorCeleste" })
                             @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
                             {
                                 @Html.ActionLink("Modificar", "Edit", new { id = item.cedulaPK }, new { @class = "botonGeneral colorCeleste" })
