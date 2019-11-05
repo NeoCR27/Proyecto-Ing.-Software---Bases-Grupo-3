@@ -90,11 +90,19 @@ namespace ProyectoPI.Controllers
             ViewBag.id = id;
             string queryEquipo = "SELECT Part.idProyectoFK AS 'IDProyecto', Emp.nombre + ' ' + Emp.primerApellido AS 'empleado', Emp.correo AS 'email', Part.rol AS 'rol', Emp.disponibilidad AS 'dispon', Emp.cedulaPK AS 'idEmp', Proy.nombre AS 'proyNom' FROM PARTICIPA Part Join EMPLEADO Emp ON Emp.cedulaPK = Part.cedulaEmpleadoFK JOIN Proyecto Proy ON Proy.idPK = Part.idProyectoFK WHERE Part.idProyectoFK = " + id + "Order by part.rol";
             string queryEmpleado = ("Exec recuperarHabilidad" + "'"+ buscarPor + "','" + filtroBusqueda + "'");
+            string queryReqAsociados = ("Exec Consulta_Cantidad_Req_Tester"+"'"+id+"'");
             //Se hace el query a la base de datos
             IList<EquipoModel> resultadoQueryEquipo = (db.Database.SqlQuery<EquipoModel>(queryEquipo)).ToList();
             IList<HabilidadEmpleadoModel> resultadoQueryEmpleado = (db.Database.SqlQuery<HabilidadEmpleadoModel>(queryEmpleado)).ToList();
+            List<CantReq> resultadoReq = (db.Database.SqlQuery<CantReq>(queryReqAsociados)).ToList();
+            List<String> idOcupadas = new List<string>();
+            foreach(CantReq item in resultadoReq)
+            {
+                idOcupadas.Add(item.cedulaPK); 
+            }
             ViewBag.maximoEq = AlcanzadoMaxEquipo(id);
             ViewBag.nomProyecto = resultadoQueryEquipo.First().proyNom;
+            ViewBag.idNoRemover = idOcupadas;
             //Se pasa a viewData para llamar desde la vista
             ViewData["equipo"] = resultadoQueryEquipo;
             ViewData["empleados"] = resultadoQueryEmpleado;           

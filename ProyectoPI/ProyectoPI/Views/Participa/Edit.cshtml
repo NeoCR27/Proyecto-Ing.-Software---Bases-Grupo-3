@@ -63,6 +63,7 @@
                     {
                         foreach (var empleado in ViewData["empleados"] as IList<ProyectoPI.Models.HabilidadEmpleadoModel>)
                         {
+
                             <tr>
                                 <td> @empleado.nombre</td>
                                 <td> @empleado.tipoHabilidad</td>
@@ -89,10 +90,10 @@
     {
         <div style="width: 50%; float: left">
             <h2>Empleados Disponibles</h2>
-            <p>
-                El equipo ha alcanzado el máximo de integrantes permitido
-            </p>
         </div>
+        <p style="position: absolute; color:red;top:50%">
+            El equipo ha alcanzado el máximo de integrantes permitido
+        </p>
         <div style="width: 50%; float: right;">
             <h2>Miembros de Equipo </h2>
         </div>
@@ -125,25 +126,11 @@ else
             </thead>
             @foreach (var integrante in ViewData["equipo"] as IList<ProyectoPI.Models.EquipoModel>)
             {
+
                 <tr>
                     <td>@integrante.empleado</td>
                     <td>@integrante.email</td>
                     <td>@integrante.rol</td>
-                    @if (!soyTester && !soyCliente)
-                    {
-                        if (!rol.Equals(@integrante.rol, StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            <td>
-                                @using (Html.BeginForm("RemoverTester", "PARTICIPA"))
-                                {
-                                    @Html.Hidden("idProyecto", @id)
-                                    @Html.Hidden("idEmpleado", integrante.idEmp)
-                                    <input class="botonGeneral colorRojo" type="submit" value="Remover" />
-                                }
-                            </td>
-                        }
-
-                    }
 
                 </tr>
             }
@@ -164,6 +151,8 @@ else
             </thead>
             @foreach (var integrante in ViewData["equipo"] as IList<ProyectoPI.Models.EquipoModel>)
             {
+                bool tieneReq = false;
+
                 <tr>
                     <td>@integrante.empleado</td>
                     <td>@integrante.email</td>
@@ -172,14 +161,32 @@ else
                     {
                         if (!rol.Equals(@integrante.rol, StringComparison.InvariantCultureIgnoreCase))
                         {
-                            <td>
-                                @using (Html.BeginForm("RemoverTester", "PARTICIPA"))
+                            foreach (string item in ViewBag.idNoRemover as List<String>)
+                            {
+                                if (String.Equals(item, integrante.idEmp, StringComparison.InvariantCultureIgnoreCase))
                                 {
-                                    @Html.Hidden("idProyecto", @id)
-                                    @Html.Hidden("idEmpleado", integrante.idEmp)
-                                    <input class="botonGeneral colorRojo" type="submit" value="Remover" />
+                                    tieneReq = true;
                                 }
-                            </td>
+                            }
+
+                            if (!tieneReq)
+                            {
+                                using (Html.BeginForm("RemoverTester", "PARTICIPA"))
+                                {
+                                    <td>
+                                        @Html.Hidden("idProyecto", @id)
+                                        @Html.Hidden("idEmpleado", integrante.idEmp)
+                                        <input class="botonGeneral colorRojo" type="submit" value="Remover" />
+                                    </td>
+                                }
+                            }
+                            else
+                            {
+                                <td colspan="1" style="color:red">
+                                    No se puede remover empleado con requerimiento pendiente
+                                </td>
+                            }
+
                         }
 
                     }

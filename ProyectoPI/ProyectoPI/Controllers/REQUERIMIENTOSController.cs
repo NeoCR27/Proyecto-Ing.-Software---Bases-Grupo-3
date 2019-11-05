@@ -144,13 +144,15 @@ namespace ProyectoPI.Controllers
             {
                 testerDisp.Add(new SelectListItem { Text = item.NombreEmpleado, Value = item.cedulaPK });
             }
+            testerDisp.Add(new SelectListItem { Text = "Desasignar Tester", Value = null});
             // Query que me retorna la cantidad de pruebas por el estado
+
             string queryPruebasPorEstado = "EXEC cantidad_pruebas_por_estado " + "'" + rEQUERIMIENTOS.nombrePK + "','" + rEQUERIMIENTOS.idFK + "';";
-            List<PruebasPorEstado> resultado = (db.Database.SqlQuery<PruebasPorEstado>(queryPruebasPorEstado)).ToList();
+            /*List<PruebasPorEstado> resultado = (db.Database.SqlQuery<PruebasPorEstado>(queryPruebasPorEstado)).ToList();
             foreach(PruebasPorEstado a in resultado)
             {
                 // 
-            }
+            }*/
             // Pequeño problema, si no hay de un estado, no viene esa informacion en la tabla, hay que iterar sobre lista buscando los 3 tipos 
 
             
@@ -197,11 +199,18 @@ namespace ProyectoPI.Controllers
                 {
                     rEQUERIMIENTOS.cedulaFK = testerAnterior;
                 }
-                else // Se selecciono un nuevo tester
+                else // Se selecciono un campo del dropdown
                 {
                     rEQUERIMIENTOS.cedulaFK = Request.Form["Testers"].ToString();
-                    String queryAgregarAHistorial = "exec agregar_Historial_Req" + "'" + idProy + "'," + "'" + nombrePK + "'," + "'" + rEQUERIMIENTOS.cedulaFK + "'";
-                    db.Database.SqlQuery<EquipoModel>(queryAgregarAHistorial).ToList();
+                    if(rEQUERIMIENTOS.cedulaFK != "Desasignar Tester")
+                    {
+                        String queryAgregarAHistorial = "exec agregar_Historial_Req" + "'" + idProy + "'," + "'" + nombrePK + "'," + "'" + rEQUERIMIENTOS.cedulaFK + "'";
+                        db.Database.SqlQuery<EquipoModel>(queryAgregarAHistorial).ToList();
+                    }
+                    else
+                    {
+                        rEQUERIMIENTOS.cedulaFK = null;
+                    }
                 }
                 
                 db.Entry(rEQUERIMIENTOS).State = EntityState.Modified;

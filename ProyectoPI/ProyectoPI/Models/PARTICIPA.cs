@@ -49,4 +49,5 @@ namespace ProyectoPI.Models
     {
         public int numInt { get; set; }
     }
+
 }
