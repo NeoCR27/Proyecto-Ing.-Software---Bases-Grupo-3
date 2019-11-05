@@ -144,7 +144,16 @@ namespace ProyectoPI.Controllers
             {
                 testerDisp.Add(new SelectListItem { Text = item.NombreEmpleado, Value = item.cedulaPK });
             }
+            // Query que me retorna la cantidad de pruebas por el estado
+            string queryPruebasPorEstado = "EXEC cantidad_pruebas_por_estado " + "'" + rEQUERIMIENTOS.nombrePK + "','" + rEQUERIMIENTOS.idFK + "';";
+            List<PruebasPorEstado> resultado = (db.Database.SqlQuery<PruebasPorEstado>(queryPruebasPorEstado)).ToList();
+            foreach(PruebasPorEstado a in resultado)
+            {
+                // 
+            }
+            // Pequeño problema, si no hay de un estado, no viene esa informacion en la tabla, hay que iterar sobre lista buscando los 3 tipos 
 
+            
             ViewBag.idProy = idpro;
             ViewBag.dificultad = rEQUERIMIENTOS.dificultad;
             ViewBag.estadoActual = rEQUERIMIENTOS.estado_actual;

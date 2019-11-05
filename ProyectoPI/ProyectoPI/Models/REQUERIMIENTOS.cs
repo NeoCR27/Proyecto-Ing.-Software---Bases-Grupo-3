@@ -74,4 +74,10 @@ namespace ProyectoPI.Models
         public string NombreEmpleado { get; set; }
         public string cedulaPK { get; set; }
     }
+
+    public class PruebasPorEstado
+    {
+        public string estadoFinal { get; set; }
+        public int cantidad { get; set; }
+    }
 }
