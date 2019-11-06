@@ -120,10 +120,27 @@ namespace ProyectoPI.Controllers
         // Recibe los datos de la vista del editar empleado
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(EMPLEADO eMPLEADO)
+    
+        public async Task<ActionResult> Edit([Bind(Include = "cedulaPK,tel,nombre,primerApellido,segundoApellido,correo,distrito,canton,provincia,direccionExacta,horasLaboradas,edad,disponibilidad,rol,fechaNacimiento")] EMPLEADO eMPLEADO)
         {
-            EMPLEADO duplicado = db.EMPLEADO.Find(eMPLEADO.cedulaPK);
-            if ((duplicado == null) && (!db.EMPLEADO.Any(x => x.tel == eMPLEADO.tel)) && (!db.EMPLEADO.Any(x => x.correo == eMPLEADO.correo)))
+            var datosOriginales = db.EMPLEADO.AsNoTracking().Where(x => x.cedulaPK == eMPLEADO.cedulaPK).FirstOrDefault();
+
+            int error = 0;
+            if ((datosOriginales.tel != eMPLEADO.tel) && (db.EMPLEADO.Any(x => x.tel == eMPLEADO.tel)))
+            {
+                error = 1;
+                this.ModelState.AddModelError("", "YA EXISTE UN EMPLEADO CON EL MISMO TELÉFONO");
+                return View(eMPLEADO);
+
+            }
+            
+            if ((datosOriginales.correo != eMPLEADO.correo) && (db.EMPLEADO.Any(x => x.correo == eMPLEADO.correo)))
+            {
+                error = 1;
+                this.ModelState.AddModelError("", "YA EXISTE UN EMPLEADO CON EL MISMO CORREO");
+                return View(eMPLEADO);
+            }
+            if (error == 0)
             {
                 if (ModelState.IsValid)
                 {
@@ -134,23 +151,8 @@ namespace ProyectoPI.Controllers
                     return RedirectToAction("../EMPLEADO/Index");
                 }
             }
-            else
-            {
-                if (duplicado != null)
-                {
-                    this.ModelState.AddModelError("", "YA EXISTE UN EMPLEADO CON LA MISMA CÉDULA");
-                }
-                else if (db.EMPLEADO.Any(x => x.tel == eMPLEADO.tel))
-                {
-                    this.ModelState.AddModelError("", "YA EXISTE UN EMPLEADO CON EL MISMO TELÉFONO");
-                }
-                else if (db.EMPLEADO.Any(x => x.correo == eMPLEADO.correo))
-                {
-                    this.ModelState.AddModelError("", "YA EXISTE UN EMPLEADO CON EL MISMO CORREO");
-                }
-
-                return View(eMPLEADO);
-            }
+                
+            
             return RedirectToAction("../EMPLEADO/Index");
         }
         //Despliega vista para casos de elementos duplicados
