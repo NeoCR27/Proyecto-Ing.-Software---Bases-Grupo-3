@@ -85,6 +85,7 @@ else
                             <p class="card-text"><small class="text-muted">Estado: @Html.DisplayFor(modelItem => item.estado)</small></p>
                             <p class="card-text">
                                 @Html.ActionLink("Consultar", "Details", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
+                                @Html.ActionLink("Requerimientos", "GetReq", new { id = item.idPK }, new { @class = "botonGeneral colorCeleste" })
                             </p>
                         </div>
                     </div>
