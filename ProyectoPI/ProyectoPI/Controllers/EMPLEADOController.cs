@@ -68,7 +68,7 @@ namespace ProyectoPI.Controllers
         public ActionResult Create([Bind(Include = "cedulaPK,tel,nombre,primerApellido,segundoApellido,correo,distrito,canton,provincia,direccionExacta,horasLaboradas,edad,disponibilidad,rol,fechaNacimiento")] EMPLEADO eMPLEADO)
         {
             EMPLEADO duplicado = db.EMPLEADO.Find(eMPLEADO.cedulaPK);
-            if (duplicado == null)
+            if ((duplicado == null) && (!db.EMPLEADO.Any(x => x.tel == eMPLEADO.tel)) && (!db.EMPLEADO.Any(x => x.correo == eMPLEADO.correo)))
             {
                 if (ModelState.IsValid)
                 {
@@ -77,12 +77,26 @@ namespace ProyectoPI.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                
+
             }
             else
             {
-                return RedirectToAction("NoDuplicados");
+                if (duplicado != null)
+                {
+                    this.ModelState.AddModelError("", "YA EXISTE UN EMPLEADO CON LA MISMA CÉDULA");
+                }
+                else if (db.EMPLEADO.Any(x => x.tel == eMPLEADO.tel))
+                {
+                    this.ModelState.AddModelError("", "YA EXISTE UN EMPLEADO CON EL MISMO TELÉFONO");
+                }
+                else if (db.EMPLEADO.Any(x => x.correo == eMPLEADO.correo))
+                {
+                    this.ModelState.AddModelError("", "YA EXISTE UN EMPLEADO CON EL MISMO CORREO");
+                }
+
+                return View(eMPLEADO);
             }
+            return View(eMPLEADO);
 
             return RedirectToAction("../EMPLEADO/Index");
         }
@@ -108,13 +122,34 @@ namespace ProyectoPI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(EMPLEADO eMPLEADO)
         {
-            if (ModelState.IsValid)
+            EMPLEADO duplicado = db.EMPLEADO.Find(eMPLEADO.cedulaPK);
+            if ((duplicado == null) && (!db.EMPLEADO.Any(x => x.tel == eMPLEADO.tel)) && (!db.EMPLEADO.Any(x => x.correo == eMPLEADO.correo)))
             {
+                if (ModelState.IsValid)
+                {
 
-                await seguridad_controller.ChangeRol(eMPLEADO.correo, eMPLEADO.rol);
-                db.Entry(eMPLEADO).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("../EMPLEADO/Index");
+                    await seguridad_controller.ChangeRol(eMPLEADO.correo, eMPLEADO.rol);
+                    db.Entry(eMPLEADO).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("../EMPLEADO/Index");
+                }
+            }
+            else
+            {
+                if (duplicado != null)
+                {
+                    this.ModelState.AddModelError("", "YA EXISTE UN EMPLEADO CON LA MISMA CÉDULA");
+                }
+                else if (db.EMPLEADO.Any(x => x.tel == eMPLEADO.tel))
+                {
+                    this.ModelState.AddModelError("", "YA EXISTE UN EMPLEADO CON EL MISMO TELÉFONO");
+                }
+                else if (db.EMPLEADO.Any(x => x.correo == eMPLEADO.correo))
+                {
+                    this.ModelState.AddModelError("", "YA EXISTE UN EMPLEADO CON EL MISMO CORREO");
+                }
+
+                return View(eMPLEADO);
             }
             return RedirectToAction("../EMPLEADO/Index");
         }
