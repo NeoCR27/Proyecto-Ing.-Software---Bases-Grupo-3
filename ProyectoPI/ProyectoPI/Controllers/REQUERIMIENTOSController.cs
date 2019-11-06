@@ -212,7 +212,7 @@ namespace ProyectoPI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(string nombrePK, string idProy, string dificultadAnterior, string estadoAnterior, string testerAnterior, [Bind(Include = "idFK,nombrePK,Descripcion,fechaInicio,fechaEntrega,horasReales,horasEstimadas,dificultad,cedulaFK")] REQUERIMIENTOS rEQUERIMIENTOS)
+        public ActionResult Edit(string nombrePK, string idProy, string dificultadAnterior, string estadoAnterior, string testerAnterior, [Bind(Include = "idFK,nombrePK,Descripcion,fechaInicio,fechaEntrega,horasReales,horasEstimadas,dificultad,cedulaFK,estado_final,descripcion_resultado")] REQUERIMIENTOS rEQUERIMIENTOS)
         {
             if (ModelState.IsValid)
             {
