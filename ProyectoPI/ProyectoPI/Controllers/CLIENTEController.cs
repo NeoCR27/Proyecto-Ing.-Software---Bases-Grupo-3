@@ -129,7 +129,7 @@ namespace ProyectoPI.Controllers
             string mail = User.Identity.Name;
             string rol = await this.seguridadController.GetRol(mail);
             ViewBag.rol = rol;
-            
+
             var datosOriginales = db.CLIENTE.AsNoTracking().Where(x => x.cedulaPK == cLIENTE.cedulaPK).FirstOrDefault();
             if ((datosOriginales.tel != cLIENTE.tel) && (db.CLIENTE.Any(x => x.tel == cLIENTE.tel)))
             {
