@@ -174,5 +174,11 @@ namespace ProyectoPI.Models
             }
             base.Dispose(disposing);
         }
+        //Redirecciona la al controlador de pruebas
+        public ActionResult to_requerimientos(string id)
+        {
+            return RedirectToAction("../REQUERIMIENTOS/index", new { id = id});
+        }
+
     }
 }
