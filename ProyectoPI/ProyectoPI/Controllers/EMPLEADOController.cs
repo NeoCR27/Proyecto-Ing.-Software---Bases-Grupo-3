@@ -178,9 +178,23 @@ namespace ProyectoPI.Controllers
         // Recibe los datos de la vista del eliminar empleado
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public async Task<ActionResult> DeleteConfirmed(string id)
         {
+
+            var proyectos_involucrados = db.PARTICIPA.AsNoTracking().Where(x => x.cedulaEmpleadoFK == id).FirstOrDefault();
+
+            var proyectos_activos = db.PROYECTO.AsNoTracking().Where(x => x.idPK == proyectos_involucrados.idProyectoFK && x.estado.Equals("En-proceso")).FirstOrDefault();
             EMPLEADO eMPLEADO = db.EMPLEADO.Find(id);
+
+            int error = 0;
+            if (proyectos_activos != null)
+            {
+                error = 1;
+                this.ModelState.AddModelError("CustomError", "ESTE EMPLEADO ESTA EN UN PROYECTO ACTIVO");
+                return View(eMPLEADO);
+
+            }
+
             db.EMPLEADO.Remove(eMPLEADO);
             db.SaveChanges();
             return RedirectToAction("Index");

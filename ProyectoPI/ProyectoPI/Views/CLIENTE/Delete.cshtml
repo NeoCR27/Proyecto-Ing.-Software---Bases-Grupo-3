@@ -74,6 +74,8 @@
                 @Html.DisplayFor(model => model.direccionExacta)
             </dd>
         </dl>
+        @Html.ValidationMessage("CustomError", new { @class = "text-danger" })
+
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()

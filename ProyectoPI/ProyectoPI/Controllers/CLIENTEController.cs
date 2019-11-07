@@ -175,6 +175,13 @@ namespace ProyectoPI.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             CLIENTE cLIENTE = db.CLIENTE.Find(id);
+
+            var proyectos_activos = db.PROYECTO.AsNoTracking().Where(x => x.cedulaClienteFK == id && x.estado.Equals("En-proceso")).FirstOrDefault();
+            if (proyectos_activos != null)
+            {
+                this.ModelState.AddModelError("CustomError", "ESTE CLIENTE ESTA EN UN PROYECTO ACTIVO");
+                return View(cLIENTE);
+            }
             db.CLIENTE.Remove(cLIENTE);
             db.SaveChanges();
             return RedirectToAction("Index");
