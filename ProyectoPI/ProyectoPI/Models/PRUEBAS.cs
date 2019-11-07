@@ -18,16 +18,20 @@ namespace ProyectoPI.Models
         public string idProyFK { get; set; }
         public string nombreReqFK { get; set; }
 
+        [MaxLength(100, ErrorMessage = "El máximo de caracteres es 100")]
+        [Required(ErrorMessage = "El campo Nombre es obligatorio")]
         [Display(Name = "Nombre")]
         public string nombrePK { get; set; }
 
+        [MaxLength(50, ErrorMessage = "El máximo de caracteres es 50")]
         [Display(Name = "Estado final")]
         public string EstadoFinal { get; set; }
 
         [DataType(DataType.MultilineText)]
+        [MaxLength(100, ErrorMessage = "El máximo de caracteres es 100")]
         [Display(Name = "Detalles de los resultados")]
         public string resultadoDetalles { get; set; }
-    
+
         public virtual REQUERIMIENTOS REQUERIMIENTOS { get; set; }
     }
 }

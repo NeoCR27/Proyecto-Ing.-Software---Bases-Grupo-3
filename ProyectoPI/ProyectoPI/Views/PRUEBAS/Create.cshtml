@@ -1,68 +1,67 @@
 ﻿@model ProyectoPI.Models.PRUEBAS
-
 @{
     ViewBag.Title = "Create";
     string idProyecto = ViewBag.idProy;
     string nombreReq = ViewBag.nomReq;
     string nombreProyecto = ViewBag.nomProy;
+    string rol = ViewBag.my_rol;
 }
 <h2 class="titulosPag">crear prueba </h2>
 <h3 class="miniTitulosPag">Proyecto: @nombreProyecto</h3>
 <h3 class="miniTitulosPag">Requerimiento: @nombreReq</h3>
-
-
-@using (Html.BeginForm())
+@if (!@rol.Equals("Cliente", StringComparison.InvariantCultureIgnoreCase))
 {
-    @Html.AntiForgeryToken()
+    @:@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <input type="hidden" id="idProyFK" name="idProyFK" value=@idProyecto>
-    <input type="hidden" id="nombreReqFK" name="nombreReqFK" value=@nombreReq>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.nombrePK, htmlAttributes: new { @class = "control-label col-md-2 required" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.nombrePK, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.nombrePK, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <input type="hidden" id="idProyFK" name="idProyFK" value=@idProyecto>
+            <input type="hidden" id="nombreReqFK" name="nombreReqFK" value=@nombreReq>
+            <div class="form-group">
+                @Html.LabelFor(model => model.nombrePK, htmlAttributes: new { @class = "control-label col-md-2 required" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.nombrePK, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nombrePK, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.EstadoFinal, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select class="form-control" id="EstadoFinal" name="EstadoFinal" required="required">
+                        <option value="" disabled hidden selected>Seleccione el Estado</option>
+                        <option>Incompleto</option>
+                        <option>Exitoso</option>
+                        <option>Fallido</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.resultadoDetalles, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.resultadoDetalles, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.resultadoDetalles, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <p><strong>Los campos con <font color="red">*</font> son obligatorios.</strong></p>
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @{
+                        string URL = Request.Url.ToString();
+                    }
+                    <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="submit" value="Aceptar" class="botonGeneral colorVerde" />
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.EstadoFinal, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <select class="form-control" id="EstadoFinal" name="EstadoFinal" required="required">
-                <option value="" disabled hidden selected>Seleccione el Estado</option>
-                <option>Incompleto</option>
-                <option>Exitoso</option>
-                <option>Fallido</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.resultadoDetalles, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.resultadoDetalles, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.resultadoDetalles, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <br />
-    <p><strong>Los campos con <font color="red">*</font> son obligatorios.</strong></p>
-    <br />
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            @{
-                string URL = Request.Url.ToString();
-            }
-            <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="submit" value="Aceptar" class="botonGeneral colorVerde" />
-        </div>
-    </div>
-</div>
+    }
+}else{
+        <h1>LOS CLIENTES NO PUEDEN CREAR PRUEBAS</h1>
 }
 
 <div class="form-actions no-color">

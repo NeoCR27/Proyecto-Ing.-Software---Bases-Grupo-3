@@ -20,7 +20,6 @@ namespace ProyectoPI.Models
         // GET: PRUEBAS
         public async Task<ActionResult> Index(string id, string nombre, string nombreProyecto)
         {
-
             string mail = User.Identity.Name;
             string rol = await this.seguridad_controller.GetRol(mail);
             ViewBag.my_rol = rol;
@@ -37,9 +36,7 @@ namespace ProyectoPI.Models
         // GET: PRUEBAS/Details/5
         public ActionResult Details(string id, string nombreReq, string nombrePK, string nombreProyecto, string rol )
         {
-
             ViewBag.my_rol = rol;
-
             ViewBag.nomProy = nombreProyecto;
             ViewBag.idProy = id;
             ViewBag.nomReq = nombreReq;
@@ -58,14 +55,14 @@ namespace ProyectoPI.Models
         }
 
         // GET: PRUEBAS/Create
-        public ActionResult Create(string id, string nombre, string nombreProyecto)
+        public async Task<ActionResult> Create(string id, string nombre, string nombreProyecto)
         {
+            string mail = User.Identity.Name;
+            string rol = await this.seguridad_controller.GetRol(mail);
+            ViewBag.my_rol = rol;
             ViewBag.nomProy = nombreProyecto;
             ViewBag.idProy = id;
             ViewBag.nomReq = nombre;
-            Console.WriteLine("id");
-            Console.WriteLine(id);
-
 
             return View();
         }
@@ -77,26 +74,38 @@ namespace ProyectoPI.Models
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idProyFK,nombreReqFK,nombrePK,EstadoFinal,resultadoDetalles")] PRUEBAS pRUEBAS)
         {
+
             PROYECTO proyecto = db.PROYECTO.Find(pRUEBAS.idProyFK);
             string nombre = proyecto.nombre;
-            if (ModelState.IsValid)
+            PRUEBAS duplicate = db.PRUEBAS.Find(pRUEBAS.idProyFK, pRUEBAS.nombreReqFK, pRUEBAS.nombrePK);
+            if (duplicate == null)
             {
-                db.PRUEBAS.Add(pRUEBAS);
-                db.SaveChanges();
-                return RedirectToAction("Index", new { id = pRUEBAS.idProyFK, nombre = pRUEBAS.nombreReqFK, nombreProyecto = nombre });
+                if (ModelState.IsValid)
+                {
+                    db.PRUEBAS.Add(pRUEBAS);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", new { id = pRUEBAS.idProyFK, nombre = pRUEBAS.nombreReqFK, nombreProyecto = nombre });
+                }
             }
-            //no es valido, agregar codigo aqui!!!!!!!!
-            return RedirectToAction("Index", new { id = pRUEBAS.idProyFK, nombre = pRUEBAS.nombreReqFK });
+            else
+            {
+                this.ModelState.AddModelError("", "YA EXISTE UNA PRUEBA CON EL MISMO NOMBRE EN ESTE REQUERIMIENTO");
+                return View(pRUEBAS);
+            }
+            return RedirectToAction("Index", new { id = pRUEBAS.idProyFK, nombre = pRUEBAS.nombreReqFK, nombreProyecto = nombre });
         }
 
         // GET: PRUEBAS/Edit/5
-        public ActionResult Edit(string id, string nombreReq, string nombrePK, string nombreProyecto)
+        public async Task<ActionResult> Edit(string id, string nombreReq, string nombrePK, string nombreProyecto)
         {
+            string mail = User.Identity.Name;
+            string rol = await this.seguridad_controller.GetRol(mail);
+            ViewBag.my_rol = rol;
+
             ViewBag.nomProy = nombreProyecto;
             ViewBag.idProy = id;
             ViewBag.nomReq = nombreReq;
             ViewBag.nomPK= nombrePK;
-
 
             if (id == null)
             {
@@ -133,8 +142,12 @@ namespace ProyectoPI.Models
         }
 
         // GET: PRUEBAS/Delete/5
-        public ActionResult Delete(string id, string nombreReq, string nombrePK, string nombreProyecto)
+        public async Task<ActionResult> Delete(string id, string nombreReq, string nombrePK, string nombreProyecto)
         {
+            string mail = User.Identity.Name;
+            string rol = await this.seguridad_controller.GetRol(mail);
+            ViewBag.my_rol = rol;
+
             ViewBag.nomProy = nombreProyecto;
             ViewBag.idProy = id;
             ViewBag.nomReq = nombreReq;
