@@ -33,12 +33,14 @@ namespace ProyectoPI.Controllers
             var req = db.REQUERIMIENTOS.Where(x => x.idFK == id);
 
             var listaRequerimientos = req.ToList();
-
+            
             List<int> requerimientosSePuedenBorrar = new List<int>();
+            // Para TODOS los requerimientos del proyecto, averiguar si se puede borrar basandose en la cantidad de pruebas asociadas
+            // Si tiene pruebas NO se puede borrar 
             foreach (REQUERIMIENTOS requerimiento in listaRequerimientos)
             {
                 string queryCantidadPruebasAsociadas = "EXEC cantidad_pruebas_asociadas " + "'" + requerimiento.nombrePK + "','" + requerimiento.idFK + "';";
-                var resultado = (db.Database.SqlQuery<int>(queryCantidadPruebasAsociadas)).ToList().First(); // "Count = #"
+                var resultado = (db.Database.SqlQuery<int>(queryCantidadPruebasAsociadas)).ToList().First();
                 requerimientosSePuedenBorrar.Add(resultado);
             }
             ViewBag.requerimientosSePuedenBorrar = requerimientosSePuedenBorrar;
@@ -73,11 +75,11 @@ namespace ProyectoPI.Controllers
             idProyecto = id;
             List<SelectListItem> testerDisp = new List<SelectListItem>();
 
-            /*Datos para desplegar miembros de equipo disponibles*/
+            // Datos para desplegar miembros de equipo disponibles
             string queryTesterDisp = "Exec recuperar_tester_disponible" + "'" + id + "'";
-            //Se hace el query a la base de datos
+            // Se hace el query a la base de datos
             var tempTesterDisp = (db.Database.SqlQuery<testerDisp>(queryTesterDisp)).ToList();
-            /*Se pasa a un Select List para hacer dropdown*/
+            // Se pasa a un Select List para hacer dropdown
             foreach (testerDisp item in tempTesterDisp)
             {
                 testerDisp.Add(new SelectListItem { Text = item.NombreEmpleado, Value = item.cedulaPK });
@@ -162,7 +164,7 @@ namespace ProyectoPI.Controllers
             }
             else if(resultado.Count() == 2) // Solo hay de 2 tipos
             {
-                
+                // Averiguar el estado de los 2 tipos de pruebas que hay
                 PruebasPorEstado incompletas = resultado.Find(x => x.estadoFinal == "Incompleto");
                 if(incompletas != null)
                 {
@@ -181,7 +183,8 @@ namespace ProyectoPI.Controllers
             }
             else if(resultado.Count() == 1) // Solo hay de un tipo
             {
-                if(resultado.ElementAt(0).estadoFinal == "Exitoso")
+                // Averiguar el estado de la unica prueba 
+                if(resultado.ElementAt(0).estadoFinal == "Exitoso") 
                 {
                     pruebasExitosas = true;
                 }else if (resultado.ElementAt(0).estadoFinal == "Fallido")
@@ -222,7 +225,7 @@ namespace ProyectoPI.Controllers
                 {
                     rEQUERIMIENTOS.estado_actual = estadoAnterior;
                 }
-                else // Se selecciono una opcion
+                else // Se selecciono una opcion de estado
                 {
                     rEQUERIMIENTOS.estado_actual = Request.Form["estado"].ToString();
                 }
@@ -231,7 +234,7 @@ namespace ProyectoPI.Controllers
                 {
                     rEQUERIMIENTOS.dificultad = dificultadAnterior;
                 }
-                else // Se selecciono una opcion
+                else // Se selecciono una opcion de dificultad
                 {
                     rEQUERIMIENTOS.estado_actual = Request.Form["dificultad"].ToString();
                 }
@@ -243,11 +246,11 @@ namespace ProyectoPI.Controllers
                 }
                 else // Se selecciono un campo del dropdown
                 {
-                    rEQUERIMIENTOS.cedulaFK = Request.Form["Testers"].ToString();
+                    rEQUERIMIENTOS.cedulaFK = Request.Form["Testers"].ToString(); // Selecciona la cedula del tester seleccionado en el dropdown
                     if(rEQUERIMIENTOS.cedulaFK != "Desasignar Tester")
                     {
                         String queryAgregarAHistorial = "exec agregar_Historial_Req" + "'" + idProy + "'," + "'" + nombrePK + "'," + "'" + rEQUERIMIENTOS.cedulaFK + "'";
-                        db.Database.SqlQuery<EquipoModel>(queryAgregarAHistorial).ToList();
+                        db.Database.SqlQuery<EquipoModel>(queryAgregarAHistorial).ToList(); // Se ejecuta query de agregar a historial
                     }
                     else
                     {
@@ -301,13 +304,16 @@ namespace ProyectoPI.Controllers
             base.Dispose(disposing);
         }
 
-        //Redirecciona la al controlador de pruebas
-        public ActionResult to_pruebas(string id, string nombre, string nombreProyecto)
+        //Redirecciona al controlador de pruebas
+        public ActionResult RetornarPruebas(string id, string nombre, string nombreProyecto)
         {
-            System.Diagnostics.Debug.WriteLine(id);
-            System.Diagnostics.Debug.WriteLine(nombre);
-            System.Diagnostics.Debug.WriteLine("hola2");
-            return RedirectToAction("../PRUEBAS/index", new { id = id, nombre = nombre, nombreProyecto = nombreProyecto});
+            return RedirectToAction("../PRUEBAS/Index", new { id = id, nombre = nombre, nombreProyecto = nombreProyecto});
+        }
+
+        //Redirecciona al controlador de proyecto
+        public ActionResult RetornarProyectos()
+        {
+            return RedirectToAction("../PROYECTOes/Index");
         }
 
     }

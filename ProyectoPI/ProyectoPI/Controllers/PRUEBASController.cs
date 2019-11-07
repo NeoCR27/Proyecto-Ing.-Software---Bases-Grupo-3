@@ -129,7 +129,6 @@ namespace ProyectoPI.Models
                 return RedirectToAction("Index", new { id = pRUEBAS.idProyFK, nombre = pRUEBAS.nombreReqFK, nombreProyecto = nombre });
             }
             ViewBag.idProyFK = new SelectList(db.REQUERIMIENTOS, "idFK", "dificultad", pRUEBAS.idProyFK);
-            //no es valido, agregar codigo aqui!!!!!!!!
             return View(pRUEBAS);
         }
 
@@ -174,8 +173,8 @@ namespace ProyectoPI.Models
             }
             base.Dispose(disposing);
         }
-        //Redirecciona la al controlador de pruebas
-        public ActionResult to_requerimientos(string id)
+        //Redirecciona al controlador de requerimientos
+        public ActionResult RetornarRequerimientos(string id)
         {
             return RedirectToAction("../REQUERIMIENTOS/index", new { id = id});
         }
