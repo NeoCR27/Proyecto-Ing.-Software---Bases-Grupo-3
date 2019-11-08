@@ -146,7 +146,7 @@ namespace ProyectoPI.Controllers
             {
                 testerDisp.Add(new SelectListItem { Text = item.NombreEmpleado, Value = item.cedulaPK });
             }
-            testerDisp.Add(new SelectListItem { Text = "Desasignar Tester", Value = null});
+            testerDisp.Add(new SelectListItem { Text = "No asignado", Value = null});
             // Query que me retorna la cantidad de pruebas por el estado
 
             string queryPruebasPorEstado = "EXEC cantidad_pruebas_por_estado " + "'" + rEQUERIMIENTOS.nombrePK + "','" + rEQUERIMIENTOS.idFK + "';";

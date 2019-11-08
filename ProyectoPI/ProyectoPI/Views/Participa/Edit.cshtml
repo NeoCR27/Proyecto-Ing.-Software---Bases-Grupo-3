@@ -23,12 +23,14 @@
     {
         <div style="width: 50%;float: left">
             <h2>Empleados Disponibles</h2>
+            <br />
             <p>
                 @using (Html.BeginForm("Edit", "PARTICIPA", FormMethod.Get))
                 {
                     <b> Buscar Por Habilidades:</b>
                     @Html.RadioButton("buscarPor", "Tecnica") <text>Técnicas</text>
                     @Html.RadioButton("buscarPor", "Blanda") <text>Blandas</text>
+                    <br />
                     <br />
                     @Html.TextBox("filtroBusqueda")<input type="submit" value="Buscar" />
                 }
@@ -44,8 +46,8 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Nombre Del Empleado</th>
-                        <th>Tipo de Habilidad</th>
+                        <th>Empleado</th>
+                        <th>Tipo</th>
                         <th>Habilidad</th>
                         <th></th>
                     </tr>
@@ -112,14 +114,14 @@ else
 
 
 
-@if (soyTester)
+@if (soyTester || soyCliente)
 {
     <div style=" width: 100%; float:right">
         <table class="table">
             <thead>
                 <tr>
-                    <th>Nombre Del Empleado</th>
-                    <th>Correo de Contacto</th>
+                    <th>Empleado</th>
+                    <th>Correo</th>
                     <th>Rol</th>
                     <th></th>
                 </tr>
@@ -143,8 +145,8 @@ else
         <table class="table">
             <thead>
                 <tr>
-                    <th>Nombre Del Empleado</th>
-                    <th>Correo de Contacto</th>
+                    <th>Empleado</th>
+                    <th>Correo</th>
                     <th>Rol</th>
                     <th></th>
                 </tr>
