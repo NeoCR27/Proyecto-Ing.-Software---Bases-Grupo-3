@@ -35,6 +35,8 @@ namespace ProyectoPI.Models
         public string FechaInicio { get; set; }
         public string FechaActual { get; set; }
         public string FechaEntrega { get; set; }
+        public int dias { get; set; }
+        public int diasf { get; set; }
 
     }
 }

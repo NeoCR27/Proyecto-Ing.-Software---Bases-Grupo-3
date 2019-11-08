@@ -8,7 +8,7 @@
 }
 <h2 class="titulosPag">Estado y Asignacion de Requerimientos</h2>
 
-<div style=" right:3000px;width:1100px ;height:auto" class="jumbotron">
+<div style=" right:3000px;width:1150px ;height:auto" class="jumbotron">
     <p style="text-align:center" display-1">Resultados</p>
         <p style="font-size:15px">
         </p>
@@ -19,11 +19,14 @@
                     <th scope="col">Nombre</th>
 
                     <th scope="col">Correo</th>
-                    <th scope="col">Nombre del Requerimiento</th>
+                    <th scope="col">Nombre Requerimiento</th>
                     <th scope="col">Estado Actual</th>
                     <th scope="col">Fecha de Inicio</th>
+
+                    <th scope="col">Dias Transcurridos</th>
                     <th scope="col">Fecha Actual</th>
                     <th scope="col">Fecha de Finalizacion</th>
+                    <th scope="col">Dias Restantes</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,8 +38,11 @@
                     <td>@Html.DisplayFor(modelItem => item.nombrePK)</td>
                     <td>@Html.DisplayFor(modelItem => item.estado_actual)</td>
                     <td>@Html.DisplayFor(modelItem => item.FechaInicio)</td>
+
+                    <td>@Html.DisplayFor(modelItem => item.dias)</td>
                     <td>@Html.DisplayFor(modelItem => item.FechaActual)</td>
                     <td>@Html.DisplayFor(modelItem => item.FechaEntrega)</td>
+                    <td>@Html.DisplayFor(modelItem => item.diasf)</td>
                 </tr>
                 }
                 </tbody>

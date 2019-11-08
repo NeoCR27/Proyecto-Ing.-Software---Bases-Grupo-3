@@ -25,20 +25,22 @@
         <thead class="thead-dark">
             <tr>
 
-                <th scope="col">Nombre del Tester</th>
-                <th scope="col">Nombre del Requerimiento</th>
+                <th scope="col">Nombre Tester</th>
+                <th scope="col">Nombre Requerimiento</th>
 
             </tr>
         </thead>
         <tbody>
             @foreach (var item in req)
             {
-                <tr>
+            <tr>
 
-                    <td>@item.nombre</td>
-                    <td>@item.nombrePK</td>
+                <td>@item.nombre</td>
+                <td>@item.nombrePK</td>
+                <td>@item.estado_actual</td>
 
-                </tr>
+
+            </tr>
             }
         </tbody>
     </table>
