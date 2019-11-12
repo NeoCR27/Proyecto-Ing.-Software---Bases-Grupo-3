@@ -26,19 +26,27 @@ namespace ProyectoPI.Models
 
 
         [Display(Name = "Nombre")]
+        [MaxLength(100, ErrorMessage = "El máximo de caracteres es 100")]
+        [Required(ErrorMessage = "El campo Nombre del requerimiento es obligatorio")]
         public string nombrePK { get; set; }
 
 
         [Display(Name = "Fecha de Inicio")]
+      
+        [Required(ErrorMessage = "Fecha de Inicio es obligatorio")]
         public System.DateTime fechaInicio { get; set; }
 
+
         [Display(Name = "Fecha de Entrega")]
+        [Required(ErrorMessage = "Fecha de Entrega es obligatorio")]
         public System.DateTime fechaEntrega { get; set; }
 
         [Display(Name = "Horas Reales")]
         public Nullable<int> horasReales { get; set; }
 
+         
         [Display(Name = "Dificultad")]
+        [Required(ErrorMessage = "Dificultad es obligatorio")]
         public string dificultad { get; set; }
 
         [Display(Name = "Tester")]
@@ -46,6 +54,7 @@ namespace ProyectoPI.Models
 
 
         [Display(Name = "Horas Estimadas")]
+        [Required(ErrorMessage = "Horas Estimadas es obligatorio")]
         public Nullable<int> horasEstimadas { get; set; }
 
 
@@ -54,6 +63,7 @@ namespace ProyectoPI.Models
         public string Descripcion { get; set; }
 
         [Display(Name = "Estado Actual")]
+        [Required(ErrorMessage = "Estado Actual es obligatorio")]
         public string estado_actual { get; set; }
 
         [Display(Name = "Estado Final")]

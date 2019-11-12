@@ -23,7 +23,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.nombrePK, htmlAttributes: new { @class = "control-label col-md-2 required" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.nombrePK, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.EditorFor(model => model.nombrePK, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.nombrePK, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -40,15 +40,17 @@
     <div class="form-group">
         @Html.LabelFor(model => model.fechaInicio, htmlAttributes: new { @class = "control-label col-md-2 required" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.fechaInicio, new { @type = "date", @class = "form-control datepicker", required = "required" })
-
+            @Html.TextBoxFor(model => model.fechaInicio, new { @type = "date", @class = "form-control datepicker" })
+            <p class="text-danger"> Fecha de Inicio debe ser menor que fecha de Entrega</p>
             @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
+
         </div>
+        
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.fechaEntrega, htmlAttributes: new { @class = "control-label col-md-2 required" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.fechaEntrega, new { @type = "date", @class = "form-control datepicker", required = "required" })
+            @Html.TextBoxFor(model => model.fechaEntrega, new { @type = "date", @class = "form-control datepicker"})
 
             @Html.ValidationMessageFor(model => model.fechaEntrega, "", new { @class = "text-danger" })
         </div>
@@ -57,7 +59,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.horasEstimadas, htmlAttributes: new { @class = "control-label col-md-2 required" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.horasEstimadas, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.EditorFor(model => model.horasEstimadas, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.horasEstimadas, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -73,26 +75,28 @@
     <div class="form-group">
         @Html.LabelFor(model => model.dificultad, htmlAttributes: new { @class = "control-label col-md-2 required" })
         <div class="col-md-10" place>
-            <select class="form-control" id="dificultad" name="dificultad" required="required">
+            <select class="form-control" id="dificultad" name="dificultad">
                 <option value="" disabled selected>Seleccione la Dificultad</option>
                 <option>Baja</option>
                 <option>Intermedia</option>
                 <option>Alta</option>
 
             </select>
+            @Html.ValidationMessageFor(model => model.dificultad, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.estado_actual, htmlAttributes: new { @class = "control-label col-md-2 required" })
         <div class="col-md-10">
-            <select class="form-control" id="estado_actual" name="estado_actual" required="required">
+            <select class="form-control" id="estado_actual" name="estado_actual">
                 <option value="" disabled selected>Seleccione el Estado</option>
                 <option>No-iniciado</option>
                 <option>En-proceso</option>
                 <option>Finalizado</option>
                 <option>Cancelado</option>
             </select>
+            @Html.ValidationMessageFor(model => model.estado_actual, "", new { @class = "text-danger" })
         </div>
     </div>
 
