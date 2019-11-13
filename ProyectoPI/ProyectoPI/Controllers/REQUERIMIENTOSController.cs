@@ -116,7 +116,17 @@ namespace ProyectoPI.Controllers
                 }
                 return RedirectToAction("../REQUERIMIENTOS/Index", new { id = rEQUERIMIENTOS.idFK });
             }
-
+            List<SelectListItem> testerDisp = new List<SelectListItem>();
+            // Datos para desplegar miembros de equipo disponibles
+            string queryTesterDisp = "Exec recuperar_tester_disponible" + "'" + rEQUERIMIENTOS.idFK + "'";
+            // Se hace el query a la base de datos
+            var tempTesterDisp = (db.Database.SqlQuery<testerDisp>(queryTesterDisp)).ToList();
+            // Se pasa a un Select List para hacer dropdown
+            foreach (testerDisp item in tempTesterDisp)
+            {
+                testerDisp.Add(new SelectListItem { Text = item.NombreEmpleado, Value = item.cedulaPK });
+            }
+            ViewBag.testerDisp = testerDisp;
 
             return View(rEQUERIMIENTOS);
         }
@@ -247,7 +257,7 @@ namespace ProyectoPI.Controllers
                 else // Se selecciono un campo del dropdown
                 {
                     rEQUERIMIENTOS.cedulaFK = Request.Form["Testers"].ToString(); // Selecciona la cedula del tester seleccionado en el dropdown
-                    if(rEQUERIMIENTOS.cedulaFK != "Desasignar Tester")
+                    if(rEQUERIMIENTOS.cedulaFK != "No asignado")
                     {
                         String queryAgregarAHistorial = "exec agregar_Historial_Req" + "'" + idProy + "'," + "'" + nombrePK + "'," + "'" + rEQUERIMIENTOS.cedulaFK + "'";
                         db.Database.SqlQuery<EquipoModel>(queryAgregarAHistorial).ToList(); // Se ejecuta query de agregar a historial
