@@ -127,8 +127,12 @@ namespace ProyectoPI.Models
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idProyFK,nombreReqFK,nombrePK,EstadoFinal,resultadoDetalles")] PRUEBAS pRUEBAS)
+        public async Task<ActionResult> Edit([Bind(Include = "idProyFK,nombreReqFK,nombrePK,EstadoFinal,resultadoDetalles")] PRUEBAS pRUEBAS)
         {
+            string mail = User.Identity.Name;
+            string rol = await this.seguridad_controller.GetRol(mail);
+            ViewBag.my_rol = rol;
+
             PROYECTO proyecto = db.PROYECTO.Find(pRUEBAS.idProyFK);
             string nombre = proyecto.nombre;
             if (ModelState.IsValid)
