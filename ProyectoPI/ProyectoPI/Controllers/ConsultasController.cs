@@ -59,7 +59,7 @@ namespace ProyectoPI.Controllers
             string queryCantReq = "Exec Consulta_Cantidad_Req_Tester" + "'" + proy + "'";
             //Se hace el query a la base de datos
             var tempCantReq = (db.Database.SqlQuery<CantReq>(queryCantReq)).ToList();
-
+      
             string queryGetReq = "Exec Get_Req" + "'" + proy + "'";
             //Se hace el query a la base de datos
             var tempGetReq = (db.Database.SqlQuery<GetReq>(queryGetReq)).ToList();
