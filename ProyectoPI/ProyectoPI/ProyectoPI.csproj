@@ -457,6 +457,11 @@
     <Content Include="Views\Consultas\EstadoTesterReq.cshtml" />
     <Content Include="Views\Consultas\MostrarEstadoTesterReq.cshtml" />
     <Content Include="Views\Consultas\grafico.cshtml" />
+    <Content Include="Views\Consultas\HistorialReq.cshtml" />
+    <Content Include="Views\Consultas\HabilidadesEquipo.cshtml" />
+    <Content Include="Views\Consultas\MostrarHabilidadesEmpleados.cshtml" />
+    <Content Include="Views\Consultas\MostrarHabilidadesEquipo.cshtml" />
+    <Content Include="Views\Consultas\MostrarHistorialReq.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
