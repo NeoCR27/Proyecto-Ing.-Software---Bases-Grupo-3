@@ -189,6 +189,29 @@ namespace ProyectoPI.Controllers
             .GetBytes("png");
             return File(chart, "image/bytes");
         }
+
+
+     /*Consultas Julian*/
+        public ActionResult HistorialReq()
+        {
+            ViewBag.emp = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult HistorialReq(string idEmp)
+        {
+            return RedirectToAction("MostrarHistorialReq", new { idEmp = Request.Form["emp"].ToString() });
+        }
+
+        public ActionResult MostrarHistorialReq(string idEmp)
+        {
+            return View();
+        }
+     /*Consultas Julián*/
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

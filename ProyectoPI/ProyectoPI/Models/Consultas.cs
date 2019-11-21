@@ -39,4 +39,15 @@ namespace ProyectoPI.Models
         public int diasf { get; set; }
 
     }
+
+    public class NumHab
+    {
+        public string Habilidad { get; set; }
+        public int Total { get; set; }
+    }
+    public class HistorialReq
+    {
+        public string Estado { get; set; }
+        public int Total { get; set; }
+    }
 }
