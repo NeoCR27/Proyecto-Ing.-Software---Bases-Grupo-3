@@ -50,4 +50,10 @@ namespace ProyectoPI.Models
         public string Estado { get; set; }
         public int Total { get; set; }
     }
+
+    public class getLiderReq
+    {
+        public string nombre { get; set; }
+        public int totales { get; set; }
+    }
 }

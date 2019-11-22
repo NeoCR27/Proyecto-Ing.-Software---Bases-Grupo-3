@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "task-liderReq",
+      "appliesTo": "ProyectoPI/ProyectoPI/Views/Consultas/liderReq.cshtml",
+      "type": "launch"
+    }
+  ]
+}

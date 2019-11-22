@@ -210,7 +210,34 @@ namespace ProyectoPI.Controllers
         {
             return View();
         }
-     /*Consultas Julián*/
+        /*Consultas Julián*/
+
+        /*Consultas Pablo*/
+
+
+
+        public ActionResult MostrarLiderReq()
+        {
+
+            string queryCantReq = "Exec Consulta_lideres_req_totales " + "'Exitoso'";
+            //Se hace el query a la base de datos
+            //var tempEstadoReq = (db.Database.SqlQuery<getLiderReq>(queryCantReq)).ToList();
+
+            string queryTotalReq = "Exec Consulta_lideres_totales ";
+            var total = (db.Database.SqlQuery<getLiderReq>(queryTotalReq)).ToList();
+
+            ViewBag.getLiderReq = total;
+
+
+
+           
+
+           
+
+            return View();
+
+        }
+        /*Consultas Pablo*/
 
         protected override void Dispose(bool disposing)
         {
