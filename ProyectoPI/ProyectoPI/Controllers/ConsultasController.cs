@@ -194,8 +194,8 @@ namespace ProyectoPI.Controllers
      /*Consultas Julian*/
         public ActionResult HistorialReq()
         {
-            ViewBag.emp = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
-
+            List<SelectListItem> empleados = empleadosController.getEmpleados();
+            ViewBag.emp = empleados;
             return View();
         }
 
@@ -208,7 +208,29 @@ namespace ProyectoPI.Controllers
 
         public ActionResult MostrarHistorialReq(string idEmp)
         {
+            ViewBag.idEmp = idEmp;
             return View();
+        }
+        public ActionResult GraficoHistorialReq(string idEmp)
+        {
+            ViewBag.idEmp = idEmp;
+
+            string consulHistorial = "Exec Consultar_Historial_Req_Tester '" + idEmp + "'"; //'24'
+
+            var tempEstadoReq = (db.Database.SqlQuery<HistorialReq>(consulHistorial)).ToList();
+            string[] estados = tempEstadoReq.Select(l => l.Estado.ToString()).ToArray();
+            string[] totales = tempEstadoReq.Select(l => l.Total.ToString()).ToArray();
+
+            var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
+            .AddSeries(name: "Requerimientos",
+                    xValue: estados,
+                    yValues: totales)
+            .AddLegend()
+            .AddTitle("Estado de los Requerimientos")
+            .SetYAxis("Cantidad de Requerimientos")
+            .SetXAxis("Estado Actual")
+            .GetBytes("png");
+            return File(chart, "image/bytes");
         }
      /*Consultas Julián*/
 
