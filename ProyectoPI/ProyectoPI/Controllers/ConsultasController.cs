@@ -287,6 +287,21 @@ namespace ProyectoPI.Controllers
         }
         /*Consultas Pablo*/
 
+
+
+
+        /* Consultas Esteban*/
+
+        public ActionResult ProyRequerimientos()
+        {
+            // Envio todos los proyectos
+            ViewBag.proy = new SelectList(db.PROYECTO, "idPK", "nombre");
+            // Envio todos los requerimientos
+            //ViewBag.req = new SelectList(db.REQUERIMIENTOS, "nombrePK")
+            return View();
+        }
+        
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
