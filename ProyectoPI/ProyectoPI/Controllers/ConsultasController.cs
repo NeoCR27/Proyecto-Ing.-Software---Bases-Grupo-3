@@ -429,13 +429,18 @@ namespace ProyectoPI.Controllers
         {
             // Envio todos los proyectos
             ViewBag.proy = new SelectList(db.PROYECTO, "idPK", "nombre");
-            ViewBag.requerimientos2 = new SelectList(db.REQUERIMIENTOS, "idFK", "nombrePK");
             // Envio todos los requerimientos
-            IEnumerable<SelectListItem> requerimientos = from req in db.REQUERIMIENTOS select new SelectListItem { Value = req.idFK, Text = req.nombrePK};
+            List<SelectListItem> requerimientos = new List<SelectListItem>(from req in db.REQUERIMIENTOS select new SelectListItem { Value = req.idFK, Text = req.nombrePK });
+            foreach (var item in requerimientos)
+            {
+                string value = item.Value;
+                string text = item.Text;
+            }
+
             ViewBag.req = requerimientos;
             return View();
         }
-        
+
 
         protected override void Dispose(bool disposing)
         {
