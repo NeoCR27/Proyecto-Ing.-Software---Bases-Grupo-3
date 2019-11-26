@@ -211,7 +211,10 @@ namespace ProyectoPI.Controllers
             ViewBag.idEmp = idEmp;
             return View();
         }
-
+        public ActionResult MostrarHabilidadesEmpleados()
+        {
+            return View();
+        }
         public ActionResult GraficoHistorialReq(string idEmp)
         {
             ViewBag.idEmp = idEmp;
@@ -227,13 +230,35 @@ namespace ProyectoPI.Controllers
                     xValue: estados,
                     yValues: totales)
             .AddLegend()
-            .AddTitle("Estado de los Requerimientos")
+            .AddTitle("Historial de los Requerimientos")
             .SetYAxis("Cantidad de Requerimientos")
-            .SetXAxis("Estado Actual")
+            .SetXAxis("Estado Final")
             .GetBytes("png");
             return File(chart, "image/bytes");
         }
-     /*Consultas Julián*/
+
+        public ActionResult GraficoHabEmp(string tipoHab)
+        {
+            string consulHistorial = "Consultar_Num_Habilidades_Empleados '" + tipoHab + "'";
+
+            var tempEstadoReq = (db.Database.SqlQuery<NumHab>(consulHistorial)).ToList();
+            string[] habilidades = tempEstadoReq.Select(l => l.Habilidad.ToString()).ToArray();
+            string[] totales = tempEstadoReq.Select(l => l.Total.ToString()).ToArray();
+
+            var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
+            .AddSeries(name: "Habilidad",chartType:"Pie",
+                    xValue: habilidades,
+                    yValues: totales)
+            .AddLegend()
+            .AddTitle("Habilidades de los Empleados")
+            .SetYAxis("Cantidad de Habilidades")
+            .SetXAxis("Estado Final")
+            .GetBytes("png");
+            return File(chart, "image/bytes");
+        }
+
+   
+        /*Consultas Julián*/
 
         /*Consultas Pablo*/
 
