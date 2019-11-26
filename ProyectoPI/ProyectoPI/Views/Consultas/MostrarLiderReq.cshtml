@@ -4,13 +4,18 @@
 @{
 
     List<ProyectoPI.Models.getLiderReq> total = ViewBag.getLiderReq;
+    List<ProyectoPI.Models.getLiderReqDificultad> baja = ViewBag.getBaja;
+    List<ProyectoPI.Models.getLiderReqDificultad> intermedia = ViewBag.getIntermedia;
+    List<ProyectoPI.Models.getLiderReqDificultad> alta = ViewBag.getAlta;
+
+
 }
 <h2 class="titulosPag">Desempeño de los lideres</h2>
 <h4>Resultados</h4>
 
 
 
-@*<img src="@Url.Action("GraficoEstadoReq",new { proy = idProy })" alt="Pie Chart using MVC" />*@
+<img src="@Url.Action("GraficoLideresReq",new { })" alt="Pie Chart using MVC" />
 </br>
 </br>
 
@@ -18,24 +23,85 @@
     <p style="text-align:center" display-1">Resultados</p>
     <p style="font-size:15px">
     </p>
+
+
     <table class="table">
         <thead class="thead-dark">
             <tr>
 
                 <th scope="col">Nombre Lider</th>
+                <th scope="col">Dificultad baja</th>
+                <th scope="col">Dificultad intermedia</th>
+                <th scope="col">Dificultad alta</th>
                 <th scope="col">Requerimientos totales</th>
-                
+
+
+
 
 
 
             </tr>
         </thead>
         <tbody>
+
             @foreach (var item in total)
             {
                 <tr>
 
                     <td>@item.nombre</td>
+
+
+                    @{
+                        int hasBaja = 0;
+                        int hasIntermedia = 0;
+                        int hasAlta = 0;
+                    }
+
+                    @foreach (var reqB in baja)
+                    {
+                        if (item.nombre == reqB.nombre)
+                        {
+                            <td>@reqB.req</td>
+
+                            hasBaja = 1;
+                        }
+
+                    }
+                    @if (hasBaja == 0)
+                    {
+                        <td>0</td>
+                    }
+
+                    @foreach (var reqI in intermedia)
+                    {
+                        if (@item.nombre == @reqI.nombre)
+                        {
+                            <td>@reqI.req</td>
+                            hasIntermedia = 1;
+                            break;
+                        }
+
+                    }
+                    @if (hasIntermedia == 0)
+                    {
+                        <td>0</td>
+                    }
+
+                    @foreach (var reqA in alta)
+                    {
+                        if (@item.nombre == @reqA.nombre)
+                        {
+                            <td>@reqA.req</td>
+                            hasAlta = 1;
+                            break;
+                        }
+
+                    }
+
+                    @if (hasAlta == 0)
+                    {
+                        <td>0</td>
+                    }
                     <td>@item.totales</td>
 
 

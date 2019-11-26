@@ -463,6 +463,8 @@
     <Content Include="Views\Consultas\MostrarHabilidadesEquipo.cshtml" />
     <Content Include="Views\Consultas\MostrarHistorialReq.cshtml" />
     <Content Include="Views\Consultas\MostrarLiderReq.cshtml" />
+    <Content Include="Views\Consultas\TesterReq.cshtml" />
+    <Content Include="Views\Consultas\MostrarTesterReq.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

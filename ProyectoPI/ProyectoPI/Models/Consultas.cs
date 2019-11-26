@@ -56,4 +56,11 @@ namespace ProyectoPI.Models
         public string nombre { get; set; }
         public int totales { get; set; }
     }
+    public class getLiderReqDificultad
+    {
+        public string nombre { get; set; }
+        public int req { get; set; }
+    }
+
+
 }

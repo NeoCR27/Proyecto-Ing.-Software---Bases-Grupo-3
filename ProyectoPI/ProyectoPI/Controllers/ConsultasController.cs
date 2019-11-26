@@ -272,12 +272,22 @@ namespace ProyectoPI.Controllers
 
 
 
+
+
         public ActionResult MostrarLiderReq()
         {
 
-            string queryCantReq = "Exec Consulta_lideres_req_totales " + "'Exitoso'";
-            //Se hace el query a la base de datos
-            //var tempEstadoReq = (db.Database.SqlQuery<getLiderReq>(queryCantReq)).ToList();
+            string reqBaja = "Exec Consulta_lideres_req_totales 'Baja'";
+            string reqIntermedia = "Exec Consulta_lideres_req_totales 'Intermedia'";
+            string reqAlta = "Exec Consulta_lideres_req_totales 'Alta'";
+
+            var baja = (db.Database.SqlQuery<getLiderReqDificultad>(reqBaja)).ToList();
+            var intermedia = (db.Database.SqlQuery<getLiderReqDificultad>(reqIntermedia)).ToList();
+            var alta = (db.Database.SqlQuery<getLiderReqDificultad>(reqAlta)).ToList();
+
+            ViewBag.getBaja = baja;
+            ViewBag.getIntermedia = intermedia;
+            ViewBag.getAlta = alta;
 
             string queryTotalReq = "Exec Consulta_lideres_totales ";
             var total = (db.Database.SqlQuery<getLiderReq>(queryTotalReq)).ToList();
@@ -285,13 +295,88 @@ namespace ProyectoPI.Controllers
             ViewBag.getLiderReq = total;
 
 
-
-           
-
-           
-
             return View();
+        }
 
+        public ActionResult GraficoLideresReq()
+        {
+            string reqBaja = "Exec Consulta_lideres_req_totales 'Baja'";
+            string reqIntermedia = "Exec Consulta_lideres_req_totales 'Intermedia'";
+            string reqAlta = "Exec Consulta_lideres_req_totales 'Alta'";
+
+            var baja = (db.Database.SqlQuery<getLiderReqDificultad>(reqBaja)).ToList();
+            var intermedia = (db.Database.SqlQuery<getLiderReqDificultad>(reqIntermedia)).ToList();
+            var alta = (db.Database.SqlQuery<getLiderReqDificultad>(reqAlta)).ToList();
+            //Se hace el query a la base de datos
+
+            string[] cantidadBaja = baja.Select(l => l.req.ToString()).ToArray();
+            string[] cantidadIntermedia = intermedia.Select(l => l.req.ToString()).ToArray();
+            string[] cantidadAlta = alta.Select(l => l.req.ToString()).ToArray();
+
+            string[] nombreBaja = baja.Select(l => l.nombre.ToString()).ToArray();
+            string[] nombreIntermedia = intermedia.Select(l => l.nombre.ToString()).ToArray();
+            string[] nombreAlta = alta.Select(l => l.nombre.ToString()).ToArray();
+
+
+            int xValue = 0;
+            var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
+            .AddSeries(name: "Baja",
+                    xValue: nombreBaja,
+                    yValues: cantidadBaja)
+            .AddSeries(name: "Intermedio",
+                    yValues: cantidadIntermedia)
+            .AddSeries(name: "Alta",
+                    yValues: cantidadAlta)
+            .AddLegend()
+
+            .AddTitle("Desempeño de lideres")
+            .SetYAxis("Cantidad de Requerimientos")
+            .SetXAxis("Lider")
+            //.DataBindTable(dataSource: nombreBaja, xField: "Name")
+            .GetBytes("png");
+            return File(chart, "image/bytes");
+        }
+        //-------
+        public ActionResult TesterReq()
+        {
+            List<SelectListItem> empleados = empleadosController.getEmpleados();
+            ViewBag.emp = empleados;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TesterReq(string idEmp)
+        {
+            return RedirectToAction("MostrarTesterReq", new { idEmp = Request.Form["emp"].ToString() });
+        }
+
+        public ActionResult MostrarTesterReq(string idEmp)
+        {
+            ViewBag.idEmp = idEmp;
+            return View();
+        }
+
+        public ActionResult GraficoTesterReq(string idEmp)
+        {
+            ViewBag.idEmp = idEmp;
+
+            string consulHistorial = "Exec Consultar_Historial_Req_Tester '" + idEmp + "'"; //'24'
+
+            var tempEstadoReq = (db.Database.SqlQuery<HistorialReq>(consulHistorial)).ToList();
+            string[] estados = tempEstadoReq.Select(l => l.Estado.ToString()).ToArray();
+            string[] totales = tempEstadoReq.Select(l => l.Total.ToString()).ToArray();
+
+            var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
+            .AddSeries(name: "Requerimientos",
+                    xValue: estados,
+                    yValues: totales)
+            .AddLegend()
+            .AddTitle("Estado de los Requerimientos")
+            .SetYAxis("Cantidad de Requerimientos")
+            .SetXAxis("Estado Actual")
+            .GetBytes("png");
+            return File(chart, "image/bytes");
         }
         /*Consultas Pablo*/
 
