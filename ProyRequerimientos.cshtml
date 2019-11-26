@@ -1,0 +1,126 @@
+﻿@model ProyectoPI.Models.REQUERIMIENTOS
+@{
+    ViewBag.Title = "ProyRequerimientos";
+    List<SelectListItem>
+    requerimientos = ViewBag.req;
+    SelectList requerimientosPrimeros = ViewBag.requerimientos2;
+    }
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Cliente", "Index", "CLIENTE")</li>
+                        <li>@Html.ActionLink("Proyecto", "Index", "PROYECTOes")</li>
+                        <li>@Html.ActionLink("Equipo", "Index", "PARTICIPA")</li>
+                        <li>@Html.ActionLink("Empleado", "Index", "EMPLEADO")</li>
+
+
+
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>
+        <h2 class="titulosPag">Pruebas asociadas a un requerimiento, agrupadas por su estado final</h2>
+        <br />
+
+        <script>
+            function armarRequerimientos() {
+                $('#requerimientos').removeAttr('disabled');
+                var target = jQuery('#requerimientos');
+                target.empty();
+                var opcion = document.getElementById('proyectos').value;
+                var array = [];
+                @foreach(var item in requerimientos) {
+                    @: var tupla = ("@item.Value", "@item.Text");
+                    @: array.push(tupla);
+                }
+                var requerimientosNecesarios = [];
+                for (i = 0; i < array.length; ++i) {
+                    if (array[i].[0] == opcion) {
+                        requerimientosNecesarios.push(array[i]);
+                    }
+                }
+                document.getElementById('hola').innerHTML = array;
+            }
+        </script>
+
+        <p id="hola">
+            Hola esto es antes
+        </p>
+
+        @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.Label("Proyecto", htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10">
+                @Html.DropDownList("proy", null, "Seleccione un Proyecto", htmlAttributes: new { @class = "form-control", @onchange = "armarRequerimientos()", @AutoPostBack = "true", @id = "proyectos"})
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+
+        <div class="form-group" id="requerimientosAfuera">
+            @Html.Label("Requerimientos", htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10">
+                @Html.DropDownList("req", null, "Seleccione un Requerimiento", htmlAttributes: new { @class = "form-control", @id="requerimientos", @disabled = true})
+            </div>
+        </div>
+
+
+        <br />
+        <br />
+        <br />
+
+
+        <p><strong>Los campos con <font color="red">*</font> son obligatorios.</strong></p>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @{
+                string URL = Request.Url.ToString();
+                }
+                <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="submit" value="Aceptar" class="botonGeneral colorVerde" />
+            </div>
+        </div>
+
+        }
+        <div>
+            @Html.ActionLink("Volver", "Index", null, new { @class = "botonGeneral colorGris" })
+        </div>
+
+
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+        }
+    </body>
+</html>
