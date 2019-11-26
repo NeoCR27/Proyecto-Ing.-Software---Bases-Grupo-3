@@ -239,21 +239,29 @@ namespace ProyectoPI.Controllers
 
         public ActionResult GraficoHabEmp(string tipoHab)
         {
-            string consulHistorial = "Consultar_Num_Habilidades_Empleados '" + tipoHab + "'";
+            string consulHab = "Consultar_Num_Habilidades_Empleados '" + tipoHab + "'";
 
-            var tempEstadoReq = (db.Database.SqlQuery<NumHab>(consulHistorial)).ToList();
+            var tempEstadoReq = (db.Database.SqlQuery<NumHab>(consulHab)).ToList();
             string[] habilidades = tempEstadoReq.Select(l => l.Habilidad.ToString()).ToArray();
-            string[] totales = tempEstadoReq.Select(l => l.Total.ToString()).ToArray();
-
+            int[] totales = tempEstadoReq.Select(l => l.Total).ToArray();
+            int totalObtenido = 0;
+            foreach(int i in totales)
+            {
+                totalObtenido += i; 
+            }
+            for(int i=0; i<habilidades.Length;i++)
+            {
+               habilidades[i]=habilidades[i]+" ("+ ((double)totales[i]/(double)totalObtenido*100.00).ToString("#.##") +"%)";
+            }
             var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
-            .AddSeries(name: "Habilidad",chartType:"Pie",
+            .AddSeries(name: "HabilidaddesEmp " + tipoHab, chartType: "Pie",
                     xValue: habilidades,
                     yValues: totales)
             .AddLegend()
             .AddTitle("Habilidades de los Empleados")
             .SetYAxis("Cantidad de Habilidades")
-            .SetXAxis("Estado Final")
             .GetBytes("png");
+      
             return File(chart, "image/bytes");
         }
 
