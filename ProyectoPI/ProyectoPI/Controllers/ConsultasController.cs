@@ -211,10 +211,32 @@ namespace ProyectoPI.Controllers
             ViewBag.idEmp = idEmp;
             return View();
         }
+
         public ActionResult MostrarHabilidadesEmpleados()
         {
             return View();
         }
+
+
+        public ActionResult HabilidadesEquipo()
+        {
+            ViewBag.proy = new SelectList(db.PROYECTO, "idPK", "nombre");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult HabilidadesEquipo(string proy)
+        {
+            return RedirectToAction("MostrarHabilidadesEquipo", new { proy = Request.Form["proy"].ToString() });
+        }
+
+        public ActionResult MostrarHabilidadesEquipo(string proy)
+        {
+            ViewBag.idProy = proy;
+            return View();
+        }
+
         public ActionResult GraficoHistorialReq(string idEmp)
         {
             ViewBag.idEmp = idEmp;
@@ -264,8 +286,26 @@ namespace ProyectoPI.Controllers
       
             return File(chart, "image/bytes");
         }
+        public ActionResult GraficoHabEquipo(string tipoHab, string idProy)
+        {
+            string consulHab = "Consultar_Num_Habilidades_Equipo'" + tipoHab + "' ,'"+idProy+"'";
+            var tempEstadoReq = (db.Database.SqlQuery<NumHab>(consulHab)).ToList();
+            string[] habilidades = tempEstadoReq.Select(l => l.Habilidad.ToString()).ToArray();
+            int[] totales = tempEstadoReq.Select(l => l.Total).ToArray();
+            int totalObtenido = 0;
 
-   
+            var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
+            .AddSeries(name: "HabilidaddesEmp " + tipoHab,
+                    xValue: habilidades,
+                    yValues: totales)
+            .AddLegend()
+            .AddTitle("Habilidades de los Empleados")
+            .SetYAxis("Cantidad de Habilidades")
+            .GetBytes("png");
+
+            return File(chart, "image/bytes");
+        }
+
         /*Consultas Julián*/
 
         /*Consultas Pablo*/
