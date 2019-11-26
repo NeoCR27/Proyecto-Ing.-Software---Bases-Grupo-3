@@ -1,9 +1,11 @@
-﻿
+﻿@model ProyectoPI.Models.REQUERIMIENTOS
 @{
     ViewBag.Title = "ProyRequerimientos";
+    string variable = "variable";
+    int[] a = {1,2};
+    SelectList  requerimientos2 = ViewBag.requerimientos2;
+    IEnumerable<SelectListItem> reque = ViewBag.req;
 }
-
-<h2>ProyRequerimientos</h2>
 
 <!DOCTYPE html>
 <html>
@@ -41,37 +43,68 @@
             </div>
         </div>
     </div>
-    <h2 class="titulosPag">Cantidad de Requerimientos por Tester</h2>
+    <h2 class="titulosPag">Pruebas asociadas a un requerimiento, agrupadas por su estado final</h2>
+    <br />
+
+    <script type="text/javascript">
+        function armarRequerimientos() {
+            var opcion = document.getElementById('proyectos').value;
+            var array = [];
+           @foreach(var item in requerimientos2) {
+                if (@item.Value == opcion){
+                    @: array.push("@item.Text");
+                }
+                //@: array.push("@item.Text");
+            }
+
+            ///var opcionA = opcion.options[opcion.selectedIndex].value;
+            document.getElementById('hola').innerHTML = array;
+        }
+    </script>
+
+    <p id="hola">
+        Hola esto es antes
+    </p>
 
     @using (Html.BeginForm())
     {
-        @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.Label("Proyecto", htmlAttributes: new { @class = "control-label col-md-2 required" })
-            <div class="col-md-10">
-                @Html.DropDownList("proy", null, "Seleccione un Proyecto", htmlAttributes: new { @class = "form-control" })
-            </div>
-
+    <div class="form-group">
+        @Html.Label("Proyecto", htmlAttributes: new { @class = "control-label col-md-2 required" })
+        <div class="col-md-10">
+            @Html.DropDownList("proy", null, "Seleccione un Proyecto", htmlAttributes: new { @class = "form-control", @onchange = "armarRequerimientos()", @AutoPostBack = "true", @id="proyectos"})
         </div>
+    </div>
+    <br />
+    <br />
+    <br />
 
-        <br />
-        <br />
-        <br />
-
-
-        <p><strong>Los campos con <font color="red">*</font> son obligatorios.</strong></p>
-        <br />
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                @{
-                    string URL = Request.Url.ToString();
-                }
-                <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="submit" value="Aceptar" class="botonGeneral colorVerde" />
-            </div>
+    <div class="form-group" id="requerimientosAfuera">
+        @Html.Label("Requerimientos", htmlAttributes: new { @class = "control-label col-md-2 required" })
+        <div class="col-md-10">
+            @Html.DropDownList("proy", null, "Seleccione un Proyecto", htmlAttributes: new { @class = "form-control", @onchange = "armarRequerimientos(@requerimientos)", @AutoPostBack = "true", @id="proyectos", @disabled = true})
         </div>
+    </div>
+
+
+    <br />
+    <br />
+    <br />
+
+
+    <p><strong>Los campos con <font color="red">*</font> son obligatorios.</strong></p>
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @{
+            string URL = Request.Url.ToString();
+            }
+            <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="submit" value="Aceptar" class="botonGeneral colorVerde" />
+        </div>
+    </div>
 
     }
     <div>
@@ -81,9 +114,9 @@
 
 
     @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     }
 </body>
 </html>
