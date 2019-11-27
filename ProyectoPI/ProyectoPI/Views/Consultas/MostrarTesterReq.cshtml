@@ -2,24 +2,24 @@
 
 @{
     ViewBag.Title = "Create";
-
+    string id = ViewBag.idEmp;
 
 
 }
 
 <h2 class="titulosPag">Habilidades de los Empleados en la Empresa</h2>
 <div style="width: 45%;float: left">
-    <h4>Desempeño por proyecto</h4>
+    <h4>Desempeño por proyecto @id</h4>
 </div>
 <div style="width: 45%;float: right">
     <h4>Dificultad de los requerimientos</h4>
 </div>
 <div style="width: 45%;float: left">
-    <img src="@Url.Action("GraficoTesterReq",new {tipoHab="Tecnica"})" alt="Pie Chart using MVC" />
+
 </div>
 
 <div style="width: 45%;float: right">
-    <img src="@Url.Action("GraficoTesterReq",new { tipoHab = "Blanda"})" alt="Pie Chart using MVC" />
+    <img src="@Url.Action("GraficoTesterBarrasReq",new { testerId = @id})" alt="Pie Chart using MVC" />
 </div>
 
 <br />
@@ -29,6 +29,6 @@
     l
 </div>
 
-        <div style="width: 100%; float:right">
-            @Html.ActionLink("Volver", "Index", null, new { @class = "botonGeneral colorGris" })
-        </div>
+<div style="width: 100%; float:right">
+    @Html.ActionLink("Volver", "Index", null, new { @class = "botonGeneral colorGris" })
+</div>

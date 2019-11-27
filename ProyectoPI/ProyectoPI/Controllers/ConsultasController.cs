@@ -374,6 +374,13 @@ namespace ProyectoPI.Controllers
 
         public ActionResult GraficoLideresReq()
         {
+            string lideres = "Exec Consulta_lideres_id";
+            var liderList = (db.Database.SqlQuery<getLideres>(lideres)).ToList();
+            string[] lider = liderList.Select(l => l.nombre.ToString()).ToArray();
+            string[] liderId = liderList.Select(l => l.cedula.ToString()).ToArray();
+
+
+
             string reqBaja = "Exec Consulta_lideres_req_totales 'Baja'";
             string reqIntermedia = "Exec Consulta_lideres_req_totales 'Intermedia'";
             string reqAlta = "Exec Consulta_lideres_req_totales 'Alta'";
@@ -383,24 +390,63 @@ namespace ProyectoPI.Controllers
             var alta = (db.Database.SqlQuery<getLiderReqDificultad>(reqAlta)).ToList();
             //Se hace el query a la base de datos
 
-            string[] cantidadBaja = baja.Select(l => l.req.ToString()).ToArray();
-            string[] cantidadIntermedia = intermedia.Select(l => l.req.ToString()).ToArray();
-            string[] cantidadAlta = alta.Select(l => l.req.ToString()).ToArray();
+            int[] cantidadBaja = baja.Select(l => l.req).ToArray();
+            int[] cantidadIntermedia = intermedia.Select(l => l.req).ToArray();
+            int[] cantidadAlta = alta.Select(l => l.req).ToArray();
 
-            string[] nombreBaja = baja.Select(l => l.nombre.ToString()).ToArray();
-            string[] nombreIntermedia = intermedia.Select(l => l.nombre.ToString()).ToArray();
-            string[] nombreAlta = alta.Select(l => l.nombre.ToString()).ToArray();
+            string[] nombreBaja = baja.Select(l => l.cedula.ToString()).ToArray();
+            string[] nombreIntermedia = intermedia.Select(l => l.cedula.ToString()).ToArray();
+            string[] nombreAlta = alta.Select(l => l.cedula.ToString()).ToArray();
+
+            int[] bajas = new int[lider.Length];
+            int[] intermedias = new int[lider.Length];
+            int[] altas = new int[lider.Length];
+
+
+            for (int i = 0; i < lider.Length; ++i)
+            {
+                for (int j = 0; j < nombreBaja.Length; ++j)
+                {
+                    if (nombreBaja[j] == liderId[i])
+                    {
+                        bajas[i] = cantidadBaja[j];
+                        break;
+                    }
+                    else
+                        bajas[i] = 0;
+                }
+                for (int j = 0; j < nombreIntermedia.Length; ++j)
+                {
+                    if (nombreIntermedia[j] == liderId[i])
+                    {
+                        intermedias[i] = cantidadIntermedia[j];
+                        break;
+                    }
+                    else
+                        intermedias[i] = 0;
+                }
+                for (int j = 0; j < nombreAlta.Length; ++j)
+                {
+                    if (nombreAlta[j] == liderId[i])
+                    {
+                        altas[i] = cantidadAlta[j];
+                        break;
+                    }
+                    else
+                        altas[i] = 0;
+                }
+            }
 
 
             int xValue = 0;
             var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
             .AddSeries(name: "Baja",
-                    xValue: nombreBaja,
-                    yValues: cantidadBaja)
+                    xValue: lider,
+                    yValues: bajas)
             .AddSeries(name: "Intermedio",
-                    yValues: cantidadIntermedia)
+                    yValues: intermedias)
             .AddSeries(name: "Alta",
-                    yValues: cantidadAlta)
+                    yValues: altas)
             .AddLegend()
 
             .AddTitle("Desempeño de lideres")
@@ -433,7 +479,7 @@ namespace ProyectoPI.Controllers
 
         public ActionResult GraficoTesterReq(string testerId)
         {
-            
+
             string consulHab = "Consultar_Num_Habilidades_Equipo '" + testerId + "'";
             var tempEstadoReq = (db.Database.SqlQuery<NumHab>(consulHab)).ToList();
             string[] habilidades = tempEstadoReq.Select(l => l.Habilidad.ToString()).ToArray();
@@ -449,6 +495,37 @@ namespace ProyectoPI.Controllers
             .SetYAxis("Cantidad de Habilidades")
             .GetBytes("png");
 
+            return File(chart, "image/bytes");
+        }
+
+        public ActionResult GraficoTesterBarrasReq(string testerId)
+        {
+
+            string proy = "Exec Consulta_tester_proyectos '" + testerId + "'";
+            var proyecto = (db.Database.SqlQuery<getProyectos>(proy)).ToList();
+            string[] proyectos = proyecto.Select(l => l.proyecto.ToString()).ToArray();
+            string[] nombreProy = proyecto.Select(l => l.proyectoNombre.ToString()).ToArray();
+
+
+            string porcentaje = "Exec Consulta_Tester_Req_Percentage 'Alta', '" + testerId + "', '" + proyectos[0] + "'";
+            var porcentajeA = (db.Database.SqlQuery<getPorcentajes>(porcentaje)).ToList();
+            int[] porcentajeAlta = porcentajeA.Select(l => l.porcentaje).ToArray();
+
+
+            //Se hace el query a la base de datos
+
+
+            var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
+            .AddSeries(name: nombreProy[0],
+                    yValues: porcentajeAlta)
+
+            .AddLegend()
+
+            .AddTitle("Desempeño de lideres")
+            .SetYAxis("Cantidad de Requerimientos")
+            .SetXAxis("Lider")
+            //.DataBindTable(dataSource: nombreBaja, xField: "Name")
+            .GetBytes("png");
             return File(chart, "image/bytes");
         }
         /*Consultas Pablo*/

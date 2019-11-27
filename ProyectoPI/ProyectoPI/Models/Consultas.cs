@@ -60,7 +60,30 @@ namespace ProyectoPI.Models
     {
         public string nombre { get; set; }
         public int req { get; set; }
+        public string cedula { get; set; }
+
+    }
+    public class getLideres
+    {
+        public string nombre { get; set; }
+        public string cedula { get; set; }
+
     }
 
+    public class getProyectos
+    {
+        public string nombre { get; set; }
+        public string cedula { get; set; }
+        public string proyecto { get; set; }
+        public string proyectoNombre { get; set; }
+
+
+    }
+
+    public class getPorcentajes
+    {
+        public int parcial { get; set; }
+        public int porcentaje { get; set; }
+    }
 
 }
