@@ -550,6 +550,53 @@ namespace ProyectoPI.Controllers
             ViewBag.req = requerimientos;
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProyRequerimientos(string proyecto, string requerimiento)
+        {
+            string proy = Request.Form["proy"].ToString();
+            string req = Request.Form["requerimientos"].ToString();
+            return RedirectToAction("MostrarTotalPruebasPorEstado", proy, req);
+        }
+
+        public ActionResult MostrarTotalPruebasPorEstado(string proy, string requerimiento)
+        {
+            /* ViewBag.idproy = proy;
+             ViewBag.requerimiento = requerimiento;
+             string queryCantReq = "Exec Consulta_Cantidad_Req_Tester" + "'" + proy + "'";
+             //Se hace el query a la base de datos
+             var tempCantReq = (db.Database.SqlQuery<CantReq>(queryCantReq)).ToList();
+
+             string queryGetReq = "Exec Get_Req" + "'" + proy + "'";
+             //Se hace el query a la base de datos
+             var tempGetReq = (db.Database.SqlQuery<GetReq>(queryGetReq)).ToList();
+             ViewBag.Req = tempGetReq;
+             */
+
+            return View();
+        }
+
+        /* public ActionResult GraficoPruebasPorEstado(string proy)
+         {
+             /*ViewBag.idproy = proy;
+             System.Diagnostics.Debug.WriteLine("entro");
+             string queryCantReq = "Exec Consulta_Cantidad_Req_Tester" + "'" + proy + "'";
+             //Se hace el query a la base de datos
+             var tempCantReq = (db.Database.SqlQuery<CantReq>(queryCantReq)).ToList();
+             string[] nombres = tempCantReq.Select(l => l.nombre.ToString()).ToArray();
+             string[] cantidad = tempCantReq.Select(l => l.Cantidad.ToString()).ToArray();
+
+             var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
+                     .AddSeries(name: "Testers",
+                     xValue: nombres,
+                     yValues: cantidad)
+             .AddLegend()
+             .AddTitle("Cantidad de Requerimientos por Tester")
+             .SetYAxis("Cantidad de Requerimientos")
+             .SetXAxis("Nombre")
+             .GetBytes("png");
+             return File(chart, "image/bytes");
+         }*/
 
 
         protected override void Dispose(bool disposing)
