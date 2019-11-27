@@ -397,25 +397,24 @@ namespace ProyectoPI.Controllers
             return View();
         }
 
-        public ActionResult GraficoTesterReq(string idEmp)
+        public ActionResult GraficoTesterReq(string testerId)
         {
-            ViewBag.idEmp = idEmp;
-
-            string consulHistorial = "Exec Consultar_Historial_Req_Tester '" + idEmp + "'"; //'24'
-
-            var tempEstadoReq = (db.Database.SqlQuery<HistorialReq>(consulHistorial)).ToList();
-            string[] estados = tempEstadoReq.Select(l => l.Estado.ToString()).ToArray();
-            string[] totales = tempEstadoReq.Select(l => l.Total.ToString()).ToArray();
+            
+            string consulHab = "Consultar_Num_Habilidades_Equipo '" + testerId + "'";
+            var tempEstadoReq = (db.Database.SqlQuery<NumHab>(consulHab)).ToList();
+            string[] habilidades = tempEstadoReq.Select(l => l.Habilidad.ToString()).ToArray();
+            int[] totales = tempEstadoReq.Select(l => l.Total).ToArray();
+            int totalObtenido = 0;
 
             var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
-            .AddSeries(name: "Requerimientos",
-                    xValue: estados,
+            .AddSeries(name: "HabilidaddesEmp " + testerId,
+                    xValue: habilidades,
                     yValues: totales)
             .AddLegend()
-            .AddTitle("Estado de los Requerimientos")
-            .SetYAxis("Cantidad de Requerimientos")
-            .SetXAxis("Estado Actual")
+            .AddTitle("Habilidades de los Empleados")
+            .SetYAxis("Cantidad de Habilidades")
             .GetBytes("png");
+
             return File(chart, "image/bytes");
         }
         /*Consultas Pablo*/
