@@ -5,8 +5,7 @@
 
 }
 
-    <h2 class="titulosPag">Habilidades de Equipo de Proyecto</h2>
-<h4>Resultados</h4>
+<h2 class="titulosPag">Habilidades de Equipo de Proyecto</h2>
 <div style="width: 45%;float: left">
     <h4>Habilidades Tecnicas</h4>
 </div>
@@ -21,13 +20,53 @@
     <img src="@Url.Action("GraficoHabEquipo",new { tipoHab = "Blanda",idProy=proy})" alt="Pie Chart using MVC" />
 </div>
 
-<br />
-<br />
-<br />
-<div style="width: 100%; float:right">
-    l
+<div style="width: 100%;float: left">
+    <br />
+    <br />
 </div>
 
-<div style="width: 100%; float:right">
+<div style="overflow-y: scroll; width: 45%;height:250px; float: left" class="jumbotron">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var blanda in ViewData["HabT"] as IList<ProyectoPI.Models.NumHab>)
+            {
+                <tr>
+                    <td> @blanda.Habilidad</td>
+                    <td> @blanda.Total</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<div style="overflow-y: scroll; width: 45%;height:250px; float: right" class="jumbotron">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var blanda in ViewData["HabB"] as IList<ProyectoPI.Models.NumHab>)
+            {
+                <tr>
+                    <td> @blanda.Habilidad</td>
+                    <td> @blanda.Total</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<div style="width: 100%; float:left">
     @Html.ActionLink("Volver", "HabilidadesEquipo", null, new { @class = "botonGeneral colorGris" })
 </div>

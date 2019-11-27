@@ -214,6 +214,14 @@ namespace ProyectoPI.Controllers
 
         public ActionResult MostrarHabilidadesEmpleados()
         {
+            string consulHabT = "Consultar_Num_Habilidades_Empleados '" + "Tecnica" + "'";
+            string consulHabB = "Consultar_Num_Habilidades_Empleados '" + "Blanda" + "'";
+            //Se ejecuta query a base de datos
+            var tempHabT = (db.Database.SqlQuery<NumHab>(consulHabT)).ToList();
+            var tempHabB = (db.Database.SqlQuery<NumHab>(consulHabB)).ToList();
+            ViewData["HabT"] = tempHabT;
+            ViewData["HabB"] = tempHabB;
+            
             return View();
         }
 
@@ -234,6 +242,14 @@ namespace ProyectoPI.Controllers
         public ActionResult MostrarHabilidadesEquipo(string proy)
         {
             ViewBag.idProy = proy;
+            string consulHabT = "Consultar_Num_Habilidades_Equipo'" + "Tecnica" + "' ,'" + proy + "'";
+            string consulHabB = "Consultar_Num_Habilidades_Equipo'" + "Blanda" + "' ,'"  + proy + "'";
+
+            var tempHabT = (db.Database.SqlQuery<NumHab>(consulHabT)).ToList();
+            var tempHabB = (db.Database.SqlQuery<NumHab>(consulHabB)).ToList();
+            ViewData["HabT"] = tempHabT;
+            ViewData["HabB"] = tempHabB;
+
             return View();
         }
 
@@ -263,9 +279,9 @@ namespace ProyectoPI.Controllers
         {
             string consulHab = "Consultar_Num_Habilidades_Empleados '" + tipoHab + "'";
 
-            var tempEstadoReq = (db.Database.SqlQuery<NumHab>(consulHab)).ToList();
-            string[] habilidades = tempEstadoReq.Select(l => l.Habilidad.ToString()).ToArray();
-            int[] totales = tempEstadoReq.Select(l => l.Total).ToArray();
+            var tempNumHabEmp = (db.Database.SqlQuery<NumHab>(consulHab)).ToList();
+            string[] habilidades = tempNumHabEmp.Select(l => l.Habilidad.ToString()).ToArray();
+            int[] totales = tempNumHabEmp.Select(l => l.Total).ToArray();
             int totalObtenido = 0;
             foreach(int i in totales)
             {
@@ -275,7 +291,7 @@ namespace ProyectoPI.Controllers
             {
                habilidades[i]=habilidades[i]+" ("+ ((double)totales[i]/(double)totalObtenido*100.00).ToString("#.##") +"%)";
             }
-            var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
+            var chart = new System.Web.Helpers.Chart(width: 513, height: 400)
             .AddSeries(name: "HabilidaddesEmp " + tipoHab, chartType: "Pie",
                     xValue: habilidades,
                     yValues: totales)
@@ -289,12 +305,11 @@ namespace ProyectoPI.Controllers
         public ActionResult GraficoHabEquipo(string tipoHab, string idProy)
         {
             string consulHab = "Consultar_Num_Habilidades_Equipo'" + tipoHab + "' ,'"+idProy+"'";
-            var tempEstadoReq = (db.Database.SqlQuery<NumHab>(consulHab)).ToList();
-            string[] habilidades = tempEstadoReq.Select(l => l.Habilidad.ToString()).ToArray();
-            int[] totales = tempEstadoReq.Select(l => l.Total).ToArray();
-            int totalObtenido = 0;
+            var tempNumHabEmp = (db.Database.SqlQuery<NumHab>(consulHab)).ToList();
+            string[] habilidades = tempNumHabEmp.Select(l => l.Habilidad.ToString()).ToArray();
+            int[] totales = tempNumHabEmp.Select(l => l.Total).ToArray();
 
-            var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
+            var chart = new System.Web.Helpers.Chart(width: 513, height: 400)
             .AddSeries(name: "HabilidaddesEmp " + tipoHab,
                     xValue: habilidades,
                     yValues: totales)
