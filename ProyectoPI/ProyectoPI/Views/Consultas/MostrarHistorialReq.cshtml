@@ -1,4 +1,4 @@
-﻿
+﻿@model ProyectoPI.Models.HistorialReq
 @{
     ViewBag.Title = "Requerimiento";
 }
@@ -13,7 +13,28 @@
 <img src="@Url.Action("GraficoHistorialReq",new { idEmp = idEmp })" alt="Pie Chart using MVC" />
 </br>
 </br>
-
+<div style=" right:3000px;width:600px ;height:auto" class="jumbotron">
+    <p style="text-align:center" display-1">Resultados</p>
+    <p style="font-size:15px">
+    </p>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Estado Final</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var blanda in ViewData["Historial"] as IList<ProyectoPI.Models.HistorialReq>)
+            {
+                <tr>
+                    <td> @blanda.Estado</td>
+                    <td> @blanda.Total</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 
 

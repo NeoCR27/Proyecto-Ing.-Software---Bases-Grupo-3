@@ -194,8 +194,10 @@ namespace ProyectoPI.Controllers
      /*Consultas Julian*/
         public ActionResult HistorialReq()
         {
+            //Se llama a el controlador de empleados para qeu se envíe la lista de empleados
             List<SelectListItem> empleados = empleadosController.getEmpleados();
             ViewBag.emp = empleados;
+            //Se retorna la vista
             return View();
         }
 
@@ -203,22 +205,30 @@ namespace ProyectoPI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult HistorialReq(string idEmp)
         {
+            //Se redirige a mostrar el historial con el ID del empleado escogido
             return RedirectToAction("MostrarHistorialReq", new { idEmp = Request.Form["emp"].ToString() });
         }
 
         public ActionResult MostrarHistorialReq(string idEmp)
         {
+            //Se pasa el id a la vista
             ViewBag.idEmp = idEmp;
+            //Se arma la consultay se pasa el resultado a la vista
+            string consulHistorial = "Exec Consultar_Historial_Req_Tester '" + idEmp + "'";
+            var tempEstadoReq = (db.Database.SqlQuery<HistorialReq>(consulHistorial)).ToList();
+            ViewData["Historial"] = tempEstadoReq;
             return View();
         }
 
         public ActionResult MostrarHabilidadesEmpleados()
         {
+            //Se arma las consultas
             string consulHabT = "Consultar_Num_Habilidades_Empleados '" + "Tecnica" + "'";
             string consulHabB = "Consultar_Num_Habilidades_Empleados '" + "Blanda" + "'";
             //Se ejecuta query a base de datos
             var tempHabT = (db.Database.SqlQuery<NumHab>(consulHabT)).ToList();
             var tempHabB = (db.Database.SqlQuery<NumHab>(consulHabB)).ToList();
+            //Se pasan a la vista
             ViewData["HabT"] = tempHabT;
             ViewData["HabB"] = tempHabB;
             
@@ -228,6 +238,7 @@ namespace ProyectoPI.Controllers
 
         public ActionResult HabilidadesEquipo()
         {
+            //Se obtiene la lista de proyectos disponibles
             ViewBag.proy = new SelectList(db.PROYECTO, "idPK", "nombre");
             return View();
         }
@@ -236,17 +247,20 @@ namespace ProyectoPI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult HabilidadesEquipo(string proy)
         {
+            //Se pasa el ID del proyecto escogido a la siguiente vista
             return RedirectToAction("MostrarHabilidadesEquipo", new { proy = Request.Form["proy"].ToString() });
         }
 
         public ActionResult MostrarHabilidadesEquipo(string proy)
         {
+            //Se arman las consultas
             ViewBag.idProy = proy;
             string consulHabT = "Consultar_Num_Habilidades_Equipo'" + "Tecnica" + "' ,'" + proy + "'";
             string consulHabB = "Consultar_Num_Habilidades_Equipo'" + "Blanda" + "' ,'"  + proy + "'";
-
+            //Se ejecuta los querys
             var tempHabT = (db.Database.SqlQuery<NumHab>(consulHabT)).ToList();
             var tempHabB = (db.Database.SqlQuery<NumHab>(consulHabB)).ToList();
+            //Se pasa los resultados a la vista
             ViewData["HabT"] = tempHabT;
             ViewData["HabB"] = tempHabB;
 
@@ -256,13 +270,13 @@ namespace ProyectoPI.Controllers
         public ActionResult GraficoHistorialReq(string idEmp)
         {
             ViewBag.idEmp = idEmp;
-
-            string consulHistorial = "Exec Consultar_Historial_Req_Tester '" + idEmp + "'"; //'24'
-
+            //Se arma y ejecuta el query dependiendo
+            string consulHistorial = "Exec Consultar_Historial_Req_Tester '" + idEmp + "'"; 
             var tempEstadoReq = (db.Database.SqlQuery<HistorialReq>(consulHistorial)).ToList();
+            //Se arman los ejes del gráfico
             string[] estados = tempEstadoReq.Select(l => l.Estado.ToString()).ToArray();
             string[] totales = tempEstadoReq.Select(l => l.Total.ToString()).ToArray();
-
+            //Se crea el gráfico y se retorna como una imagen
             var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
             .AddSeries(name: "Requerimientos",
                     xValue: estados,
@@ -277,11 +291,13 @@ namespace ProyectoPI.Controllers
 
         public ActionResult GraficoHabEmp(string tipoHab)
         {
+            //Se arma y se ejecuta el query
             string consulHab = "Consultar_Num_Habilidades_Empleados '" + tipoHab + "'";
-
             var tempNumHabEmp = (db.Database.SqlQuery<NumHab>(consulHab)).ToList();
+            //Se arman los ejes del gráfico
             string[] habilidades = tempNumHabEmp.Select(l => l.Habilidad.ToString()).ToArray();
             int[] totales = tempNumHabEmp.Select(l => l.Total).ToArray();
+            //Se obtiene el porcentaje para poder mostrarlo
             int totalObtenido = 0;
             foreach(int i in totales)
             {
@@ -291,6 +307,7 @@ namespace ProyectoPI.Controllers
             {
                habilidades[i]=habilidades[i]+" ("+ ((double)totales[i]/(double)totalObtenido*100.00).ToString("#.##") +"%)";
             }
+            //Se construye el gráfico con los resultados y porcentajes obtenidos
             var chart = new System.Web.Helpers.Chart(width: 513, height: 400)
             .AddSeries(name: "HabilidaddesEmp " + tipoHab, chartType: "Pie",
                     xValue: habilidades,
@@ -304,11 +321,13 @@ namespace ProyectoPI.Controllers
         }
         public ActionResult GraficoHabEquipo(string tipoHab, string idProy)
         {
+            //Se arma la consulta y se ejecuta
             string consulHab = "Consultar_Num_Habilidades_Equipo'" + tipoHab + "' ,'"+idProy+"'";
             var tempNumHabEmp = (db.Database.SqlQuery<NumHab>(consulHab)).ToList();
+            //Se construyen los ejes del gráfico
             string[] habilidades = tempNumHabEmp.Select(l => l.Habilidad.ToString()).ToArray();
             int[] totales = tempNumHabEmp.Select(l => l.Total).ToArray();
-
+            //Se arma el gráfico y se retorna como una imagen.
             var chart = new System.Web.Helpers.Chart(width: 513, height: 400)
             .AddSeries(name: "HabilidaddesEmp " + tipoHab,
                     xValue: habilidades,
