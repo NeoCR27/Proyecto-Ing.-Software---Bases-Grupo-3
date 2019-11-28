@@ -1,0 +1,11 @@
+﻿@{
+    string proy = ViewBag.idproy;
+    string requerimiento = ViewBag.requerimiento;
+}
+<h2 class="titulosPag">Pruebas agrupadas por estado final</h2>
+<h4>Resultados</h4>
+<img src="@Url.Action("GraficoMostrarTotalPruebasProy",new { proy = proy })" alt="Grafico de Total de pruebas de un requerimiento" />
+
+<div>
+    @Html.ActionLink("Volver", "ProyRequerimientos", null, new { @class = "botonGeneral colorGris" })
+</div>

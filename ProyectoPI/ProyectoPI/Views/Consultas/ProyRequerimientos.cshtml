@@ -64,7 +64,6 @@
             
             var dropdown = document.getElementById('requerimientos');
             var cantidadRequerimientos = requerimientosNecesarios.length;
-            document.getElementById('hola').innerHTML = cantidadRequerimientos;
             var iteracion = 0;
             for (i = 0; i < dropdown.length; ++i) {
                 dropdown.remove(i);
@@ -79,10 +78,6 @@
             }
         }
     </script>
-
-    <p id="hola">
-        Hola esto es antes
-    </p>
 
     @using (Html.BeginForm())
     {

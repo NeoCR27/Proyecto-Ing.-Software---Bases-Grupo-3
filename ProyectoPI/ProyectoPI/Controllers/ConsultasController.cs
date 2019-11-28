@@ -522,47 +522,75 @@ namespace ProyectoPI.Controllers
         {
             string proy = Request.Form["proy"].ToString();
             string req = Request.Form["requerimientos"].ToString();
-            return RedirectToAction("MostrarTotalPruebasPorEstado", proy, req);
+            return RedirectToAction("MostrarTotalPruebasProy", new { proy, req });
         }
 
-        public ActionResult MostrarTotalPruebasPorEstado(string proy, string requerimiento)
+        public ActionResult MostrarTotalPruebasProy(string proy, string requerimiento)
         {
-            /* ViewBag.idproy = proy;
+             ViewBag.idproy = proy;
              ViewBag.requerimiento = requerimiento;
-             string queryCantReq = "Exec Consulta_Cantidad_Req_Tester" + "'" + proy + "'";
-             //Se hace el query a la base de datos
-             var tempCantReq = (db.Database.SqlQuery<CantReq>(queryCantReq)).ToList();
-
-             string queryGetReq = "Exec Get_Req" + "'" + proy + "'";
-             //Se hace el query a la base de datos
-             var tempGetReq = (db.Database.SqlQuery<GetReq>(queryGetReq)).ToList();
-             ViewBag.Req = tempGetReq;
-             */
-
             return View();
         }
 
-        /* public ActionResult GraficoPruebasPorEstado(string proy)
+        public ActionResult GraficoMostrarTotalPruebasProy(string proy)
          {
-             /*ViewBag.idproy = proy;
-             System.Diagnostics.Debug.WriteLine("entro");
-             string queryCantReq = "Exec Consulta_Cantidad_Req_Tester" + "'" + proy + "'";
+             string queryPruebasProy = "Exec pruebas_proyecto" + "'" + proy + "'";
              //Se hace el query a la base de datos
-             var tempCantReq = (db.Database.SqlQuery<CantReq>(queryCantReq)).ToList();
-             string[] nombres = tempCantReq.Select(l => l.nombre.ToString()).ToArray();
-             string[] cantidad = tempCantReq.Select(l => l.Cantidad.ToString()).ToArray();
+             var tempPruebasProy = (db.Database.SqlQuery<PruebasProy>(queryPruebasProy)).ToList();
+            string[] estadosFinales = tempPruebasProy.Select(pruebasProy => pruebasProy.EstadoFinal.ToString()).ToArray();
+            // [Exitoso , Fallido, Exitoso, Incompleto]
+            string[] testersResponsables = tempPruebasProy.Select(pruebasProy => pruebasProy.TesterResponsable.ToString()).ToArray();
+            // [Andres2 , Andres2, Andres3, Andres3]
+            int[] cantidadPruebas = tempPruebasProy.Select(pruebasProy => pruebasProy.CantidadPruebas).ToArray();
+            // [1 , 1, 2, 1]
+            List<string> testersSinRepetir = new List<string>();
+            for(int i = 0; i < testersResponsables.Length; ++i)
+            {
+                if (!(testersSinRepetir.Contains(testersResponsables[i])))
+                {
+                    testersSinRepetir.Add(testersResponsables[i]);
+                }
+            }
+            int[] cantidadExitosas = new int[testersSinRepetir.Count];
+            int[] cantidadFallidas = new int[testersSinRepetir.Count];
+            int[] cantidadIncompletas = new int[testersSinRepetir.Count];
+            for(int i = 0; i < estadosFinales.Length; ++i) // Todos los arrays que vienen del proc almacenado tienen la misma indexacion
+            {
+                int index = testersSinRepetir.IndexOf(testersResponsables[i], 0);
+                if(estadosFinales[i] == "Exitoso")
+                {
+                    cantidadExitosas[index] = cantidadPruebas[i];
+                }else if(estadosFinales[i] == "Fallido")
+                {
+                    cantidadFallidas[index] = cantidadPruebas[i];
+                }
+                else // Incompletas
+                {
+                    cantidadIncompletas[index] = cantidadPruebas[i];
+                }
+            }
+            string[] arrayTesterSinRepetir = testersSinRepetir.ToArray();
 
-             var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
-                     .AddSeries(name: "Testers",
-                     xValue: nombres,
-                     yValues: cantidad)
-             .AddLegend()
-             .AddTitle("Cantidad de Requerimientos por Tester")
-             .SetYAxis("Cantidad de Requerimientos")
-             .SetXAxis("Nombre")
-             .GetBytes("png");
-             return File(chart, "image/bytes");
-         }*/
+            var chart = new System.Web.Helpers.Chart(width: 900, height: 450)
+            .AddTitle("Pruebas del proyecto")
+            .AddSeries(name: "Exitosas",
+                    chartType: "column",
+                    xValue: arrayTesterSinRepetir,
+                    yValues: cantidadExitosas)
+            .AddSeries(name: "Fallidas",
+                    chartType: "column",
+                    xValue: arrayTesterSinRepetir,
+                    yValues: cantidadFallidas)
+            .AddSeries(name: "Incompletas",
+                    chartType: "column",
+                    xValue: arrayTesterSinRepetir,
+                    yValues: cantidadIncompletas)
+            .AddLegend()
+            .SetYAxis("Cantidad de Pruebas")
+            .SetXAxis("Testers Responsables")
+            .GetBytes("png");
+            return File(chart, "image/bytes");
+         }
 
         /*Consultas Andres*/
         public ActionResult DuracionProy()

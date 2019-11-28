@@ -17,7 +17,12 @@ namespace ProyectoPI.Models
         public string nombre { get; set; }
         public string estado_actual { get; set; }
     }
-
+    public class PruebasProy
+    {
+        public string EstadoFinal { get; set; }
+        public string TesterResponsable { get; set; }
+        public int CantidadPruebas { get; set; }
+    }
     public class CantReq
     {
         public int Cantidad { get; set; }
