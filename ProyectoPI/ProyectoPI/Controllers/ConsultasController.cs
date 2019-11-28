@@ -527,8 +527,12 @@ namespace ProyectoPI.Controllers
 
         public ActionResult MostrarTotalPruebasProy(string proy, string requerimiento)
         {
-             ViewBag.idproy = proy;
-             ViewBag.requerimiento = requerimiento;
+            ViewBag.idproy = proy;
+            var proyecto = (from proyectos in db.PROYECTO where proyectos.idPK == proy select new { proyectos.nombre }).ToList(); 
+            string nombreProyecto = proyecto.First().ToString(); // "{ nombre = nombreProyecto }
+            nombreProyecto = nombreProyecto.Substring(10); // "nombreProyecto }
+            nombreProyecto = nombreProyecto.Replace("}", "");
+            ViewBag.nombreProy = nombreProyecto;
             return View();
         }
 

@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    <h2 class="titulosPag">Pruebas asociadas a un requerimiento, agrupadas por su estado final</h2>
+    <h2 class="titulosPag">Pruebas y testers asociados a un proyecto</h2>
     <br />
 
     <script>
@@ -69,7 +69,7 @@
                 dropdown.remove(i);
             }
             while(cantidadRequerimientos != 0){
-                dropdown.options[dropdown.options.length] = new Option(requerimientosNecesarios[iteracion][1], requerimientosNecesarios[iteracion][0]);
+                dropdown.options[dropdown.options.length] = new Option(requerimientosNecesarios[iteracion][1], requerimientosNecesarios[iteracion][1]);
                 --cantidadRequerimientos;
                 ++iteracion;
             }
