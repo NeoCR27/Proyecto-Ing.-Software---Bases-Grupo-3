@@ -1,0 +1,49 @@
+﻿@model List<ProyectoPI.Models.DuracionProy>
+@{
+    ViewBag.Title = "Graficos";
+}
+@{
+    string rol = ViewBag.myRol;
+    string idProy = ViewBag.idproy;
+    string proy = ViewBag.nombre;
+    List<ProyectoPI.Models.DuracionProy> consultaTable = ViewBag.Consulta;
+}
+<h2 class="titulosPag">Análisis de Duraciones</h2>
+<h4>Resultados</h4>
+
+<img src="@Url.Action("GraficoDuracionProy",new { proy = idProy })" alt="Grafico de Duracion de Proyecto" />
+<br />
+<br />
+
+<div style=" right:3000px;width:700px ;height:auto" class="jumbotron" color="white">
+    <p style="text-align:center; font-weight:bold" display-1">Desglose de duraciones entre Requerimientos</p>
+    <p style="font-size:15px">
+    </p>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nombre Tester</th>
+                <th scope="col">Duración Estimada</th>
+                <th scope="col">Duración Real</th>
+                <th scope="col">Dificultad</th>
+                <th scope="col">Estado Final</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in consultaTable)
+            {
+                <tr>
+                    <td>@item.nombreReq</td>
+                    <td>@item.duracionEstimada</td>
+                    <td>@item.duracionReal</td>
+                    <td>@item.dificultad</td>
+                    <td>@item.estadoFinal</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    @Html.ActionLink("Volver", "DuracionProy", null, new { @class = "botonGeneral colorGris" })
+</div>

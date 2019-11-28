@@ -23,7 +23,6 @@ namespace ProyectoPI.Models
         public int Cantidad { get; set; }
         public string cedulaPK { get; set; }
         public string nombre { get; set; }
-
     }
 
     public class EstadoAsigReq
@@ -37,7 +36,6 @@ namespace ProyectoPI.Models
         public string FechaEntrega { get; set; }
         public int dias { get; set; }
         public int diasf { get; set; }
-
     }
 
     public class NumHab
@@ -45,6 +43,7 @@ namespace ProyectoPI.Models
         public string Habilidad { get; set; }
         public int Total { get; set; }
     }
+
     public class HistorialReq
     {
         public string Estado { get; set; }
@@ -56,6 +55,7 @@ namespace ProyectoPI.Models
         public string nombre { get; set; }
         public int totales { get; set; }
     }
+
     public class getLiderReqDificultad
     {
         public string nombre { get; set; }
@@ -76,8 +76,6 @@ namespace ProyectoPI.Models
         public string cedula { get; set; }
         public string proyecto { get; set; }
         public string proyectoNombre { get; set; }
-
-
     }
 
     public class getPorcentajes
@@ -86,4 +84,19 @@ namespace ProyectoPI.Models
         public int porcentaje { get; set; }
     }
 
+    public class DuracionProy
+    {
+        public string nombreReq { get; set; }
+        public int duracionEstimada { get; set; }
+        public int duracionReal { get; set; }
+        public string dificultad { get; set; }
+        public string estadoFinal { get; set; }
+    }
+
+    public class HorasReq
+    {
+        public string nombreReq { get; set; }
+        public int horasEstimadas { get; set; }
+        public int horasReales { get; set; }
+    }
 }

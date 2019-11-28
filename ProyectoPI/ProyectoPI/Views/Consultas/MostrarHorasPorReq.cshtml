@@ -1,0 +1,18 @@
+﻿@model List<ProyectoPI.Models.HorasReq>
+@{
+    ViewBag.Title = "Graficos";
+}
+@{
+    string idProy = ViewBag.idproy;
+    string tester = ViewBag.tester;
+}
+<h2 class="titulosPag">Análisis de Horas por Requerimiento</h2>
+<h4>Resultados</h4>
+
+<img src="@Url.Action("GraficoHorasPorReq",new { proy = @idProy, tester = @tester })" alt="Grafico de Horas por Requerimiento" />
+<br />
+<br />
+
+<div>
+    @Html.ActionLink("Volver", "HorasPorProy", null, new { @class = "botonGeneral colorGris" })
+</div>

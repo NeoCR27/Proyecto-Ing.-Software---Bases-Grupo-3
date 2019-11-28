@@ -1,14 +1,11 @@
-﻿
-@{
-    ViewBag.Title = "Requerimiento";
+﻿@{
+    ViewBag.Title = "Reportes";
 }
 @{
     string rol = ViewBag.myRol;
-
 }
+
 <h2 class="titulosPag">Reportes</h2>
-
-
 
 
 <div class="row">
@@ -34,9 +31,7 @@
                 </p>
             </div>
         </div>
-
     </div>
-
 
     <div class="col-sm-4">
         <div class="card">
@@ -48,7 +43,6 @@
                 </p>
             </div>
         </div>
-
     </div>
 
     <div class="col-sm-4">
@@ -61,7 +55,6 @@
                 </p>
             </div>
         </div>
-
     </div>
 
     <div class="col-sm-4">
@@ -74,7 +67,6 @@
                 </p>
             </div>
         </div>
-
     </div>
 
     <div class="col-sm-4">
@@ -96,7 +88,6 @@
                 <h4 class="card-title" title="Consultar desempeño de los lideres ">Desempeño de los lideres</h4>
                 <p class="card-text">
                     @Html.ActionLink("Realizar Consulta", "MostrarLiderReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
-
                 </p>
             </div>
         </div>
@@ -121,13 +112,34 @@
                 <h4 class="card-title" title="Consultar desempeño por tester">Desempeño por tester</h4>
                 <p class="card-text">
                     @Html.ActionLink("Realizar Consulta", "TesterReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
-
                 </p>
             </div>
         </div>
-
     </div>
 
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                <h4 class="card-title" title="Consultar duracion real y estimada de un proyecto">Duraciones Proyecto</h4>
+                <p class="card-text">
+                    @Html.ActionLink("Realizar Consulta", "DuracionProy", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                <h4 class="card-title" title="Consultar Horas reales y estimadas por Requeriemiento">Horas por Requerimiento</h4>
+                <p class="card-text">
+                    @Html.ActionLink("Realizar Consulta", "HorasPorReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                </p>
+            </div>
+        </div>
+    </div>
 
 </div>
 
