@@ -499,7 +499,7 @@ namespace ProyectoPI.Controllers
         
 
         /* Consultas Esteban*/
-
+        // Pruebas de un proyecto, agrupadas por estado final y el tester responsable de cada requerimiento
         public ActionResult ProyRequerimientos()
         {
             // Envio todos los proyectos
@@ -511,21 +511,19 @@ namespace ProyectoPI.Controllers
                 string value = item.Value;
                 string text = item.Text;
             }
-
             ViewBag.req = requerimientos;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ProyRequerimientos(string proyecto, string requerimiento)
+        public ActionResult ProyRequerimientos(string proyecto)
         {
             string proy = Request.Form["proy"].ToString();
-            string req = Request.Form["requerimientos"].ToString();
-            return RedirectToAction("MostrarTotalPruebasProy", new { proy, req });
+            return RedirectToAction("MostrarTotalPruebasProy", new { proy });
         }
 
-        public ActionResult MostrarTotalPruebasProy(string proy, string requerimiento)
+        public ActionResult MostrarTotalPruebasProy(string proy)
         {
             ViewBag.idproy = proy;
             var proyecto = (from proyectos in db.PROYECTO where proyectos.idPK == proy select new { proyectos.nombre }).ToList(); 
@@ -595,6 +593,124 @@ namespace ProyectoPI.Controllers
             .GetBytes("png");
             return File(chart, "image/bytes");
          }
+
+        // Pruebas de un requerimiento, agrupadas por estado final
+
+        public ActionResult PruebasReq()
+        {
+            // Envio todos los proyectos
+            ViewBag.proy = new SelectList(db.PROYECTO, "idPK", "nombre");
+            // Envio todos los requerimientos
+            List<SelectListItem> requerimientos = new List<SelectListItem>(from req in db.REQUERIMIENTOS select new SelectListItem { Value = req.idFK, Text = req.nombrePK });
+            foreach (var item in requerimientos)
+            {
+                string value = item.Value;
+                string text = item.Text;
+            }
+
+            ViewBag.req = requerimientos;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PruebasReq(string idFKproyecto, string nombreRequerimiento)
+        {
+            string proy = Request.Form["proy"].ToString();
+            string req = Request.Form["requerimientos"].ToString();
+            return RedirectToAction("MostrarPruebasReq", new { idProyFK = proy, nombreRequerimiento = req });
+        }
+
+        public ActionResult MostrarPruebasReq(string idProyFK, string nombreRequerimiento)
+        {
+            ViewBag.idproy = idProyFK;
+            ViewBag.nombreReq = nombreRequerimiento;
+            return View();
+        }
+        
+        public ActionResult GraficoMostrarMostrarPruebasReq(string idProyFK, string nombreRequerimiento)
+        {
+            string queryPruebasPorEstado = "EXEC cantidad_pruebas_por_estado " + "'" + nombreRequerimiento + "','" + idProyFK + "';";
+            List<PruebasPorEstado> resultado = (db.Database.SqlQuery<PruebasPorEstado>(queryPruebasPorEstado)).ToList();
+            if (resultado.Count() == 2) // Solo hay de 2 tipos
+            {
+                // Averiguar el estado de los 2 tipos de pruebas que hay
+                PruebasPorEstado incompletas = resultado.Find(x => x.estadoFinal == "Incompleto");
+                if (incompletas == null)
+                {
+                    incompletas = new PruebasPorEstado();
+                    incompletas.estadoFinal = "Incompleto";
+                    incompletas.cantidad = 0;
+                    resultado.Add(incompletas);
+                }
+                PruebasPorEstado exitosas = resultado.Find(x => x.estadoFinal == "Exitoso");
+                if (exitosas == null)
+                {
+                    exitosas = new PruebasPorEstado();
+                    exitosas.estadoFinal = "Exitoso";
+                    exitosas.cantidad = 0;
+                    resultado.Add(exitosas);
+                }
+                PruebasPorEstado fallidas = resultado.Find(x => x.estadoFinal == "Fallido");
+                if (fallidas == null)
+                {
+                    fallidas = new PruebasPorEstado();
+                    fallidas.estadoFinal = "Fallido";
+                    fallidas.cantidad = 0;
+                    resultado.Add(fallidas);
+                }
+            }
+            else if (resultado.Count() == 1) // Solo hay de un tipo
+            {
+                // Averiguar el estado de la unica prueba 
+                if (resultado.ElementAt(0).estadoFinal == "Exitoso")
+                {
+                    PruebasPorEstado fallidas = new PruebasPorEstado();
+                    fallidas.cantidad = 0;
+                    fallidas.estadoFinal = "Fallido";
+                    resultado.Add(fallidas);
+                    PruebasPorEstado incompletas = new PruebasPorEstado();
+                    incompletas.cantidad = 0;
+                    incompletas.estadoFinal = "Incompleto";
+                    resultado.Add(incompletas);
+                }
+                else if (resultado.ElementAt(0).estadoFinal == "Fallido")
+                {
+                    PruebasPorEstado exitosas = new PruebasPorEstado();
+                    exitosas.cantidad = 0;
+                    exitosas.estadoFinal = "Exitoso";
+                    resultado.Add(exitosas);
+                    PruebasPorEstado incompletas = new PruebasPorEstado();
+                    incompletas.cantidad = 0;
+                    incompletas.estadoFinal = "Incompleto";
+                    resultado.Add(incompletas);
+                }
+                else
+                {
+                    PruebasPorEstado exitosas = new PruebasPorEstado();
+                    exitosas.cantidad = 0;
+                    exitosas.estadoFinal = "Exitoso";
+                    resultado.Add(exitosas);
+                    PruebasPorEstado fallidas = new PruebasPorEstado();
+                    fallidas.cantidad = 0;
+                    fallidas.estadoFinal = "Fallido";
+                    resultado.Add(fallidas);
+                }
+            }
+            string[] estados = resultado.Select(prueba => prueba.estadoFinal.ToString()).ToArray();
+            int[] cantidad = resultado.Select(prueba => prueba.cantidad).ToArray();
+
+            var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
+            .AddSeries(name: "Estado Pruebas",
+                    xValue: estados,
+                    yValues: cantidad)
+            .AddLegend()
+            .AddTitle("Estado de las Pruebas")
+            .SetYAxis("Cantidad de Pruebas")
+            .GetBytes("png");
+            return File(chart, "image/bytes");
+        }
+
 
         /*Consultas Andres*/
         public ActionResult DuracionProy()

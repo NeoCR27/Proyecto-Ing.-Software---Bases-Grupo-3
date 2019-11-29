@@ -41,9 +41,43 @@
             </div>
         </div>
     </div>
-    <h2 class="titulosPag">Pruebas y testers asociados a un proyecto</h2>
+    <h2 class="titulosPag">Pruebas asociadas a un requerimiento</h2>
     <br />
 
+    <script>
+        function armarRequerimientos() {
+            $('#requerimientos').removeAttr('disabled');
+            var target = jQuery('#requerimientos');
+            target.empty();
+            var opcion = document.getElementById('proyectos').value;
+            var array = [];
+            @foreach (var item in requerimientos) {
+                @: var tupla = ["@item.Value", "@item.Text"];
+                @: array.push(tupla);
+            }
+            var requerimientosNecesarios = [];
+            for (i = 0; i < array.length; ++i) {
+                if (array[i][0] == opcion) {
+                    requerimientosNecesarios.push(array[i]);
+                }
+            }
+
+            var dropdown = document.getElementById('requerimientos');
+            var cantidadRequerimientos = requerimientosNecesarios.length;
+            var iteracion = 0;
+            for (i = 0; i < dropdown.length; ++i) {
+                dropdown.remove(i);
+            }
+            while(cantidadRequerimientos != 0){
+                dropdown.options[dropdown.options.length] = new Option(requerimientosNecesarios[iteracion][1], requerimientosNecesarios[iteracion][1]);
+                --cantidadRequerimientos;
+                ++iteracion;
+            }
+            if (cantidadRequerimientos > 0) {
+                $('#requerimientos').removeAttr('disabled');
+            }
+        }
+    </script>
 
     @using (Html.BeginForm())
     {
@@ -58,6 +92,16 @@
         <br />
         <br />
         <br />
+
+        <div class="form-group" id="requerimientosAfuera">
+            @Html.Label("Requerimientos", htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10">
+                <select class="form-control" id="requerimientos" disabled name="requerimientos">
+                    <option selected="selected" disabled>Seleccione un Requerimiento</option>
+                </select>
+            </div>
+        </div>
+
 
         <br />
         <br />

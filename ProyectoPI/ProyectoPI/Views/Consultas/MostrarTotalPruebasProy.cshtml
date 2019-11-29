@@ -1,11 +1,10 @@
 ﻿@{
     string proy = ViewBag.idproy;
-    string requerimiento = ViewBag.requerimiento;
     string nombreProyecto = ViewBag.nombreProy;
 }
 <h2 class="titulosPag">Pruebas por estado final, del proyecto @nombreProyecto</h2>
 <h4>Resultados</h4>
-<img src="@Url.Action("GraficoMostrarTotalPruebasProy",new { proy=proy })" alt="Grafico de Total de pruebas de un requerimiento" />
+<img src="@Url.Action("GraficoMostrarTotalPruebasProy",new { proy = @proy  })" alt="Grafico de Total de pruebas de un requerimiento" />
 <br />
 <br />
 <br />

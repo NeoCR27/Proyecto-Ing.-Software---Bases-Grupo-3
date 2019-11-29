@@ -23,6 +23,7 @@ namespace ProyectoPI.Models
         public string TesterResponsable { get; set; }
         public int CantidadPruebas { get; set; }
     }
+
     public class CantReq
     {
         public int Cantidad { get; set; }
