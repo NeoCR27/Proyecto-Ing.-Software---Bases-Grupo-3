@@ -465,6 +465,7 @@
     <Content Include="Views\Consultas\MostrarLiderReq.cshtml" />
     <Content Include="Views\Consultas\TesterReq.cshtml" />
     <Content Include="Views\Consultas\MostrarTesterReq.cshtml" />
+    <Content Include="Views\REQUERIMIENTOS\Scripts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
