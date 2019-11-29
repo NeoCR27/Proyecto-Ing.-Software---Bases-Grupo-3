@@ -343,7 +343,6 @@ namespace ProyectoPI.Controllers
 
             ViewBag.getLiderReq = total;
 
-
             return View();
         }
 
@@ -440,35 +439,79 @@ namespace ProyectoPI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult TesterReq(string idEmp)
         {
-            return RedirectToAction("MostrarTesterReq", new { idEmp = Request.Form["emp"].ToString() });
+            return RedirectToAction("MostrarTesterReq", new { testerId = Request.Form["emp"].ToString() });
         }
 
-        public ActionResult MostrarTesterReq(string idEmp)
+        public ActionResult MostrarTesterReq(string testerId)
         {
-            ViewBag.idEmp = idEmp;
+            ViewBag.idEmp = testerId;
+            string proy = "Exec Consulta_Tester_Req_Global '" + testerId + "'";
+            var proyecto = (db.Database.SqlQuery<TesterParticipacionGlobalReq>(proy)).ToList();
+            ViewBag.proyectoDatos = proyecto;
+
+
             return View();
         }
 
         public ActionResult GraficoTesterReq(string testerId)
         {
-            string consulHab = "Consultar_Num_Habilidades_Equipo '" + testerId + "'";
-            var tempEstadoReq = (db.Database.SqlQuery<NumHab>(consulHab)).ToList();
-            string[] habilidades = tempEstadoReq.Select(l => l.Habilidad.ToString()).ToArray();
-            int[] totales = tempEstadoReq.Select(l => l.Total).ToArray();
-            int totalObtenido = 0;
+            ViewBag.idEmp = testerId;
+            string procedure = "Exec Consulta_Tester_Req_Dificultad '" + testerId + "'";
+            var testerData = (db.Database.SqlQuery<TesterParticipacion>(procedure)).ToList();
+            int[] baja = testerData.Select(l => l.baja).ToArray();
+            int[] intermedia = testerData.Select(l => l.intermedia).ToArray();
+            int[] alta = testerData.Select(l => l.alta).ToArray();
 
-            var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
-            .AddSeries(name: "HabilidaddesEmp " + testerId,
-                    xValue: habilidades,
-                    yValues: totales)
-            .AddLegend()
-            .AddTitle("Habilidades de los Empleados")
-            .SetYAxis("Cantidad de Habilidades")
-            .GetBytes("png");
+            int[] porcentaje = new int[3];
+            int total = baja[0] + intermedia[0] + alta[0];
+            porcentaje[0] = (baja[0] * 100) / total;
+            porcentaje[1] = (intermedia[0] * 100) / total;
+            porcentaje[2] = (alta[0] * 100) / total;
+
+            string[] nombres = new string[3];
+            nombres[0] = "Baja";
+            nombres[1] = "Intermedia";
+            nombres[2] = "Alta";
+
+            var chart = new System.Web.Helpers.Chart(width: 513, height: 400)
+             .AddSeries(name: "Requerimientos realizados", chartType: "Pie",
+                     xValue: nombres,
+                     yValues: porcentaje)
+             .AddLegend()
+             .AddTitle("Requerimientos realizados")
+
+             .GetBytes("png");
 
             return File(chart, "image/bytes");
         }
+        public ActionResult GraficoTesterReqGlobal(string testerId)
+        {
+            ViewBag.idEmp = testerId;
+            string procedure = "Exec Consulta_Tester_Req_Percentage_Total '" + testerId + "'";
+            var testerData = (db.Database.SqlQuery<TesterParticipacionGlobal>(procedure)).ToList();
+            int[] total = testerData.Select(l => l.total).ToArray();
+            int[] partipacion = testerData.Select(l => l.participacion).ToArray();
+            string[] nombre = testerData.Select(l => l.nombre.ToString()).ToArray();
 
+            int[] porcentaje = new int[2];
+            porcentaje[0] = (partipacion[0] * 100) / total[0];
+            porcentaje[1] = total[0];
+
+            string[] nombres = new string[2];
+            nombres[0] = nombre[0];
+            nombres[1] = "Total";
+
+            var chart = new System.Web.Helpers.Chart(width: 513, height: 400)
+             .AddSeries(name: "Requerimientos realizados", chartType: "Pie",
+                     xValue: nombres,
+                     yValues: porcentaje)
+             .AddLegend()
+             .AddTitle("Requerimientos realizados")
+
+             .GetBytes("png");
+
+            return File(chart, "image/bytes");
+        }
         public ActionResult GraficoTesterBarrasReq(string testerId)
         {
             string proy = "Exec Consulta_tester_proyectos '" + testerId + "'";
@@ -476,27 +519,35 @@ namespace ProyectoPI.Controllers
             string[] proyectos = proyecto.Select(l => l.proyecto.ToString()).ToArray();
             string[] nombreProy = proyecto.Select(l => l.proyectoNombre.ToString()).ToArray();
 
-            string porcentaje = "Exec Consulta_Tester_Req_Percentage 'Alta', '" + testerId + "', '" + proyectos[0] + "'";
-            var porcentajeA = (db.Database.SqlQuery<getPorcentajes>(porcentaje)).ToList();
-            int[] porcentajeAlta = porcentajeA.Select(l => l.porcentaje).ToArray();
-            
-            //Se hace el query a la base de datos
+            string consultaAlta = "Exec Consulta_Tester_Req_Percentage 'Alta', '" + testerId + "', '" + proyectos[0] + "'";
+            var porcentajeA = (db.Database.SqlQuery<getPorcentajes>(consultaAlta)).ToList();
+            int[] porcentajeAlta = porcentajeA.Select(l => l.parcial).ToArray();
+
+            string consultaIntermedia = "Exec Consulta_Tester_Req_Percentage 'Intermedia', '" + testerId + "', '" + proyectos[0] + "'";
+            var porcentajeI = (db.Database.SqlQuery<getPorcentajes>(consultaIntermedia)).ToList();
+            int[] porcentajeIntermedia = porcentajeA.Select(l => l.parcial).ToArray();
+
+            string consultaBaja = "Exec Consulta_Tester_Req_Percentage 'Baja', '" + testerId + "', '" + 7 + "'";
+            var porcentajeB = (db.Database.SqlQuery<getPorcentajes>(consultaBaja)).ToList();
+            int[] porcentajeBaja = porcentajeA.Select(l => l.parcial).ToArray();
 
             var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
-            .AddSeries(name: nombreProy[0],
-                    yValues: porcentajeAlta)
+              .AddSeries(name: "Baja",
 
-            .AddLegend()
+                      yValues: porcentajeBaja)
 
-            .AddTitle("Desempeño de lideres")
-            .SetYAxis("Cantidad de Requerimientos")
-            .SetXAxis("Lider")
-            //.DataBindTable(dataSource: nombreBaja, xField: "Name")
-            .GetBytes("png");
+              .AddLegend()
+
+              .AddTitle("Desempeño de lideres")
+              .SetYAxis("Cantidad de Requerimientos")
+              .SetXAxis("Lider")
+              //.DataBindTable(dataSource: nombreBaja, xField: "Name")
+              .GetBytes("png");
+            return File(chart, "image/bytes");
             return File(chart, "image/bytes");
         }
         /*Consultas Pablo*/
-        
+
 
         /* Consultas Esteban*/
         // Pruebas de un proyecto, agrupadas por estado final y el tester responsable de cada requerimiento

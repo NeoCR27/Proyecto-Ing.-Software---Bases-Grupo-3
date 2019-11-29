@@ -1,55 +1,68 @@
-﻿@model List<ProyectoPI.Models.CantReq>
+﻿
+
 @{
-    ViewBag.Title = "Requerimiento";
+    ViewBag.Title = "Create";
+    string id = ViewBag.idEmp;
+    List<ProyectoPI.Models.TesterParticipacionGlobalReq> datos = ViewBag.proyectoDatos;
+
+
 }
-@{
-    string rol = ViewBag.myRol;
-    string idProy = ViewBag.idproy;
-    string proy = ViewBag.nombre;
-    List<ProyectoPI.Models.GetReq> req = ViewBag.Req;
-}
-<h2 class="titulosPag">Cantidad de Requerimientos por Tester</h2>
-<h4>Resultados</h4>
 
+<h2 class="titulosPag">Habilidades de los Empleados en la Empresa</h2>
+<div style="width: 45%;float: left">
+    <h4>Desempeño por proyecto @id</h4>
+</div>
+<div style="width: 45%;float: right">
+    <h4>Dificultad de los requerimientos</h4>
+</div>
+<div style="width: 45%;float: left">
+    <img src="@Url.Action("GraficoTesterReq",new { testerId = @id})" alt="Pie Chart using MVC" />
 
-
-<img src="@Url.Action("GraficoTotalReq",new { proy = idProy })" alt="Pie Chart using MVC" />
-</br>
-</br>
-
-<div style=" right:3000px;width:500px ;height:auto" class="jumbotron">
-    <p style="text-align:center" display-1">Resultados</p>
-    <p style="font-size:15px">
-    </p>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-
-                <th scope="col">Nombre Tester</th>
-                <th scope="col">Nombre Requerimiento</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in req)
-            {
-            <tr>
-
-                <td>@item.nombre</td>
-                <td>@item.nombrePK</td>
-                <td>@item.estado_actual</td>
-
-
-            </tr>
-            }
-        </tbody>
-    </table>
 </div>
 
+<div style="width: 45%;float: right">
+    <img src="@Url.Action("GraficoTesterReqGlobal",new { testerId = @id})" alt="Pie Chart using MVC" />
+
+
+</div>
+
+<br />
+<br />
+<br />
+<div style="width: 100%; float:right">
+    l
+</div>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+
+            <th scope="col">Nombre proyecto</th>
+            <th scope="col">Requerimientos</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in datos)
+        {
+            <tr>
+
+                <td>@item.proyecto</td>
 
 
 
 
-<div>
-    @Html.ActionLink("Volver", "CantReq", null, new { @class = "botonGeneral colorGris" })
+
+                <td>@item.participacion</td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+<div style="width: 100%; float:right">
+    @Html.ActionLink("Volver", "Index", null, new { @class = "botonGeneral colorGris" })
 </div>

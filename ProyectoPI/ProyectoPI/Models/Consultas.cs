@@ -105,4 +105,30 @@ namespace ProyectoPI.Models
         public int horasEstimadas { get; set; }
         public int horasReales { get; set; }
     }
+
+    public class TesterParticipacion
+    {
+        public string nombre { get; set; }
+        public string cedula { get; set; }
+
+        public int baja { get; set; }
+        public int intermedia { get; set; }
+        public int alta { get; set; }
+    }
+    public class TesterParticipacionGlobal
+    {
+        public string nombre { get; set; }
+
+        public int total { get; set; }
+        public int participacion { get; set; }
+    }
+    public class TesterParticipacionGlobalReq
+    {
+        public string nombre { get; set; }
+
+        public string proyecto { get; set; }
+        public string idProy { get; set; }
+
+        public int participacion { get; set; }
+    }
 }

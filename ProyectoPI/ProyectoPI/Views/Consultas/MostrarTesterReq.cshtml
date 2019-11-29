@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Create";
     string id = ViewBag.idEmp;
+    List<ProyectoPI.Models.TesterParticipacionGlobalReq> datos = ViewBag.proyectoDatos;
 
 
 }
@@ -15,20 +16,60 @@
     <h4>Dificultad de los requerimientos</h4>
 </div>
 <div style="width: 45%;float: left">
+    <img src="@Url.Action("GraficoTesterReq",new { testerId = @id})" alt="Pie Chart using MVC" />
 
 </div>
 
 <div style="width: 45%;float: right">
-    <img src="@Url.Action("GraficoTesterBarrasReq",new { testerId = @id})" alt="Pie Chart using MVC" />
+    <img src="@Url.Action("GraficoTesterReqGlobal",new { testerId = @id})" alt="Pie Chart using MVC" />
+
+
 </div>
 
 <br />
 <br />
+<br /><br /><br /><br />
 <br />
-<div style="width: 100%; float:right">
-    l
-</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
+<div style=" right:50%;width:100% ;height:20%" class="jumbotron">
+    <p style="text-align:center" display-1">Resultados</p>
+    <p style="font-size:15px">
+    </p>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nombre proyecto</th>
+                <th scope="col">Requerimientos</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in datos)
+            {
+                <tr>
+                    <td>@item.proyecto</td>
+                    <td>@item.participacion</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 <div style="width: 100%; float:right">
     @Html.ActionLink("Volver", "Index", null, new { @class = "botonGeneral colorGris" })
 </div>
