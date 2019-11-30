@@ -55,6 +55,7 @@
                         int hasBaja = 0;
                         int hasIntermedia = 0;
                         int hasAlta = 0;
+                        int totalReq = 0;
                     }
 
                     @foreach (var reqB in baja)
@@ -62,8 +63,9 @@
                         if (item.nombre == reqB.nombre)
                         {
                             <td>@reqB.req</td>
-
+                            totalReq += @reqB.req;
                             hasBaja = 1;
+                            break;
                         }
 
                     }
@@ -77,6 +79,7 @@
                         if (@item.nombre == @reqI.nombre)
                         {
                             <td>@reqI.req</td>
+                            totalReq += reqI.req;
                             hasIntermedia = 1;
                             break;
                         }
@@ -92,6 +95,8 @@
                         if (@item.nombre == @reqA.nombre)
                         {
                             <td>@reqA.req</td>
+                            totalReq += reqA.req;
+
                             hasAlta = 1;
                             break;
                         }
@@ -102,7 +107,7 @@
                     {
                         <td>0</td>
                     }
-                    <td>@item.totales</td>
+                <td>@totalReq</td>
 
 
                 </tr>
