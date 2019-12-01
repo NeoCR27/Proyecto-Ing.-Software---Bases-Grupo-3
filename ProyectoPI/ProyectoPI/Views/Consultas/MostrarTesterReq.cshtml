@@ -4,6 +4,8 @@
     ViewBag.Title = "Create";
     string id = ViewBag.idEmp;
     List<ProyectoPI.Models.TesterParticipacionGlobalReq> datos = ViewBag.proyectoDatos;
+    List<ProyectoPI.Models.TesterParticipacion> dificultad = ViewBag.data;
+    List<ProyectoPI.Models.TesterParticipacionGlobal> percent = ViewBag.porcentaje;
 
 
 }
@@ -15,7 +17,7 @@
 <div style="width: 45%;float: right">
     <h4>Dificultad de los requerimientos</h4>
 </div>
-<div style="width: 45%;float: left">
+<div style="width: 50%;float: left">
     <img src="@Url.Action("GraficoTesterReq",new { testerId = @id})" alt="Pie Chart using MVC" />
 
 </div>
@@ -31,25 +33,78 @@
 <br /><br /><br /><br /><br /><br />
 <br /><br /><br /><br /><br /><br />
 
-<div style=" right:50%;width:100% ;height:20%" class="jumbotron">
+<div style=" left:50%;width:45% ; float: left ;height:20%" class="jumbotron">
     <p style="text-align:center" display-1">Resultados</p>
     <p style="font-size:15px">
     </p>
     <table class="table">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">Nombre proyecto</th>
-                <th scope="col">Requerimientos</th>
+                <th scope="col">Dificultad Baja</th>
+                <th scope="col">Dificultad Intermedia</th>
+                <th scope="col">Dificultad Alta</th>
+
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in datos)
+            @foreach (var item in dificultad)
             {
-                <tr>
-                    <td>@item.proyecto</td>
-                    <td>@item.participacion</td>
-                </tr>
+            <tr>
+                
+                <td>@item.baja</td>
+                <td>@item.intermedia</td>
+                <td>@item.alta</td>
+
+            </tr>
+
+            <tr>
+                @{
+                    int total = item.intermedia + item.baja + item.alta;
+                    double baja = item.baja * 100 / total;
+                    double intermedia = item.intermedia * 100 / total;
+                    double alta = item.alta * 100 / total;
+
+                }
+                <td>@baja %</td>
+                <td>@intermedia %</td>
+                <td>@alta %</td>
+
+            </tr>
+                    }
+
+        </tbody>
+    </table>
+</div>
+<div style=" right:50%;width:45%; float : right ;height:20%" class="jumbotron">
+    <p style="text-align:center" display-1">Resultados</p>
+    <p style="font-size:15px">
+    </p>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Participacion</th>
+                <th scope="col">Total</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in percent)
+            {
+            <tr>
+                <td>@item.participacion</td>
+
+                <td>@item.total</td>
+            </tr>
+            <tr>
+                @{
+                    int percentage = item.participacion * 100 / item.total;
+                }
+                <td>@percentage %</td>
+                <td>100 %</td>
+
+            </tr>
             }
+
         </tbody>
     </table>
 </div>

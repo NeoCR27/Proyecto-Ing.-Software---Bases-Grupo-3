@@ -452,6 +452,13 @@ namespace ProyectoPI.Controllers
             var proyecto = (db.Database.SqlQuery<TesterParticipacionGlobalReq>(proy)).ToList();
             ViewBag.proyectoDatos = proyecto;
 
+            string procedure = "Exec Consulta_Tester_Req_Dificultad '" + testerId + "'";
+            var data = (db.Database.SqlQuery<TesterParticipacion>(procedure)).ToList();
+            ViewBag.data = data;
+
+            string percentage = "Exec Consulta_Tester_Req_Percentage_Total '" + testerId + "'";
+            var testerData = (db.Database.SqlQuery<TesterParticipacionGlobal>(percentage)).ToList();
+            ViewBag.porcentaje= testerData;
 
             return View();
         }
@@ -498,7 +505,7 @@ namespace ProyectoPI.Controllers
 
             int[] porcentaje = new int[2];
             porcentaje[0] = (partipacion[0] * 100) / total[0];
-            porcentaje[1] = total[0];
+            porcentaje[1] = 100 - porcentaje[0] ;
 
             string[] nombres = new string[2];
             nombres[0] = nombre[0];
