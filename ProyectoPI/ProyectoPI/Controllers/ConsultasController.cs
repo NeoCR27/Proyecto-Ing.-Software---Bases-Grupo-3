@@ -326,9 +326,9 @@ namespace ProyectoPI.Controllers
         /*Consultas Pablo*/
         public ActionResult MostrarLiderReq()
         {
-            string reqBaja = "Exec Consulta_lideres_req_totales 'Baja'";
-            string reqIntermedia = "Exec Consulta_lideres_req_totales 'Intermedia'";
-            string reqAlta = "Exec Consulta_lideres_req_totales 'Alta'";
+            string reqBaja = "Exec [Consulta_lider_req_dificultad] 'Baja'";
+            string reqIntermedia = "Exec [Consulta_lider_req_dificultad] 'Intermedia'";
+            string reqAlta = "Exec [Consulta_lider_req_dificultad] 'Alta'";
 
             var baja = (db.Database.SqlQuery<getLiderReqDificultad>(reqBaja)).ToList();
             var intermedia = (db.Database.SqlQuery<getLiderReqDificultad>(reqIntermedia)).ToList();
@@ -352,6 +352,9 @@ namespace ProyectoPI.Controllers
             var liderList = (db.Database.SqlQuery<getLideres>(lideres)).ToList();
             string[] lider = liderList.Select(l => l.nombre.ToString()).ToArray();
             string[] liderId = liderList.Select(l => l.cedula.ToString()).ToArray();
+
+            string consulta = "EXEC Consulta_lider_get_proy";
+
 
             string reqBaja = "Exec Consulta_lideres_req_totales 'Baja'";
             string reqIntermedia = "Exec Consulta_lideres_req_totales 'Intermedia'";

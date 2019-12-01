@@ -60,7 +60,7 @@
 
                     @foreach (var reqB in baja)
                     {
-                        if (item.nombre == reqB.nombre)
+                        if (item.cedula == reqB.cedula)
                         {
                             <td>@reqB.req</td>
                             totalReq += @reqB.req;
@@ -76,7 +76,7 @@
 
                     @foreach (var reqI in intermedia)
                     {
-                        if (@item.nombre == @reqI.nombre)
+                        if (@item.cedula == @reqI.cedula)
                         {
                             <td>@reqI.req</td>
                             totalReq += reqI.req;
@@ -92,7 +92,7 @@
 
                     @foreach (var reqA in alta)
                     {
-                        if (@item.nombre == @reqA.nombre)
+                        if (@item.cedula == @reqA.cedula)
                         {
                             <td>@reqA.req</td>
                             totalReq += reqA.req;
@@ -107,7 +107,7 @@
                     {
                         <td>0</td>
                     }
-                <td>@totalReq</td>
+                <td>@item.totales</td>
 
 
                 </tr>

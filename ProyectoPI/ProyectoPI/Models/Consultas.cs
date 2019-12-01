@@ -59,12 +59,13 @@ namespace ProyectoPI.Models
     public class getLiderReq
     {
         public string nombre { get; set; }
+
+        public string cedula { get; set; }
         public int totales { get; set; }
     }
 
     public class getLiderReqDificultad
     {
-        public string nombre { get; set; }
         public int req { get; set; }
         public string cedula { get; set; }
 

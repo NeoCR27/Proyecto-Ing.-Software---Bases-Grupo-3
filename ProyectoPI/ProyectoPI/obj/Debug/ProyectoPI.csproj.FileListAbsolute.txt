@@ -1399,3 +1399,4 @@ C:\Users\b52321\Desktop\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\Proyec
 C:\Users\b52321\Desktop\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csproj.CopyComplete
 C:\Users\b52321\Desktop\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.dll
 C:\Users\b52321\Desktop\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.pdb
+C:\Users\pablo\Proyecto-Ing.-Software---Bases-Grupo-3\ProyectoPI\ProyectoPI\obj\Debug\ProyectoPI.csproj.CoreCompileInputs.cache
