@@ -766,21 +766,13 @@ namespace ProyectoPI.Controllers
         /*Consultas Andres*/
         public ActionResult DuracionProy()
         {
-            ViewBag.proy = new SelectList(db.PROYECTO, "idPK", "nombre");
-
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DuracionProy(string proyecto)
-        {
-            return RedirectToAction("MostrarDuracionProy", new { proy = Request.Form["proy"].ToString() });
+            return View(db.PROYECTO.Where(p => p.estado == "Finalizado").ToList());
         }
 
         public ActionResult MostrarDuracionProy(string proy)
         {
             ViewBag.idproy = proy;
+            ViewBag.nombreProy = db.PROYECTO.Where(x => x.idPK == proy).First().nombre;
 
             string queryDurProy = "Exec Consulta_Duracion_Proy" + "'" + proy + "'";
             //Se hace el query a la base de datos
@@ -799,15 +791,12 @@ namespace ProyectoPI.Controllers
                                    select new
                                    {
                                        durEst = proyecto.duracionEstimada,
-                                       durReal = proyecto.duracionReal,
-                                       nomProy = proyecto.nombre
+                                       durReal = proyecto.duracionReal
                                    });
-            string nombreProyecto = "";
             int duracionEstimada = 0;
             int duracionReal = 0;
             foreach (var item in consultaGrafico.ToList())
             {
-                nombreProyecto = item.nomProy;
                 duracionEstimada = item.durEst.Value;
                 duracionReal = item.durReal.Value;
             }
@@ -815,13 +804,12 @@ namespace ProyectoPI.Controllers
             int[] horas = new int[2];
             horas[0] = duracionEstimada;
             horas[1] = duracionReal;
-
-            //agregar aqui el nombre del proyecto
-            var chart = new System.Web.Helpers.Chart(width: 700, height: 400)
+            
+            var chart = new System.Web.Helpers.Chart(width: 700, height: 400, themePath: "~/Img/estiloDurProy.xml")
             .AddSeries(name: "Duraciones",
                     xValue: new[] { "Duracion Estimada", "Duracion Real" },
                     yValues: horas)
-            .AddTitle("Análisis de Duración del Proyecto " + nombreProyecto)
+            .AddTitle("Análisis de Resultados", "TituloDurProy")
             .SetYAxis("Cantidad de Horas")
             .GetBytes("png");
             return File(chart, "image/bytes");
@@ -829,30 +817,22 @@ namespace ProyectoPI.Controllers
 
         public ActionResult HorasPorReq()
         {
-            ViewBag.proy = new SelectList(db.PROYECTO, "idPK", "nombre");
-            ViewBag.tester = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
-            /*List<SelectListItem> empleados = new List<SelectListItem>(from req in db.REQUERIMIENTOS
-                                                                           join proy in db.PROYECTO on req.idFK equals proy.idPK
-                                                                           join empl in db.EMPLEADO on req.cedulaFK equals empl.cedulaPK
-                                                                           where empl.rol == "Tester"
-                                                                           select new SelectListItem { Value = empl.cedulaPK, Text = empl.nombre+" "+empl.primerApellido });
-
-            ViewBag.empl = empleados;*/
-
-            return View();
+            return View(db.PROYECTO.Where(p => p.estado == "Finalizado").ToList());
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult HorasPorReq(string proyecto, string empleado)
+        public ActionResult HorasPorReqTester(string proy)
         {
-            return RedirectToAction("MostrarHorasPorReq", new { proy = Request.Form["proy"].ToString(), tester = Request.Form["tester"].ToString() });
+            ViewBag.proy = proy;
+            return View(db.PARTICIPA.Include(p => p.EMPLEADO).Where(p => p.idProyectoFK == proy).Where(p => p.EMPLEADO.rol == "Tester").ToList());
         }
 
         public ActionResult MostrarHorasPorReq(string proy, string tester)
         {
             ViewBag.idproy = proy;
             ViewBag.tester = tester;
+            ViewBag.nombreProy = db.PROYECTO.Where(x => x.idPK == proy).First().nombre;
+            ViewBag.nombre = db.EMPLEADO.Where(x => x.cedulaPK == tester).First().nombre;
+            ViewBag.apellido = db.EMPLEADO.Where(x => x.cedulaPK == tester).First().primerApellido;
 
             return View();
         }
@@ -867,8 +847,8 @@ namespace ProyectoPI.Controllers
             string[] horasR = tempHorasPorReq.Select(l => l.horasEstimadas.ToString()).ToArray();
             string[] horasE = tempHorasPorReq.Select(l => l.horasReales.ToString()).ToArray();
 
-            var chart = new System.Web.Helpers.Chart(width: 900, height: 450)
-            .AddTitle("Análisis de Horas por Requerimiento")
+            var chart = new System.Web.Helpers.Chart(width: 900, height: 450, themePath: "~/Img/estiloHorPorReq.xml")
+            .AddTitle("Análisis de Resultados", "TituloHorPorReq")
             .AddSeries(name: "Horas Estimadas",
                     chartType: "column",
                     xValue: reqs,

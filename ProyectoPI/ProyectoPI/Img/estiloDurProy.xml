@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Chart>
+  <ChartAreas>
+    <ChartArea Name="Default">
+      <AxisX>
+        <MajorGrid Enabled="false"></MajorGrid>
+      </AxisX>
+    </ChartArea>
+  </ChartAreas>
+  <Titles>
+    <Title Name="TituloDurProy" Font="Verdana,14pt,style=Bold"></Title>
+  </Titles>
+  <Series>
+    <Series Name="Duraciones" IsValueShownAsLabel="true"></Series>
+  </Series>
+</Chart>

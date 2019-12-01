@@ -1,8 +1,10 @@
-﻿@model List<ProyectoPI.Models.PROYECTO>
+﻿@model List<ProyectoPI.Models.PARTICIPA>
 @{
     ViewBag.Title = "Grafico Horas Por Req";
 }
-
+@{
+    string nomProy = ViewBag.proy;
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,8 +39,8 @@
             </div>
         </div>
     </div>
-    <h2 class="titulosPag">Horas por Requerimiento</h2>
-    <h3 class="miniTitulosPag"> Escoger Proyecto </h3>
+    <h2 class="titulosPag">Horas Por Requerimiento</h2>
+    <h3 class="miniTitulosPag"> Escoger Tester </h3>
 
     @using (Html.BeginForm())
     {
@@ -50,10 +52,11 @@
                 <div class="col-sm-4">
                     <div class="card">
                         <div class="card-body">
-                            <img src="../Img/proy.jpg" class="card-img-top" alt="...">
-                            <h4 class="card-title">@Html.DisplayFor(x => item.nombre) </h4>
+                            <img src="../Img/emp.jpg" class="card-img-top" alt="...">
+                            <h4 class="card-title">@Html.DisplayFor(x => item.EMPLEADO.nombre) @Html.DisplayFor(x => item.EMPLEADO.primerApellido)</h4>
+                            <p class="card-text"><small class="text-muted">@Html.DisplayFor(x => item.EMPLEADO.correo)</small></p>
                             <p class="card-text">
-                                @Html.ActionLink("Escoger Tester", "HorasPorReqTester", new { proy = item.idPK }, new { @class = "botonGeneral colorCeleste" })
+                                @Html.ActionLink("Realizar Consulta", "MostrarHorasPorReq", new { proy = @nomProy, tester = item.cedulaEmpleadoFK }, new { @class = "botonGeneral colorCeleste" })
                             </p>
                         </div>
                     </div>
@@ -63,7 +66,7 @@
         </div>
     }
     <div>
-        @Html.ActionLink("Volver", "Index", null, new { @class = "botonGeneral colorGris" })
+        @Html.ActionLink("Volver", "HorasPorReq", null, new { @class = "botonGeneral colorGris" })
     </div>
 
     @section Scripts {

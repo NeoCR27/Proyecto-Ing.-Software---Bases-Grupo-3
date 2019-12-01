@@ -6,10 +6,11 @@
     string rol = ViewBag.myRol;
     string idProy = ViewBag.idproy;
     string proy = ViewBag.nombre;
+    string nombreProy = ViewBag.nombreProy;
     List<ProyectoPI.Models.DuracionProy> consultaTable = ViewBag.Consulta;
 }
-<h2 class="titulosPag">Análisis de Duraciones</h2>
-<h4>Resultados</h4>
+<h2 class="titulosPag">Duraciones de Proyecto</h2>
+<h3 class="miniTitulosPag">Proyecto: @nombreProy </h3>
 
 <img src="@Url.Action("GraficoDuracionProy",new { proy = idProy })" alt="Grafico de Duracion de Proyecto" />
 <br />

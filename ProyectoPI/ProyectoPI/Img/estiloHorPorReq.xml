@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Chart>
+  <ChartAreas>
+    <ChartArea Name="Default">
+      <AxisX>
+        <MajorGrid Enabled="false"></MajorGrid>
+      </AxisX>
+    </ChartArea>
+  </ChartAreas>
+  <Titles>
+    <Title Name="TituloHorPorReq" Font="Verdana,14pt,style=Bold"></Title>
+  </Titles>
+  <Series>
+    <Series Name="Horas Estimadas" IsValueShownAsLabel="true"></Series>
+    <Series Name="Horas Reales" IsValueShownAsLabel="true"></Series>
+  </Series>
+  <Legends>
+    <Legend Name="Cantidad de Horas" Alignment="Center"> </Legend>
+  </Legends>
+</Chart>
