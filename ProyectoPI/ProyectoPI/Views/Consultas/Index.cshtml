@@ -1,4 +1,6 @@
 ﻿@{
+    /**/
+
     ViewBag.Title = "Reportes";
 }
 @{
@@ -8,150 +10,319 @@
 <h2 class="titulosPag">Reportes</h2>
 
 
-<div class="row">
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-body">
-                <img src="~/Img/cons.png" class="card-img-top" alt="...">
-                <h4 class="card-title" title="Consultar sobre la cantidad de requerimientos que tiene cada tester en un proyecto">Cantidad de Requerimentos por Tester </h4>
-                <p class="card-text">
-                    @Html.ActionLink("Realizar Consulta", "CantReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
-                </p>
+@if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase))
+{
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                    <h4 class="card-title" title="Consultar sobre la cantidad de requerimientos que tiene cada tester en un proyecto">Cantidad de Requerimentos por Tester </h4>
+                    <p class="card-text">
+                        @Html.ActionLink("Realizar Consulta", "CantReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-body">
-                <img src="~/Img/cons.png" class="card-img-top" alt="...">
-                <h4 class="card-title" title="Consultar sobre el estado de todos los requerimientos de un proyecto ya sea finalizado o en proceso">Estado de los Requerimientos</h4>
-                <p class="card-text">
-                    @Html.ActionLink("Realizar Consulta", "EstadoReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
-                </p>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                    <h4 class="card-title" title="Consultar sobre el estado de todos los requerimientos de un proyecto ya sea finalizado o en proceso">Estado de los Requerimientos</h4>
+                    <p class="card-text">
+                        @Html.ActionLink("Realizar Consulta", "EstadoReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-body">
-                <img src="~/Img/cons.png" class="card-img-top" alt="...">
-                <h4 class="card-title" title="Consultar sobre el estado y la asignacion de todos los requerimientos de un proyecto ya sea finalizado o en proceso">Estado y Asignacion por Requerimiento</h4>
-                <p class="card-text">
-                    @Html.ActionLink("Realizar Consulta", "EstadoTesterReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
-                </p>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                    <h4 class="card-title" title="Consultar sobre el estado y la asignacion de todos los requerimientos de un proyecto ya sea finalizado o en proceso">Estado y Asignacion por Requerimiento</h4>
+                    <p class="card-text">
+                        @Html.ActionLink("Realizar Consulta", "EstadoTesterReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-body">
-                <img src="~/Img/cons.png" class="card-img-top" alt="...">
-                <h4 class="card-title" title="Consultar sobre el historial de requerimientos y su estado final para un empleado">Historial Requerimientos Empleado</h4>
-                <p class="card-text">
-                    @Html.ActionLink("Realizar Consulta", "HistorialReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
-                </p>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                    <h4 class="card-title" title="Consultar sobre el historial de requerimientos y su estado final para un empleado">Historial Requerimientos Empleado</h4>
+                    <p class="card-text">
+                        @Html.ActionLink("Realizar Consulta", "HistorialReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-body">
-                <img src="~/Img/cons.png" class="card-img-top" alt="...">
-                <h4 class="card-title" title="Consultar numero de Habilidades en todos los empleados">Habilidades de los Empleados</h4>
-                <p class="card-text">
-                    @Html.ActionLink("Realizar Consulta", "MostrarHabilidadesEmpleados", "Consultas", new { @class = "botonGeneral colorCeleste" })
-                </p>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                    <h4 class="card-title" title="Consultar numero de Habilidades en todos los empleados">Habilidades de los Empleados</h4>
+                    <p class="card-text">
+                        @Html.ActionLink("Realizar Consulta", "MostrarHabilidadesEmpleados", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-body">
-                <img src="~/Img/cons.png" class="card-img-top" alt="...">
-                <h4 class="card-title" title="Consultar numero de Habilidades para un equipo de proyecto">Habilidades de un Equipo</h4>
-                <p class="card-text">
-                    @Html.ActionLink("Realizar Consulta", "HabilidadesEquipo", "Consultas", new { @class = "botonGeneral colorCeleste" })
-                </p>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                    <h4 class="card-title" title="Consultar numero de Habilidades para un equipo de proyecto">Habilidades de un Equipo</h4>
+                    <p class="card-text">
+                        @Html.ActionLink("Realizar Consulta", "HabilidadesEquipo", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-body">
-                <img src="~/Img/cons.png" class="card-img-top" alt="...">
-                <h4 class="card-title" title="Consultar desempeño de los lideres ">Desempeño de los lideres</h4>
-                <p class="card-text">
-                    @Html.ActionLink("Realizar Consulta", "MostrarLiderReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
-                </p>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                    <h4 class="card-title" title="Consultar desempeño de los lideres ">Desempeño de los lideres</h4>
+                    <p class="card-text">
+                        @Html.ActionLink("Realizar Consulta", "MostrarLiderReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-body">
-                <img src="~/Img/cons.png" class="card-img-top" alt="...">
-                <h4 class="card-title" title="Pruebas agrupadas por estado final de un proyecto">Pruebas de un proyecto</h4>
-                <p class="card-text">
-                    @Html.ActionLink("Realizar Consulta", "ProyRequerimientos", "Consultas", new { @class = "botonGeneral colorCeleste" })
-                </p>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                    <h4 class="card-title" title="Pruebas agrupadas por estado final de un proyecto">Pruebas de un proyecto</h4>
+                    <p class="card-text">
+                        @Html.ActionLink("Realizar Consulta", "ProyRequerimientos", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-body">
-                <img src="~/Img/cons.png" class="card-img-top" alt="...">
-                <h4 class="card-title" title="Pruebas agrupadas por estado final de un requerimiento">Pruebas de un requerimiento</h4>
-                <p class="card-text">
-                    @Html.ActionLink("Realizar Consulta", "PruebasReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
-                </p>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                    <h4 class="card-title" title="Pruebas agrupadas por estado final de un requerimiento">Pruebas de un requerimiento</h4>
+                    <p class="card-text">
+                        @Html.ActionLink("Realizar Consulta", "PruebasReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-body">
-                <img src="~/Img/cons.png" class="card-img-top" alt="...">
-                <h4 class="card-title" title="Consultar desempeño por tester">Desempeño por tester</h4>
-                <p class="card-text">
-                    @Html.ActionLink("Realizar Consulta", "TesterReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
-                </p>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                    <h4 class="card-title" title="Consultar desempeño por tester">Desempeño por tester</h4>
+                    <p class="card-text">
+                        @Html.ActionLink("Realizar Consulta", "TesterReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-body">
-                <img src="~/Img/cons.png" class="card-img-top" alt="...">
-                <h4 class="card-title" title="Consultar duracion real y estimada de un proyecto">Duraciones de Proyecto</h4>
-                <p class="card-text">
-                    @Html.ActionLink("Realizar Consulta", "DuracionProy", "Consultas", new { @class = "botonGeneral colorCeleste" })
-                </p>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                    <h4 class="card-title" title="Consultar duracion real y estimada de un proyecto">Duraciones de Proyecto</h4>
+                    <p class="card-text">
+                        @Html.ActionLink("Realizar Consulta", "DuracionProy", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-body">
-                <img src="~/Img/cons.png" class="card-img-top" alt="...">
-                <h4 class="card-title" title="Consultar Horas reales y estimadas por Requeriemiento">Horas por Requerimiento</h4>
-                <p class="card-text">
-                    @Html.ActionLink("Realizar Consulta", "HorasPorReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
-                </p>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                    <h4 class="card-title" title="Consultar Horas reales y estimadas por Requeriemiento">Horas por Requerimiento</h4>
+                    <p class="card-text">
+                        @Html.ActionLink("Realizar Consulta", "HorasPorReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                    </p>
+                </div>
             </div>
         </div>
+
     </div>
 
-</div>
+}
+else
+{
+    if (@rol.Equals("Lider", StringComparison.InvariantCultureIgnoreCase))
+    {
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                        <h4 class="card-title" title="Consultar sobre el historial de requerimientos y su estado final para un empleado">Historial Requerimientos Empleado</h4>
+                        <p class="card-text">
+                            @Html.ActionLink("Realizar Consulta", "HistorialReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                        <h4 class="card-title" title="Consultar numero de Habilidades en todos los empleados">Habilidades de los Empleados</h4>
+                        <p class="card-text">
+                            @Html.ActionLink("Realizar Consulta", "MostrarHabilidadesEmpleados", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                        <h4 class="card-title" title="Consultar numero de Habilidades para un equipo de proyecto">Habilidades de un Equipo</h4>
+                        <p class="card-text">
+                            @Html.ActionLink("Realizar Consulta", "HabilidadesEquipo", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                        <h4 class="card-title" title="Pruebas agrupadas por estado final de un proyecto">Pruebas de un proyecto</h4>
+                        <p class="card-text">
+                            @Html.ActionLink("Realizar Consulta", "ProyRequerimientos", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                        <h4 class="card-title" title="Pruebas agrupadas por estado final de un requerimiento">Pruebas de un requerimiento</h4>
+                        <p class="card-text">
+                            @Html.ActionLink("Realizar Consulta", "PruebasReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                        <h4 class="card-title" title="Consultar desempeño por tester">Desempeño por tester</h4>
+                        <p class="card-text">
+                            @Html.ActionLink("Realizar Consulta", "TesterReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                        <h4 class="card-title" title="Consultar duracion real y estimada de un proyecto">Duraciones de Proyecto</h4>
+                        <p class="card-text">
+                            @Html.ActionLink("Realizar Consulta", "DuracionProy", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                        <h4 class="card-title" title="Consultar Horas reales y estimadas por Requeriemiento">Horas por Requerimiento</h4>
+                        <p class="card-text">
+                            @Html.ActionLink("Realizar Consulta", "HorasPorReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    }
+    else
+    {
+
+        if (@rol.Equals("Cliente", StringComparison.InvariantCultureIgnoreCase))
+        {
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                            <h4 class="card-title" title="Consultar sobre la cantidad de requerimientos que tiene cada tester en un proyecto">Cantidad de Requerimentos por Tester </h4>
+                            <p class="card-text">
+                                @Html.ActionLink("Realizar Consulta", "CantReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                            <h4 class="card-title" title="Consultar sobre el estado de todos los requerimientos de un proyecto ya sea finalizado o en proceso">Estado de los Requerimientos</h4>
+                            <p class="card-text">
+                                @Html.ActionLink("Realizar Consulta", "EstadoReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="~/Img/cons.png" class="card-img-top" alt="...">
+                            <h4 class="card-title" title="Consultar sobre el estado y la asignacion de todos los requerimientos de un proyecto ya sea finalizado o en proceso">Estado y Asignacion por Requerimiento</h4>
+                            <p class="card-text">
+                                @Html.ActionLink("Realizar Consulta", "EstadoTesterReq", "Consultas", new { @class = "botonGeneral colorCeleste" })
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        }
+
+
+
+
+
+
+    }
+
+
+}
 

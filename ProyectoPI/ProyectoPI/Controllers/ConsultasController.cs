@@ -26,7 +26,7 @@ namespace ProyectoPI.Controllers
         {
             string correo = User.Identity.Name;
             string rol = await this.seguridad_controller.GetRol(correo);
-            ViewBag.miRol = rol;
+            ViewBag.myRol = rol;
            
             return View();
         }
