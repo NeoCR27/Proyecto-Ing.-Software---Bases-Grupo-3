@@ -3,6 +3,7 @@
     ViewBag.Title = "ProyRequerimientos";
     List<SelectListItem> requerimientos = ViewBag.req;
     SelectList requerimientosPrimeros = ViewBag.requerimientos2;
+    string rol = ViewBag.rol;
 }
 
 <!DOCTYPE html>
@@ -16,6 +17,8 @@
 
 </head>
 <body>
+    @if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase) || @rol.Equals("Lider", StringComparison.InvariantCultureIgnoreCase))
+    {
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -51,7 +54,7 @@
             target.empty();
             var opcion = document.getElementById('proyectos').value;
             var array = [];
-            @foreach (var item in requerimientos) {
+            @foreach(var item in requerimientos) {
                 @: var tupla = ["@item.Value", "@item.Text"];
                 @: array.push(tupla);
             }
@@ -68,7 +71,7 @@
             for (i = 0; i < dropdown.length; ++i) {
                 dropdown.remove(i);
             }
-            while(cantidadRequerimientos != 0){
+            while (cantidadRequerimientos != 0) {
                 dropdown.options[dropdown.options.length] = new Option(requerimientosNecesarios[iteracion][1], requerimientosNecesarios[iteracion][1]);
                 --cantidadRequerimientos;
                 ++iteracion;
@@ -79,7 +82,7 @@
         }
     </script>
 
-    @using (Html.BeginForm())
+    using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
@@ -113,15 +116,20 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 @{
-                    string URL = Request.Url.ToString();
+                string URL = Request.Url.ToString();
                 }
                 <a class="botonGeneral colorRojo" href="@URL" role="button"> Cancelar</a>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="submit" value="Aceptar" class="botonGeneral colorVerde" />
             </div>
         </div>
-
+        }
     }
+    else
+    {
+    <h1>NO puede realizar la consulta</h1>
+    }
+
     <div>
         @Html.ActionLink("Volver", "Index", null, new { @class = "botonGeneral colorGris" })
     </div>
@@ -129,9 +137,9 @@
 
 
     @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     }
 </body>
 </html>

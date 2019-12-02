@@ -2,13 +2,22 @@
     string proy = ViewBag.idproy;
     string nombreReq = ViewBag.nombreReq;
     string requerimiento = ViewBag.requerimiento;
+    string rol = ViewBag.rol;
 }
+@if (@rol.Equals("Jefe", StringComparison.InvariantCultureIgnoreCase) || @rol.Equals("Lider", StringComparison.InvariantCultureIgnoreCase))
+{
 <h2 class="titulosPag">Pruebas por estado final, del requerimiento: @nombreReq </h2>
 <h4>Resultados</h4>
-<img src="@Url.Action("GraficoMostrarMostrarPruebasReq",new { idProyFK = proy, nombreRequerimiento = nombreReq })" alt="Grafico de Total de pruebas de un requerimiento" />
+<img src="@Url.Action("GraficoMostrarMostrarPruebasReq",new { idProyFK=proy, nombreRequerimiento=nombreReq })" alt="Grafico de Total de pruebas de un requerimiento" />
 <br />
 <br />
 <br />
+}
+else
+{
+<h1>NO puede ver la información de la consulta</h1>
+}
+
 <div>
     @Html.ActionLink("Volver", "PruebasReq", null, new { @class = "botonGeneral colorGris" })
 </div>

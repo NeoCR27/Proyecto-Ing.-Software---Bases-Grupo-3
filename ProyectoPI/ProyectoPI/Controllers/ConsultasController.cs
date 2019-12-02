@@ -561,8 +561,11 @@ namespace ProyectoPI.Controllers
 
         /* Consultas Esteban*/
         // Pruebas de un proyecto, agrupadas por estado final y el tester responsable de cada requerimiento
-        public ActionResult ProyRequerimientos()
+        public async Task<ActionResult> ProyRequerimientos()
         {
+            string correo = User.Identity.Name;
+            string rol = await this.seguridad_controller.GetRol(correo);
+            ViewBag.rol = rol;
             // Envio todos los proyectos
             ViewBag.proy = new SelectList(db.PROYECTO, "idPK", "nombre");
             // Envio todos los requerimientos
@@ -584,10 +587,13 @@ namespace ProyectoPI.Controllers
             return RedirectToAction("MostrarTotalPruebasProy", new { proy });
         }
 
-        public ActionResult MostrarTotalPruebasProy(string proy)
+        public async Task<ActionResult> MostrarTotalPruebasProy(string proy)
         {
+            string correo = User.Identity.Name;
+            string rol = await this.seguridad_controller.GetRol(correo);
+            ViewBag.rol = rol;
             ViewBag.idproy = proy;
-            var proyecto = (from proyectos in db.PROYECTO where proyectos.idPK == proy select new { proyectos.nombre }).ToList(); 
+            var proyecto = (from proyectos in db.PROYECTO where proyectos.idPK == proy select new { proyectos.nombre }).ToList(); // Jala el nombre del proyecto
             string nombreProyecto = proyecto.First().ToString(); // "{ nombre = nombreProyecto }
             nombreProyecto = nombreProyecto.Substring(10); // "nombreProyecto }
             nombreProyecto = nombreProyecto.Replace("}", "");
@@ -597,32 +603,39 @@ namespace ProyectoPI.Controllers
 
         public ActionResult GraficoMostrarTotalPruebasProy(string proy)
          {
-             string queryPruebasProy = "Exec pruebas_proyecto" + "'" + proy + "'";
-             //Se hace el query a la base de datos
-             var tempPruebasProy = (db.Database.SqlQuery<PruebasProy>(queryPruebasProy)).ToList();
+             
+            string queryPruebasProy = "Exec pruebas_proyecto" + "'" + proy + "'";  // Se hace el query a la base de datos
+            var tempPruebasProy = (db.Database.SqlQuery<PruebasProy>(queryPruebasProy)).ToList();
+            /*A continuacion, se muestran ejemplos de resultados devueltos por el query y la forma de manejarlos
+             para poder obtener los datos correctos y poder armar el grafico*/
             string[] estadosFinales = tempPruebasProy.Select(pruebasProy => pruebasProy.EstadoFinal.ToString()).ToArray();
-            // [Exitoso , Fallido, Exitoso, Incompleto]
+            // [Exitoso , Fallido, Exitoso, Incompleto] 
             string[] testersResponsables = tempPruebasProy.Select(pruebasProy => pruebasProy.TesterResponsable.ToString()).ToArray();
             // [Andres2 , Andres2, Andres3, Andres3]
             int[] cantidadPruebas = tempPruebasProy.Select(pruebasProy => pruebasProy.CantidadPruebas).ToArray();
             // [1 , 1, 2, 1]
             List<string> testersSinRepetir = new List<string>();
             for(int i = 0; i < testersResponsables.Length; ++i)
+            // Añade los DISTINTOS testers que se encuentran en el array de los testers
             {
                 if (!(testersSinRepetir.Contains(testersResponsables[i])))
                 {
                     testersSinRepetir.Add(testersResponsables[i]);
                 }
             }
+            /* Se necesitan 3 arreglos con la cantidad de fallidas, la cantidad de exitosas y la cantidad de incompletas 
+             por cada tester distinto. Una forma de hacer esto es que cada tester estara indexado en la lista
+             con sus respectivas cantidad de pruebas*/ 
             int[] cantidadExitosas = new int[testersSinRepetir.Count];
             int[] cantidadFallidas = new int[testersSinRepetir.Count];
             int[] cantidadIncompletas = new int[testersSinRepetir.Count];
-            for(int i = 0; i < estadosFinales.Length; ++i) // Todos los arrays que vienen del proc almacenado tienen la misma indexacion
+            for(int i = 0; i < estadosFinales.Length; ++i) 
+            // Todos los arrays que vienen del proc almacenado tienen la misma indexacion
             {
                 int index = testersSinRepetir.IndexOf(testersResponsables[i], 0);
                 if(estadosFinales[i] == "Exitoso")
                 {
-                    cantidadExitosas[index] = cantidadPruebas[i];
+                    cantidadExitosas[index] = cantidadPruebas[i]; // Anade las pruebas exitosas para el tester en la posicion index
                 }else if(estadosFinales[i] == "Fallido")
                 {
                     cantidadFallidas[index] = cantidadPruebas[i];
@@ -632,9 +645,15 @@ namespace ProyectoPI.Controllers
                     cantidadIncompletas[index] = cantidadPruebas[i];
                 }
             }
-            string[] arrayTesterSinRepetir = testersSinRepetir.ToArray();
+            /*Un ejemplo final del resultado podria ser:
+             [Esteban, Andres, Roger] // Testers sin repetir
+             [0, 0, 0] // Cantidad de pruebas fallidas, donde Esteban tiene 0, Andres 0 y Roger 0
+             [1, 2, 3] // Cantidad de pruebas incompletas, donde Esteban tiene 1, Andres 2 y Roger 3
+             [4, 2, 1] // Cantidad de pruebas exitosas, donde Esteban tiene 4, Andres 2 y Roger 1 */
 
-            var chart = new System.Web.Helpers.Chart(width: 900, height: 450)
+            string[] arrayTesterSinRepetir = testersSinRepetir.ToArray(); // Se pasa a un array de string para poder pasarlo al graficador
+
+            var chart = new System.Web.Helpers.Chart(width: 900, height: 450) // Armar el grafico
             .AddTitle("Pruebas del proyecto")
             .AddSeries(name: "Exitosas",
                     chartType: "column",
@@ -655,10 +674,14 @@ namespace ProyectoPI.Controllers
             return File(chart, "image/bytes");
          }
 
+        
         // Pruebas de un requerimiento, agrupadas por estado final
 
-        public ActionResult PruebasReq()
+        public async Task<ActionResult> PruebasReq()
         {
+            string correo = User.Identity.Name;
+            string rol = await this.seguridad_controller.GetRol(correo);
+            ViewBag.rol = rol;
             // Envio todos los proyectos
             ViewBag.proy = new SelectList(db.PROYECTO, "idPK", "nombre");
             // Envio todos los requerimientos
@@ -677,13 +700,16 @@ namespace ProyectoPI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult PruebasReq(string idFKproyecto, string nombreRequerimiento)
         {
-            string proy = Request.Form["proy"].ToString();
-            string req = Request.Form["requerimientos"].ToString();
+            string proy = Request.Form["proy"].ToString(); // Valor seleccionado en el dropdown de proyectos
+            string req = Request.Form["requerimientos"].ToString(); // Valor seleccionado en el dropdown de requerimientos
             return RedirectToAction("MostrarPruebasReq", new { idProyFK = proy, nombreRequerimiento = req });
         }
 
-        public ActionResult MostrarPruebasReq(string idProyFK, string nombreRequerimiento)
+        public async Task<ActionResult> MostrarPruebasReq(string idProyFK, string nombreRequerimiento)
         {
+            string correo = User.Identity.Name;
+            string rol = await this.seguridad_controller.GetRol(correo);
+            ViewBag.rol = rol;
             ViewBag.idproy = idProyFK;
             ViewBag.nombreReq = nombreRequerimiento;
             return View();
@@ -696,6 +722,7 @@ namespace ProyectoPI.Controllers
             if (resultado.Count() == 2) // Solo hay de 2 tipos
             {
                 // Averiguar el estado de los 2 tipos de pruebas que hay
+                // Algoritmo que encuentra el tipo de pruebas que hay, y rellena el array con el tipo de pruebas que faltan y le pone como cantidad 0
                 PruebasPorEstado incompletas = resultado.Find(x => x.estadoFinal == "Incompleto");
                 if (incompletas == null)
                 {
@@ -722,6 +749,7 @@ namespace ProyectoPI.Controllers
                 }
             }
             else if (resultado.Count() == 1) // Solo hay de un tipo
+             // Algoritmo que encuentra el tipo de pruebas que hay, y rellena el array con el tipo de pruebas que faltan y le pone como cantidad 0
             {
                 // Averiguar el estado de la unica prueba 
                 if (resultado.ElementAt(0).estadoFinal == "Exitoso")
@@ -761,7 +789,7 @@ namespace ProyectoPI.Controllers
             string[] estados = resultado.Select(prueba => prueba.estadoFinal.ToString()).ToArray();
             int[] cantidad = resultado.Select(prueba => prueba.cantidad).ToArray();
 
-            var chart = new System.Web.Helpers.Chart(width: 600, height: 400)
+            var chart = new System.Web.Helpers.Chart(width: 600, height: 400) // Armar el grafico
             .AddSeries(name: "Estado Pruebas",
                     xValue: estados,
                     yValues: cantidad)
