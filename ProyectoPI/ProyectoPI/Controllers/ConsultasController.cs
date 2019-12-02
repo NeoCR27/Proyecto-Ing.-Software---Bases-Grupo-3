@@ -24,10 +24,10 @@ namespace ProyectoPI.Controllers
         // Despliega las habilidades del respectivo empleado con la cedula  igual al id
         public async Task<ActionResult> Index()
         {
-            string correo = User.Identity.Name;
-            string rol = await this.seguridad_controller.GetRol(correo);
-            ViewBag.myRol = rol;
-           
+            string mail = User.Identity.Name;
+            string rol = await this.seguridad_controller.GetRol(mail);
+            ViewBag.my_rol = rol;
+
             return View();
         }
         
