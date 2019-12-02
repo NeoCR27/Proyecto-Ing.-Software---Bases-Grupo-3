@@ -10,12 +10,12 @@
 
 }
 
-<h2 class="titulosPag">Habilidades de los Empleados en la Empresa</h2>
+<h2 class="titulosPag">Desempeño de los testers</h2>
 <div style="width: 45%;float: left">
-    <h4>Desempeño por proyecto @id</h4>
+    <h4>Dificultad de los requerimientos</h4>
 </div>
 <div style="width: 45%;float: right">
-    <h4>Dificultad de los requerimientos</h4>
+    <h4>Desempeño global</h4>
 </div>
 <div style="width: 50%;float: left">
     <img src="@Url.Action("GraficoTesterReq",new { testerId = @id})" alt="Pie Chart using MVC" />
@@ -109,5 +109,5 @@
     </table>
 </div>
 <div style="width: 100%; float:right">
-    @Html.ActionLink("Volver", "Index", null, new { @class = "botonGeneral colorGris" })
+    @Html.ActionLink("Volver", "TesterReq", null, new { @class = "botonGeneral colorGris" })
 </div>
